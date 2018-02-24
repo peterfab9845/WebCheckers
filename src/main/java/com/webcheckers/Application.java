@@ -18,6 +18,7 @@ import spark.template.freemarker.FreeMarkerEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public final class Application {
+
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
   //
@@ -27,13 +28,10 @@ public final class Application {
   /**
    * Entry point for the WebCheckers web application.
    *
-   * <p>
-   * It wires the application components together.  This is an example
-   * of <a href='https://en.wikipedia.org/wiki/Dependency_injection'>Dependency Injection</a>
-   * </p>
+   * <p> It wires the application components together.  This is an example of <a
+   * href='https://en.wikipedia.org/wiki/Dependency_injection'>Dependency Injection</a> </p>
    *
-   * @param args
-   *    Command line arguments; none expected.
+   * @param args Command line arguments; none expected.
    */
   public static void main(String[] args) {
     // initialize Logging

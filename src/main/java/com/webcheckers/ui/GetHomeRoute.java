@@ -17,16 +17,15 @@ import spark.TemplateEngine;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetHomeRoute implements Route {
+
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private final TemplateEngine templateEngine;
 
   /**
-   * Create the Spark Route (UI controller) for the
-   * {@code GET /} HTTP request.
+   * Create the Spark Route (UI controller) for the {@code GET /} HTTP request.
    *
-   * @param templateEngine
-   *   the HTML template rendering engine
+   * @param templateEngine the HTML template rendering engine
    */
   public GetHomeRoute(final TemplateEngine templateEngine) {
     // validation
@@ -40,13 +39,9 @@ public class GetHomeRoute implements Route {
   /**
    * Render the WebCheckers Home page.
    *
-   * @param request
-   *   the HTTP request
-   * @param response
-   *   the HTTP response
-   *
-   * @return
-   *   the rendered HTML for the Home page
+   * @param request the HTTP request
+   * @param response the HTTP response
+   * @return the rendered HTML for the Home page
    */
   @Override
   public Object handle(Request request, Response response) {
@@ -54,7 +49,7 @@ public class GetHomeRoute implements Route {
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
-    return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+    return templateEngine.render(new ModelAndView(vm, "home.ftl"));
   }
 
 }
