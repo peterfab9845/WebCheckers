@@ -7,17 +7,18 @@
 </head>
 <body>
   <div class="page">
-  
+
     <h1>Web Checkers</h1>
-    
+
     <div class="navigation">
       <a href="/">my home</a>
+      <a class="right-side" href="/signin">sign in</a>
     </div>
-    
+
     <div class="body">
       <p>Welcome to the world of online Checkers.</p>
     </div>
-    
+
   </div>
 </body>
 </html>

@@ -71,6 +71,10 @@ div.page div.navigation a {
     font-weight: bold;
 }
 
+div.page div.navigation a.right-side {
+    float: right;
+}
+
 div.page h2 {
     margin: 0 0 15px 0;
     color: #1057FF;
