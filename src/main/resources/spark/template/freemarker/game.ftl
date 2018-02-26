@@ -21,10 +21,10 @@
 
   <div class="navigation">
     <#if currentPlayer??>
-      <a href="/">my home</a> |
-      <a href="/signout">sign out [${currentPlayer.name}]</a>
+      <a href="/">my home</a>
+      <a class="right-side" href="/signout">sign out [${currentPlayer.name}]</a>
     <#else>
-      <a href="/signin">sign in</a>
+      <a class="right-side" href="/signin">sign in</a>
     </#if>
   </div>
 
