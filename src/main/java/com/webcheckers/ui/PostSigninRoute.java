@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.Application;
 import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
@@ -51,6 +52,7 @@ public class PostSigninRoute implements Route {
     // retrieve request parameter
     final String username = request.queryParams("name");
     Player currentPlayer = new Player(username);
+
 
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Sign-in");
