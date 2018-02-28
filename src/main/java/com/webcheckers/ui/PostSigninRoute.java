@@ -49,7 +49,7 @@ public class PostSigninRoute implements Route {
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Sign-in");
-    return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+    return templateEngine.render(new ModelAndView(vm, "home.ftl"));
   }
 
 }
