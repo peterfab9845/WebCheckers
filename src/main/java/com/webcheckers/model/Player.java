@@ -4,9 +4,11 @@ import java.util.Objects;
 
 public class Player {
   private String name;
+  private boolean inGame;
 
   public Player(String name) {
     this.name = name;
+    this.setInGame(false);
   }
 
   public String getName() {
@@ -20,6 +22,14 @@ public class Player {
     else {
       return name.equals(((Player) obj).getName());
     }
+  }
+
+  public boolean isInGame() {
+    return inGame;
+  }
+
+  public void setInGame(boolean inGame) {
+    this.inGame = inGame;
   }
 
   public int hashCode() {
