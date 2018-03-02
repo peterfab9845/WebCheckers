@@ -49,6 +49,11 @@ public class WebServer {
    */
   public static final String SIGNIN_URL = "/signin";
 
+  /**
+   * The URL pattern to request the Game page.
+   */
+  public static final String GAME_URL = "/game";
+
   //
   // Attributes
   //
@@ -132,6 +137,10 @@ public class WebServer {
     // Shows the user sign-in page.
     get(SIGNIN_URL, new GetSigninRoute(templateEngine));
 
+    //Shows the game page.
+    get(GAME_URL, new GetGameRoute(templateEngine));
+
+    //Receives the user's login.
     post(SIGNIN_URL, new PostSigninRoute(templateEngine));
 
     //
