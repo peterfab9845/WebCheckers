@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.Application;
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
@@ -52,6 +53,7 @@ public class PostSigninRoute implements Route {
     // retrieve request parameter
     final String username = request.queryParams("name");
     Player currentPlayer = new Player(username);
+    PlayerLobby.addPlayer(currentPlayer);
 
 
     Map<String, Object> vm = new HashMap<>();

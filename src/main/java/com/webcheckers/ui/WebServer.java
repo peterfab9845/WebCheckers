@@ -74,7 +74,7 @@ public class WebServer {
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.playerLobby = new PlayerLobby();
+    PlayerLobby.init();
   }
 
   //

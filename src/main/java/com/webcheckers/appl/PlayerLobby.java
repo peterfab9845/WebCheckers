@@ -6,13 +6,13 @@ import java.util.LinkedList;
 
 public class PlayerLobby {
 
-    LinkedList allPlayers;
+    private static LinkedList allPlayers;
 
-    public PlayerLobby(){
-        this.allPlayers = new LinkedList<Player>();
+    public static void init(){
+        allPlayers = new LinkedList<Player>();
     }
 
-    void addPlayer(Player player){
-        this.allPlayers.add(player);
+    public static void addPlayer(Player player){
+        allPlayers.add(player);
     }
 }
