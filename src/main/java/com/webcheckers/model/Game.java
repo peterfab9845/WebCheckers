@@ -1,19 +1,32 @@
 package com.webcheckers.model;
 
+import com.google.gson.Gson;
+
 /**
  * Created by Curtis Veronesi on 3/2/2018.
  */
 public class Game {
-    private Player one;
-    private Player two;
-    //private Board board;
+    private Player playerOne;
+    private Player playerTwo;
+    private Board board;
 
     public Game(Player One, Player Two){
-        one = One;
-        two = Two;
-        //board = new Board;
+        playerOne = One;
+        playerTwo = Two;
+        board = new Board();
     }
 
-    
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public String getBoardView(){
+        Gson gson = new Gson();
+        return gson.toJson(board);
+    }
 
 }
