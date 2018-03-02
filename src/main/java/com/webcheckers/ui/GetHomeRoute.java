@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.google.gson.Gson;
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -47,8 +50,10 @@ public class GetHomeRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("GetHomeRoute is invoked.");
         //
+        Player currentPlayer = PlayerLobby.getPlayer(request.session());
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
+        vm.put("currentPlayer", currentPlayer);
         //vm.put("currentPlayer", "some playername");
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.google.gson.Gson;
 import com.webcheckers.Application;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
@@ -53,10 +54,11 @@ public class PostSigninRoute implements Route {
         // retrieve request parameter
         final String username = request.queryParams("name");
         Player currentPlayer = new Player(username);
-        PlayerLobby.addPlayer(currentPlayer);
+        PlayerLobby.addPlayer(currentPlayer, request.session());
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign-in");
+        vm.put("currentPlayer", currentPlayer);
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
