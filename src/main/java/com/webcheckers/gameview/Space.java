@@ -3,6 +3,7 @@ package com.webcheckers.gameview;
 public class Space {
 
     private int cellId;
+    private Piece piece;
 
     public int getCellId() {
         return cellId;
@@ -12,7 +13,7 @@ public class Space {
         return true;
     }
 
-    public int getPiece(){
-        return 0;
+    public Piece getPiece(){
+        return piece;
     }
 }
