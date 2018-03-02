@@ -24,6 +24,7 @@ public class Game {
         return playerTwo;
     }
 
+    //TODO rewrite this
     public String getBoardView(){
         Gson gson = new Gson();
         return gson.toJson(board);
