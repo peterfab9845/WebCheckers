@@ -18,39 +18,39 @@ import spark.TemplateEngine;
  */
 public class GetHomeRoute implements Route {
 
-  private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-  private final TemplateEngine templateEngine;
+    private final TemplateEngine templateEngine;
 
-  /**
-   * Create the Spark Route (UI controller) for the {@code GET /} HTTP request.
-   *
-   * @param templateEngine the HTML template rendering engine
-   */
-  public GetHomeRoute(final TemplateEngine templateEngine) {
-    // validation
-    Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-    //
-    this.templateEngine = templateEngine;
-    //
-    LOG.config("GetHomeRoute is initialized.");
-  }
+    /**
+     * Create the Spark Route (UI controller) for the {@code GET /} HTTP request.
+     *
+     * @param templateEngine the HTML template rendering engine
+     */
+    public GetHomeRoute(final TemplateEngine templateEngine) {
+        // validation
+        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+        //
+        this.templateEngine = templateEngine;
+        //
+        LOG.config("GetHomeRoute is initialized.");
+    }
 
-  /**
-   * Render the WebCheckers Home page.
-   *
-   * @param request the HTTP request
-   * @param response the HTTP response
-   * @return the rendered HTML for the Home page
-   */
-  @Override
-  public Object handle(Request request, Response response) {
-    LOG.finer("GetHomeRoute is invoked.");
-    //
-    Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
-    //vm.put("currentPlayer", "some playername");
-    return templateEngine.render(new ModelAndView(vm, "home.ftl"));
-  }
+    /**
+     * Render the WebCheckers Home page.
+     *
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return the rendered HTML for the Home page
+     */
+    @Override
+    public Object handle(Request request, Response response) {
+        LOG.finer("GetHomeRoute is invoked.");
+        //
+        Map<String, Object> vm = new HashMap<>();
+        vm.put("title", "Welcome!");
+        //vm.put("currentPlayer", "some playername");
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+    }
 
 }
