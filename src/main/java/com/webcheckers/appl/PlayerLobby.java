@@ -9,17 +9,18 @@ public class PlayerLobby {
 
     private static Queue<Player> allPlayers;
 
-    public static void init(){
+    public static void init() {
         allPlayers = new LinkedList<>();
     }
 
-    public static void addPlayer(Player player){
+    public static void addPlayer(Player player) {
         boolean add = allPlayers.add(player);
-        if (add)
-           System.out.println("SERVER:" + player.getName() + " has signed in.");
+        if (add) {
+            System.out.println("SERVER:" + player.getName() + " has signed in.");
+        }
     }
 
-    public static Player getNextPlayer(){
+    public static Player getNextPlayer() {
         return allPlayers.remove();
     }
 }

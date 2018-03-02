@@ -18,38 +18,38 @@ import spark.TemplateEngine;
  */
 public class GetGameRoute implements Route {
 
-  private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-  private final TemplateEngine templateEngine;
+    private final TemplateEngine templateEngine;
 
-  /**
-   * Create the Spark Route (UI controller) for the {@code GET /} HTTP request.
-   *
-   * @param templateEngine the HTML template rendering engine
-   */
-  public GetGameRoute(final TemplateEngine templateEngine) {
-    // validation
-    Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-    //
-    this.templateEngine = templateEngine;
-    //
-    LOG.config("GetGameRoute is initialized.");
-  }
+    /**
+     * Create the Spark Route (UI controller) for the {@code GET /} HTTP request.
+     *
+     * @param templateEngine the HTML template rendering engine
+     */
+    public GetGameRoute(final TemplateEngine templateEngine) {
+        // validation
+        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+        //
+        this.templateEngine = templateEngine;
+        //
+        LOG.config("GetGameRoute is initialized.");
+    }
 
-  /**
-   * Render the WebCheckers Game page.
-   *
-   * @param request the HTTP request
-   * @param response the HTTP response
-   * @return the rendered HTML for the Game page
-   */
-  @Override
-  public Object handle(Request request, Response response) {
-    LOG.finer("GetGameRoute is invoked.");
-    //
-    Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Checkers Game");
-    return templateEngine.render(new ModelAndView(vm, "game.ftl"));
-  }
+    /**
+     * Render the WebCheckers Game page.
+     *
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return the rendered HTML for the Game page
+     */
+    @Override
+    public Object handle(Request request, Response response) {
+        LOG.finer("GetGameRoute is invoked.");
+        //
+        Map<String, Object> vm = new HashMap<>();
+        vm.put("title", "Checkers Game");
+        return templateEngine.render(new ModelAndView(vm, "game.ftl"));
+    }
 
 }
