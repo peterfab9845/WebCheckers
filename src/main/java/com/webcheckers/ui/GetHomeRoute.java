@@ -64,6 +64,7 @@ public class GetHomeRoute implements Route {
         vm.put("currentPlayer", currentPlayer);
         vm.put("playerCount", PlayerLobby.getPlayerCount());
         if (PlayerLobby.sessionExists(request.session())) {
+            currentPlayer = PlayerLobby.getPlayer(request.session());
             vm.put("playerList", PlayerLobby.getPlayerListExcept(currentPlayer.getName()));
         }
         Message message = MessageMap.getMessage(request.session());
