@@ -11,12 +11,10 @@ public class PlayerLobby {
 
     private static Queue<Player> allPlayers;
     private static HashMap<String, Player> allPlayersHashed;
-    private static int playerCount;
 
     public static void init() {
         allPlayers = new LinkedList<>();
-        allPlayersHashed = new HashMap();
-        playerCount = 0;
+        allPlayersHashed = new HashMap<>();
     }
 
     public static boolean addPlayer(Player player, Session session) {
@@ -25,8 +23,7 @@ public class PlayerLobby {
 
         allPlayers.add(player);
         allPlayersHashed.put(session.id(), player);
-        playerCount++;
-        
+
         return true;
     }
 
@@ -40,5 +37,9 @@ public class PlayerLobby {
 
     public static boolean sessionExists(Session session){
         return allPlayersHashed.containsKey(session.id());
+    }
+
+    public static int getPlayerCount(){
+        return allPlayersHashed.size();
     }
 }
