@@ -6,22 +6,22 @@ import com.google.gson.Gson;
  * Created by Curtis Veronesi on 3/2/2018.
  */
 public class Game {
-    private Player playerOne;
-    private Player playerTwo;
+    private Player redPlayer;
+    private Player whitePlayer;
     private Board board;
 
-    public Game(Player one, Player two) {
-        playerOne = one;
-        playerTwo = two;
+    public Game(Player red, Player white) {
+        redPlayer = red;
+        whitePlayer = white;
         board = new Board();
     }
 
-    public Player getPlayerOne() {
-        return playerOne;
+    public Player getRedPlayer() {
+        return redPlayer;
     }
 
-    public Player getPlayerTwo() {
-        return playerTwo;
+    public Player getWhitePlayer() {
+        return whitePlayer;
     }
 
     //TODO rewrite this
