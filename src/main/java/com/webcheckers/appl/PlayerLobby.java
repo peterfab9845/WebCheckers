@@ -3,8 +3,10 @@ package com.webcheckers.appl;
 import com.webcheckers.model.Player;
 import spark.Session;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class PlayerLobby {
@@ -41,5 +43,13 @@ public class PlayerLobby {
 
     public static int getPlayerCount(){
         return allPlayersHashed.size();
+    }
+    
+    public static List<String> getPlayerList() {
+        List<String> playerNames = new ArrayList<String>();
+        for (Player p : allPlayersHashed.values()) {
+            playerNames.add(p.getName());
+        }
+        return playerNames;
     }
 }

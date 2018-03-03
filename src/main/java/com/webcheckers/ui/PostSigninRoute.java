@@ -63,6 +63,10 @@ public class PostSigninRoute implements Route {
         }
 
         vm.put("title", "home");
+        vm.put("playerCount", PlayerLobby.getPlayerCount());
+        if (PlayerLobby.sessionExists(request.session())) {
+            vm.put("playerList", PlayerLobby.getPlayerList());
+        }
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 

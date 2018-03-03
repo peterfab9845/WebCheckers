@@ -54,7 +54,10 @@ public class GetHomeRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
         vm.put("currentPlayer", currentPlayer);
-
+        vm.put("playerCount", PlayerLobby.getPlayerCount());
+        if (PlayerLobby.sessionExists(request.session())) {
+            vm.put("playerList", PlayerLobby.getPlayerList());
+        }
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 
