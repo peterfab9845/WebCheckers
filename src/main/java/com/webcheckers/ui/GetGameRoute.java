@@ -59,8 +59,8 @@ public class GetGameRoute implements Route {
         Player currentPlayer = PlayerLobby.getPlayer(request.session());
         if (currentPlayer != null && !currentPlayer.isInGame()) {
             String opponentName = request.queryParams("opponentName");
-            if (PlayerLobby.playerExists(opponentName)) {
-                Player opponent = PlayerLobby.getPlayerByName(opponentName);
+            Player opponent = PlayerLobby.getPlayerByName(opponentName);
+            if (opponent != null) {
                 if (!requestGame(currentPlayer, opponent)) {
                     // The player is already in a game
                     MessageMap.setMessage(request.session(), new Message("That player is already in a game.", MessageType.ERROR));
