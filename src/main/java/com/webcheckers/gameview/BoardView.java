@@ -8,8 +8,11 @@ public class BoardView implements Iterable<Row> {
 
     private List<Row> rows;
 
-    public BoardView() {
-        this.rows = new ArrayList<>(8);
+    public BoardView(Piece[][] boardRows) {
+        rows = new ArrayList<>(8);
+        for (int row = 0; row < boardRows.length; row++) {
+            rows.add(new Row(row, boardRows[row]));
+        }
     }
 
     @Override

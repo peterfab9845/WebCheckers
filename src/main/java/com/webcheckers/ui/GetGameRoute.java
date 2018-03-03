@@ -57,11 +57,11 @@ public class GetGameRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("GetGameRoute is invoked.");
         //
-        
+
         Map<String, Object> vm = new HashMap<>();
         Player currentPlayer = PlayerLobby.getPlayer(request.session());
         if (currentPlayer != null && !currentPlayer.isInGame()) {
-            String opponentName = request.queryParams("name");
+            String opponentName = request.queryParams("opponentName");
             if (PlayerLobby.playerExists(opponentName)) {
                 Player opponent = PlayerLobby.getPlayerByName(opponentName);
                 if (!requestGame(currentPlayer, opponent)) {
@@ -76,26 +76,26 @@ public class GetGameRoute implements Route {
                 response.redirect("/");
                 throw halt(400);
             }
-        } else if (currentPlayer == null){
+        } else if (currentPlayer == null) {
             response.redirect("/");
             throw halt(401);
         }
-        
+
         vm.put("title", "Checkers Game");
         vm.put("currentPlayer", currentPlayer);
         vm.put("viewMode", ViewMode.PLAY);
         vm.put("redPlayer", currentPlayer);
         vm.put("whitePlayer", new Player("test white"));
         vm.put("activeColor", PieceColor.RED);
-        vm.put("board", new BoardView());
+        vm.put("board", currentPlayer.getBoardView());
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
-    
+
     private boolean requestGame(Player currentPlayer, Player opponent) {
         if (opponent.isInGame()) {
             return false;
         }
-        
+
         // Create the game object that will be used as the model for both players
         Game game = new Game(currentPlayer, opponent);
         currentPlayer.setGame(game);

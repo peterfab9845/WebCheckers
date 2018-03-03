@@ -1,11 +1,12 @@
 package com.webcheckers.model;
 
-import com.google.gson.Gson;
+import com.webcheckers.gameview.BoardView;
 
 /**
  * Created by Curtis Veronesi on 3/2/2018.
  */
 public class Game {
+
     private Player redPlayer;
     private Player whitePlayer;
     private Board board;
@@ -24,10 +25,8 @@ public class Game {
         return whitePlayer;
     }
 
-    //TODO rewrite this
-    public String getBoardView() {
-        Gson gson = new Gson();
-        return gson.toJson(board);
+    public BoardView getBoardView() {
+        return board.getBoardView();
     }
 
 }

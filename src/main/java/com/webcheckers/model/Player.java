@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import com.webcheckers.gameview.BoardView;
 import java.util.Objects;
 
 public class Player {
@@ -37,13 +38,16 @@ public class Player {
     public int hashCode() {
         return Objects.hash(name);
     }
-    
+
     public Game getGame() {
         return this.game;
     }
-    
+
     public void setGame(Game newGame) {
         this.game = newGame;
     }
 
+    public BoardView getBoardView() {
+        return game.getBoardView();
+    }
 }
