@@ -3,12 +3,8 @@ package com.webcheckers.ui;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.gameview.BoardView;
-import com.webcheckers.gameview.PieceColor;
 import com.webcheckers.gameview.ViewMode;
 import com.webcheckers.model.Game;
-import com.webcheckers.model.Message;
-import com.webcheckers.model.MessageType;
 import com.webcheckers.model.Player;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,13 +77,14 @@ public class GetGameRoute implements Route {
             throw halt(401);
         }
 
+        Game game = currentPlayer.getGame();
         vm.put("title", "Checkers Game");
         vm.put("currentPlayer", currentPlayer);
         vm.put("viewMode", ViewMode.PLAY);
-        vm.put("redPlayer", currentPlayer);
-        vm.put("whitePlayer", new Player("test white"));
-        vm.put("activeColor", PieceColor.RED);
-        vm.put("board", currentPlayer.getBoardView());
+        vm.put("redPlayer", game.getRedPlayer());
+        vm.put("whitePlayer", game.getWhitePlayer());
+        vm.put("activeColor", game.getActiveColor());
+        vm.put("board", game.getBoardView(currentPlayer));
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
 

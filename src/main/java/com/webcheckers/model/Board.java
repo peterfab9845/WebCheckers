@@ -27,7 +27,21 @@ public class Board {
         }
     }
 
-    public BoardView getBoardView() {
-        return new BoardView(board);
+    public BoardView getBoardView(PieceColor perspectiveColor) {
+        if (perspectiveColor == PieceColor.WHITE) {
+            return new BoardView(rotate180());
+        } else {
+            return new BoardView(board);
+        }
+    }
+
+    private Piece[][] rotate180() {
+        Piece[][] rotated = new Piece[8][8];
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                rotated[7 - row][7 - col] = board[row][col];
+            }
+        }
+        return rotated;
     }
 }
