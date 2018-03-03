@@ -20,7 +20,7 @@
       </#if>
 
     <form action="/signin" method="POST">
-      Your name: <input name="name"/>
+      Your name: <input name="name" pattern="[A-Za-z0-9]+"/>
       <br/>
       <button type="submit">Ok</button>
     </form>
