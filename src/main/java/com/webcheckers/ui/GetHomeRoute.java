@@ -2,15 +2,14 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
+import com.webcheckers.appl.Message;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.google.gson.Gson;
 import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Message;
 import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;

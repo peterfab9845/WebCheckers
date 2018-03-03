@@ -2,12 +2,12 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
+import com.webcheckers.appl.Message;
 import com.webcheckers.appl.MessageMap;
+import com.webcheckers.appl.MessageType;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.gameview.ViewMode;
 import com.webcheckers.model.Game;
-import com.webcheckers.model.Message;
-import com.webcheckers.model.MessageType;
 import com.webcheckers.model.Player;
 import java.util.HashMap;
 import java.util.Map;

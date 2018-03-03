@@ -1,7 +1,6 @@
 package com.webcheckers.model;
 
 import com.webcheckers.gameview.BoardView;
-import com.webcheckers.gameview.PieceColor;
 
 /**
  * Created by Curtis Veronesi on 3/2/2018.

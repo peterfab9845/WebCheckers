@@ -1,4 +1,7 @@
-package com.webcheckers.gameview;
+package com.webcheckers.model;
+
+import com.webcheckers.model.PieceColor;
+import com.webcheckers.model.PieceType;
 
 public class Piece {
 

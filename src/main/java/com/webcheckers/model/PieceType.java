@@ -1,4 +1,4 @@
-package com.webcheckers.gameview;
+package com.webcheckers.model;
 
 public enum PieceType {
     SINGLE, KING

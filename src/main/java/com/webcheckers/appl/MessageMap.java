@@ -2,8 +2,6 @@ package com.webcheckers.appl;
 
 import java.util.HashMap;
 
-import com.webcheckers.model.Message;
-
 import spark.Session;
 
 /**

@@ -1,5 +1,6 @@
 package com.webcheckers.gameview;
 
+import com.webcheckers.model.Piece;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

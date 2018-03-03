@@ -2,8 +2,8 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
-import com.webcheckers.model.Message;
-import com.webcheckers.model.MessageType;
+import com.webcheckers.appl.Message;
+import com.webcheckers.appl.MessageType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

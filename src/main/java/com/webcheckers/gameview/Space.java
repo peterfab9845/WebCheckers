@@ -1,5 +1,7 @@
 package com.webcheckers.gameview;
 
+import com.webcheckers.model.Piece;
+
 public class Space {
 
     private int cellIdx;
