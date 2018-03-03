@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
-
+import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -78,6 +78,7 @@ public class WebServer {
         //
         this.templateEngine = templateEngine;
         PlayerLobby.init();
+        MessageMap.init();
     }
 
     //

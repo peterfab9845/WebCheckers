@@ -2,9 +2,12 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
+import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.gameview.ViewMode;
 import com.webcheckers.model.Game;
+import com.webcheckers.model.Message;
+import com.webcheckers.model.MessageType;
 import com.webcheckers.model.Player;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,17 +65,18 @@ public class GetGameRoute implements Route {
                 Player opponent = PlayerLobby.getPlayerByName(opponentName);
                 if (!requestGame(currentPlayer, opponent)) {
                     // The player is already in a game
-                    // TODO display an error message
+                    MessageMap.setMessage(request.session(), new Message("That player is already in a game.", MessageType.ERROR));
                     response.redirect("/");
                     throw halt(400);
                 }
             } else {
                 // The player does not exist in the system
-                // TODO display an error message
+                MessageMap.setMessage(request.session(), new Message("That player does not exist.", MessageType.ERROR));
                 response.redirect("/");
                 throw halt(400);
             }
         } else if (currentPlayer == null) {
+            MessageMap.setMessage(request.session(), new Message("You must sign in to play a game.", MessageType.ERROR));
             response.redirect("/");
             throw halt(401);
         }

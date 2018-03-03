@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Message;
 import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
@@ -64,6 +66,10 @@ public class GetHomeRoute implements Route {
         vm.put("playerCount", PlayerLobby.getPlayerCount());
         if (PlayerLobby.sessionExists(request.session())) {
             vm.put("playerList", PlayerLobby.getPlayerListExcept(currentPlayer.getName()));
+        }
+        Message message = MessageMap.getMessage(request.session());
+        if (message != null) {
+            vm.put("message", message);
         }
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
