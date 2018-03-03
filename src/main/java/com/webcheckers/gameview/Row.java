@@ -1,15 +1,25 @@
 package com.webcheckers.gameview;
 
-public class Row {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
+public class Row implements Iterable {
 
     private int index;
-    private Space[] spaces;
+    private List<Space> spaces;
 
     public Row(){
-        spaces = new Space[8];
+        spaces = new ArrayList<>(8);
     }
 
     public int getIndex(){
         return index;
+    }
+
+    @Override
+    public Iterator<Space> iterator() {
+        return spaces.iterator();
     }
 }

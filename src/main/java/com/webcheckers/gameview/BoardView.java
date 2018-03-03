@@ -1,11 +1,20 @@
 package com.webcheckers.gameview;
 
-public class BoardView {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
-    private Row[] rows;
+public class BoardView implements Iterable<Row> {
+
+    private List<Row> rows;
 
     public BoardView(){
-        this.rows = new Row[8];
+        this.rows = new ArrayList<>(8);
     }
 
+    @Override
+    public Iterator<Row> iterator() {
+        return rows.iterator();
+    }
 }
