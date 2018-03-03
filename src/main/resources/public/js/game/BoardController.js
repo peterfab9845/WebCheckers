@@ -255,8 +255,10 @@ define(function(require){
         var pieceId = event.originalEvent.dataTransfer.getData('text');
         // cancel if this drop event has no data
         if (pieceId === null || pieceId === '') return;
-        // otherwise handle the event
         var $destCell = jQuery(event.target);
+        // Cancel if the player can't move to this cell
+        if (!canMakeMove(boardController, $destCell)) return;
+        // otherwise handle the event
         var $piece = jQuery('#' + pieceId);
         var $sourceCell = $piece.parent();
         // set to normal opacity
@@ -266,6 +268,23 @@ define(function(require){
         boardController._triggerListeners(new PieceMoveEvent($piece, pendingMove));
         //
         return false;
+    }
+    
+    function canMakeMove(boardController, $destCell) {
+        var destRow = parseInt($destCell.parent().attr('data-row'));
+        var destCell = parseInt($destCell.attr('data-cell'));
+        if (isNaN(destRow) || isNaN(destCell)) return false;
+        
+        // The player can't move to a white cell
+        // The cell is white if the row and column are both even or both odd
+        if (destRow % 2 == 0 && destCell % 2 == 0) return false;
+        if (destRow % 2 == 1 && destCell % 2 == 1) return false;
+        
+        // The player can't move to an occupied cell
+        var piece = boardController.getPiece$(new Position(destRow, destCell));
+        if (piece !== null) return false;
+        
+        return true;
     }
     
     // export class constructor
