@@ -60,4 +60,18 @@ public class PlayerLobby {
         }
         return playerNames;
     }
+    
+    public static boolean playerExists(String playerName) {
+        List<String> playerList = getPlayerList();
+        return playerList.contains(playerName);
+    }
+    
+    public static Player getPlayerByName(String playerName) {
+        for (Player p : allPlayersHashed.values()) {
+            if (p.getName().equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
+    }
 }

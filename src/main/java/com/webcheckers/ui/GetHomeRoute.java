@@ -51,6 +51,10 @@ public class GetHomeRoute implements Route {
         LOG.finer("GetHomeRoute is invoked.");
         //
         Player currentPlayer = PlayerLobby.getPlayer(request.session());
+        // Redirect the player to the game page if a game is in progress
+        if (currentPlayer != null && currentPlayer.isInGame()) {
+            response.redirect("/game");
+        }
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
         vm.put("currentPlayer", currentPlayer);

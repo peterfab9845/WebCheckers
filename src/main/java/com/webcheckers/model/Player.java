@@ -6,10 +6,12 @@ public class Player {
 
     private String name;
     private boolean inGame;
+    private Game game;
 
     public Player(String name) {
         this.name = name;
         this.setInGame(false);
+        this.game = null;
     }
 
     public String getName() {
@@ -34,6 +36,14 @@ public class Player {
 
     public int hashCode() {
         return Objects.hash(name);
+    }
+    
+    public Game getGame() {
+        return this.game;
+    }
+    
+    public void setGame(Game newGame) {
+        this.game = newGame;
     }
 
 }
