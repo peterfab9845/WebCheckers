@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import static spark.Spark.halt;
+
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.gameview.BoardView;
 import com.webcheckers.gameview.PieceColor;
@@ -66,12 +68,17 @@ public class GetGameRoute implements Route {
                     // The player is already in a game
                     // TODO display an error message
                     response.redirect("/");
+                    throw halt(400);
                 }
             } else {
                 // The player does not exist in the system
                 // TODO display an error message
                 response.redirect("/");
+                throw halt(400);
             }
+        } else {
+            response.redirect("/");
+            throw halt(303);
         }
         
         vm.put("title", "Checkers Game");

@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import static spark.Spark.halt;
+
 import com.webcheckers.model.Message;
 import com.webcheckers.model.MessageType;
 import java.util.HashMap;
@@ -67,6 +69,7 @@ public class PostSigninRoute implements Route {
             if (loginSuccess) {
                 vm.put("currentPlayer", currentPlayer);
                 response.redirect("/");
+                throw halt(200);
             } else {
                 vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.ERROR));
             }

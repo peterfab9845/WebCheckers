@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import static spark.Spark.halt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -53,6 +55,7 @@ public class GetSigninRoute implements Route {
 
         if (PlayerLobby.sessionExists(request.session())) {
             response.redirect("/");
+            throw halt(303);
         }
 
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));

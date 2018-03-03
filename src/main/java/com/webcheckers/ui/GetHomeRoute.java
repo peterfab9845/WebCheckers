@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import static spark.Spark.halt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -54,6 +56,7 @@ public class GetHomeRoute implements Route {
         // Redirect the player to the game page if a game is in progress
         if (currentPlayer != null && currentPlayer.isInGame()) {
             response.redirect("/game");
+            throw halt(303);
         }
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
