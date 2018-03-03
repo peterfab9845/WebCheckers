@@ -10,9 +10,9 @@ public class Game {
     private Player playerTwo;
     private Board board;
 
-    public Game(Player One, Player Two){
-        playerOne = One;
-        playerTwo = Two;
+    public Game(Player one, Player two){
+        playerOne = one;
+        playerTwo = two;
         board = new Board();
     }
 

@@ -52,8 +52,9 @@ public class GetSigninRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign-in");
 
-        if (PlayerLobby.sessionExists(request.session()))
+        if (PlayerLobby.sessionExists(request.session())) {
             response.redirect("/");
+        }
 
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
