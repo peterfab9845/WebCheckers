@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-import com.webcheckers.gameview.BoardView;
 import java.util.Objects;
 
 public class Player {
@@ -45,9 +44,5 @@ public class Player {
 
     public void setGame(Game newGame) {
         this.game = newGame;
-    }
-
-    public BoardView getBoardView() {
-        return game.getBoardView();
     }
 }

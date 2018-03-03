@@ -1,6 +1,7 @@
 package com.webcheckers.model;
 
 import com.webcheckers.gameview.BoardView;
+import com.webcheckers.gameview.PieceColor;
 
 /**
  * Created by Curtis Veronesi on 3/2/2018.
@@ -25,8 +26,15 @@ public class Game {
         return whitePlayer;
     }
 
-    public BoardView getBoardView() {
-        return board.getBoardView();
+    public BoardView getBoardView(Player player) {
+        if (player.equals(whitePlayer)) {
+            return board.getBoardView(PieceColor.WHITE);
+        } else {
+            return board.getBoardView(PieceColor.RED);
+        }
     }
 
+    public PieceColor getActiveColor() {
+        return PieceColor.RED;
+    }
 }
