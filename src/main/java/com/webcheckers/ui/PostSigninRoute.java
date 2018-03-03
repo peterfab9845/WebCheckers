@@ -1,12 +1,13 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.model.Message;
+import com.webcheckers.model.MessageType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.google.gson.Gson;
-import com.webcheckers.Application;
+
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.ModelAndView;
@@ -25,6 +26,9 @@ public class PostSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostSigninRoute.class.getName());
 
     private final TemplateEngine templateEngine;
+
+    private static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
+    private static final String MSG_USERNAME_TAKEN = "Username taken, please choose a different one";
 
     /**
      * Create the Spark Route (UI controller) for the {@code POST /signin} HTTP request.
@@ -51,19 +55,23 @@ public class PostSigninRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("PostSigninRoute is invoked.");
 
+        Map<String, Object> vm = new HashMap<>();
+        vm.put("title", "Sign-in");
+
         // retrieve request parameter
         final String username = request.queryParams("name");
-        Player currentPlayer = new Player(username);
-        boolean loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
-
-        Map<String, Object> vm = new HashMap<>();
-
-        if (loginSuccess){
-            vm.put("currentPlayer", currentPlayer);
-            response.redirect("/");
-        }
-        else {
-            vm.put("title", "Sign-in");
+        boolean loginSuccess;
+        if (username.matches("[A-Za-z0-9 ]+")) {
+            Player currentPlayer = new Player(username);
+            loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
+            if (loginSuccess) {
+                vm.put("currentPlayer", currentPlayer);
+                response.redirect("/");
+            } else {
+                vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.ERROR));
+            }
+        } else {
+            vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.ERROR));
         }
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }

@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.gameview.BoardView;
 import com.webcheckers.gameview.PieceColor;
 import com.webcheckers.gameview.ViewMode;
@@ -53,7 +54,7 @@ public class GetGameRoute implements Route {
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Checkers Game");
-        vm.put("currentPlayer", new Player("test playernam"));
+        vm.put("currentPlayer", PlayerLobby.getPlayer(request.session()));
         vm.put("viewMode", ViewMode.PLAY);
         vm.put("redPlayer", new Player("test red name"));
         vm.put("whitePlayer", new Player("test white name"));
