@@ -46,7 +46,7 @@ public class PlayerLobby {
     }
     
     public static List<String> getPlayerList() {
-        List<String> playerNames = new ArrayList<String>();
+        List<String> playerNames = new ArrayList<>();
         for (Player p : allPlayersHashed.values()) {
             playerNames.add(p.getName());
         }

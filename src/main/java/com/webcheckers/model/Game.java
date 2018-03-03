@@ -10,7 +10,7 @@ public class Game {
     private Player playerTwo;
     private Board board;
 
-    public Game(Player one, Player two){
+    public Game(Player one, Player two) {
         playerOne = one;
         playerTwo = two;
         board = new Board();
@@ -25,7 +25,7 @@ public class Game {
     }
 
     //TODO rewrite this
-    public String getBoardView(){
+    public String getBoardView() {
         Gson gson = new Gson();
         return gson.toJson(board);
     }

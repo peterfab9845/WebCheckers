@@ -1,5 +1,5 @@
 package com.webcheckers.gameview;
 
 public enum PieceColor {
-    RED, WHITE;
+    RED, WHITE
 }
