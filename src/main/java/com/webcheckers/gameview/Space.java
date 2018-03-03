@@ -2,11 +2,11 @@ package com.webcheckers.gameview;
 
 public class Space {
 
-    private int cellId;
+    private int cellIdx;
     private Piece piece;
 
     public int getCellId() {
-        return cellId;
+        return cellIdx;
     }
 
     public boolean isValid(){
