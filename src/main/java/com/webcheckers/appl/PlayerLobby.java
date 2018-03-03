@@ -17,12 +17,14 @@ public class PlayerLobby {
         allPlayersHashed = new HashMap();
     }
 
-    public static void addPlayer(Player player, Session session) {
-        boolean add = allPlayers.add(player);
+    public static boolean addPlayer(Player player, Session session) {
+        if (allPlayersHashed.containsValue(player))
+            return false;
+
+        allPlayers.add(player);
         allPlayersHashed.put(session.id(), player);
-        if (add) {
-            System.out.println("SERVER:" + player.getName() + " has signed in.");
-        }
+
+        return true;
     }
 
     public static Player getNextPlayer() {
@@ -31,5 +33,9 @@ public class PlayerLobby {
 
     public static Player getPlayer(Session session){
         return allPlayersHashed.get(session.id());
+    }
+
+    public static boolean sessionExists(Session session){
+        return allPlayersHashed.containsKey(session.id());
     }
 }

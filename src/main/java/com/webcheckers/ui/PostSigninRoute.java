@@ -54,11 +54,15 @@ public class PostSigninRoute implements Route {
         // retrieve request parameter
         final String username = request.queryParams("name");
         Player currentPlayer = new Player(username);
-        PlayerLobby.addPlayer(currentPlayer, request.session());
+        boolean loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
 
         Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Sign-in");
-        vm.put("currentPlayer", currentPlayer);
+
+        if (loginSuccess){
+            vm.put("currentPlayer", currentPlayer);
+        }
+
+        vm.put("title", "home");
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 

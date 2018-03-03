@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -49,6 +51,10 @@ public class GetSigninRoute implements Route {
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Sign-in");
+
+        if (PlayerLobby.sessionExists(request.session()))
+            response.redirect("/");
+
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
 

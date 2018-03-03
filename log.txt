@@ -1,0 +1,99 @@
+commit 069866ac8e9e18da1738ece2069578eaf9566f51
+Author: andrewreed <andrewreed2017@icloud.com>
+Date:   Wed Feb 28 16:56:51 2018 -0500
+
+    Post set up to send back home after sign up
+
+commit d17af74c3095cc89eb09487b39ea8d632f43fd5b
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Wed Feb 28 16:42:10 2018 -0500
+
+    Started PlayerLobby and PostSigninRoute (not functional).
+
+commit 94853436a28745c06f0a9701f8bfca4ebc358ccd
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Mon Feb 26 18:50:37 2018 -0500
+
+    Removed no-longer-needed .keep files.
+
+commit 93ce129700602da9ec59c812de390ad99d0f94a4
+Merge: e66f5e9 d47bc15
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Mon Feb 26 18:46:00 2018 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       src/main/java/com/webcheckers/model/Player.java
+
+commit e66f5e91c3270cc9bbbd2362ca0f5362095741ec
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Mon Feb 26 18:39:48 2018 -0500
+
+    Created Player class.
+
+commit d47bc15190d7d4db3779bb69fe4534f5465b1112
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Mon Feb 26 18:39:48 2018 -0500
+
+    Created Player class.
+
+commit 1a4651649eaf12b7252ddd166b77c11d80a1d64b
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Mon Feb 26 18:35:27 2018 -0500
+
+    Updated game navigation bar to match home page.
+
+commit 3807048d1cfe88cc98dba2ea57bb4304dfb1ee95
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Fri Feb 23 23:14:57 2018 -0500
+
+    Used IntelliJ to format files to Google specifications.
+
+commit 3ccbc78956c5de35a98e3efe2fbcb26ff31761cc
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Fri Feb 23 23:11:00 2018 -0500
+
+    Added functionality to reach sign-in page from home.
+
+commit 37b6f0e77aa86921ba5e8b5ec9d77181ac2797e1
+Author: Adam Heeter <axh6277@rit.edu>
+Date:   Mon Feb 19 19:14:21 2018 -0500
+
+    Added my name to the readme file
+
+commit ac3ceb1b494a201124a5acfcf6246db5342b0644
+Author: Curtis Veronesi <cpv9844@rit.edu>
+Date:   Wed Feb 14 18:32:40 2018 -0500
+
+    Curtis Veronesi fixed
+
+commit 5c1bd2dc342eef6aeb21e5706c5169bd84dd8d75
+Author: Curtis Veronesi <cpv9844@rit.edu>
+Date:   Wed Feb 14 18:30:36 2018 -0500
+
+    Curtis Veronesi added
+
+commit 147e115be985c30d9d8300263961791c30db9a36
+Author: pnf9945 <pnf9945@rit.edu>
+Date:   Wed Feb 14 18:15:48 2018 -0500
+
+    Added my name to README file.
+
+commit a48bc49642faf141ff3ab52005aba70a6900cc2d
+Author: andrewreed <andrewreed2017@icloud.com>
+Date:   Wed Feb 14 18:09:50 2018 -0500
+
+    Name Added
+
+commit 0fdf762bd8d56b8a30549e3af710d6e7447386f8
+Author: Kenn Martinez <kbmvse@rit.edu>
+Date:   Wed Feb 14 14:09:36 2018 -0500
+
+    added docs/ and etc/ and xml to produce the right zip
+
+commit 9d4007ebe9b0a5f58d7a6512416474cf72933406
+Author: Kenn Martinez <kbmvse@rit.edu>
+Date:   Mon Feb 12 06:29:23 2018 -0500
+
+    Initial SEEDing of TEAM PROJECT repo
