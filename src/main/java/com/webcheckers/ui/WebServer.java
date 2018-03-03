@@ -59,7 +59,6 @@ public class WebServer {
     //
 
     private final TemplateEngine templateEngine;
-    private final Gson gson;
     private PlayerLobby playerLobby;
     //
     // Constructor
@@ -78,7 +77,6 @@ public class WebServer {
         Objects.requireNonNull(gson, "gson must not be null");
         //
         this.templateEngine = templateEngine;
-        this.gson = gson;
         PlayerLobby.init();
     }
 
@@ -143,7 +141,7 @@ public class WebServer {
         //Receives the user's login.
         post(SIGNIN_URL, new PostSigninRoute(templateEngine));
 
-        //
+
         LOG.config("WebServer is initialized.");
     }
 

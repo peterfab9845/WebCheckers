@@ -1,5 +1,9 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.gameview.BoardView;
+import com.webcheckers.gameview.PieceColor;
+import com.webcheckers.gameview.ViewMode;
+import com.webcheckers.model.Player;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -49,6 +53,12 @@ public class GetGameRoute implements Route {
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Checkers Game");
+        vm.put("currentPlayer", new Player("test playernam"));
+        vm.put("viewMode", ViewMode.PLAY);
+        vm.put("redPlayer", new Player("test red name"));
+        vm.put("whitePlayer", new Player("test white name"));
+        vm.put("activeColor", PieceColor.WHITE);
+        vm.put("board", new BoardView());
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
 
