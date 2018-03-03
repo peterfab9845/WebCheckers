@@ -21,7 +21,7 @@
 
     <div class="body">
         <p>Welcome to the world of online Checkers.</p>
-        <p>${playerCount} players are online right now.</p>
+        <p>${playerCount} player<#if (playerCount > 1)>s are<#else> is</#if> online right now.</p>
         <#if currentPlayer??>
             <p>
             <#list playerList as player>
