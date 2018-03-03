@@ -10,7 +10,7 @@ import java.util.Queue;
 public class PlayerLobby {
 
     private static Queue<Player> allPlayers;
-    private static HashMap<Session, Player> allPlayersHashed;
+    private static HashMap<String, Player> allPlayersHashed;
 
     public static void init() {
         allPlayers = new LinkedList<>();
@@ -19,7 +19,7 @@ public class PlayerLobby {
 
     public static void addPlayer(Player player, Session session) {
         boolean add = allPlayers.add(player);
-        allPlayersHashed.put(session, player);
+        allPlayersHashed.put(session.id(), player);
         if (add) {
             System.out.println("SERVER:" + player.getName() + " has signed in.");
         }
@@ -30,6 +30,6 @@ public class PlayerLobby {
     }
 
     public static Player getPlayer(Session session){
-        return allPlayersHashed.get(session);
+        return allPlayersHashed.get(session.id());
     }
 }
