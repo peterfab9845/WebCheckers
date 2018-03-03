@@ -23,9 +23,7 @@ public class MessageMap {
     public static Message getMessage(Session session) {
         if (messages.containsKey(session.id())) {
             // Remove the message from the list so it only gets displayed once
-            Message m = messages.get(session.id());
-            messages.remove(session.id());
-            return m;
+            return messages.remove(session.id());
         } else {
             return null;
         }
