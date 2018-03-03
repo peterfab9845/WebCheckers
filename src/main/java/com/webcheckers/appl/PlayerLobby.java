@@ -52,4 +52,12 @@ public class PlayerLobby {
         }
         return playerNames;
     }
+    
+    public static List<String> getPlayerListExcept(String name) {
+        List<String> playerNames = getPlayerList();
+        if (playerNames.contains(name)) {
+            playerNames.remove(name);
+        }
+        return playerNames;
+    }
 }

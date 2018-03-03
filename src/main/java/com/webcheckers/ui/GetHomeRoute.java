@@ -56,7 +56,7 @@ public class GetHomeRoute implements Route {
         vm.put("currentPlayer", currentPlayer);
         vm.put("playerCount", PlayerLobby.getPlayerCount());
         if (PlayerLobby.sessionExists(request.session())) {
-            vm.put("playerList", PlayerLobby.getPlayerList());
+            vm.put("playerList", PlayerLobby.getPlayerListExcept(currentPlayer.getName()));
         }
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
