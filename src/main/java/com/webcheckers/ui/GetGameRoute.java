@@ -22,8 +22,6 @@ import spark.TemplateEngine;
 
 /**
  * The UI Controller to GET the Game page.
- *
- * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetGameRoute implements Route {
 
