@@ -76,17 +76,17 @@ public class GetGameRoute implements Route {
                 response.redirect("/");
                 throw halt(400);
             }
-        } else {
+        } else if (currentPlayer == null){
             response.redirect("/");
-            throw halt(303);
+            throw halt(401);
         }
         
         vm.put("title", "Checkers Game");
         vm.put("currentPlayer", currentPlayer);
         vm.put("viewMode", ViewMode.PLAY);
-        vm.put("redPlayer", new Player("test red name"));
-        vm.put("whitePlayer", new Player("test white name"));
-        vm.put("activeColor", PieceColor.WHITE);
+        vm.put("redPlayer", currentPlayer);
+        vm.put("whitePlayer", new Player("test white"));
+        vm.put("activeColor", PieceColor.RED);
         vm.put("board", new BoardView());
         return templateEngine.render(new ModelAndView(vm, "game.ftl"));
     }
