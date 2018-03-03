@@ -60,14 +60,11 @@ public class PostSigninRoute implements Route {
 
         if (loginSuccess){
             vm.put("currentPlayer", currentPlayer);
+            response.redirect("/");
         }
-
-        vm.put("title", "home");
-        vm.put("playerCount", PlayerLobby.getPlayerCount());
-        if (PlayerLobby.sessionExists(request.session())) {
-            vm.put("playerList", PlayerLobby.getPlayerList());
+        else {
+            vm.put("title", "Sign-in");
         }
-        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
-
 }
