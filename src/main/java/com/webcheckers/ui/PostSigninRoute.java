@@ -71,10 +71,10 @@ public class PostSigninRoute implements Route {
                 response.redirect("/");
                 throw halt(200);
             } else {
-                vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.ERROR));
+                vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.error));
             }
         } else {
-            vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.ERROR));
+            vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.error));
         }
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
