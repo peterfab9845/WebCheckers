@@ -53,13 +53,20 @@ public class WebServer {
      * The URL pattern to request the Game page.
      */
     public static final String GAME_URL = "/game";
+    
+    /**
+     * The URL pattern to request the move validation Ajax action.
+     */
+    public static final String VALIDATE_MOVE_URL = "/validateMove";
 
     //
     // Attributes
     //
 
+    private final Gson gson;
     private final TemplateEngine templateEngine;
     private PlayerLobby playerLobby;
+    
     //
     // Constructor
     //
@@ -76,6 +83,7 @@ public class WebServer {
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         Objects.requireNonNull(gson, "gson must not be null");
         //
+        this.gson = gson;
         this.templateEngine = templateEngine;
         PlayerLobby.init();
         MessageMap.init();
@@ -141,6 +149,9 @@ public class WebServer {
 
         //Receives the user's login.
         post(SIGNIN_URL, new PostSigninRoute(templateEngine));
+        
+        // Validates the player's moves.
+        post(VALIDATE_MOVE_URL, new PostValidateMoveRoute(gson));
 
 
         LOG.config("WebServer is initialized.");
