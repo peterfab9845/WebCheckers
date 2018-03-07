@@ -22,4 +22,12 @@ public class Position {
     public int getCell() {
         return cell;
     }
+    
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Position)) {
+            return false;
+        } else {
+            return row == ((Position) obj).row && cell == ((Position) obj).cell;
+        }
+    }
 }

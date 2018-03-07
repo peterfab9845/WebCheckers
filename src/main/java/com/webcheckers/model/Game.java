@@ -24,6 +24,14 @@ public class Game {
     public Player getWhitePlayer() {
         return whitePlayer;
     }
+    
+    public PieceColor getPlayerColor(Player player) {
+        if (player == redPlayer) {
+            return PieceColor.RED;
+        } else {
+            return PieceColor.WHITE;
+        }
+    }
 
     public BoardView getBoardView(Player player) {
         if (player.equals(whitePlayer)) {
@@ -35,5 +43,9 @@ public class Game {
 
     public PieceColor getActiveColor() {
         return PieceColor.RED;
+    }
+    
+    public Board getBoard() {
+        return board;
     }
 }

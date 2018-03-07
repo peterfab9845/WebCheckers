@@ -22,6 +22,8 @@ public class Board {
                 board[7][col] = new Piece(PieceType.SINGLE, PieceColor.RED);
             }
         }
+        board[5][0] = null;
+        board[4][3] = new Piece(PieceType.SINGLE, PieceColor.WHITE);
     }
 
     public BoardView getBoardView(PieceColor perspectiveColor) {
@@ -40,5 +42,25 @@ public class Board {
             }
         }
         return rotated;
+    }
+    
+    public boolean opponentInPosition(Position position, PieceColor currentColor) {
+        int row = position.getRow();
+        int cell = position.getCell();
+        Piece piece = board[row][cell];
+        if (piece == null) {
+            return false;
+        } else if (currentColor == piece.getColor()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public boolean pieceInPosition(Position position) {
+        int row = position.getRow();
+        int cell = position.getCell();
+        Piece piece = board[row][cell];
+        return piece != null;
     }
 }
