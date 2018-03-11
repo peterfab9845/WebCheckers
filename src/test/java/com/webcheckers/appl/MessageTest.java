@@ -40,6 +40,8 @@ public class MessageTest {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
         assertTrue(CuT.equals(CuT),
             "Message not equal to itself.");
+        assertEquals(CuT.hashCode(), CuT.hashCode(),
+            "Same message has different hashcodes.");
     }
 
     @Test
@@ -49,6 +51,8 @@ public class MessageTest {
 
         assertTrue(CuT.equals(otherMessage),
             "Messages of same text and type not equal.");
+        assertEquals(CuT.hashCode(), otherMessage.hashCode(),
+            "Messages of same text and type have different hashcodes.");
     }
 
     @Test
@@ -58,6 +62,7 @@ public class MessageTest {
 
         assertFalse(CuT.equals(otherMessage),
             "Messages with different text equal.");
+        //not testing hashcodes being different because collisions are possible
     }
 
     @Test
@@ -67,7 +72,7 @@ public class MessageTest {
 
         assertFalse(CuT.equals(otherMessage),
             "Messages with different type equal.");
-
+        //not testing hashcodes being different because collisions are possible
     }
 
     @Test
@@ -77,5 +82,6 @@ public class MessageTest {
 
         assertFalse(CuT.equals(otherMessage),
             "Messages of different text and type equal.");
+        //not testing hashcodes being different because collisions are possible
     }
 }
