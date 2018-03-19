@@ -40,15 +40,20 @@ public class PlayerLobbyTest {
 
     @Test
     public void addPlayer_noConflict() {
-        assertTrue(PlayerLobby.addPlayer(player1, session1));
-        assertTrue(PlayerLobby.addPlayer(player2, session2));
+        assertTrue(PlayerLobby.addPlayer(player1, session1),
+            "Could not add first player.");
+        assertTrue(PlayerLobby.addPlayer(player2, session2),
+            "Could not add second player.");
     }
 
     @Test
     public void addPlayer_conflict() {
-        assertTrue(PlayerLobby.addPlayer(player1, session1));
-        assertFalse(PlayerLobby.addPlayer(player1, session1));
-        assertFalse(PlayerLobby.addPlayer(player2, session1));
+        assertTrue(PlayerLobby.addPlayer(player1, session1),
+            "Could not add first player.");
+        assertFalse(PlayerLobby.addPlayer(player1, session1),
+            "addPlayer accepted same player twice (same session id).");
+        assertFalse(PlayerLobby.addPlayer(player1, session2),
+            "addPlayer accepted same player twice (different session id)");
     }
 
 }
