@@ -57,7 +57,7 @@ public class PlayerLobbyTest {
         assertFalse(PlayerLobby.addPlayer(player1, session1),
             "addPlayer accepted same player twice (same session id).");
         assertFalse(PlayerLobby.addPlayer(player1, session2),
-            "addPlayer accepted same player twice (different session id)");
+            "addPlayer accepted same player twice (different session id).");
     }
 
     @Test
@@ -70,7 +70,8 @@ public class PlayerLobbyTest {
     public void getNextPlayer_onePlayer() {
         PlayerLobby.addPlayer(player1, session1);
 
-        assertEquals(player1, PlayerLobby.getNextPlayer());
+        assertEquals(player1, PlayerLobby.getNextPlayer(),
+            "getNextPlayer did not return correct player with only one added.");
     }
 
     @Test
@@ -93,9 +94,9 @@ public class PlayerLobbyTest {
     @Test
     public void getPlayer_notAdded() {
         assertNull(PlayerLobby.getPlayer(session1),
-            "getPlayer returned non-null for un-added session id");
+            "getPlayer returned non-null for un-added session id.");
         assertNull(PlayerLobby.getPlayer(session2),
-            "getPlayer returned non-null for un-added session id");
+            "getPlayer returned non-null for un-added session id.");
     }
 
     @Test
@@ -104,17 +105,17 @@ public class PlayerLobbyTest {
         PlayerLobby.addPlayer(player2, session2);
 
         assertEquals(player1, PlayerLobby.getPlayer(session1),
-            "getPlayer did not return correct player for first session id");
+            "getPlayer did not return correct player for first session id.");
         assertEquals(player2, PlayerLobby.getPlayer(session2),
-            "getPlayer did not return correct player for second session id");
+            "getPlayer did not return correct player for second session id.");
     }
 
     @Test
     public void sessionExists_notAdded() {
         assertFalse(PlayerLobby.sessionExists(session1),
-            "sessionExists returned true for un-added session");
+            "sessionExists returned true for un-added session.");
         assertFalse(PlayerLobby.sessionExists(session2),
-            "sessionExists returned true for un-added session");
+            "sessionExists returned true for un-added session.");
     }
 
     @Test
@@ -125,9 +126,9 @@ public class PlayerLobbyTest {
         PlayerLobby.getNextPlayer();
 
         assertFalse(PlayerLobby.sessionExists(session1),
-            "sessionExists returned true for removed session");
+            "sessionExists returned true for removed session.");
         assertFalse(PlayerLobby.sessionExists(session2),
-            "sessionExists returned true for removed session");
+            "sessionExists returned true for removed session.");
     }
 
     @Test
@@ -136,15 +137,15 @@ public class PlayerLobbyTest {
         PlayerLobby.addPlayer(player2, session2);
 
         assertTrue(PlayerLobby.sessionExists(session1),
-            "sessionExists returned false for added session");
+            "sessionExists returned false for added session.");
         assertTrue(PlayerLobby.sessionExists(session2),
-            "sessionExists returned false for added session");
+            "sessionExists returned false for added session.");
     }
 
     @Test
     public void getPlayerCount_noPlayers() {
         assertEquals(0, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned nonzero with zero added");
+            "getPlayerCount returned nonzero with zero added.");
     }
 
     @Test
@@ -152,7 +153,7 @@ public class PlayerLobbyTest {
         PlayerLobby.addPlayer(player1, session1);
 
         assertEquals(1, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned non-one with one added");
+            "getPlayerCount returned non-one with one added.");
     }
 
     @Test
@@ -161,14 +162,14 @@ public class PlayerLobbyTest {
         PlayerLobby.addPlayer(player2, session2);
 
         assertEquals(2, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned non-two with two added");
+            "getPlayerCount returned non-two with two added.");
     }
 
     @Test
     public void getPlayerList_noPlayers() {
         List<String> playerList = PlayerLobby.getPlayerList();
         assertEquals(0, playerList.size(),
-            "getPlayerList returned non-empty list with no players");
+            "getPlayerList returned non-empty list with no players.");
     }
 
     @Test
@@ -177,9 +178,9 @@ public class PlayerLobbyTest {
         List<String> playerList = PlayerLobby.getPlayerList();
 
         assertTrue(playerList.contains(player1.getName()),
-            "getPlayerList returned list without added player");
+            "getPlayerList returned list without added player.");
         assertEquals(1, playerList.size(),
-            "getPlayerList returned too many names");
+            "getPlayerList returned too many names.");
     }
 
     @Test
@@ -189,10 +190,10 @@ public class PlayerLobbyTest {
         List<String> playerList = PlayerLobby.getPlayerList();
 
         assertTrue(playerList.contains(player1.getName()),
-            "getPlayerList returned list without added player");
+            "getPlayerList returned list without added player.");
         assertTrue(playerList.contains(player2.getName()),
-            "getPlayerList returned list without added player");
+            "getPlayerList returned list without added player.");
         assertEquals(2, playerList.size(),
-            "getPlayerList returned too many names");
+            "getPlayerList returned too many names.");
     }
 }
