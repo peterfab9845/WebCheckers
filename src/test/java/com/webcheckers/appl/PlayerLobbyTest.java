@@ -92,25 +92,6 @@ public class PlayerLobbyTest {
     }
 
     @Test
-    public void getPlayer_notAdded() {
-        assertNull(PlayerLobby.getPlayer(session1),
-            "getPlayer returned non-null for un-added session id.");
-        assertNull(PlayerLobby.getPlayer(session2),
-            "getPlayer returned non-null for un-added session id.");
-    }
-
-    @Test
-    public void getPlayer_added() {
-        PlayerLobby.addPlayer(player1, session1);
-        PlayerLobby.addPlayer(player2, session2);
-
-        assertEquals(player1, PlayerLobby.getPlayer(session1),
-            "getPlayer did not return correct player for first session id.");
-        assertEquals(player2, PlayerLobby.getPlayer(session2),
-            "getPlayer did not return correct player for second session id.");
-    }
-
-    @Test
     public void sessionExists_notAdded() {
         assertFalse(PlayerLobby.sessionExists(session1),
             "sessionExists returned true for un-added session.");
@@ -143,97 +124,22 @@ public class PlayerLobbyTest {
     }
 
     @Test
-    public void getPlayerCount_noPlayers() {
-        assertEquals(0, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned nonzero with zero added.");
+    public void getPlayer_notAdded() {
+        assertNull(PlayerLobby.getPlayer(session1),
+            "getPlayer returned non-null for un-added session id.");
+        assertNull(PlayerLobby.getPlayer(session2),
+            "getPlayer returned non-null for un-added session id.");
     }
 
     @Test
-    public void getPlayerCount_onePlayer() {
-        PlayerLobby.addPlayer(player1, session1);
-
-        assertEquals(1, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned non-one with one added.");
-    }
-
-    @Test
-    public void getPlayerCount_twoPlayers() {
+    public void getPlayer_added() {
         PlayerLobby.addPlayer(player1, session1);
         PlayerLobby.addPlayer(player2, session2);
 
-        assertEquals(2, PlayerLobby.getPlayerCount(),
-            "getPlayerCount returned non-two with two added.");
-    }
-
-    @Test
-    public void getPlayerList_noPlayers() {
-        List<String> playerList = PlayerLobby.getPlayerList();
-        assertEquals(0, playerList.size(),
-            "getPlayerList returned non-empty list with no players.");
-    }
-
-    @Test
-    public void getPlayerList_onePlayer() {
-        PlayerLobby.addPlayer(player1, session1);
-        List<String> playerList = PlayerLobby.getPlayerList();
-
-        assertTrue(playerList.contains(player1.getName()),
-            "getPlayerList returned list without added player.");
-        assertEquals(1, playerList.size(),
-            "getPlayerList returned too many names.");
-    }
-
-    @Test
-    public void getPlayerList_twoPlayers() {
-        PlayerLobby.addPlayer(player1, session1);
-        PlayerLobby.addPlayer(player2, session2);
-        List<String> playerList = PlayerLobby.getPlayerList();
-
-        assertTrue(playerList.contains(player1.getName()),
-            "getPlayerList returned list without added player.");
-        assertTrue(playerList.contains(player2.getName()),
-            "getPlayerList returned list without added player.");
-        assertEquals(2, playerList.size(),
-            "getPlayerList returned too many names.");
-    }
-
-    @Test
-    public void getPlayerListExcept_noPlayers() {
-        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
-        assertEquals(0, playerList.size(),
-            "getPlayerListExcept returned non-empty list with no players.");
-    }
-    
-    @Test
-    public void getPlayerListExcept_onePlayerExcepted() {
-        PlayerLobby.addPlayer(player1, session1);
-        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
-
-        assertEquals(0, playerList.size(),
-            "getPlayerListExcept returned a name despite excluding only added player.");
-    }
-
-    @Test
-    public void getPlayerListExcept_onePlayerNotExcepted() {
-        PlayerLobby.addPlayer(player1, session1);
-        List<String> playerList = PlayerLobby.getPlayerListExcept(player2.getName());
-
-        assertTrue(playerList.contains(player1.getName()),
-            "getPlayerListExcept returned list without non-excepted player.");
-        assertEquals(1, playerList.size(),
-            "getPlayerListExcept returned wrong number of names.");
-    }
-
-    @Test
-    public void getPlayerListExcept_twoPlayers() {
-        PlayerLobby.addPlayer(player1, session1);
-        PlayerLobby.addPlayer(player2, session2);
-        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
-
-        assertTrue(playerList.contains(player2.getName()),
-            "getPlayerListExcept returned list without non-excepted player.");
-        assertEquals(1, playerList.size(),
-            "getPlayerListExcept returned too many names.");
+        assertEquals(player1, PlayerLobby.getPlayer(session1),
+            "getPlayer did not return correct player for first session id.");
+        assertEquals(player2, PlayerLobby.getPlayer(session2),
+            "getPlayer did not return correct player for second session id.");
     }
 
     @Test
@@ -285,5 +191,99 @@ public class PlayerLobbyTest {
             "getPlayerByName did not return correct player for first username.");
         assertEquals(player2, PlayerLobby.getPlayerByName(player2.getName()),
             "getPlayerByName did not return correct player for second username.");
+    }
+
+    @Test
+    public void getPlayerList_noPlayers() {
+        List<String> playerList = PlayerLobby.getPlayerList();
+        assertEquals(0, playerList.size(),
+            "getPlayerList returned non-empty list with no players.");
+    }
+
+    @Test
+    public void getPlayerList_onePlayer() {
+        PlayerLobby.addPlayer(player1, session1);
+        List<String> playerList = PlayerLobby.getPlayerList();
+
+        assertTrue(playerList.contains(player1.getName()),
+            "getPlayerList returned list without added player.");
+        assertEquals(1, playerList.size(),
+            "getPlayerList returned too many names.");
+    }
+
+    @Test
+    public void getPlayerList_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+        List<String> playerList = PlayerLobby.getPlayerList();
+
+        assertTrue(playerList.contains(player1.getName()),
+            "getPlayerList returned list without added player.");
+        assertTrue(playerList.contains(player2.getName()),
+            "getPlayerList returned list without added player.");
+        assertEquals(2, playerList.size(),
+            "getPlayerList returned too many names.");
+    }
+
+    @Test
+    public void getPlayerListExcept_noPlayers() {
+        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
+        assertEquals(0, playerList.size(),
+            "getPlayerListExcept returned non-empty list with no players.");
+    }
+
+    @Test
+    public void getPlayerListExcept_onePlayerExcepted() {
+        PlayerLobby.addPlayer(player1, session1);
+        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
+
+        assertEquals(0, playerList.size(),
+            "getPlayerListExcept returned a name despite excluding only added player.");
+    }
+
+    @Test
+    public void getPlayerListExcept_onePlayerNotExcepted() {
+        PlayerLobby.addPlayer(player1, session1);
+        List<String> playerList = PlayerLobby.getPlayerListExcept(player2.getName());
+
+        assertTrue(playerList.contains(player1.getName()),
+            "getPlayerListExcept returned list without non-excepted player.");
+        assertEquals(1, playerList.size(),
+            "getPlayerListExcept returned wrong number of names.");
+    }
+
+    @Test
+    public void getPlayerListExcept_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+        List<String> playerList = PlayerLobby.getPlayerListExcept(player1.getName());
+
+        assertTrue(playerList.contains(player2.getName()),
+            "getPlayerListExcept returned list without non-excepted player.");
+        assertEquals(1, playerList.size(),
+            "getPlayerListExcept returned too many names.");
+    }
+
+    @Test
+    public void getPlayerCount_noPlayers() {
+        assertEquals(0, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned nonzero with zero added.");
+    }
+
+    @Test
+    public void getPlayerCount_onePlayer() {
+        PlayerLobby.addPlayer(player1, session1);
+
+        assertEquals(1, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned non-one with one added.");
+    }
+
+    @Test
+    public void getPlayerCount_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertEquals(2, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned non-two with two added.");
     }
 }

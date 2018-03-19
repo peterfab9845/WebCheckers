@@ -33,16 +33,26 @@ public class PlayerLobby {
         return allPlayers.remove(sessionIterator.next());
     }
 
-    public static Player getPlayer(Session session) {
-        return allPlayers.get(session.id());
-    }
-
     public static boolean sessionExists(Session session) {
         return allPlayers.containsKey(session.id());
     }
 
-    public static int getPlayerCount() {
-        return allPlayers.size();
+    public static Player getPlayer(Session session) {
+        return allPlayers.get(session.id());
+    }
+
+    public static boolean playerExists(String playerName) {
+        List<String> playerList = getPlayerList();
+        return playerList.contains(playerName);
+    }
+
+    public static Player getPlayerByName(String playerName) {
+        for (Player p : allPlayers.values()) {
+            if (p.getName().equals(playerName)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public static List<String> getPlayerList() {
@@ -59,17 +69,7 @@ public class PlayerLobby {
         return playerNames;
     }
 
-    public static boolean playerExists(String playerName) {
-        List<String> playerList = getPlayerList();
-        return playerList.contains(playerName);
-    }
-
-    public static Player getPlayerByName(String playerName) {
-        for (Player p : allPlayers.values()) {
-            if (p.getName().equals(playerName)) {
-                return p;
-            }
-        }
-        return null;
+    public static int getPlayerCount() {
+        return allPlayers.size();
     }
 }
