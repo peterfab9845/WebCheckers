@@ -290,7 +290,7 @@ public class PlayerLobbyTest {
     }
 
     @AfterAll
-    public void cleanup() {
+    public static void cleanup() {
         PlayerLobby.init();
     }
 }
