@@ -10,6 +10,8 @@ import com.webcheckers.appl.Message;
 import com.webcheckers.appl.MessageType;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.TemplateEngine;
+import spark.template.freemarker.FreeMarkerEngine;
 
 @SuppressWarnings("WeakerAccess")
 @Tag("UI-tier")
@@ -76,7 +79,25 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
     }
 
+    @Test
+    public void handle_noUsername_HTML() {
+        message = new Message(PostSigninRoute.MSG_MISSING_USERNAME, MessageType.error);
+        engine = new FreeMarkerEngine();
 
+        final Map<String, Object> vm = new HashMap<>();
+        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+
+        vm.put("title", "Sign-in");
+        vm.put("message", message);
+
+        final String viewHTML = engine.render(modelAndView);
+
+        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+            "Title tag missing from HTML.");
+        assertTrue(viewHTML.contains("<div class=\"error\">" +
+                PostSigninRoute.MSG_MISSING_USERNAME + "</div>"),
+            "Error message tag missing from HTML.");
+    }
 
     @Test
     public void handle_invalidUsername() {
@@ -96,9 +117,29 @@ public class PostSigninRouteTest {
     }
 
     @Test
+    public void handle_invalidUsername_HTML() {
+        message = new Message(PostSigninRoute.MSG_INVALID_USERNAME, MessageType.error);
+        engine = new FreeMarkerEngine();
+
+        final Map<String, Object> vm = new HashMap<>();
+        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+
+        vm.put("title", "Sign-in");
+        vm.put("message", message);
+
+        final String viewHTML = engine.render(modelAndView);
+
+        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+            "Title tag missing from HTML.");
+        assertTrue(viewHTML.contains("<div class=\"error\">" +
+                PostSigninRoute.MSG_INVALID_USERNAME + "</div>"),
+            "Error message tag missing from HTML.");
+    }
+
+    @Test
     public void handle_takenUsername() {
         when(request.queryParams("name")).thenReturn(VALID_USERNAME);
-        message = new Message(PostSigninRoute.MSG_USERNAME_TAKEN, MessageType.error);
+        message = new Message(PostSigninRoute.MSG_TAKEN_USERNAME, MessageType.error);
         PlayerLobby.addPlayer(player, request.session());
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -112,6 +153,26 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttribute("title", "Sign-in");
         testHelper.assertViewModelAttribute("message", message);
         testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
+    }
+
+    @Test
+    public void handle_takenUsername_HTML() {
+        message = new Message(PostSigninRoute.MSG_TAKEN_USERNAME, MessageType.error);
+        engine = new FreeMarkerEngine();
+
+        final Map<String, Object> vm = new HashMap<>();
+        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+
+        vm.put("title", "Sign-in");
+        vm.put("message", message);
+
+        final String viewHTML = engine.render(modelAndView);
+
+        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+            "Title tag missing from HTML.");
+        assertTrue(viewHTML.contains("<div class=\"error\">" +
+                PostSigninRoute.MSG_TAKEN_USERNAME + "</div>"),
+            "Error message tag missing from HTML.");
     }
 
     @Test
@@ -142,4 +203,6 @@ public class PostSigninRouteTest {
             fail("handle did not halt rendering of page for redirect.");
         }
     }
+
+    //no HTML test for this condition; this is handled by GetHomeRoute
 }
