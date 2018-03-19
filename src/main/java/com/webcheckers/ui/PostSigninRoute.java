@@ -31,7 +31,7 @@ public class PostSigninRoute implements Route {
 
     public static final String MSG_MISSING_USERNAME = "You must provide a username";
     public static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
-    public static final String MSG_USERNAME_TAKEN = "Username taken, please choose a different one";
+    public static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
 
     /**
      * Create the Spark Route (UI controller) for the {@code POST /signin} HTTP request.
@@ -73,7 +73,7 @@ public class PostSigninRoute implements Route {
                     response.redirect("/", 200);
                     throw halt(200);
                 } else { //username taken
-                    vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.error));
+                    vm.put("message", new Message(MSG_TAKEN_USERNAME, MessageType.error));
                 }
             } else { //username invalid
                 vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.error));
