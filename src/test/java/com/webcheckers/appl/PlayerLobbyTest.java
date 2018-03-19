@@ -89,4 +89,54 @@ public class PlayerLobbyTest {
         fail("getNextPlayer returned same player twice or an un-added player.");
     }
 
+    @Test
+    public void getPlayer_notAdded() {
+        assertNull(PlayerLobby.getPlayer(session1),
+            "getPlayer returned non-null for un-added session id");
+        assertNull(PlayerLobby.getPlayer(session2),
+            "getPlayer returned non-null for un-added session id");
+    }
+
+    @Test
+    public void getPlayer_added() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertEquals(player1, PlayerLobby.getPlayer(session1),
+            "getPlayer did not return correct player for first session id");
+        assertEquals(player2, PlayerLobby.getPlayer(session2),
+            "getPlayer did not return correct player for second session id");
+    }
+
+    @Test
+    public void sessionExists_notAdded() {
+        assertFalse(PlayerLobby.sessionExists(session1),
+            "sessionExists returned true for un-added session");
+        assertFalse(PlayerLobby.sessionExists(session2),
+            "sessionExists returned true for un-added session");
+    }
+
+    @Test
+    public void sessionExists_addedRemoved() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+        PlayerLobby.getNextPlayer();
+        PlayerLobby.getNextPlayer();
+
+        assertFalse(PlayerLobby.sessionExists(session1),
+            "sessionExists returned true for removed session");
+        assertFalse(PlayerLobby.sessionExists(session2),
+            "sessionExists returned true for removed session");
+    }
+
+    @Test
+    public void sessionExists_added() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertTrue(PlayerLobby.sessionExists(session1),
+            "sessionExists returned false for added session");
+        assertTrue(PlayerLobby.sessionExists(session2),
+            "sessionExists returned false for added session");
+    }
 }
