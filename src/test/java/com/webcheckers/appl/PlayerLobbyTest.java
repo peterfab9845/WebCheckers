@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import com.webcheckers.model.Player;
 import java.util.List;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -286,5 +287,10 @@ public class PlayerLobbyTest {
 
         assertEquals(2, PlayerLobby.getPlayerCount(),
             "getPlayerCount returned non-two with two added.");
+    }
+
+    @AfterAll
+    public void cleanup() {
+        PlayerLobby.init();
     }
 }
