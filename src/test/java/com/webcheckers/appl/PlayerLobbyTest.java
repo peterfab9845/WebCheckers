@@ -139,4 +139,27 @@ public class PlayerLobbyTest {
         assertTrue(PlayerLobby.sessionExists(session2),
             "sessionExists returned false for added session");
     }
+
+    @Test
+    public void getPlayerCount_noPlayers() {
+        assertEquals(0, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned nonzero with zero added");
+    }
+
+    @Test
+    public void getPlayerCount_onePlayer() {
+        PlayerLobby.addPlayer(player1, session1);
+
+        assertEquals(1, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned non-one with one added");
+    }
+
+    @Test
+    public void getPlayerCount_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertEquals(2, PlayerLobby.getPlayerCount(),
+            "getPlayerCount returned non-two with two added");
+    }
 }
