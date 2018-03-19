@@ -235,4 +235,36 @@ public class PlayerLobbyTest {
         assertEquals(1, playerList.size(),
             "getPlayerListExcept returned too many names.");
     }
+
+    @Test
+    public void playerExists_notAdded() {
+        assertFalse(PlayerLobby.playerExists(player1.getName()),
+            "playerExists returned true for un-added player.");
+        assertFalse(PlayerLobby.playerExists(player2.getName()),
+            "playerExists returned true for un-added player.");
+    }
+
+    @Test
+    public void playerExists_addedRemoved() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+        PlayerLobby.getNextPlayer();
+        PlayerLobby.getNextPlayer();
+
+        assertFalse(PlayerLobby.playerExists(player1.getName()),
+            "playerExists returned true for removed player.");
+        assertFalse(PlayerLobby.playerExists(player2.getName()),
+            "playerExists returned true for removed player.");
+    }
+
+    @Test
+    public void playerExists_added() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertTrue(PlayerLobby.playerExists(player1.getName()),
+            "playerExists returned false for added player.");
+        assertTrue(PlayerLobby.playerExists(player2.getName()),
+            "playerExists returned false for added player.");
+    }
 }
