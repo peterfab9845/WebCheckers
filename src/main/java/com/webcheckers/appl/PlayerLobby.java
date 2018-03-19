@@ -26,6 +26,9 @@ public class PlayerLobby {
     }
 
     public static Player getNextPlayer() {
+        if (allPlayers.isEmpty()) {
+            return null;
+        }
         Iterator<String> sessionIterator = allPlayers.keySet().iterator();
         return allPlayers.remove(sessionIterator.next());
     }
