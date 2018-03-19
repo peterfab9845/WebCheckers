@@ -7,13 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("WeakerAccess")
 @Tag("Application-tier")
 public class MessageTest {
 
     private Message CuT;
 
-    private String MESSAGE_TEXT_ONE = "Test message one.";
-    private String MESSAGE_TEXT_TWO = "Test message two.";
+    private final String MESSAGE_TEXT_ONE = "Test message one.";
+    private final String MESSAGE_TEXT_TWO = "Test message two.";
 
     @Test
     public void ctor_errorType() {
@@ -38,6 +39,7 @@ public class MessageTest {
     @Test
     public void equality_sameObject() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
+        //noinspection EqualsWithItself
         assertTrue(CuT.equals(CuT),
             "Message not equal to itself.");
         assertEquals(CuT.hashCode(), CuT.hashCode(),
@@ -83,5 +85,15 @@ public class MessageTest {
         assertFalse(CuT.equals(otherMessage),
             "Messages of different text and type equal.");
         //not testing hashcodes being different because collisions are possible
+    }
+
+    @Test
+    public void equality_nonMessage() {
+        CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
+        Integer otherObject = 0;
+
+        //noinspection EqualsBetweenInconvertibleTypes
+        assertFalse(CuT.equals(otherObject),
+            "Message equal to non-Message.");
     }
 }
