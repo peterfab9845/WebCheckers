@@ -29,8 +29,9 @@ public class PostSigninRoute implements Route {
 
     private final TemplateEngine templateEngine;
 
-    private static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
-    private static final String MSG_USERNAME_TAKEN = "Username taken, please choose a different one";
+    public static final String MSG_MISSING_USERNAME = "You must provide a username";
+    public static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
+    public static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
 
     /**
      * Create the Spark Route (UI controller) for the {@code POST /signin} HTTP request.
@@ -62,19 +63,23 @@ public class PostSigninRoute implements Route {
 
         // retrieve request parameter
         final String username = request.queryParams("name");
-        boolean loginSuccess;
-        if (username.matches("[A-Za-z0-9 ]+")) {
-            Player currentPlayer = new Player(username);
-            loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
-            if (loginSuccess) {
-                vm.put("currentPlayer", currentPlayer);
-                response.redirect("/");
-                throw halt(200);
-            } else {
-                vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.error));
+        if (username != null) {
+            boolean loginSuccess;
+            if (username.matches("[A-Za-z0-9 ]+")) {
+                Player currentPlayer = new Player(username);
+                loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
+                if (loginSuccess) { //everything worked
+                    vm.put("currentPlayer", currentPlayer);
+                    response.redirect("/", 200);
+                    throw halt(200);
+                } else { //username taken
+                    vm.put("message", new Message(MSG_TAKEN_USERNAME, MessageType.error));
+                }
+            } else { //username invalid
+                vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.error));
             }
-        } else {
-            vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.error));
+        } else { //username not sent
+            vm.put("message", new Message(MSG_MISSING_USERNAME, MessageType.error));
         }
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
     }
