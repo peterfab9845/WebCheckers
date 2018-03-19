@@ -267,4 +267,23 @@ public class PlayerLobbyTest {
         assertTrue(PlayerLobby.playerExists(player2.getName()),
             "playerExists returned false for added player.");
     }
+
+    @Test
+    public void getPlayerByName_notAdded() {
+        assertNull(PlayerLobby.getPlayerByName(player1.getName()),
+            "getPlayerByName returned non-null for un-added username.");
+        assertNull(PlayerLobby.getPlayerByName(player2.getName()),
+            "getPlayerByName returned non-null for un-added username.");
+    }
+
+    @Test
+    public void getPlayerByName_added() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        assertEquals(player1, PlayerLobby.getPlayerByName(player1.getName()),
+            "getPlayerByName did not return correct player for first username.");
+        assertEquals(player2, PlayerLobby.getPlayerByName(player2.getName()),
+            "getPlayerByName did not return correct player for second username.");
+    }
 }
