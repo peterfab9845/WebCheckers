@@ -39,6 +39,7 @@ public class MessageTest {
     @Test
     public void equality_sameObject() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
+        //noinspection EqualsWithItself
         assertTrue(CuT.equals(CuT),
             "Message not equal to itself.");
         assertEquals(CuT.hashCode(), CuT.hashCode(),
@@ -91,6 +92,7 @@ public class MessageTest {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
         Integer otherObject = 0;
 
+        //noinspection EqualsBetweenInconvertibleTypes
         assertFalse(CuT.equals(otherObject),
             "Message equal to non-Message.");
     }
