@@ -13,34 +13,40 @@ import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import spark.HaltException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Session;
 import spark.TemplateEngine;
 
+@SuppressWarnings("WeakerAccess")
 @Tag("UI-tier")
 public class PostSigninRouteTest {
 
     private static final String INVALID_USERNAME = "MyName123!";
     private static final String VALID_USERNAME = "MyUsername";
+    private static final String SESSION_ID = "sessionId";
 
     private PostSigninRoute CuT;
 
     private TemplateEngine engine;
     private Request request;
     private Response response;
-    private PlayerLobby lobby;
     private Player player;
     private Message message;
 
     @BeforeEach
     public void setup() {
         request = mock(Request.class);
+        Session session = mock(Session.class);
+        when(request.session()).thenReturn(session);
+        when(session.id()).thenReturn(SESSION_ID);
         engine = mock(TemplateEngine.class);
         response = mock(Response.class);
-        lobby = mock(PlayerLobby.class);
         player = mock(Player.class);
+        when(player.getName()).thenReturn(VALID_USERNAME);
+        PlayerLobby.init(); //friendly
 
         CuT = new PostSigninRoute(engine);
     }
@@ -91,7 +97,7 @@ public class PostSigninRouteTest {
     public void handle_takenUsername() {
         when(request.queryParams("name")).thenReturn(VALID_USERNAME);
         message = new Message(PostSigninRoute.MSG_USERNAME_TAKEN, MessageType.error);
-        when(lobby.addPlayer(any(Player.class), any(Session.class))).thenReturn(false);
+        PlayerLobby.addPlayer(player, request.session());
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
@@ -110,19 +116,22 @@ public class PostSigninRouteTest {
     public void handle_goodUsername() {
         when(request.queryParams("name")).thenReturn(VALID_USERNAME);
         when(player.getName()).thenReturn(VALID_USERNAME);
-        when(lobby.addPlayer(any(Player.class), any(Session.class))).thenReturn(true);
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
 
-        CuT.handle(request, response);
+        try {
+            CuT.handle(request, response);
 
-        testHelper.assertViewModelExists();
-        testHelper.assertViewModelIsaMap();
+            testHelper.assertViewModelExists();
+            testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttributeIsAbsent("message");
-        testHelper.assertViewModelAttribute("currentPlayer", player);
+            testHelper.assertViewModelAttributeIsAbsent("message");
+            testHelper.assertViewModelAttribute("currentPlayer", player);
 
-        verify(response).redirect("/", 200);
+            verify(response).redirect("/", 200);
+        } catch (HaltException e) {
+            // halt(200) is expected for redirect to homepage
+        }
     }
 }

@@ -68,17 +68,17 @@ public class PostSigninRoute implements Route {
             if (username.matches("[A-Za-z0-9 ]+")) {
                 Player currentPlayer = new Player(username);
                 loginSuccess = PlayerLobby.addPlayer(currentPlayer, request.session());
-                if (loginSuccess) {
+                if (loginSuccess) { //everything worked
                     vm.put("currentPlayer", currentPlayer);
-                    response.redirect("/");
+                    response.redirect("/", 200);
                     throw halt(200);
-                } else {
+                } else { //username taken
                     vm.put("message", new Message(MSG_USERNAME_TAKEN, MessageType.error));
                 }
-            } else {
+            } else { //username invalid
                 vm.put("message", new Message(MSG_INVALID_USERNAME, MessageType.error));
             }
-        } else {
+        } else { //username not sent
             vm.put("message", new Message(MSG_MISSING_USERNAME, MessageType.error));
         }
         return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
