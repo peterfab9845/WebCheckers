@@ -64,7 +64,7 @@ public class PostSigninRouteTest {
 
     @Test
     public void handle_noUsername() {
-        when(request.queryParams("name")).thenReturn(null);
+        when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(null);
         message = new Message(PostSigninRoute.MSG_MISSING_USERNAME, MessageType.error);
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -74,9 +74,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute("title", "Sign-in");
-        testHelper.assertViewModelAttribute("message", message);
-        testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
     @Test
@@ -85,23 +85,22 @@ public class PostSigninRouteTest {
         engine = new FreeMarkerEngine();
 
         final Map<String, Object> vm = new HashMap<>();
-        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+        final ModelAndView modelAndView = new ModelAndView(vm, PostSigninRoute.VIEW_NAME);
 
-        vm.put("title", "Sign-in");
-        vm.put("message", message);
+        vm.put(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        vm.put(PostSigninRoute.ATTR_MESSAGE, message);
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
             "Title tag missing from HTML.");
-        assertTrue(viewHTML.contains("<div class=\"error\">" +
-                PostSigninRoute.MSG_MISSING_USERNAME + "</div>"),
+        assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_MISSING_USERNAME)),
             "Error message tag missing from HTML.");
     }
 
     @Test
     public void handle_invalidUsername() {
-        when(request.queryParams("name")).thenReturn(INVALID_USERNAME);
+        when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(INVALID_USERNAME);
         message = new Message(PostSigninRoute.MSG_INVALID_USERNAME, MessageType.error);
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -111,9 +110,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute("title", "Sign-in");
-        testHelper.assertViewModelAttribute("message", message);
-        testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
     @Test
@@ -122,23 +121,22 @@ public class PostSigninRouteTest {
         engine = new FreeMarkerEngine();
 
         final Map<String, Object> vm = new HashMap<>();
-        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+        final ModelAndView modelAndView = new ModelAndView(vm, PostSigninRoute.VIEW_NAME);
 
-        vm.put("title", "Sign-in");
-        vm.put("message", message);
+        vm.put(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        vm.put(PostSigninRoute.ATTR_MESSAGE, message);
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
             "Title tag missing from HTML.");
-        assertTrue(viewHTML.contains("<div class=\"error\">" +
-                PostSigninRoute.MSG_INVALID_USERNAME + "</div>"),
+        assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_INVALID_USERNAME)),
             "Error message tag missing from HTML.");
     }
 
     @Test
     public void handle_takenUsername() {
-        when(request.queryParams("name")).thenReturn(VALID_USERNAME);
+        when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(VALID_USERNAME);
         message = new Message(PostSigninRoute.MSG_TAKEN_USERNAME, MessageType.error);
         PlayerLobby.addPlayer(player, request.session());
 
@@ -150,9 +148,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute("title", "Sign-in");
-        testHelper.assertViewModelAttribute("message", message);
-        testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
     @Test
@@ -161,23 +159,22 @@ public class PostSigninRouteTest {
         engine = new FreeMarkerEngine();
 
         final Map<String, Object> vm = new HashMap<>();
-        final ModelAndView modelAndView = new ModelAndView(vm, "signin.ftl");
+        final ModelAndView modelAndView = new ModelAndView(vm, PostSigninRoute.VIEW_NAME);
 
-        vm.put("title", "Sign-in");
-        vm.put("message", message);
+        vm.put(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
+        vm.put(PostSigninRoute.ATTR_MESSAGE, message);
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains("<title>Sign-in | Web Checkers</title>"),
+        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
             "Title tag missing from HTML.");
-        assertTrue(viewHTML.contains("<div class=\"error\">" +
-                PostSigninRoute.MSG_TAKEN_USERNAME + "</div>"),
+        assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_TAKEN_USERNAME)),
             "Error message tag missing from HTML.");
     }
 
     @Test
     public void handle_goodUsername() {
-        when(request.queryParams("name")).thenReturn(VALID_USERNAME);
+        when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(VALID_USERNAME);
         when(player.getName()).thenReturn(VALID_USERNAME);
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -191,18 +188,27 @@ public class PostSigninRouteTest {
             testHelper.assertViewModelExists();
             testHelper.assertViewModelIsaMap();
 
-            testHelper.assertViewModelAttributeIsAbsent("message");
-            testHelper.assertViewModelAttribute("currentPlayer", player);
+            testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_MESSAGE);
+            testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_CURRENT_PLAYER, player);
 
-            verify(response).redirect("/", 200);
+            verify(response).redirect("/");
         } catch (HaltException e) {
             // halt(200) is expected for redirect to homepage
+            
+            // using assertThrows with handle() makes it not throw the exception again
+            //      (message gets set)
             exceptionThrown = true;
         }
         if (!exceptionThrown) {
             fail("handle did not halt rendering of page for redirect.");
         }
+    } // no HTML test for this condition; this is handled by GetHomeRoute
+    
+    private String generateTitleHTML(String title) {
+        return "<title>" + title + " | Web Checkers</title>";
     }
 
-    //no HTML test for this condition; this is handled by GetHomeRoute
+    private String generateMessageHTML(String message) {
+        return "<div class=\"error\">" + message + "</div>";
+    }
 }
