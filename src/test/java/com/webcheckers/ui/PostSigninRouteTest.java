@@ -76,6 +76,8 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttributeIsAbsent("currentPlayer");
     }
 
+
+
     @Test
     public void handle_invalidUsername() {
         when(request.queryParams("name")).thenReturn(INVALID_USERNAME);
@@ -120,6 +122,8 @@ public class PostSigninRouteTest {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
 
+        boolean exceptionThrown = false;
+
         try {
             CuT.handle(request, response);
 
@@ -132,6 +136,10 @@ public class PostSigninRouteTest {
             verify(response).redirect("/", 200);
         } catch (HaltException e) {
             // halt(200) is expected for redirect to homepage
+            exceptionThrown = true;
+        }
+        if (!exceptionThrown) {
+            fail("handle did not halt rendering of page for redirect.");
         }
     }
 }
