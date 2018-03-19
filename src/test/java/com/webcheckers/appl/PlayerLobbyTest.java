@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import spark.Session;
 
+@SuppressWarnings("WeakerAccess")
 @Tag("Application-tier")
 public class PlayerLobbyTest {
 
