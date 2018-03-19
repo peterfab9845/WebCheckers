@@ -1,7 +1,10 @@
 package com.webcheckers.appl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -48,12 +51,42 @@ public class PlayerLobbyTest {
 
     @Test
     public void addPlayer_conflict() {
-        assertTrue(PlayerLobby.addPlayer(player1, session1),
-            "Could not add first player.");
+        PlayerLobby.addPlayer(player1, session1);
+
         assertFalse(PlayerLobby.addPlayer(player1, session1),
             "addPlayer accepted same player twice (same session id).");
         assertFalse(PlayerLobby.addPlayer(player1, session2),
             "addPlayer accepted same player twice (different session id)");
+    }
+
+    @Test
+    public void getNextPlayer_noPlayers() {
+        assertNull(PlayerLobby.getNextPlayer(),
+            "getNextPlayer did not return null with no players.");
+    }
+
+    @Test
+    public void getNextPlayer_onePlayer() {
+        PlayerLobby.addPlayer(player1, session1);
+
+        assertEquals(player1, PlayerLobby.getNextPlayer());
+    }
+
+    @Test
+    public void getNextPlayer_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+
+        Player return1 = PlayerLobby.getNextPlayer();
+        Player return2 = PlayerLobby.getNextPlayer();
+
+        if (player1.equals(return1) && player2.equals(return2)) {
+            return;
+        }
+        if (player2.equals(return1) && player1.equals(return1)) {
+            return;
+        }
+        fail("getNextPlayer returned same player twice or an un-added player.");
     }
 
 }
