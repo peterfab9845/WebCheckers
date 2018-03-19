@@ -9,6 +9,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.webcheckers.model.Player;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -161,5 +162,37 @@ public class PlayerLobbyTest {
 
         assertEquals(2, PlayerLobby.getPlayerCount(),
             "getPlayerCount returned non-two with two added");
+    }
+
+    @Test
+    public void getPlayerList_noPlayers() {
+        List<String> playerList = PlayerLobby.getPlayerList();
+        assertEquals(0, playerList.size(),
+            "getPlayerList returned non-empty list with no players");
+    }
+
+    @Test
+    public void getPlayerList_onePlayer() {
+        PlayerLobby.addPlayer(player1, session1);
+        List<String> playerList = PlayerLobby.getPlayerList();
+
+        assertTrue(playerList.contains(player1.getName()),
+            "getPlayerList returned list without added player");
+        assertEquals(1, playerList.size(),
+            "getPlayerList returned too many names");
+    }
+
+    @Test
+    public void getPlayerList_twoPlayers() {
+        PlayerLobby.addPlayer(player1, session1);
+        PlayerLobby.addPlayer(player2, session2);
+        List<String> playerList = PlayerLobby.getPlayerList();
+
+        assertTrue(playerList.contains(player1.getName()),
+            "getPlayerList returned list without added player");
+        assertTrue(playerList.contains(player2.getName()),
+            "getPlayerList returned list without added player");
+        assertEquals(2, playerList.size(),
+            "getPlayerList returned too many names");
     }
 }
