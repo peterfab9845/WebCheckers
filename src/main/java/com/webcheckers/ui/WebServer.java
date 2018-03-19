@@ -65,7 +65,6 @@ public class WebServer {
 
     private final Gson gson;
     private final TemplateEngine templateEngine;
-    private PlayerLobby playerLobby;
     
     //
     // Constructor
