@@ -6,8 +6,8 @@ package com.webcheckers.model;
  * @author Adam Heeter
  */
 public class Move {
+
     private Position start;
-    
     private Position end;
     
     public Move(Position start, Position end) {
