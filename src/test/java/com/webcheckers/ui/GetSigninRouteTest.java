@@ -11,9 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static spark.Spark.get;
+import static spark.Spark.halt;
 
 class GetSigninRouteTest {
 
@@ -56,26 +58,26 @@ class GetSigninRouteTest {
         assertEquals(actual, expected);
     }
 
+    @Test
     void handleWithTakenUsername(){
         request = mock(Request.class);
         Session session = mock(Session.class);
-        when(request.session()).thenReturn(session);
         when(session.id()).thenReturn(SESSION_ID);
         engine = mock(TemplateEngine.class);
         response = mock(Response.class);
         player1 = mock(Player.class);
         when(player1.getName()).thenReturn(USER_NAME1);
-        player2 = mock(Player.class);
-        when(player2.getName()).thenReturn(USER_NAME1);
+
         PlayerLobby.init();
-        Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Sign-in");
+        PlayerLobby.addPlayer(player1, session);
+        when(request.session()).thenReturn(session);
 
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
-
-        Object expected = engine.render(new ModelAndView(vm, "signin.ftl"));
-        Object actual = getSigninRoute.handle(request, response);
-
-        assertNotEquals(actual, expected);
+        try {
+            getSigninRoute.handle(request, response);
+        }
+        catch (HaltException e){
+            e.printStackTrace();
+        }
     }
 }
