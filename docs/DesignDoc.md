@@ -1,7 +1,7 @@
 ---
 geometry: margin=1in
 ---
-# PROJECT Design Documentation
+# WebCheckers Design Documentation
 
 > The following template provides the headings for your Design Documentation.  As you edit each section make sure you remove these commentary 'blockquotes'; the lines that start with a > character.
 
@@ -38,10 +38,83 @@ This section describes the features of the application.
 > Provide a simple description of the Minimum Viable Product.
 
 ### MVP Features
-> Provide a list of top-level Epics and/or Stories of the MVP.
+> <b>Player Sign-in</b>
+> > As a Player I want to sign-in so that I can play a game of checkers.
+
+> <b>Start a Game</b>
+> > As a Player I want to start a game so that I can play checkers with an opponent.
+
+> <b>Start a Game</b>
+> > As a Player I want to start a game so that I can play checkers with an opponent.
+
+
+> <b>Epic: Piece Movement</b>
+> > As a Player I want to play a game of checkers so that I have fun.
+
+> > <b>Allowed Spaces</b>
+> > > As a Player I want to get feedback when I drag a piece so that I know where I am allowed to put it down.
+
+> > <b>Piece Capture</b>
+> > > As a Player I want to capture the other player's pieces so that I can progress in the game.
+
+> > <b>Forced Moves</b>
+> > > As a Player I want to be informed when I am required to make a move so that I don’t try to make a different move than I need to.
+
+
+> <b>Epic: Game State</b>
+> > The player needs to know the state of the game and what they can do next.
+
+> > <b>Game Endings </b>
+> > > As a Player I want to know when the game is over so that I don't try to continue playing.
+
 
 ### Roadmap of Enhancements
-> Provide a list of top-level features in the order you plan to consider them.
+
+> <b>Epic: Save Management</b>
+> > The player must be able to choose when they want to save a game and look at them later.
+
+> > <b>Listing Saved Games</b>
+> > > As a Player I want to view the games which I have saved so that I can choose which one to watch.
+
+> > <b>Saving a Game</b>
+> > > As a Player I want to decide, at the end of a game, to save it so that I can review it at a later date.
+
+> > <b>Deleting a Game</b>
+> > > As a Player I want to delete a game I have saved so that it does not clutter up my list of saved games.
+
+
+> <b>Epic: Artificial Intelligence</b>
+> > As a Player I want to play against a computer player so that I can play checkers without needing another player to play against.
+
+> > <b>Movement</b>
+> > > As an AI I want to move checkers so that the game can be played.
+
+> > <b>Location Take Over</b>
+> > > As an AI I want to take positions so that I can win.
+
+> > <b>AI Learning</b>
+> > > As an AI I want to Learn from mistakes so that I can win every game.
+
+> > <b>Easy AI Extra</b>
+> > > As an easy AI I want to make jokes so that the player is entertained.
+
+> > <b>Player Selection </b>
+> > > As a Player I want to choose an AI so that I can play a game of checkers against it.
+
+> <b>Epic: Watching a Saved Game</b>
+> > The player must be able to pick a saved game and watch the playthrough.
+
+> > <b>Viewing a Game</b>
+> > > As a Player I want to see the replayed game in a similar setting to where it was played originally so that I can easily track the movements and game status.
+
+> > <b>Play and Pause</b>
+> > > As a Player I want to pause and resume watching a replay game so that I can stop to analyze a position or practice my own playing.
+
+> > <b>Speed Controls</b>
+> > > As a Player I want to control the speed of playback of a game so that I can slow it down and look carefully or go quickly through and get the basic idea of the game.
+
+> > <b>Player Information</b>
+> > > As a Player watching a game, I want to be told the names of each player in the game so that I know who I am watching.
 
 
 ## Application Domain
