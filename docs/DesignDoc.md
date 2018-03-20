@@ -6,12 +6,12 @@ geometry: margin=1in
 > The following template provides the headings for your Design Documentation.  As you edit each section make sure you remove these commentary 'blockquotes'; the lines that start with a > character.
 
 # Team Information
-* Team name: TEAMNAME
+* Team name: Group 🅱️
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Andrew Reed
+  * Curtis Veronesi
+  * Peter Fabinski
+  * Adam Heeter
 
 ## Executive Summary
 
