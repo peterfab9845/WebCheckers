@@ -3,8 +3,6 @@ geometry: margin=1in
 ---
 # WebCheckers Design Documentation
 
-> The following template provides the headings for your Design Documentation.  As you edit each section make sure you remove these commentary 'blockquotes'; the lines that start with a > character.
-
 # Team Information
 * Team name: Group "B emoji"
 * Team members
