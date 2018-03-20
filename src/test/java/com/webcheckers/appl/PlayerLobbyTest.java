@@ -44,6 +44,12 @@ public class PlayerLobbyTest {
         PlayerLobby.init();
     }
 
+
+    @Test
+    public void instantiateForCoverage(){
+        PlayerLobby playerLobby = new PlayerLobby();
+    }
+
     @Test
     public void addPlayer_noConflict() {
         assertTrue(PlayerLobby.addPlayer(player1, session1),
