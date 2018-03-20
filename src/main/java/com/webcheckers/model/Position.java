@@ -22,4 +22,5 @@ public class Position {
     public int getCell() {
         return cell;
     }
+
 }
