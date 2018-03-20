@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -11,14 +13,15 @@ class PlayerTest {
     private static final String NAME = "Test Name";
     private static final String NAME2 = "Testing Name";
 
-    @Test
-    void testConst() {
-        Player player = new Player(NAME);
+    private Player player;
+
+    @BeforeEach
+    void setup(){
+        player = new Player(NAME);
     }
 
     @Test
     void getName() {
-        Player player = new Player(NAME);
         assertEquals(player.getName(), NAME);
     }
 
@@ -37,24 +40,21 @@ class PlayerTest {
 
     @Test
     void isInGame() {
-        Player player = new Player(NAME);
         player.setInGame(true);
-        assertEquals(player.isInGame(), true);
+        assertTrue(player.isInGame());
         player.setInGame(false);
-        assertEquals(player.isInGame(), false);
+        assertFalse(player.isInGame());
     }
 
     @Test
     void setInGame() {
-        Player player = new Player(NAME);
         player.setInGame(true);
         player.setInGame(false);
     }
 
     @Test
     void hashCodeTest() {
-        Player player = new Player(NAME);
-        assertEquals(player.hashCode(), Objects.hash(player.getName()));
+        assertEquals(player.hashCode(), Objects.hash(NAME));
     }
 
     @Test
@@ -64,8 +64,8 @@ class PlayerTest {
         Game game = new Game(player1, player2);
         player1.setGame(game);
         player2.setGame(game);
-        assertEquals(player1.getGame(),game);
-        assertEquals(player2.getGame(),game);
+        assertEquals(player1.getGame(), game);
+        assertEquals(player2.getGame(), game);
     }
 
     @Test
@@ -73,6 +73,8 @@ class PlayerTest {
         Player player1 = new Player(NAME);
         Player player2 = new Player(NAME);
         Game game = new Game(player1, player2);
+        player1.setGame(game);
+        assertEquals(player1.getGame(), game);
     }
 
 }

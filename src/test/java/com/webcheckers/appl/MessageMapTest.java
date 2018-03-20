@@ -29,6 +29,12 @@ public class MessageMapTest {
         when(session2.id()).thenReturn(PLAYER2_SESSIONID);
         MessageMap.init();
     }
+
+
+    @Test
+    void MessageMap_test(){
+        new MessageMap();
+    }
     
     @Test
     public void getMessage_noPlayer() {
