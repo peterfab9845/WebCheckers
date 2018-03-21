@@ -15,6 +15,10 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Curtis Veronesi on 3/19/2018.
+ *
+ * Due to the nature of how the classes are built GameTest requires many other classes to be friendly
+ * The required friendlies are Board, PieceColor, BoardView, Row, Space, and Piece
+ * This is due to the fact that I can't intercept the creation of a board meaning the only way to compare it is to use the methods and classes that we created to do that in the first place
  */
 @SuppressWarnings("WeakerAccess")
 @Tag("Model-Tier")
