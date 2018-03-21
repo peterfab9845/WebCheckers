@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
  * Created by Curtis Veronesi on 3/19/2018.
  */
 @SuppressWarnings("WeakerAccess")
-@Tag("Model-Tier")
+@Tag("Model-tier")
 public class BoardTest {
 
 
