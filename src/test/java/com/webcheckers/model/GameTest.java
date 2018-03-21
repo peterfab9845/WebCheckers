@@ -60,7 +60,10 @@ public class GameTest {
                 Space gameBoardSpace = gameBoardSpaces.next();
                 Piece testBoardPiece = testBoardSpace.getPiece();
                 Piece gameBoardPiece = gameBoardSpace.getPiece();
-                assertTrue(testBoardPiece.getColor() == gameBoardPiece.getColor() && testBoardPiece.getType() == gameBoardPiece.getType());
+                if (testBoardPiece == null){ assertTrue(gameBoardPiece == null);}
+                else{
+                        assertTrue(testBoardPiece.getColor() == gameBoardPiece.getColor() && testBoardPiece.getType() == gameBoardPiece.getType());
+                }
             }
         }
     }
@@ -82,7 +85,10 @@ public class GameTest {
                 Space gameBoardSpace = gameBoardSpaces.next();
                 Piece testBoardPiece = testBoardSpace.getPiece();
                 Piece gameBoardPiece = gameBoardSpace.getPiece();
-                assertTrue(testBoardPiece.getColor() == gameBoardPiece.getColor() && testBoardPiece.getType() == gameBoardPiece.getType());
+                if (testBoardPiece == null){ assertTrue(gameBoardPiece == null);}
+                else{
+                    assertTrue(testBoardPiece.getColor() == gameBoardPiece.getColor() && testBoardPiece.getType() == gameBoardPiece.getType());
+                }
             }
         }
     }
