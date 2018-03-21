@@ -13,7 +13,7 @@ geometry: margin=1in
 
 # Executive Summary
 
-> WebCheckers is the new platform for friends and family to have fun together. With online capabilities it will keep up with times and revolutionize the game of checkers. No matter how far your challenger is you will still be able to show them who's the best at checkers, with our newly provided software!
+> WebChecker is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choose the type of game to play the user is brought to a screen with the board printed on it and thier opponent also is brought to the same game but from the oposite prespective. From there they will continue to play the game while being held to the rules of the game. Lastly players will beable to save and re-watch the game that they just played.
 
 ## Purpose
 
