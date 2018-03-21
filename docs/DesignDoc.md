@@ -11,112 +11,140 @@ geometry: margin=1in
   * Peter Fabinski
   * Adam Heeter
 
-## Executive Summary
+# Executive Summary
 
 > WebCheckers is the new platform for friends and family to have fun together. With online capabilities it will keep up with times and revolutionize the game of checkers. No matter how far your challenger is you will still be able to show them who's the best at checkers, with our newly provided software!
 
-### Purpose
+## Purpose
 
 > Web checkers is a platform for users to come and play checkers online with either their friends or an artificial intelligence.
+>
 > Our user group includes:
+>
 > > Parents and childern, who want to add more fun to game night. 
+> >
 > > Groups of Friends, who are looking for something fun to play.
 
-### Glossary and Acronyms
+## Glossary and Acronyms
 > Provide a table of terms and acronyms.
 
 | Term | Definition |
 |------|------------|
 | VO | Value Object |
 
-
-## Requirements
+# Requirements
 
 This section describes the features of the application.
 
 > In this section you do not need to be exhaustive and list every story.  Focus on top-level features from the Vision document and maybe Epics and critical Stories.
 
-### Definition of MVP
+## Definition of MVP
+
 > Provide a simple description of the Minimum Viable Product.
 
-### MVP Features
-> <b>Player Sign-in</b>
+## MVP Features
+
+> Player Sign-in
+
 > > As a Player I want to sign-in so that I can play a game of checkers.
->
-> <b>Start a Game</b>
+
+> Start a Game
+
 > > As a Player I want to start a game so that I can play checkers with an opponent.
->
-> <b>Start a Game</b>
+
+> Start a Game
+
 > > As a Player I want to start a game so that I can play checkers with an opponent.
->
-> <b>Epic: Piece Movement</b>
+
+> Epic: Piece Movement
+
 > > As a Player I want to play a game of checkers so that I have fun.
-> >
-> > <b>Allowed Spaces</b>
+
+> > Allowed Spaces
+
 > > > As a Player I want to get feedback when I drag a piece so that I know where I am allowed to put it down.
-> >
-> > <b>Piece Capture</b>
+
+> > Piece Capture
+
 > > > As a Player I want to capture the other player's pieces so that I can progress in the game.
-> >
-> > <b>Forced Moves</b>
+
+> > Forced Moves
+
 > > > As a Player I want to be informed when I am required to make a move so that I don’t try to make a different move than I need to.
->
-> <b>Epic: Game State</b>
+
+> Epic: Game State
+
 > > The player needs to know the state of the game and what they can do next.
-> >
-> > <b>Game Endings </b>
+
+> > Game Endings 
+
 > > > As a Player I want to know when the game is over so that I don't try to continue playing.
 
 
-### Roadmap of Enhancements
+## Roadmap of Enhancements
 
-> <b>Epic: Save Management</b>
+> Epic: Save Management
+
 > > The player must be able to choose when they want to save a game and look at them later.
->
-> > <b>Listing Saved Games</b>
+
+> > Listing Saved Games
+
 > > > As a Player I want to view the games which I have saved so that I can choose which one to watch.
-> >
-> > <b>Saving a Game</b>
+
+> > Saving a Game
+
 > > > As a Player I want to decide, at the end of a game, to save it so that I can review it at a later date.
-> >
-> > <b>Deleting a Game</b>
+
+> > Deleting a Game
+
 > > > As a Player I want to delete a game I have saved so that it does not clutter up my list of saved games.
->
-> <b>Epic: Artificial Intelligence</b>
+
+> Epic: Artificial Intelligence
+
 > > As a Player I want to play against a computer player so that I can play checkers without needing another player to play against.
-> >
-> > <b>Movement</b>
+
+> > Movement
+
 > > > As an AI I want to move checkers so that the game can be played.
-> >
-> > <b>Location Take Over</b>
+
+> > Location Take Over
+
 > > > As an AI I want to take positions so that I can win.
-> >
-> > <b>AI Learning</b>
+
+> > AI Learning
+
 > > > As an AI I want to Learn from mistakes so that I can win every game.
-> >
-> > <b>Easy AI Extra</b>
+
+> > Easy AI Extra
+
 > > > As an easy AI I want to make jokes so that the player is entertained.
-> >
-> > <b>Player Selection </b>
-> > > As a Player I want to choose an AI so that I can play a game of checkers against it.
->
-> <b>Epic: Watching a Saved Game</b>
+
+> Player Selection 
+
+> > As a Player I want to choose an AI so that I can play a game of checkers against it.
+
+> Epic: Watching a Saved Game
+
 > > The player must be able to pick a saved game and watch the playthrough.
-> >
-> > <b>Viewing a Game</b>
+
+> > Viewing a Game
+
 > > > As a Player I want to see the replayed game in a similar setting to where it was played originally so that I can easily track the movements and game status.
-> >
-> > <b>Play and Pause</b>
+
+> > Play and Pause
+
 > > > As a Player I want to pause and resume watching a replay game so that I can stop to analyze a position or practice my own playing.
-> >
-> > <b>Speed Controls</b>
+
+> > Speed Controls
+
 > > > As a Player I want to control the speed of playback of a game so that I can slow it down and look carefully or go quickly through and get the basic idea of the game.
-> >
-> > <b>Player Information</b>
+
+> > Player Information
+
 > > > As a Player watching a game, I want to be told the names of each player in the game so that I know who I am watching.
 
 
-## Application Domain
+# Application Domain
 
 This section describes the application domain.
 
@@ -127,11 +155,11 @@ This section describes the application domain.
 
 
 
-## Architecture
+# Architecture
 
 This section describes the application architecture.
 
-### Summary
+## Summary
 
 The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
@@ -147,7 +175,7 @@ Controllers are built using the Spark framework and View are built using the Fre
 Details of the components within these tiers are supplied below
 
 
-### Overview of User Interface
+## Overview of User Interface
 
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
@@ -158,35 +186,39 @@ with the WebCheckers application.
 > Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application.
 
 
-### UI Tier
+## UI Tier
 > Provide a summary of the Server-side UI tier of your architecture.
+
 > Describe the types of components in the tier and describe their responsibilities.
 
-#### Static models
+### Static models
 > Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
 
-#### Dynamic models
+### Dynamic models
 > Provide any dynamic models, such as state and sequence diagrams, as is relevant to a particularly significant user story.
+
 > For example, in WebCheckers you might create a sequence diagram of the `POST /validateMove` HTTP request processing or you might use a state diagram if the Game component uses a state machine to manage the game.
 
 
-### Application Tier
+## Application Tier
 > Provide a summary of the Application tier of your architecture.
+
 > Describe the types of components in the tier and describe their responsibilities.
 
-#### Static models
+### Static models
 > Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
 
-#### Dynamic models
+### Dynamic models
 > Provide any dynamic model, such as state and sequence diagrams, as is relevant to a particularly significant user story.
 
 
-### Model Tier
+## Model Tier
 > Provide a summary of the Model tier of your architecture.
+
 > Describe the types of components in the tier and describe their responsibilities.
 
-#### Static models
+### Static models
 > Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
 
-#### Dynamic models
+### Dynamic models
 > Provide any dynamic model, such as state and sequence diagrams, as is relevant to a particularly significant user story.
