@@ -47,4 +47,15 @@ public class Space {
     public boolean isValid() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Space){
+            Space otherSpace = (Space)other;
+            if (otherSpace.getCellIdx() == this.cellIdx){
+                return (otherSpace.getPiece()).equals(this.piece);
+            }
+        }
+        return false;
+    }
 }
