@@ -3,12 +3,18 @@ package com.webcheckers.model;
 import com.webcheckers.gameview.BoardView;
 
 /**
- * Created by Curtis Veronesi on 3/2/2018.
+ * The server-side representation of a Checkers board
  */
 public class Board {
 
+    /**
+     * The 2D array of pieces in this board
+     */
     private Piece[][] board = new Piece[8][8];
 
+    /**
+     * Create a new board with pieces in the default starting configuration
+     */
     public Board() {
         //white at the top
         for (int col = 0; col < 8; col++) {
@@ -24,6 +30,11 @@ public class Board {
         }
     }
 
+    /**
+     * Get the BoardView representation of this Board
+     * @param perspectiveColor which player's perspective the view should be from
+     * @return BoardView containing the pieces from this board
+     */
     public BoardView getBoardView(PieceColor perspectiveColor) {
         if (perspectiveColor == PieceColor.WHITE) {
             return new BoardView(rotate180());
@@ -32,6 +43,10 @@ public class Board {
         }
     }
 
+    /**
+     * Get a 180-degree rotation of the board, for the other player's perspective
+     * @return Piece array rotated 180 degrees
+     */
     private Piece[][] rotate180() {
         Piece[][] rotated = new Piece[8][8];
         for (int row = 0; row < 8; row++) {

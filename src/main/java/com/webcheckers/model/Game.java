@@ -3,7 +3,7 @@ package com.webcheckers.model;
 import com.webcheckers.gameview.BoardView;
 
 /**
- * Created by Curtis Veronesi on 3/2/2018.
+ * Representation a game being played.
  */
 public class Game {
 
@@ -11,20 +11,38 @@ public class Game {
     private Player whitePlayer;
     private Board board;
 
+    /**
+     * Create a game with red and white players, and create a new Board for the game
+     * @param red the red player
+     * @param white the white player
+     */
     public Game(Player red, Player white) {
         redPlayer = red;
         whitePlayer = white;
         board = new Board();
     }
 
+    /**
+     * Get the red player of this game
+     * @return red player of this game
+     */
     public Player getRedPlayer() {
         return redPlayer;
     }
 
+    /**
+     * Get the white player of this game
+     * @return white player of this game
+     */
     public Player getWhitePlayer() {
         return whitePlayer;
     }
 
+    /**
+     * Get the BoardView from the given player's perspective
+     * @param player the player whose perspective to use
+     * @return the BoardView for the given player
+     */
     public BoardView getBoardView(Player player) {
         if (player.equals(whitePlayer)) {
             return board.getBoardView(PieceColor.WHITE);
@@ -33,6 +51,10 @@ public class Game {
         }
     }
 
+    /**
+     * Get the currently active color in this game
+     * @return the active color
+     */
     public PieceColor getActiveColor() {
         return PieceColor.RED;
     }
