@@ -13,10 +13,14 @@ geometry: margin=1in
 
 ## Executive Summary
 
-This is a summary of the project.
+> WebCheckers is the new platform for friends and family to have fun together. With online capabilities it will keep up with times and revolutionize the game of checkers. No matter how far your challenger is you will still be able to show them who's the best at checkers, with our newly provided software!
 
 ### Purpose
-> Provide a very brief statement about the project and the most important user group and user goals.
+
+> Web checkers is a platform for users to come and play checkers online with either their friends or an artificial intelligence.
+> Our user group includes:
+> > Parents and childern, who want to add more fun to game night. 
+> > Groups of Friends, who are looking for something fun to play.
 
 ### Glossary and Acronyms
 > Provide a table of terms and acronyms.
