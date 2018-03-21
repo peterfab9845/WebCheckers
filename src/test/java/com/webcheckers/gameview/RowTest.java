@@ -4,6 +4,7 @@ import com.webcheckers.model.Piece;
 import com.webcheckers.model.PieceColor;
 import com.webcheckers.model.PieceType;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@Tag("Model-tier")
 class RowTest {
 
     private final int INDEX = 10;
-    private final int COLS = 8;
     private static final PieceType PIECE_TYPE = PieceType.SINGLE;
     private static final PieceColor PIECE_COLOR = PieceColor.WHITE;
 
@@ -24,7 +25,8 @@ class RowTest {
 
     @BeforeEach
     void setup(){
-        boardCols = new Piece[COLS];
+        int cols = 8;
+        boardCols = new Piece[cols];
         for(int i = 0; i < boardCols.length; i++)
             boardCols[i] = new Piece(PIECE_TYPE, PIECE_COLOR);
         row = new Row(INDEX, boardCols);

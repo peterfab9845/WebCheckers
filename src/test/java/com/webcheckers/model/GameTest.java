@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
  * This is due to the fact that I can't intercept the creation of a board meaning the only way to compare it is to use the methods and classes that we created to do that in the first place
  */
 @SuppressWarnings("WeakerAccess")
-@Tag("Model-Tier")
+@Tag("Model-tier")
 public class GameTest {
 
     private Player red;

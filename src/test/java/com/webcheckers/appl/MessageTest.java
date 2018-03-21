@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for Message
+ */
 @SuppressWarnings("WeakerAccess")
 @Tag("Application-tier")
 public class MessageTest {
@@ -16,6 +19,9 @@ public class MessageTest {
     private final String MESSAGE_TEXT_ONE = "Test message one.";
     private final String MESSAGE_TEXT_TWO = "Test message two.";
 
+    /**
+     * Test the constructor for an Error-type Message
+     */
     @Test
     public void ctor_errorType() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -26,6 +32,9 @@ public class MessageTest {
             "Message constructor did not keep type.");
     }
 
+    /**
+     * Test the constructor for an Info-type message
+     */
     @Test
     public void ctor_infoType() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.info);
@@ -36,6 +45,9 @@ public class MessageTest {
             "Message constructor did not keep type.");
     }
 
+    /**
+     * Test that equals() is true when run on the same object
+     */
     @Test
     public void equality_sameObject() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -46,6 +58,9 @@ public class MessageTest {
             "Same message has different hashcodes.");
     }
 
+    /**
+     * Test that equals() is true with type and text the same for different Messages
+     */
     @Test
     public void equality_bothSame() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -57,6 +72,9 @@ public class MessageTest {
             "Messages of same text and type have different hashcodes.");
     }
 
+    /**
+     * Test that equals() is false for a Message with different text and same type
+     */
     @Test
     public void equality_differentText() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -67,6 +85,9 @@ public class MessageTest {
         //not testing hashcodes being different because collisions are possible
     }
 
+    /**
+     * Test that equals() is false for a Message with different type and same text
+     */
     @Test
     public void equality_differentType() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -77,6 +98,9 @@ public class MessageTest {
         //not testing hashcodes being different because collisions are possible
     }
 
+    /**
+     * Test that equals() is false for a Message with different type and text
+     */
     @Test
     public void equality_bothDifferent() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);
@@ -87,6 +111,9 @@ public class MessageTest {
         //not testing hashcodes being different because collisions are possible
     }
 
+    /**
+     * Test that equals() is false when passed a non-Message
+     */
     @Test
     public void equality_nonMessage() {
         CuT = new Message(MESSAGE_TEXT_ONE, MessageType.error);

@@ -23,6 +23,9 @@ import spark.Session;
 import spark.TemplateEngine;
 import spark.template.freemarker.FreeMarkerEngine;
 
+/**
+ * Test class for PostSigninRoute
+ */
 @SuppressWarnings("WeakerAccess")
 @Tag("UI-tier")
 public class PostSigninRouteTest {
@@ -39,6 +42,9 @@ public class PostSigninRouteTest {
     private Player player;
     private Message message;
 
+    /**
+     * Set up mock and friendly objects, create CuT
+     */
     @BeforeEach
     public void setup() {
         request = mock(Request.class);
@@ -54,6 +60,9 @@ public class PostSigninRouteTest {
         CuT = new PostSigninRoute(engine);
     }
 
+    /**
+     * Test checking of null template engine
+     */
     @Test
     public void ctor_nullEngine() {
         engine = null;
@@ -62,6 +71,9 @@ public class PostSigninRouteTest {
         }, "PostSigninRoute allowed null template engine.");
     }
 
+    /**
+     * Test no username in request parameters
+     */
     @Test
     public void handle_noUsername() {
         when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(null);
@@ -79,6 +91,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
+    /**
+     * Test that correct message shows for no username in parameters
+     */
     @Test
     public void handle_noUsername_HTML() {
         message = new Message(PostSigninRoute.MSG_MISSING_USERNAME, MessageType.error);
@@ -98,6 +113,9 @@ public class PostSigninRouteTest {
             "Error message tag missing from HTML.");
     }
 
+    /**
+     * Test handling of invalid username
+     */
     @Test
     public void handle_invalidUsername() {
         when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(INVALID_USERNAME);
@@ -115,6 +133,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
+    /**
+     * Test showing of message for invalid username
+     */
     @Test
     public void handle_invalidUsername_HTML() {
         message = new Message(PostSigninRoute.MSG_INVALID_USERNAME, MessageType.error);
@@ -134,6 +155,9 @@ public class PostSigninRouteTest {
             "Error message tag missing from HTML.");
     }
 
+    /**
+     * Test handling of already-taken username
+     */
     @Test
     public void handle_takenUsername() {
         when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(VALID_USERNAME);
@@ -153,6 +177,9 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
+    /**
+     * Test showing of message for already-taken username
+     */
     @Test
     public void handle_takenUsername_HTML() {
         message = new Message(PostSigninRoute.MSG_TAKEN_USERNAME, MessageType.error);
@@ -172,6 +199,9 @@ public class PostSigninRouteTest {
             "Error message tag missing from HTML.");
     }
 
+    /**
+     * Test successful sign-in
+     */
     @Test
     public void handle_goodUsername() {
         when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(VALID_USERNAME);
@@ -203,11 +233,21 @@ public class PostSigninRouteTest {
             fail("handle did not halt rendering of page for redirect.");
         }
     } // no HTML test for this condition; this is handled by GetHomeRoute
-    
+
+    /**
+     * Create the HTML title tag to check for
+     * @param title the title message
+     * @return HTML title tag to verify is created
+     */
     private String generateTitleHTML(String title) {
         return "<title>" + title + " | Web Checkers</title>";
     }
 
+    /**
+     * Create the HTML error message tag to check for
+     * @param message the message text to check
+     * @return the message HTML to check for
+     */
     private String generateMessageHTML(String message) {
         return "<div class=\"error\">" + message + "</div>";
     }

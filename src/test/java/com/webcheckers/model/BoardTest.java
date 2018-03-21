@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
  * Board test requires Piece, PieceColor, Row, Space, and BoardView to be friendly
  */
 @SuppressWarnings("WeakerAccess")
-@Tag("Model-Tier")
+@Tag("Model-tier")
 public class BoardTest {
 
 

@@ -1,10 +1,12 @@
 package com.webcheckers.model;
 
 import javafx.geometry.Pos;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("Model-tier")
 class PositionTest {
 
     private static final int ARG_1 = 1;
