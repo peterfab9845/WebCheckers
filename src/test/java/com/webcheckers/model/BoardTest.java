@@ -19,6 +19,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Curtis Veronesi on 3/19/2018.
+ *
+ * Board test requires Piece, PieceColor, Row, Space, and BoardView to be friendly
  */
 @SuppressWarnings("WeakerAccess")
 @Tag("Model-tier")

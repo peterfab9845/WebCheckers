@@ -13,7 +13,7 @@ geometry: margin=1in
 
 # Executive Summary
 
-> WebChecker is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choose the type of game to play the user is brought to a screen with the board printed on it and thier opponent also is brought to the same game but from the oposite prespective. From there they will continue to play the game while being held to the rules of the game. Lastly players will beable to save and re-watch the game that they just played.
+> WebChecker is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choosing the type of game to play, the user is brought to a screen with the board shown on it, and their opponent also is brought to the same game but from the opposite perspective. From there, they will continue to play the game while being held to the rules of the game. Lastly, players will be able to save and re-watch games they have played in the past.
 
 ## Purpose
 
@@ -148,11 +148,9 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model-placeholder.png)
-> Replace the placeholder image above with your team's own domain model. 
+![The WebCheckers Domain Model](domain-model.png)
 
-> Provide a high-level overview of the domain for this application. You can discuss the more important domain entities and their relationship to each other.
-
+Web Checkers is based primarily upon individual games of checkers, each having a board and two players. The board contains 64 spaces of alternating colors; each player's pieces can be placed on the dark squares of the board. Each player has 12 pieces; one player has red pieces, and one player has white pieces. When moving pieces, the players are restricted by the rules of Checkers, which dictate where they are allowed to move and what actions they can take. When a game is complete, either player can decide to save the game to their savegame list to rewatch it at a later date.
 
 
 # Architecture
@@ -180,10 +178,9 @@ Details of the components within these tiers are supplied below
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
-> Replace the placeholder image above with your team's own web interface state model. 
+![The WebCheckers Web Interface Statechart](web-interface.png)
 
-> Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application.
+When the user first logs in, they are directed to the home page, which will show them the total number of online players, as well as a link to the sign in page. When they click the link to sign in, they see a text box where they can enter a username. If the username is taken or invalid, they will see a message and be directed back to the sign in page. If they enter a valid, unused username, they will be sent back to the home page with a link to sign out and a full list of players' usernames. When they click on another user, if they are not in a game already, the two players will be placed in a game together and sent to the Game page. Until the game is over, it alternates between being the red and white player's turn.
 
 
 ## UI Tier

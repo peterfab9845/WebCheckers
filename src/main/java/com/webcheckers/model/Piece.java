@@ -40,4 +40,15 @@ public class Piece {
     public PieceColor getColor() {
         return color;
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Piece){
+            Piece otherPiece = (Piece)other;
+            if (otherPiece.getColor() == this.color){
+                if (otherPiece.getType() == this.type) return true;
+            }
+        }
+        return false;
+    }
 }
