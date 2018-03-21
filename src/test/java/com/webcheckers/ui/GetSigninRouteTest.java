@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import spark.*;
 
@@ -16,6 +17,7 @@ import static org.mockito.Mockito.when;
 import static spark.Spark.get;
 import static spark.Spark.halt;
 
+@Tag("UI-tier")
 class GetSigninRouteTest {
 
     private static final String VALID_USERNAME = "MyUsername";
