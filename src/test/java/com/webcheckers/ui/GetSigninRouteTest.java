@@ -77,7 +77,14 @@ class GetSigninRouteTest {
         PlayerLobby.addPlayer(player, request.session());
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
         try { getSigninRoute.handle(request, response); }
-        catch (HaltException ignored){}
+        catch (HaltException ignored){ }
 
+    }
+
+    @Test
+    void handleHalt(){
+        PlayerLobby.addPlayer(player, request.session());
+        GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
+        assertThrows(HaltException.class, ()->getSigninRoute.handle(request, response));
     }
 }
