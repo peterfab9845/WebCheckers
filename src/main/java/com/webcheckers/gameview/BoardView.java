@@ -34,4 +34,19 @@ public class BoardView implements Iterable<Row> {
     public Iterator<Row> iterator() {
         return rows.iterator();
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof BoardView){
+            BoardView otherBoardView = (BoardView)other;
+            Iterator<Row> otherIterator = otherBoardView.iterator();
+            Iterator<Row> thisIterator = iterator();
+            while (otherIterator.hasNext()){
+                Row otherRow = otherIterator.next();
+                Row thisRow = thisIterator.next();
+                if (!otherRow.equals(thisRow)) return false;
+            }
+        }
+        return false;
+    }
 }
