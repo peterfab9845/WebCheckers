@@ -53,30 +53,35 @@ public class GetGameRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         LOG.finer("GetGameRoute is invoked.");
-        //
 
         Map<String, Object> vm = new HashMap<>();
         Player currentPlayer = PlayerLobby.getPlayer(request.session());
-        if (currentPlayer != null && !currentPlayer.isInGame()) {
+        if (currentPlayer == null) {
+            // user is not signed in
+            MessageMap.setMessage(request.session(),
+                new Message("You must sign in to play a game.", MessageType.error));
+            response.redirect("/");
+            throw halt(401);
+        }
+        if (!currentPlayer.isInGame()) {
+            // otherwise, current player is in a game, don't make another one
             String opponentName = request.queryParams("opponentName");
             Player opponent = PlayerLobby.getPlayerByName(opponentName);
-            if (opponent != null) {
-                if (!requestGame(currentPlayer, opponent)) {
-                    // The player is already in a game
-                    MessageMap.setMessage(request.session(), new Message("That player is already in a game.", MessageType.error));
-                    response.redirect("/");
-                    throw halt(400);
-                }
-            } else {
-                // The player does not exist in the system
-                MessageMap.setMessage(request.session(), new Message("That player does not exist.", MessageType.error));
+            if (opponent == null) {
+                // the player does not exist in the system
+                MessageMap.setMessage(request.session(),
+                    new Message("That player does not exist.", MessageType.error));
                 response.redirect("/");
                 throw halt(400);
             }
-        } else if (currentPlayer == null) {
-            MessageMap.setMessage(request.session(), new Message("You must sign in to play a game.", MessageType.error));
-            response.redirect("/");
-            throw halt(401);
+
+            if (!requestGame(currentPlayer, opponent)) {
+                // the player is already in a game
+                MessageMap.setMessage(request.session(),
+                    new Message("That player is already in a game.", MessageType.error));
+                response.redirect("/");
+                throw halt(400);
+            }
         }
 
         Game game = currentPlayer.getGame();
