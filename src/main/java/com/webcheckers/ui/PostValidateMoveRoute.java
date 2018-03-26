@@ -5,8 +5,6 @@ import static spark.Spark.halt;
 import com.google.gson.Gson;
 import java.util.Objects;
 import java.util.logging.Logger;
-
-
 import spark.Request;
 import spark.Response;
 import spark.Route;

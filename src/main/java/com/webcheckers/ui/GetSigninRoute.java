@@ -2,12 +2,11 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
+import com.webcheckers.appl.PlayerLobby;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
-
-import com.webcheckers.appl.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

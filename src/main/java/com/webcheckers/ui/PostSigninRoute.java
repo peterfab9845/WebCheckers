@@ -4,14 +4,12 @@ import static spark.Spark.halt;
 
 import com.webcheckers.appl.Message;
 import com.webcheckers.appl.MessageType;
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Player;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
-
-
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

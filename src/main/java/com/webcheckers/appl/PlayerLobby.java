@@ -1,12 +1,11 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.Player;
-import java.util.Iterator;
-import spark.Session;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import spark.Session;
 
 /**
  * Map of each player's session ID to its respective Player object.

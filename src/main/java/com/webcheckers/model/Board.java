@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.webcheckers.gameview.BoardView;
 
 /**

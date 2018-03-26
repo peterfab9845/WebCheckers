@@ -1,13 +1,14 @@
 package com.webcheckers.ui;
 
-import static spark.Spark.*;
-
-import java.util.Objects;
-import java.util.logging.Logger;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.staticFileLocation;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
+import java.util.Objects;
+import java.util.logging.Logger;
 import spark.TemplateEngine;
 
 
