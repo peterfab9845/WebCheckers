@@ -49,4 +49,15 @@ public class Row implements Iterable {
     public Iterator<Space> iterator() {
         return spaces.iterator();
     }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Row) {
+            Row otherRow = (Row) other;
+            if (otherRow.getIndex() == this.index);{
+                return (otherRow.iterator()).equals(this.iterator());
+            }
+        }
+        return false;
+    }
 }

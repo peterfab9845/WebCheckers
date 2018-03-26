@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.webcheckers.gameview.BoardView;
 
 /**
@@ -55,5 +56,16 @@ public class Board {
             }
         }
         return rotated;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof  Board){
+            Board otherBoard = (Board)other;
+            if (getBoardView(PieceColor.WHITE).equals(otherBoard.getBoardView(PieceColor.WHITE))){
+                return getBoardView(PieceColor.RED).equals(otherBoard.getBoardView(PieceColor.WHITE));
+            }
+        }
+        return false;
     }
 }
