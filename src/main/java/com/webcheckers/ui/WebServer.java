@@ -63,6 +63,11 @@ public class WebServer {
      * The URL pattern to request the backup move Ajax action.
      */
     public static final String BACKUP_MOVE_URL = "/backupMove";
+    
+    /**
+     * The URL pattern to request the submit turn Ajax action.
+     */
+    public static final String SUBMIT_TURN_URL = "/submitTurn";
 
     //
     // Attributes
@@ -160,6 +165,9 @@ public class WebServer {
         
         // Removes the player's last move in the current turn
         post(BACKUP_MOVE_URL, new PostBackupMoveRoute(gson));
+        
+        // Submits all of the moves in the player's turn
+        post(SUBMIT_TURN_URL, new PostSubmitTurnRoute(gson));
 
         LOG.config("WebServer is initialized.");
     }

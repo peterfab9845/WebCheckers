@@ -81,4 +81,31 @@ public class Board {
             return false;
         }
     }
+    
+    public void movePiece(Move move) {
+        Position start = move.getStart();
+        Position end = move.getEnd();
+        // Move the player's piece
+        Piece movedPiece = board[start.getRow()][start.getCell()];
+        board[start.getRow()][start.getCell()] = null;
+        board[end.getRow()][end.getCell()] = movedPiece;
+        // Remove an opponent piece that is jumped over
+        Position opponentPosition = null;
+        if (start.getRow() == end.getRow() + 2) {
+            if (start.getCell() == end.getCell() - 2) {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() + 1);
+            } else {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() - 1);
+            }
+        } else if (start.getRow() == end.getRow() - 2) {
+            if (start.getCell() == end.getCell() - 2) {
+                opponentPosition = new Position(start.getRow() - 1, start.getCell() + 1);
+            } else {
+                opponentPosition = new Position(start.getRow() - 1, start.getCell() - 1);
+            }
+        }
+        if (opponentPosition != null) {
+            board[opponentPosition.getRow()][opponentPosition.getCell()] = null;
+        }
+    }
 }

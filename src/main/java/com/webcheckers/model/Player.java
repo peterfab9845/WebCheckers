@@ -89,4 +89,13 @@ public class Player {
             return board.kingInPosition(moves.getFirst().getStart());
         }
     }
+    
+    public boolean makeMoves() {
+        Board board = game.getBoard();
+        for (Move move : moves) {
+            board.movePiece(move);
+        }
+        moves.clear();
+        return true;
+    }
 }
