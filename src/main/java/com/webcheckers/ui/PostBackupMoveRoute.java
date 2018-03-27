@@ -25,7 +25,7 @@ public class PostBackupMoveRoute implements Route {
     private final Gson gson;
 
     /**
-     * Create the Spark Route (UI controller) for the {@code POST /validateMove} HTTP request.
+     * Create the Spark Route (UI controller) for the {@code POST /backupMove} HTTP request.
      *
      * @param gson the gson instance
      */
