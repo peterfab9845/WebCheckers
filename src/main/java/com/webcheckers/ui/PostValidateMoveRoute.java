@@ -23,7 +23,7 @@ import spark.Route;
  */
 public class PostValidateMoveRoute implements Route {
 
-    private static final Logger LOG = Logger.getLogger(PostSigninRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
 
     private final Gson gson;
 
