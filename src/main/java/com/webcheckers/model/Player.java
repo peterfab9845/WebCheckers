@@ -65,6 +65,12 @@ public class Player {
         }
     }
     
+    public void removeLastMove() {
+        if (moves.size() > 0) {
+            moves.pop();
+        }
+    }
+    
     public boolean canJumpOver(Position position) {
         Board board = game.getBoard();
         return board.opponentInPosition(position, getColor());

@@ -58,6 +58,11 @@ public class WebServer {
      * The URL pattern to request the move validation Ajax action.
      */
     public static final String VALIDATE_MOVE_URL = "/validateMove";
+    
+    /**
+     * The URL pattern to request the backup move Ajax action.
+     */
+    public static final String BACKUP_MOVE_URL = "/backupMove";
 
     //
     // Attributes
@@ -152,7 +157,9 @@ public class WebServer {
         
         // Validates the player's moves.
         post(VALIDATE_MOVE_URL, new PostValidateMoveRoute(gson));
-
+        
+        // Removes the player's last move in the current turn
+        post(BACKUP_MOVE_URL, new PostBackupMoveRoute(gson));
 
         LOG.config("WebServer is initialized.");
     }
