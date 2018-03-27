@@ -1,20 +1,20 @@
 package com.webcheckers.model;
 
+import java.util.LinkedList;
 import java.util.Objects;
-import java.util.Stack;
 
 public class Player {
 
     private String name;
     private boolean inGame;
     private Game game;
-    private Stack<Move> moves;
+    private LinkedList<Move> moves;
 
     public Player(String name) {
         this.name = name;
         this.setInGame(false);
         this.game = null;
-        this.moves = new Stack<>();
+        this.moves = new LinkedList<>();
     }
 
     public String getName() {
@@ -54,12 +54,12 @@ public class Player {
     }
     
     public void addMove(Move newMove) {
-        moves.push(newMove);
+        moves.add(newMove);
     }
     
     public Move getLastMove() {
         if (moves.size() > 0) {
-            return moves.peek();
+            return moves.getLast();
         } else {
             return null;
         }
@@ -67,7 +67,7 @@ public class Player {
     
     public void removeLastMove() {
         if (moves.size() > 0) {
-            moves.pop();
+            moves.removeLast();
         }
     }
     
@@ -83,10 +83,10 @@ public class Player {
     
     public boolean isMovingKing(Position position) {
         Board board = game.getBoard();
-        if (moves.empty()) {
+        if (moves.isEmpty()) {
             return board.kingInPosition(position);
         } else {
-            return board.kingInPosition(moves.firstElement().getStart());
+            return board.kingInPosition(moves.getFirst().getStart());
         }
     }
 }
