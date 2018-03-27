@@ -65,8 +65,6 @@ public class PostValidateMoveRoute implements Route {
      * @param move The move the player is trying to make
      * @return Message indicating whether the move is valid
      */
-    // TODO Allow kings to move toward the player
-    // TODO Handle pieces at the edge of the board
     private Message validateMove(Player currentPlayer, Move move) {
         Move lastMove = currentPlayer.getLastMove();
         
@@ -85,8 +83,8 @@ public class PostValidateMoveRoute implements Route {
         }
         
         // If no jump move is possible, the player can make a simple move
-        if (isSimpleMove(move)) {
-            if (lastMove != null && isSimpleMove(lastMove)) {
+        if (isSimpleMove(currentPlayer, move)) {
+            if (lastMove != null && isSimpleMove(currentPlayer, lastMove)) {
                 return new Message("You can only move once this turn.", MessageType.error);
             } else {
                 currentPlayer.addMove(move);
@@ -98,30 +96,46 @@ public class PostValidateMoveRoute implements Route {
         return new Message("That move is too far away.", MessageType.error);
     }
     
-    private boolean isSimpleMove(Move move) {
+    private boolean isSimpleMove(Player currentPlayer, Move move) {
         Position start = move.getStart();
         Position end = move.getEnd();
+        boolean movingKing = currentPlayer.isMovingKing(move.getStart());
+        boolean validMove = true;
         // Moved forward one row
         if (start.getRow() != end.getRow() + 1) {
-            return false;
+            validMove = false;
         }
         // Moved diagonally one cell
-        if ((start.getCell() != end.getCell() + 1 && start.getCell() != end.getCell() - 1)) {
-            return false;
+        if (start.getCell() != end.getCell() + 1 && start.getCell() != end.getCell() - 1) {
+            validMove = false;
         }
-        return true;
+        // The king is allowed to move back a row
+        if (movingKing && !validMove) {
+            validMove = true;
+            // Moved back one row
+            if (start.getRow() != end.getRow() - 1) {
+                validMove = false;
+            }
+            // Moved back diagonally
+            if (start.getCell() != end.getCell() + 1 && start.getCell() != end.getCell() - 1) {
+                validMove = false;
+            }
+        }
+        return validMove;
     }
     
     private boolean isJumpMove(Player currentPlayer, Move move) {
         Position start = move.getStart();
         Position end = move.getEnd();
+        boolean movingKing = currentPlayer.isMovingKing(move.getStart());
+        boolean validMove = true;
         // Moved forward two rows
         if (start.getRow() != end.getRow() + 2) {
-            return false;
+            validMove = false;
         }
         // Moved diagonally two cells
         if ((start.getCell() != end.getCell() - 2 && start.getCell() != end.getCell() + 2)) {
-            return false;
+            validMove = false;
         }
         Position opponentPosition;
         Position endPosition;
@@ -134,13 +148,39 @@ public class PostValidateMoveRoute implements Route {
         }
         // One of the opponent's pieces is in the cell being jumped over
         if (!currentPlayer.canJumpOver(opponentPosition)) {
-            return false;
+            validMove = false;
         }
         // No piece is in the cell being jumped to
         if (!currentPlayer.canJumpTo(endPosition)) {
-            return false;
+            validMove = false;
         }
-        return true;
+        // The king can jump back
+        if (movingKing && !validMove) {
+            // Moved back two rows
+            if (start.getRow() != end.getRow() - 2) {
+                validMove = false;
+            }
+            // Moved diagonally two cells
+            if ((start.getCell() != end.getCell() - 2 && start.getCell() != end.getCell() + 2)) {
+                validMove = false;
+            }
+            if (start.getCell() == end.getCell() - 2) {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() + 1);
+                endPosition = new Position(start.getRow() + 2, start.getCell() + 2);
+            } else {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() - 1);
+                endPosition = new Position(start.getRow() + 2, start.getCell() - 2);
+            }
+            // One of the opponent's pieces is in the cell being jumped over
+            if (!currentPlayer.canJumpOver(opponentPosition)) {
+                validMove = false;
+            }
+            // No piece is in the cell being jumped to
+            if (!currentPlayer.canJumpTo(endPosition)) {
+                validMove = false;
+            }
+        }
+        return validMove;
     }
     
     private boolean isJumpMovePossible(Player currentPlayer, Move move) {
@@ -155,6 +195,18 @@ public class PostValidateMoveRoute implements Route {
         Position rightJumpPosition = new Position(start.getRow() - 2, start.getCell() + 2);
         Move rightJumpMove = new Move(start, rightJumpPosition);
         if (isJumpMove(currentPlayer, rightJumpMove)) {
+            return true;
+        }
+        // The king can jump back left
+        Position backLeftJumpPosition = new Position(start.getRow() + 2, start.getCell() - 2);
+        Move backLeftJumpMove = new Move(start, backLeftJumpPosition);
+        if (isJumpMove(currentPlayer, backLeftJumpMove)) {
+            return true;
+        }
+        // The king can jump back right
+        Position backRightJumpPosition = new Position(start.getRow() + 2, start.getCell() + 2);
+        Move backRightJumpMove = new Move(start, backRightJumpPosition);
+        if (isJumpMove(currentPlayer, backRightJumpMove)) {
             return true;
         }
         return false;

@@ -74,4 +74,13 @@ public class Player {
         Board board = game.getBoard();
         return !board.pieceInPosition(position);
     }
+    
+    public boolean isMovingKing(Position position) {
+        Board board = game.getBoard();
+        if (moves.empty()) {
+            return board.kingInPosition(position);
+        } else {
+            return board.kingInPosition(moves.firstElement().getStart());
+        }
+    }
 }

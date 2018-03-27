@@ -22,8 +22,6 @@ public class Board {
                 board[7][col] = new Piece(PieceType.SINGLE, PieceColor.RED);
             }
         }
-        board[5][0] = null;
-        board[4][3] = new Piece(PieceType.SINGLE, PieceColor.WHITE);
     }
 
     public BoardView getBoardView(PieceColor perspectiveColor) {
@@ -47,6 +45,9 @@ public class Board {
     public boolean opponentInPosition(Position position, PieceColor currentColor) {
         int row = position.getRow();
         int cell = position.getCell();
+        if (row < 0 || row >= board.length || cell < 0 || cell >= board.length) {
+            return false;
+        }
         Piece piece = board[row][cell];
         if (piece == null) {
             return false;
@@ -60,7 +61,24 @@ public class Board {
     public boolean pieceInPosition(Position position) {
         int row = position.getRow();
         int cell = position.getCell();
+        if (row < 0 || row >= board.length || cell < 0 || cell >= board.length) {
+            return false;
+        }
         Piece piece = board[row][cell];
         return piece != null;
+    }
+    
+    public boolean kingInPosition(Position position) {
+        int row = position.getRow();
+        int cell = position.getCell();
+        if (row < 0 || row >= board.length || cell < 0 || cell >= board.length) {
+            return false;
+        }
+        Piece piece = board[row][cell];
+        if (piece != null && piece.getType() == PieceType.KING) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
