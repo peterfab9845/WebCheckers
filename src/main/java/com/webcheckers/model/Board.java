@@ -46,7 +46,7 @@ public class Board {
         int row = position.getRow();
         int cell = position.getCell();
         if (row < 0 || row >= board.length || cell < 0 || cell >= board.length) {
-            return false;
+            return true;
         }
         Piece piece = board[row][cell];
         if (piece == null) {
@@ -62,7 +62,7 @@ public class Board {
         int row = position.getRow();
         int cell = position.getCell();
         if (row < 0 || row >= board.length || cell < 0 || cell >= board.length) {
-            return false;
+            return true;
         }
         Piece piece = board[row][cell];
         return piece != null;
