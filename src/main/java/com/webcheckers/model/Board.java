@@ -92,7 +92,12 @@ public class Board {
         // Move the player's piece
         Piece movedPiece = board[start.getRow()][start.getCell()];
         board[start.getRow()][start.getCell()] = null;
-        board[end.getRow()][end.getCell()] = movedPiece;
+        // If the player moves a piece to the other end of the board, it becomes a king
+        if (end.getRow() == 0 && movedPiece.getType() != PieceType.KING) {
+            board[end.getRow()][end.getCell()] = new Piece(PieceType.KING, currentColor);
+        } else {
+            board[end.getRow()][end.getCell()] = movedPiece;
+        }
         // Remove an opponent piece that is jumped over
         Position opponentPosition = null;
         if (start.getRow() == end.getRow() + 2) {
