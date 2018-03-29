@@ -93,15 +93,15 @@ public class Board {
         Position opponentPosition = null;
         if (start.getRow() == end.getRow() + 2) {
             if (start.getCell() == end.getCell() - 2) {
-                opponentPosition = new Position(start.getRow() + 1, start.getCell() + 1);
-            } else {
-                opponentPosition = new Position(start.getRow() + 1, start.getCell() - 1);
-            }
-        } else if (start.getRow() == end.getRow() - 2) {
-            if (start.getCell() == end.getCell() - 2) {
                 opponentPosition = new Position(start.getRow() - 1, start.getCell() + 1);
             } else {
                 opponentPosition = new Position(start.getRow() - 1, start.getCell() - 1);
+            }
+        } else if (start.getRow() == end.getRow() - 2) {
+            if (start.getCell() == end.getCell() - 2) {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() + 1);
+            } else {
+                opponentPosition = new Position(start.getRow() + 1, start.getCell() - 1);
             }
         }
         if (opponentPosition != null) {
