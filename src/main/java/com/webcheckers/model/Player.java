@@ -73,21 +73,43 @@ public class Player {
     
     public boolean canJumpOver(Position position) {
         Board board = game.getBoard();
-        return board.opponentInPosition(position, getColor());
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
+        boolean opponent = board.opponentInPosition(position, getColor());
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
+        return opponent;
     }
     
     public boolean canJumpTo(Position position) {
         Board board = game.getBoard();
-        return !board.pieceInPosition(position);
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
+        boolean piece = !board.pieceInPosition(position);
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
+        return piece;
     }
     
     public boolean isMovingKing(Position position) {
         Board board = game.getBoard();
-        if (moves.isEmpty()) {
-            return board.kingInPosition(position);
-        } else {
-            return board.kingInPosition(moves.getFirst().getStart());
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
         }
+        boolean king = false;
+        if (moves.isEmpty()) {
+            king = board.kingInPosition(position);
+        } else {
+            king = board.kingInPosition(moves.getFirst().getStart());
+        }
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
+        return king;
     }
     
     public boolean makeMoves() {
