@@ -108,4 +108,8 @@ public class Board {
             board[opponentPosition.getRow()][opponentPosition.getCell()] = null;
         }
     }
+    
+    public void prepareWhiteTurn() {
+        board = rotate180();
+    }
 }

@@ -60,6 +60,7 @@ public class PostSubmitTurnRoute implements Route {
         }
         
         if (currentPlayer.makeMoves()) {
+            currentPlayer.endTurn();
             return new Message("Turn submitted.", MessageType.info);
         } else {
             return new Message("The board was not updated.", MessageType.error);

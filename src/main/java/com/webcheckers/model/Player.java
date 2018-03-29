@@ -92,10 +92,24 @@ public class Player {
     
     public boolean makeMoves() {
         Board board = game.getBoard();
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
         for (Move move : moves) {
             board.movePiece(move);
         }
         moves.clear();
+        if (getColor() == PieceColor.WHITE) {
+            board.prepareWhiteTurn();
+        }
         return true;
+    }
+    
+    public void endTurn() {
+        game.changeActiveColor();
+    }
+    
+    public boolean isTurn() {
+        return getColor() == game.getActiveColor();
     }
 }

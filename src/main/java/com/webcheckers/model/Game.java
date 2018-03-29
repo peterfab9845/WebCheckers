@@ -10,11 +10,13 @@ public class Game {
     private Player redPlayer;
     private Player whitePlayer;
     private Board board;
+    private PieceColor activeColor;
 
     public Game(Player red, Player white) {
         redPlayer = red;
         whitePlayer = white;
         board = new Board();
+        activeColor = PieceColor.RED;
     }
 
     public Player getRedPlayer() {
@@ -42,7 +44,15 @@ public class Game {
     }
 
     public PieceColor getActiveColor() {
-        return PieceColor.RED;
+        return activeColor;
+    }
+    
+    public void changeActiveColor() {
+        if (activeColor == PieceColor.RED) {
+            activeColor = PieceColor.WHITE;
+        } else {
+            activeColor = PieceColor.RED;
+        }
     }
     
     public Board getBoard() {

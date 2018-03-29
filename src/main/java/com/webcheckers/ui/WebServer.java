@@ -68,6 +68,11 @@ public class WebServer {
      * The URL pattern to request the submit turn Ajax action.
      */
     public static final String SUBMIT_TURN_URL = "/submitTurn";
+    
+    /**
+     * The URL pattern to request the check turn Ajax action.
+     */
+    public static final String CHECK_TURN_URL = "/checkTurn";
 
     //
     // Attributes
@@ -168,6 +173,9 @@ public class WebServer {
         
         // Submits all of the moves in the player's turn
         post(SUBMIT_TURN_URL, new PostSubmitTurnRoute(gson));
+        
+        // Checks if the opponent has finished a turn
+        post(CHECK_TURN_URL, new PostCheckTurnRoute(gson));
 
         LOG.config("WebServer is initialized.");
     }
