@@ -8,6 +8,8 @@ import com.webcheckers.gameview.BoardView;
 public class Board {
 
     private Piece[][] board = new Piece[8][8];
+    private int redPiecesRemaining;
+    private int whitePiecesRemaining;
 
     public Board() {
         //white at the top
@@ -22,6 +24,8 @@ public class Board {
                 board[7][col] = new Piece(PieceType.SINGLE, PieceColor.RED);
             }
         }
+        redPiecesRemaining = 12;
+        whitePiecesRemaining = 12;
     }
 
     public BoardView getBoardView(PieceColor perspectiveColor) {
@@ -82,7 +86,7 @@ public class Board {
         }
     }
     
-    public void movePiece(Move move) {
+    public void movePiece(Move move, PieceColor currentColor) {
         Position start = move.getStart();
         Position end = move.getEnd();
         // Move the player's piece
@@ -106,6 +110,11 @@ public class Board {
         }
         if (opponentPosition != null) {
             board[opponentPosition.getRow()][opponentPosition.getCell()] = null;
+            if (currentColor == PieceColor.RED) {
+                whitePiecesRemaining--;
+            } else {
+                redPiecesRemaining--;
+            }
         }
     }
     

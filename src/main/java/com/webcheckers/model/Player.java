@@ -118,7 +118,7 @@ public class Player {
             board.prepareWhiteTurn();
         }
         for (Move move : moves) {
-            board.movePiece(move);
+            board.movePiece(move, getColor());
         }
         moves.clear();
         if (getColor() == PieceColor.WHITE) {
