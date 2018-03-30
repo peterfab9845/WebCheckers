@@ -1,15 +1,17 @@
-# PROJECT Home
+# WebCheckers Home
 
-Welcome to the PROJECT Project!
+Welcome to the WebCheckers Project!
 
 ## Team
 
-* MEMBER1
-* MEMBER2
+* Andrew Reed
+* Curtis Veronesi
+* Peter Fabinski
+* Adam Heeter
 
 ## [Design Documentation](DesignDoc)
 
-Click above for details of the PROJECT design documentation.
+Click above for details of the WebCheckers design documentation.
 
 ## [Setup Guide](SetupGuide)
 
