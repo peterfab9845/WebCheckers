@@ -42,4 +42,12 @@ public class Move {
     public Position getEnd() {
         return end;
     }
+    
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Move)) {
+            return false;
+        } else {
+            return start.equals(((Move) obj).start) && end.equals(((Move) obj).end);
+        }
+    }
 }

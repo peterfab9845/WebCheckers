@@ -10,6 +10,7 @@ public class Game {
     private Player redPlayer;
     private Player whitePlayer;
     private Board board;
+    private PieceColor activeColor;
 
     /**
      * Create a game with red and white players, and create a new Board for the game
@@ -20,6 +21,7 @@ public class Game {
         redPlayer = red;
         whitePlayer = white;
         board = new Board();
+        activeColor = PieceColor.RED;
     }
 
     /**
@@ -36,6 +38,14 @@ public class Game {
      */
     public Player getWhitePlayer() {
         return whitePlayer;
+    }
+    
+    public PieceColor getPlayerColor(Player player) {
+        if (player == redPlayer) {
+            return PieceColor.RED;
+        } else {
+            return PieceColor.WHITE;
+        }
     }
 
     /**
@@ -56,6 +66,18 @@ public class Game {
      * @return the active color
      */
     public PieceColor getActiveColor() {
-        return PieceColor.RED;
+        return activeColor;
+    }
+    
+    public void changeActiveColor() {
+        if (activeColor == PieceColor.RED) {
+            activeColor = PieceColor.WHITE;
+        } else {
+            activeColor = PieceColor.RED;
+        }
+    }
+    
+    public Board getBoard() {
+        return board;
     }
 }
