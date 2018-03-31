@@ -1,4 +1,4 @@
-package main.java.com.webcheckers.ui;
+package com.webcheckers.ui;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,10 +64,11 @@ public class GetHomeRoute implements Route {
 
     Player user = playerLobby.getPlayer(request.session());
 
-    if ( user != null )
+    vm.put("playerCount", playerLobby.playersInLobby());
+    if ( user != null ) {
       vm.put(ATTR_CURRENT_PLAYER, user);
-
-
+      vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
+    }
 
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
   }

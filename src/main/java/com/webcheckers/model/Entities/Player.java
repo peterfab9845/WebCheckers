@@ -15,6 +15,7 @@ public class Player extends Entity {
     super();
     this.name = name;
     this.session = session;
+    sendToLobby();
   }
 
   public void sendToLobby(){
@@ -25,7 +26,9 @@ public class Player extends Entity {
     return currentState == PlayerStates.INLOBBY;
   }
 
-
+  public Session getSession() {
+    return session;
+  }
 
   public String getName() {
     return name;

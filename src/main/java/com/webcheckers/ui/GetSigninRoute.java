@@ -1,18 +1,13 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Entities.Player;
+import spark.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
-
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
-import main.java.com.webcheckers.ui.GetHomeRoute;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
 
 import static spark.Spark.halt;
 
