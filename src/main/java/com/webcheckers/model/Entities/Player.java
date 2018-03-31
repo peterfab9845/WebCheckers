@@ -8,8 +8,12 @@ public class Player extends Entity {
   private PlayerStates currentState;
   private Session session;
 
-  public Player(String userName, Session session){
-    super(userName);
+  // UserName For user
+  private String name;
+
+  public Player(String name, Session session){
+    super();
+    this.name = name;
     this.session = session;
   }
 
@@ -21,8 +25,18 @@ public class Player extends Entity {
     return currentState == PlayerStates.INLOBBY;
   }
 
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setUserName(String userName) {
+    this.name = userName;
+  }
+
   @Override
   public int hashCode(){
-    return Integer.parseInt(session.id());
+    return session.hashCode();
   }
 }

@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Entities.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -21,6 +23,9 @@ public class GetHomeRoute implements Route {
 
   private final TemplateEngine templateEngine;
 
+  private PlayerLobby playerLobby;
+  public static final String ATTR_CURRENT_PLAYER = "currentPlayer";
+
   /**
    * Create the Spark Route (UI controller) for the
    * {@code GET /} HTTP request.
@@ -28,11 +33,12 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine) {
+  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     //
     this.templateEngine = templateEngine;
+    this.playerLobby = playerLobby;
     //
     LOG.config("GetHomeRoute is initialized.");
   }
@@ -55,6 +61,14 @@ public class GetHomeRoute implements Route {
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
+
+    Player user = playerLobby.getPlayer(request.session());
+
+    if ( user != null )
+      vm.put(ATTR_CURRENT_PLAYER, user);
+
+
+
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
   }
 

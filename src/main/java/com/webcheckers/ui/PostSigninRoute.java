@@ -69,10 +69,6 @@ public class PostSigninRoute implements Route {
 
     // retrieve request parameter
     final String username = request.queryParams(REQUEST_PARAM_NAME);
-    LOG.info( "User attempted to sign in with the username " + username );
-    LOG.info("  " + username + " is null -> " + (username == null) );
-    LOG.info( " " + username + " is not a valid Username -> " + !playerLobby.validUsername(username) );
-    LOG.info( " " + username + " does not exist yet -> " + !playerLobby.playerExists(username) );
     if ( username == null)
       vm.put(ATTR_MESSAGE, new Message(MSG_MISSING_USERNAME, MessageType.error));
     else if ( !playerLobby.validUsername(username) )
@@ -80,10 +76,8 @@ public class PostSigninRoute implements Route {
     else if ( playerLobby.playerExists(username) )
       vm.put(ATTR_MESSAGE, new Message(MSG_TAKEN_USERNAME, MessageType.error));
     else{
-      LOG.info("  " + username + " passed all tests");
       Player user = new Player(username, request.session());
-      playerLobby.addPlayer(user);
-      vm.put(ATTR_CURRENT_PLAYER, username);
+      playerLobby.addPlayer(user, request.session());
       response.redirect("/");
       throw halt(200);
     }

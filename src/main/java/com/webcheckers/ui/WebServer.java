@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.appl.PlayerLobby;
 import main.java.com.webcheckers.ui.GetHomeRoute;
 import spark.TemplateEngine;
 
@@ -67,6 +68,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
+  private PlayerLobby playerLobby;
 
   //
   // Constructor
@@ -90,6 +92,7 @@ public class WebServer {
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
+    this.playerLobby = new PlayerLobby();
   }
 
   //
@@ -144,11 +147,12 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine));
+    get(HOME_URL, new GetHomeRoute(templateEngine, playerLobby));
 
     //Shows the Checkers Signin Page
-    get(SIGNING_URL, new GetSigninRoute(templateEngine));
+    get(SIGNING_URL, new GetSigninRoute(templateEngine, playerLobby));
 
+    post(SIGNING_URL, new PostSigninRoute(templateEngine, playerLobby));
     //
     LOG.config("WebServer is initialized.");
   }
