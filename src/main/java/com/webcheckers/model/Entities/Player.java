@@ -19,11 +19,11 @@ public class Player extends Entity {
   }
 
   public void sendToLobby(){
-    this.currentState = PlayerStates.INLOBBY;
+    this.currentState = PlayerStates.IN_LOBBY;
   }
 
   public boolean isInLobby(){
-    return currentState == PlayerStates.INLOBBY;
+    return currentState == PlayerStates.IN_LOBBY;
   }
 
   public Session getSession() {
@@ -36,6 +36,10 @@ public class Player extends Entity {
 
   public void setUserName(String userName) {
     this.name = userName;
+  }
+
+  public void setInGame(){
+    this.currentState = PlayerStates.IN_GAME;
   }
 
   @Override

@@ -7,8 +7,7 @@ public class Entity {
   // Team Color - Set when game started
   private TeamColors teamColor;
 
-  public Entity(){
-  }
+  public Entity(){ }
 
   /*
   Getters and Setters
