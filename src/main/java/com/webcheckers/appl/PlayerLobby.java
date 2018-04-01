@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 public class PlayerLobby{
 
   private HashMap<String, Player> players;
-  private LinkedList<Game> games;
+  private HashMap<Player, Game> games;
 
   private static final String USERNAME_REGEX = "[A-Za-z0-9 ]+";
 
   public PlayerLobby(){
     players = new HashMap<>();
-    games = new LinkedList<>();
+    games = new HashMap<>();
   }
 
   public void addPlayer(Player player, Session session){
@@ -106,7 +106,12 @@ public class PlayerLobby{
   public void Challenge(Player player, Player challenging){
     player.setInGame();
     challenging.setInGame();
-    Game game = new Game(player, player);
-    games.add(game);
+    Game game = new Game(player, challenging);
+    games.put(player, game);
+    games.put(challenging, game);
+  }
+
+  public Game getGame(Player player){
+      return games.get(player);
   }
 }

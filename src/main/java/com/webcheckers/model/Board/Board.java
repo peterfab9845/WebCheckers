@@ -33,7 +33,6 @@ public class Board {
 
     /**
      * Get the BoardView representation of this Board
-     * @param perspectiveColor which player's perspective the view should be from
      * @return BoardView containing the pieces from this board
      */
     public BoardView getBoardView() {
