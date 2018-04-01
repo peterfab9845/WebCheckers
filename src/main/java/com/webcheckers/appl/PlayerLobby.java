@@ -1,5 +1,6 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.Entities.Game;
 import com.webcheckers.model.Entities.Player;
 import spark.Session;
 
@@ -12,13 +13,14 @@ import java.util.stream.Stream;
 public class PlayerLobby{
 
   private HashMap<String, Player> players;
+  private LinkedList<Game> games;
 
-  public static final String USERNAME_REGEX = "[A-Za-z0-9 ]+";
+  private static final String USERNAME_REGEX = "[A-Za-z0-9 ]+";
 
   public PlayerLobby(){
-    players = new HashMap<String, Player>();
+    players = new HashMap<>();
+    games = new LinkedList<>();
   }
-
 
   public void addPlayer(Player player, Session session){
     players.put(session.id(), player);
@@ -31,7 +33,7 @@ public class PlayerLobby{
   public Iterator<Player> getPlayersInLobby(){
     Stream<Player> playerStream = listOfPlayers().stream();
     //filter players out of lobby
-    playerStream.filter(Player::isInLobby);
+    playerStream = playerStream.filter(Player::isInLobby);
     return playerStream.iterator();
   }
 
@@ -44,9 +46,9 @@ public class PlayerLobby{
     String sessionid = session.id();
     Stream<Player> playerStream = listOfPlayers().stream();
     //filter players out of lobby
-    playerStream.filter(Player::isInLobby);
+    playerStream = playerStream.filter(Player::isInLobby);
     //filter out the exepted player
-    playerStream.filter(p -> !p.getSession().id().equals(sessionid));
+    playerStream = playerStream.filter(p -> !p.getSession().id().equals(sessionid));
     return playerStream.iterator();
   }
 
@@ -71,7 +73,7 @@ public class PlayerLobby{
     return username.matches(USERNAME_REGEX);
   }
 
-  public LinkedList<Player> listOfPlayers(){
+  private LinkedList<Player> listOfPlayers(){
     LinkedList<Player> playerList = new LinkedList<>();
     Player player;
     for(Map.Entry<String, Player> entry : players.entrySet()) {
@@ -87,5 +89,24 @@ public class PlayerLobby{
 
   public Player getPlayer(Session session){
     return players.get(session.id());
+  }
+
+  public Player getPlayer(String name){
+    LinkedList<Player> playerLinkedList = listOfPlayers();
+    String tempName;
+    for (Player aPlayerLinkedList : playerLinkedList) {
+      tempName = aPlayerLinkedList.getName();
+      if (tempName.equals(name)) {
+        return aPlayerLinkedList;
+      }
+    }
+    return null;
+  }
+
+  public void Challenge(Player player, Player challenging){
+    player.setInGame();
+    challenging.setInGame();
+    Game game = new Game(player, player);
+    games.add(game);
   }
 }
