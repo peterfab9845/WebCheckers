@@ -21,16 +21,8 @@ public class Game {
     return redPlayer;
   }
 
-  public void setRedPlayer(Player redPlayer) {
-    this.redPlayer = redPlayer;
-  }
-
   public Player getWhitePlayer() {
     return whitePlayer;
-  }
-
-  public void setWhitePlayer(Player whitePlayer) {
-    this.whitePlayer = whitePlayer;
   }
 
   public PieceColor getPlayerColor(Player player) {
@@ -41,10 +33,9 @@ public class Game {
   }
   /**
    * Get the BoardView from the given player's perspective
-   * @param player the player whose perspective to use
    * @return the BoardView for the given player
    */
-  public BoardView getBoardView(Player player) {
+  public BoardView getBoardView() {
     return board.getBoardView();
   }
 
