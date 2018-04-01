@@ -1,4 +1,4 @@
-package com.webcheckers.ui;
+package com.webcheckers.ui.Home;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,8 @@ import spark.Response;
 import spark.Route;
 import spark.TemplateEngine;
 
+import static spark.Spark.halt;
+
 /**
  * The UI Controller to GET the Home page.
  *
@@ -24,7 +26,7 @@ public class GetHomeRoute implements Route {
   private final TemplateEngine templateEngine;
 
   private PlayerLobby playerLobby;
-  public static final String ATTR_CURRENT_PLAYER = "currentPlayer";
+  private static final String ATTR_CURRENT_PLAYER = "currentPlayer";
 
   /**
    * Create the Spark Route (UI controller) for the
@@ -58,7 +60,6 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
 
-    //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
 
@@ -66,6 +67,11 @@ public class GetHomeRoute implements Route {
 
     vm.put("playerCount", playerLobby.playersInLobby());
     if ( user != null ) {
+      if ( !user.isInLobby() ){
+        response.redirect("/game");
+        throw halt(100);
+      }
+
       vm.put(ATTR_CURRENT_PLAYER, user);
       vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
     }

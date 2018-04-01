@@ -2,6 +2,9 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.ui.Home.GetHomeRoute;
+import com.webcheckers.ui.Signin.GetSigninRoute;
+import com.webcheckers.ui.Signin.PostSigninRoute;
 import spark.TemplateEngine;
 
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.webcheckers.ui;
+package com.webcheckers.ui.Signin;
 
 import com.webcheckers.appl.Message;
 import com.webcheckers.model.States.MessageType;
