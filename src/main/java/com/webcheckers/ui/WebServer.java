@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.ui.Game.GetGameRoute;
 import com.webcheckers.ui.Home.GetHomeRoute;
 import com.webcheckers.ui.Signin.GetSigninRoute;
 import com.webcheckers.ui.Signin.PostSigninRoute;
@@ -55,13 +56,18 @@ public class WebServer {
   /**
    * The URL pattern to request the Home page.
    */
-  public static final String HOME_URL = "/";
+  private static final String HOME_URL = "/";
 
 
   /**
    * The URL pattern to request the Signin page.
    */
-  public static final String SIGNING_URL = "/signin";
+  private static final String SIGNING_URL = "/signin";
+
+  /**
+   * The URL pattern to request the Game page.
+   */
+  private static final String GAME_URL = "/game";
 
   //
   // Attributes
@@ -154,6 +160,8 @@ public class WebServer {
     get(SIGNING_URL, new GetSigninRoute(templateEngine, playerLobby));
 
     post(SIGNING_URL, new PostSigninRoute(templateEngine, playerLobby));
+
+    get(GAME_URL, new GetGameRoute(templateEngine,playerLobby));
     //
     LOG.config("WebServer is initialized.");
   }
