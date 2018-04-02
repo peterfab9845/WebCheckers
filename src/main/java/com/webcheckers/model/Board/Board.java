@@ -60,10 +60,19 @@ public class Board {
         return rotated;
     }
 
+    /**
+     * Given a position it returns the peice that is at that location
+     * @param position
+     * @return Piece
+     */
     public Piece valueAt(Position position){
         return board[position.getRow()][position.getCell()].getPiece();
     }
 
+    /**
+     * Moves whatever is at the begining to its end location
+     * @param move
+     */
     public void makeMove(Move move){
         Position start = move.getStart();
         Position end = move.getEnd();

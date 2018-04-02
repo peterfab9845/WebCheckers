@@ -7,25 +7,28 @@ import com.webcheckers.ui.Movement.PostValidateMoveRoute;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
-public class MoveTracker extends LinkedList{
+public class TurnTracker extends LinkedList{
 
+    /**
+     * Games Board
+     */
     private Board board;
 
-    public MoveTracker(Board board){
+    /**
+     * Constructor
+     * @param board
+     */
+    public TurnTracker(Board board){
         super();
         this.board = board;
     }
 
-    public void addMove(Move move){
-        super.add(move);
-    }
-
-    private static final Logger LOG = Logger.getLogger(MoveTracker.class.getName());
-
+    /**
+     * finishes the turn by sending all the move requests
+     */
     public void finalizeTurn(){
         while(!isEmpty()) {
             Move move = (Move) remove();
-            LOG.info("Moved: (" + move.getStart().getCell() + ", "+ move.getStart().getRow() +"), (" + move.getEnd().getCell() + ", "+ move.getEnd().getRow() +")");
             board.makeMove(move);
         }
     }
