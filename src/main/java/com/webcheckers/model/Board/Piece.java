@@ -44,10 +44,15 @@ public class Piece {
         return color;
     }
 
+    /**
+     * returns wether two objects are equal
+     * @param obj
+     * @return boolean
+     */
     @Override
-    public boolean equals(Object other){
-        if (other instanceof Piece){
-            Piece otherPiece = (Piece)other;
+    public boolean equals(Object obj){
+        if (obj instanceof Piece){
+            Piece otherPiece = (Piece)obj;
             if (otherPiece.getColor() == this.color){
                 if (otherPiece.getType() == this.type) return true;
             }

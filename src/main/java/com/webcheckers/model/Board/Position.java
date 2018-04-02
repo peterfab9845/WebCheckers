@@ -43,12 +43,18 @@ public class Position {
         return cell;
     }
 
+
+    /**
+     * returns wether two objects are equal
+     * @param other
+     * @return boolean
+     */
     @Override
     public boolean equals(Object other){
         if (other instanceof Position){
             Position otherPosition = (Position)other;
             if (otherPosition.getCell() == this.cell){
-                if (otherPosition.getRow() == this.row) return true;
+                return otherPosition.getRow() == this.row;
             }
         }
         return false;

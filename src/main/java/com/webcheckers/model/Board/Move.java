@@ -20,7 +20,7 @@ public class Move {
      */
     private Position end;
 
-    private LinkedList<Space> spacesJumped;
+    //private LinkedList<Space> spacesJumped;
 
     /**
      * Create a Move with the given starting and ending positions
@@ -30,7 +30,7 @@ public class Move {
     public Move(Position start, Position end) {
         this.start = start;
         this.end = end;
-        spacesJumped = new LinkedList<>();
+        //spacesJumped = new LinkedList<>();
     }
 
     /**
@@ -49,12 +49,14 @@ public class Move {
         return end;
     }
 
+    /**
+     * Returns if two objects are equal
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
     }
 
-//    public Iterator iterator(){
-//        return spacesJumped.iterator();
-//    }
 }
