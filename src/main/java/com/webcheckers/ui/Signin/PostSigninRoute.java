@@ -37,16 +37,16 @@ public class PostSigninRoute implements Route {
   private PlayerLobby playerLobby;
 
   //Constants
-  private static final String VIEW_NAME = "/signin";
-  private static final String PAGE_TITLE = "Sign-in";
-  private static final String ATTR_TITLE = "title";
-  private static final String ATTR_MESSAGE = "message";
-  private static final String ATTR_CURRENT_PLAYER = "currentPlayer";
-  private static final String REQUEST_PARAM_NAME = "name";
+  public static final String VIEW_NAME = "/signin";
+  public static final String PAGE_TITLE = "Sign-in";
+  public static final String ATTR_TITLE = "title";
+  public static final String ATTR_MESSAGE = "message";
+  public static final String ATTR_CURRENT_PLAYER = "currentPlayer";
+  public static final String REQUEST_PARAM_NAME = "name";
 
-  private static final String MSG_MISSING_USERNAME = "You must provide a username";
-  private static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
-  private static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
+  public static final String MSG_MISSING_USERNAME = "You must provide a username";
+  public static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
+  public static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
 
   /**
    * Create the Spark Route (UI controller) for the {@code POST /signin} HTTP request.
