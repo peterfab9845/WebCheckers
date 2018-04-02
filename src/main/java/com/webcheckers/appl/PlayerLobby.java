@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class PlayerLobby{
 
   private HashMap<String, Player> players;
-  private HashMap<Player, Game> games;
+  private HashMap<String, Game> games;
 
   private static final String USERNAME_REGEX = "[A-Za-z0-9 ]+";
 
@@ -101,10 +101,6 @@ public class PlayerLobby{
     return playerList;
   }
 
-  public Iterator<Player> iterator(){
-    return listOfPlayers().iterator();
-  }
-
   public Player getPlayer(Session session){
     return players.get(session.id());
   }
@@ -121,17 +117,21 @@ public class PlayerLobby{
     return null;
   }
 
-  public void Challenge(Player player, Player challenging){
+  public void challenge(Player player, Player challenging){
     player.setInGame();
     challenging.setInGame();
     Game game = new Game(player, challenging);
     player.setTeamColor(PieceColor.RED);
     challenging.setTeamColor(PieceColor.WHITE);
-    games.put(player, game);
-    games.put(challenging, game);
+    addGame(player, game);
+    addGame(challenging, game);
+  }
+
+  public void addGame(Player player, Game game){
+    games.put(player.getName(), game);
   }
 
   public Game getGame(Player player){
-      return games.get(player);
+      return games.get(player.getName());
   }
 }

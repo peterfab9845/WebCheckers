@@ -67,7 +67,7 @@ public class GetGameRoute implements Route {
     String opponentName = request.queryParams("opponentName");
     if (opponentName != null ) {
       Player opponent = playerLobby.getPlayer(opponentName);
-      playerLobby.Challenge(user, opponent);
+      playerLobby.challenge(user, opponent);
       response.redirect("/game");
       throw halt(402);
     }
