@@ -48,6 +48,7 @@ public class PostCheckTurnRoute implements Route {
         // validation
         Objects.requireNonNull(gson, "gson must not be null");
         //
+
         this.gson = gson;
         //
         LOG.config("PostCheckTurnRoute is initialized.");
