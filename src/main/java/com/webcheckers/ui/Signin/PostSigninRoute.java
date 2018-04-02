@@ -37,7 +37,7 @@ public class PostSigninRoute implements Route {
   private PlayerLobby playerLobby;
 
   //Constants
-  public static final String VIEW_NAME = "/signin";
+  public static final String VIEW_NAME = "signin.ftl";
   public static final String PAGE_TITLE = "Sign-in";
   public static final String ATTR_TITLE = "title";
   public static final String ATTR_MESSAGE = "message";
