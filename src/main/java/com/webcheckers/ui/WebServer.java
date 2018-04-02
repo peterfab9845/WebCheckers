@@ -11,6 +11,7 @@ import com.webcheckers.ui.Movement.PostValidateMoveRoute;
 import com.webcheckers.ui.Saves.GetSavesRoute;
 import com.webcheckers.ui.Signin.GetSigninRoute;
 import com.webcheckers.ui.Signin.GetSignoutRoute;
+import com.webcheckers.ui.Signin.PostResignRoute;
 import com.webcheckers.ui.Signin.PostSigninRoute;
 import spark.TemplateEngine;
 
@@ -79,6 +80,11 @@ public class WebServer {
    * The URL pattern to request the Game page.
    */
   private static final String GAME_URL = "/game";
+
+  /**
+   * The URL pattern to resign from a game.
+   */
+  public static final String RESIGN_URL = "/resignGame";
 
   /**
    * The URL pattern to request the move validation Ajax action.
@@ -214,6 +220,9 @@ public class WebServer {
     get(SIGNOUT_URL, new GetSignoutRoute(playerLobby));
 
     get(SAVES_URL, new GetSavesRoute(templateEngine, playerLobby));
+
+    //Resigns a player from a game
+    post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
     //
     LOG.config("WebServer is initialized.");
   }

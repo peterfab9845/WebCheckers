@@ -31,16 +31,18 @@ public class PlayerLobby{
     players.remove(session.id());
     if(player.isInLobby())
       return;
-    Game game = getGame(player);
-    if(game.getRedPlayer() == player) {
-      game.getWhitePlayer().sendToLobby();
-      games.remove(game.getWhitePlayer());
-    }
-    else {
-      game.getRedPlayer().sendToLobby();
-      games.remove(game.getRedPlayer());
-    }
+    removeGame(player);
   }
+
+  public void removeGame(Player player){
+    Game game = getGame(player);
+    game.getWhitePlayer().sendToLobby();
+    games.remove(game.getWhitePlayer());
+    game.getRedPlayer().sendToLobby();
+    games.remove(game.getRedPlayer());
+  }
+
+
 
   /**
    * Returns a iterator of players in the lobby
