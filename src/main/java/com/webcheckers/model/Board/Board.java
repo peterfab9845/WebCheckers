@@ -3,9 +3,6 @@ package com.webcheckers.model.Board;
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PieceType;
 
-/**
- * Created by Curtis Veronesi on 3/2/2018.
- */
 public class Board {
 
     /**
