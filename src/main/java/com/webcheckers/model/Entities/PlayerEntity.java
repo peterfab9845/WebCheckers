@@ -74,4 +74,17 @@ public class PlayerEntity {
         return name;
     }
 
+    /**
+     * Changes state of object to Won
+     */
+    public void hasWon() {
+        this.currentState = PlayerStates.WON;
+    }
+
+    /**
+     * Changes state of object to Loss
+     */
+    public void hasLoss() {
+        this.currentState = PlayerStates.LOSS;
+    }
 }

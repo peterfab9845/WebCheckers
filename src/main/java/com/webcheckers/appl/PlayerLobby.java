@@ -64,15 +64,27 @@ public class PlayerLobby {
   }
 
   /**
-   * Removes game from list of games
+   * Removes game from list of games, and assigns winners
    * @param player
    */
   public void removeGame(Player player){
-    Game game = getGame(player);
-    game.getWhitePlayer().sendToLobby();
-    games.remove(game.getWhitePlayer());
-    game.getRedPlayer().sendToLobby();
-    games.remove(game.getRedPlayer());
+      Game game = getGame(player);
+      Player redPlayer = game.getRedPlayer();
+      Player whitePlayer = game.getWhitePlayer();
+
+      if( player == whitePlayer ){
+          redPlayer.hasWon();
+          whitePlayer.hasLoss();
+      }
+      else{
+          redPlayer.hasLoss();
+          whitePlayer.hasWon();
+      }
+
+      game.getWhitePlayer().sendToLobby();
+      games.remove(game.getWhitePlayer());
+      game.getRedPlayer().sendToLobby();
+      games.remove(game.getRedPlayer());
   }
 
   /**
