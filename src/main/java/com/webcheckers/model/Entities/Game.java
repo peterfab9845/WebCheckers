@@ -3,60 +3,98 @@ package com.webcheckers.model.Entities;
 import com.webcheckers.model.Board.Board;
 import com.webcheckers.model.Board.BoardView;
 import com.webcheckers.model.Board.Move;
-import com.webcheckers.model.Board.Piece;
 import com.webcheckers.model.GameSaves.GameLog;
 import com.webcheckers.model.States.PieceColor;
 
 public class Game {
-  private Player redPlayer;
-  private Player whitePlayer;
-  private PieceColor activeColor;
-  private Board board;
-  private MoveTracker moveTracker;
-  private GameLog gameLog;
 
-  public Game(Player redPlayer, Player whitePlayer){
-    this.redPlayer = redPlayer;
-    this.whitePlayer = whitePlayer;
-    activeColor = PieceColor.RED;
-    board = new Board();
-    gameLog = new GameLog(redPlayer, whitePlayer);
-    moveTracker = new MoveTracker(board);
-  }
+    /**
+     * Red Player
+     */
+    private Player redPlayer;
 
-  public Player getRedPlayer() {
-    return redPlayer;
-  }
+    /**
+     * Blue Player
+     */
+    private Player whitePlayer;
 
-  public Player getWhitePlayer() {
-    return whitePlayer;
-  }
+    /**
+     * The Current state of whos turn it is turn
+     */
+    private PieceColor activeColor;
 
-  /**
-   * Get the BoardView from the given player's perspective
-   * @return the BoardView for the given player
-   */
-  public BoardView getBoardView(PieceColor color) {
-    return board.getBoardView(color);
-  }
+    /**
+     * The board for the current game
+     */
+    private Board board;
 
-  /**
-   * Get the currently active color in this game
-   * @return the active color
-   */
-  public PieceColor getActiveColor() {
-    return activeColor;
-  }
+    /**
+     * The Turn Tracker to queue all moves before making them
+     */
+    private TurnTracker turnTracker;
 
-  public void changeTurns() {
-    moveTracker.finalizeTurn();
-    if( activeColor == PieceColor.RED )
-      activeColor = PieceColor.WHITE;
-    else
-      activeColor= PieceColor.RED;
-  }
+    /**
+     * Game log for saving all moves for the replay
+     */
+    private GameLog gameLog;
 
-  public void queueMove(Move move){
-    moveTracker.addMove(move);
-  }
+    public Game(Player redPlayer, Player whitePlayer){
+        this.redPlayer = redPlayer;
+        this.whitePlayer = whitePlayer;
+        activeColor = PieceColor.RED;
+        board = new Board();
+        gameLog = new GameLog(redPlayer, whitePlayer);
+        turnTracker = new TurnTracker(board);
+    }
+
+    /**
+     * give the red player
+     * @return Player
+     */
+    public Player getRedPlayer() {
+        return redPlayer;
+    }
+
+    /**
+     * give the white player
+     * @return Player
+     */
+    public Player getWhitePlayer() {
+        return whitePlayer;
+    }
+
+    /**
+    * Get the BoardView from the given player's perspective
+    * @return the BoardView for the given player
+    */
+    public BoardView getBoardView(PieceColor color) {
+          return board.getBoardView(color);
+    }
+
+    /**
+    * Get the currently active color in this game
+    * @return the active color
+    */
+    public PieceColor getActiveColor() {
+        return activeColor;
+    }
+
+    /**
+     * Changes the state of the game to either red players turn or whites
+     */
+    public void changeTurns() {
+        turnTracker.finalizeTurn();
+        if( activeColor == PieceColor.RED )
+            activeColor = PieceColor.WHITE;
+        else
+            activeColor= PieceColor.RED;
+    }
+
+    /**
+     * Adds a move to the turn tracker
+     * @param move
+     */
+    public void queueMove(Move move){
+        turnTracker.add(move);
+    }
 }
