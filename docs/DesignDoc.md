@@ -13,7 +13,7 @@ geometry: margin=1in
 
 # Executive Summary
 
-> WebChecker is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choosing the type of game to play, the user is brought to a screen with the board shown on it, and their opponent also is brought to the same game but from the opposite perspective. From there, they will continue to play the game while being held to the rules of the game. Lastly, players will be able to save and re-watch games they have played in the past.
+> WebCheckers is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choosing the type of game to play, the user is brought to a screen with the board shown on it, and their opponent also is brought to the same game but from the opposite perspective. From there, they will continue to play the game while being held to the rules of the game. Lastly, players will be able to save and re-watch games they have played in the past.
 
 ## Purpose
 
@@ -25,22 +25,13 @@ geometry: margin=1in
 > >
 > > Groups of Friends, who are looking for something fun to play.
 
-## Glossary and Acronyms
-> Provide a table of terms and acronyms.
-
-| Term | Definition |
-|------|------------|
-| VO | Value Object |
-
 # Requirements
 
 This section describes the features of the application.
 
-> In this section you do not need to be exhaustive and list every story.  Focus on top-level features from the Vision document and maybe Epics and critical Stories.
-
 ## Definition of MVP
 
-> Provide a simple description of the Minimum Viable Product.
+For this project, the minimum viable product is the capability to play a complete game of checkers. This involves signing in, starting a game, viewing the board, moving pieces, capturing the opponent's pieces, and finally, finishing the game by winning, losing, resigning, or a tie.
 
 ## MVP Features
 
@@ -170,8 +161,7 @@ some JavaScript that has been provided to the team by the architect.
 The server-side tiers include the UI Tier that is composed of UI Controllers and Views.
 Controllers are built using the Spark framework and View are built using the FreeMarker framework.  The Application and Model tiers are built using plain-old Java objects (POJOs).
 
-Details of the components within these tiers are supplied below
-
+Details of the components within these tiers are supplied below.
 
 ## Overview of User Interface
 
@@ -184,35 +174,34 @@ When the user first logs in, they are directed to the home page, which will show
 
 
 ## UI Tier
-> Provide a summary of the Server-side UI tier of your architecture.
+The UI tier of our architecture is composed primarily of Spark routes, using the FreeMarker template engine. 
 
-> Describe the types of components in the tier and describe their responsibilities.
+These routes take web requests from the client, perform the required actions (such as signing in), and then return HTML for the requested web page. To generate this HTML, FreeMarker templates are used, which allow the pages to be modified based on the state of the application and the user's information.
 
 ### Static models
-> Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
+As the below class diagram shows, the PostSigninRoute class has a FreeMarker renderer; when it is called, the messages for the login status are shown appropriately using the template.
+![UML Diagram of PostSigninRoute](PostSigninRoute-diagram.png)
 
 ### Dynamic models
-> Provide any dynamic models, such as state and sequence diagrams, as is relevant to a particularly significant user story.
+As the below sequence diagram shows, the PostSigninRoute class creates a model and view for the FreeMarker renderer to use. Using the attributes in the model and view, the renderer creates an HTML page with the correct information based on the user's input.
 
-> For example, in WebCheckers you might create a sequence diagram of the `POST /validateMove` HTTP request processing or you might use a state diagram if the Game component uses a state machine to manage the game.
+## Application Tier
+In the Application tier, our architecture has several classes which oversee the functionality of the application.
 
-
-### Application Tier
-> Provide a summary of the Application tier of your architecture.
-
-> Describe the types of components in the tier and describe their responsibilities.
+One of the most important parts of our Application tier is the PlayerLobby class. This component holds every player who is logged in; it is used to challenge other players, finish games, save completed games, and manage player states.
+The Application tier also contains some utility components; for example, one allows messages to be shown to a user from another user's request.
 
 ### Static models
-> Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
+![UML Class Diagram for PlayerLobby](PlayerLobby.png)
+This UML class diagram shows the methods and attributes of PlayerLobby, which are used to keep track of each signed-in player and in-progress game.
 
 ### Dynamic models
 > Provide any dynamic model, such as state and sequence diagrams, as is relevant to a particularly significant user story.
 
-
 ## Model Tier
-> Provide a summary of the Model tier of your architecture.
+The Model tier of our architecture contains the basic structures representing a checkers game and its players.
 
-> Describe the types of components in the tier and describe their responsibilities.
+For example, there is the Board class. This structure has each space on the checkers board; in these spaces, checkers pieces can be placed and moved. The board itself does not have very much responsibility; its only functions are to create the initial piece placements and rotate 180 degrees for the white player's perspective.
 
 ### Static models
 > Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
