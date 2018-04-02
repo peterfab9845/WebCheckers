@@ -42,7 +42,7 @@ public class Board {
         if( color == PieceColor.RED )
             return new BoardView(board);
         Space[][] temp = this.rotate180();
-            return new BoardView(temp);
+        return new BoardView(temp);
     }
 
 
