@@ -51,8 +51,11 @@ public class PostValidateMoveRoute implements Route {
         String json = request.body();
         Move move = gson.fromJson(json, Move.class);
         Game game = playerLobby.getGame(currentPlayer);
+        game.queueMove(move);
 
-        Message responseMessage = new Message(" Valid Move ", MessageType.info);
+        LOG.info("Move: (" + move.getStart().getCell() + ", "+ move.getStart().getRow() +"), (" + move.getEnd().getCell() + ", "+ move.getEnd().getRow() +")");
+
+        Message responseMessage = new Message("" , MessageType.info);
         return gson.toJson(responseMessage);
     }
 }

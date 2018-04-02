@@ -2,6 +2,7 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.Entities.Game;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.States.PieceColor;
 import spark.Session;
 
 import java.util.HashMap;
@@ -24,6 +25,21 @@ public class PlayerLobby{
 
   public void addPlayer(Player player, Session session){
     players.put(session.id(), player);
+  }
+
+  public void removePlayer(Player player, Session session){
+    players.remove(session.id());
+    if(player.isInLobby())
+      return;
+    Game game = getGame(player);
+    if(game.getRedPlayer() == player) {
+      game.getWhitePlayer().sendToLobby();
+      games.remove(game.getWhitePlayer());
+    }
+    else {
+      game.getRedPlayer().sendToLobby();
+      games.remove(game.getRedPlayer());
+    }
   }
 
   /**
@@ -107,6 +123,8 @@ public class PlayerLobby{
     player.setInGame();
     challenging.setInGame();
     Game game = new Game(player, challenging);
+    player.setTeamColor(PieceColor.RED);
+    challenging.setTeamColor(PieceColor.WHITE);
     games.put(player, game);
     games.put(challenging, game);
   }

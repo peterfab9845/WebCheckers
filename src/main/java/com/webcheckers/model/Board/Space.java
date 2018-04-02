@@ -38,12 +38,16 @@ public class Space {
         return piece;
     }
 
+    public void setPiece(Piece piece){
+        this.piece = piece;
+    }
+
     /**
      * Get whether or not this is a valid space to move to
      * @return true if this is a valid space to move to
      */
     public boolean isValid() {
-        return true;
+        return piece == null;
     }
 
     @Override

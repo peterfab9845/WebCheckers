@@ -1,8 +1,11 @@
 package com.webcheckers.model.Board;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import com.webcheckers.model.States.PieceColor;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
+import java.util.*;
+
+import static java.util.Collections.*;
 
 /**
  * The class representation for transmission to the client
@@ -18,7 +21,7 @@ public class BoardView implements Iterable<Row> {
      * Creates a BoardView from the 2D array representation in Board
      * @param boardRows 2D array of Pieces to convert
      */
-    public BoardView(Piece[][] boardRows) {
+    public BoardView(Space[][] boardRows) {
         rows = new ArrayList<>(8);
         for (int row = 0; row < boardRows.length; row++) {
             rows.add(new Row(row, boardRows[row]));
@@ -34,18 +37,4 @@ public class BoardView implements Iterable<Row> {
         return rows.iterator();
     }
 
-    @Override
-    public boolean equals(Object other){
-        if (other instanceof BoardView){
-            BoardView otherBoardView = (BoardView)other;
-            Iterator<Row> otherIterator = otherBoardView.iterator();
-            Iterator<Row> thisIterator = iterator();
-            while (otherIterator.hasNext()){
-                Row otherRow = otherIterator.next();
-                Row thisRow = thisIterator.next();
-                if (!otherRow.equals(thisRow)) return false;
-            }
-        }
-        return false;
-    }
 }

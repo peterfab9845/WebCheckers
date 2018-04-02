@@ -1,11 +1,8 @@
 package com.webcheckers.ui.Game;
 
-import com.webcheckers.appl.Message;
-import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Game;
 import com.webcheckers.model.Entities.Player;
-import com.webcheckers.model.States.MessageType;
 import com.webcheckers.model.States.ViewMode;
 import spark.*;
 
@@ -74,6 +71,11 @@ public class GetGameRoute implements Route {
       response.redirect("/game");
       throw halt(402);
     }
+
+    if( user.isInLobby() ){
+      response.redirect("/");
+      throw halt(402);
+    }
     Game game = playerLobby.getGame(user);
 
     vm.put("title", "Game!");
@@ -82,7 +84,7 @@ public class GetGameRoute implements Route {
     vm.put("redPlayer", game.getRedPlayer());
     vm.put("whitePlayer", game.getWhitePlayer());
     vm.put("activeColor", game.getActiveColor());
-    vm.put("board", game.getBoardView());
+    vm.put("board", game.getBoardView(user.getTeamColor()));
 
 
     return templateEngine.render(new ModelAndView(vm , "game.ftl"));

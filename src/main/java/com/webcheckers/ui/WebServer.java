@@ -8,7 +8,9 @@ import com.webcheckers.ui.Movement.PostBackupMoveRoute;
 import com.webcheckers.ui.Movement.PostCheckTurnRoute;
 import com.webcheckers.ui.Movement.PostSubmitTurnRoute;
 import com.webcheckers.ui.Movement.PostValidateMoveRoute;
+import com.webcheckers.ui.Saves.GetSavesRoute;
 import com.webcheckers.ui.Signin.GetSigninRoute;
+import com.webcheckers.ui.Signin.GetSignoutRoute;
 import com.webcheckers.ui.Signin.PostSigninRoute;
 import spark.TemplateEngine;
 
@@ -69,6 +71,11 @@ public class WebServer {
   private static final String SIGNING_URL = "/signin";
 
   /**
+   * The URL pattern to request the Signin page.
+   */
+  private static final String SIGNOUT_URL = "/signout";
+
+  /**
    * The URL pattern to request the Game page.
    */
   private static final String GAME_URL = "/game";
@@ -87,10 +94,16 @@ public class WebServer {
    * The URL pattern to request the submit turn Ajax action.
    */
   public static final String SUBMIT_TURN_URL = "/submitTurn";
+
   /**
    * The URL pattern to request the check turn Ajax action.
    */
   public static final String CHECK_TURN_URL = "/checkTurn";
+
+  /**
+   * The URL pattern to request the check turn Ajax action.
+   */
+  public static final String SAVES_URL = "/saves";
 
   //
   // Attributes
@@ -197,6 +210,10 @@ public class WebServer {
 
     // Removes the player's last move in the current turn
     post(BACKUP_MOVE_URL, new PostBackupMoveRoute(gson, playerLobby));
+
+    get(SIGNOUT_URL, new GetSignoutRoute(playerLobby));
+
+    get(SAVES_URL, new GetSavesRoute(templateEngine, playerLobby));
     //
     LOG.config("WebServer is initialized.");
   }

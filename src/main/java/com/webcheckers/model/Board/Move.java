@@ -1,5 +1,8 @@
 package com.webcheckers.model.Board;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * A move from the player.
  * 
@@ -17,6 +20,8 @@ public class Move {
      */
     private Position end;
 
+    private LinkedList<Space> spacesJumped;
+
     /**
      * Create a Move with the given starting and ending positions
      * @param start the Position where the move is from
@@ -25,6 +30,7 @@ public class Move {
     public Move(Position start, Position end) {
         this.start = start;
         this.end = end;
+        spacesJumped = new LinkedList<>();
     }
 
     /**
@@ -46,5 +52,9 @@ public class Move {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
+    }
+
+    public Iterator iterator(){
+        return spacesJumped.iterator();
     }
 }

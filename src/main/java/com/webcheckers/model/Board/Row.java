@@ -1,6 +1,7 @@
 package com.webcheckers.model.Board;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,12 +25,10 @@ public class Row implements Iterable {
      * @param index the index of the row
      * @param boardCols array of the pieces in the row
      */
-    public Row(int index, Piece[] boardCols) {
-        spaces = new ArrayList<>(8);
+    public Row(int index, Space[] boardCols) {
+        spaces = new ArrayList<>();
         this.index = index;
-        for (int col = 0; col < boardCols.length; col++) {
-            spaces.add(new Space(col, boardCols[col]));
-        }
+        Collections.addAll(spaces, boardCols);
     }
 
     /**
