@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.ui.Game.GetGameRoute;
 import com.webcheckers.ui.Home.GetHomeRoute;
+import com.webcheckers.ui.Movement.PostBackupMoveRoute;
+import com.webcheckers.ui.Movement.PostCheckTurnRoute;
+import com.webcheckers.ui.Movement.PostSubmitTurnRoute;
+import com.webcheckers.ui.Movement.PostValidateMoveRoute;
 import com.webcheckers.ui.Signin.GetSigninRoute;
 import com.webcheckers.ui.Signin.PostSigninRoute;
 import spark.TemplateEngine;
@@ -68,6 +72,25 @@ public class WebServer {
    * The URL pattern to request the Game page.
    */
   private static final String GAME_URL = "/game";
+
+  /**
+   * The URL pattern to request the move validation Ajax action.
+   */
+  public static final String VALIDATE_MOVE_URL = "/validateMove";
+
+  /**
+   * The URL pattern to request the backup move Ajax action.
+   */
+  public static final String BACKUP_MOVE_URL = "/backupMove";
+
+  /**
+   * The URL pattern to request the submit turn Ajax action.
+   */
+  public static final String SUBMIT_TURN_URL = "/submitTurn";
+  /**
+   * The URL pattern to request the check turn Ajax action.
+   */
+  public static final String CHECK_TURN_URL = "/checkTurn";
 
   //
   // Attributes
@@ -162,6 +185,18 @@ public class WebServer {
     post(SIGNING_URL, new PostSigninRoute(templateEngine, playerLobby));
 
     get(GAME_URL, new GetGameRoute(templateEngine,playerLobby));
+
+    // Validates the player's moves.
+    post(VALIDATE_MOVE_URL, new PostValidateMoveRoute(gson, playerLobby));
+
+    // Submits all of the moves in the player's turn
+    post(SUBMIT_TURN_URL, new PostSubmitTurnRoute(gson, playerLobby));
+
+    // Checks if the opponent has finished a turn
+    post(CHECK_TURN_URL, new PostCheckTurnRoute(gson, playerLobby));
+
+    // Removes the player's last move in the current turn
+    post(BACKUP_MOVE_URL, new PostBackupMoveRoute(gson, playerLobby));
     //
     LOG.config("WebServer is initialized.");
   }
