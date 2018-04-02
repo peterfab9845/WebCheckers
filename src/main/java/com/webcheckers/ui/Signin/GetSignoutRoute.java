@@ -2,6 +2,7 @@ package com.webcheckers.ui.Signin;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.ui.Game.GetGameRoute;
 import com.webcheckers.ui.Home.GetHomeRoute;
 import spark.Request;
 import spark.Response;
@@ -15,9 +16,21 @@ import static spark.Spark.halt;
 
 public class GetSignoutRoute implements Route{
 
-    private static final Logger LOG = Logger.getLogger(GetSignoutRoute.class.getName());
+
+    /**
+     * Logger for logging things to the console
+     */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+
+    /**
+     * Player Lobby to receive info about players in game
+     */
     private PlayerLobby playerLobby;
 
+    /**
+     * Constructor
+     * @param playerLobby
+     */
     public GetSignoutRoute(PlayerLobby playerLobby) {
 
         this.playerLobby = playerLobby;
@@ -26,6 +39,13 @@ public class GetSignoutRoute implements Route{
 
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
 

@@ -14,80 +14,94 @@ import java.util.logging.Logger;
 import static spark.Spark.halt;
 
 /**
- * The UI Controller to GET the Home page.
+ * The UI Controller to GET the game page.
  *
- * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetGameRoute implements Route {
-  private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-  private final TemplateEngine templateEngine;
+    /**
+     * Logger for logging things to the console
+     */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-  private PlayerLobby playerLobby;
+    /**
+     * Template engine for desplaying things to users
+     */
+    private final TemplateEngine templateEngine;
 
-  /**
-   * Create the Spark Route (UI controller) for the
-   * {@code GET /} HTTP request.
-   *
-   * @param templateEngine
-   *   the HTML template rendering engine
-   */
-  public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
-    // validation
-    Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-    //
-    this.templateEngine = templateEngine;
-    this.playerLobby = playerLobby;
-    //
-    LOG.config("GetHomeRoute is initialized.");
-  }
+    /**
+     * Player Lobby to receive info about players in game
+     */
+    private PlayerLobby playerLobby;
 
-  /**
-   * Render the WebCheckers Home page.
-   *
-   * @param request
-   *   the HTTP request
-   * @param response
-   *   the HTTP response
-   *
-   * @return
-   *   the rendered HTML for the Home page
-   */
-  @Override
-  public Object handle(Request request, Response response) {
-    LOG.finer("GetGameRoute is invoked.");
-
-    Map<String, Object> vm = new HashMap<>();
-
-    Player user = playerLobby.getPlayer(request.session());
-    if (user == null) {
-      response.redirect("/");
-      throw halt(401);
-    }
-    String opponentName = request.queryParams("opponentName");
-    if (opponentName != null ) {
-      Player opponent = playerLobby.getPlayer(opponentName);
-      playerLobby.challenge(user, opponent);
-      response.redirect("/game");
-      throw halt(402);
+    /**
+    * Create the Spark Route (UI controller) for the
+    * {@code GET /} HTTP request.
+    *
+    * @param templateEngine
+    *   the HTML template rendering engine
+    */
+    public GetGameRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+        // validation
+        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+        //
+        this.templateEngine = templateEngine;
+        this.playerLobby = playerLobby;
+        //
+        LOG.config("GetHomeRoute is initialized.");
     }
 
-    if( user.isInLobby() ){
-      response.redirect("/");
-      throw halt(402);
+    /**
+    * Render the WebCheckers game page.
+    *
+    * @param request
+    *   the HTTP request
+    * @param response
+    *   the HTTP response
+    *
+    * @return
+    *   the rendered HTML for the Home page
+    */
+    @Override
+    public Object handle(Request request, Response response) {
+        LOG.finer("GetGameRoute is invoked.");
+
+        Map<String, Object> vm = new HashMap<>();
+
+        Player user = playerLobby.getPlayer(request.session());
+        //If no player send them to home page
+        if (user == null) {
+            response.redirect("/");
+            throw halt(401);
+        }
+
+        // if the opponent name is present challange that player
+        String opponentName = request.queryParams("opponentName");
+        if (opponentName != null ) {
+            Player opponent = playerLobby.getPlayer(opponentName);
+            playerLobby.challenge(user, opponent);
+            response.redirect("/game");
+            throw halt(402);
+        }
+
+        //If the player is in the lobby send them to the home page
+        if( user.isInLobby() ){
+            response.redirect("/");
+            throw halt(402);
+        }
+
+        Game game = playerLobby.getGame(user);
+
+        vm.put("title", "Game!");
+        vm.put("currentPlayer", user);
+        vm.put("viewMode", ViewMode.PLAY);
+        vm.put("redPlayer", game.getRedPlayer());
+        vm.put("whitePlayer", game.getWhitePlayer());
+        vm.put("activeColor", game.getActiveColor());
+        vm.put("board", game.getBoardView(user.getTeamColor()));
+
+
+        return templateEngine.render(new ModelAndView(vm , "game.ftl"));
     }
-    Game game = playerLobby.getGame(user);
-
-    vm.put("title", "Game!");
-    vm.put("currentPlayer", user);
-    vm.put("viewMode", ViewMode.PLAY);
-    vm.put("redPlayer", game.getRedPlayer());
-    vm.put("whitePlayer", game.getWhitePlayer());
-    vm.put("activeColor", game.getActiveColor());
-    vm.put("board", game.getBoardView(user.getTeamColor()));
-
-
-    return templateEngine.render(new ModelAndView(vm , "game.ftl"));
-  }
 
 }

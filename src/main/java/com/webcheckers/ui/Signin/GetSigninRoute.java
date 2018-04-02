@@ -2,6 +2,7 @@ package com.webcheckers.ui.Signin;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.ui.Game.GetGameRoute;
 import com.webcheckers.ui.Home.GetHomeRoute;
 import spark.*;
 
@@ -18,10 +19,20 @@ import static spark.Spark.halt;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetSigninRoute implements Route {
-  private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
+  /**
+   * Logger for logging things to the console
+   */
+  private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+
+  /**
+   * Template engine for desplaying things to users
+   */
   private final TemplateEngine templateEngine;
 
+  /**
+   * Player Lobby to receive info about players in game
+   */
   private PlayerLobby playerLobby;
 
   /**

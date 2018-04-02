@@ -4,6 +4,7 @@ import com.webcheckers.appl.Message;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.ui.Game.GetGameRoute;
 import spark.*;
 
 import java.util.HashMap;
@@ -20,22 +21,32 @@ import static spark.Spark.halt;
  */
 public class PostSigninRoute implements Route {
 
-  private static final Logger LOG = Logger.getLogger(PostSigninRoute.class.getName());
+  /**
+   * Logger for logging things to the console
+   */
+  private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
+  /**
+   * Template engine for desplaying things to users
+   */
   private final TemplateEngine templateEngine;
 
-  public static final String VIEW_NAME = "signin.ftl";
-  public static final String PAGE_TITLE = "Sign-in";
-  public static final String ATTR_TITLE = "title";
-  public static final String ATTR_MESSAGE = "message";
-  public static final String ATTR_CURRENT_PLAYER = "currentPlayer";
-  public static final String REQUEST_PARAM_NAME = "name";
-
-  public static final String MSG_MISSING_USERNAME = "You must provide a username";
-  public static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
-  public static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
-
+  /**
+   * Player Lobby to receive info about players in game
+   */
   private PlayerLobby playerLobby;
+
+  //Constants
+  private static final String VIEW_NAME = "/signin";
+  private static final String PAGE_TITLE = "Sign-in";
+  private static final String ATTR_TITLE = "title";
+  private static final String ATTR_MESSAGE = "message";
+  private static final String ATTR_CURRENT_PLAYER = "currentPlayer";
+  private static final String REQUEST_PARAM_NAME = "name";
+
+  private static final String MSG_MISSING_USERNAME = "You must provide a username";
+  private static final String MSG_INVALID_USERNAME = "Invalid username; must be alphanumeric";
+  private static final String MSG_TAKEN_USERNAME = "Username taken, please choose a different one";
 
   /**
    * Create the Spark Route (UI controller) for the {@code POST /signin} HTTP request.

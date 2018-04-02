@@ -10,20 +10,30 @@ import com.webcheckers.model.Entities.Game;
 import com.webcheckers.model.Entities.Player;
 
 import com.webcheckers.model.States.MessageType;
+import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 /**
  * The UI Controller to check if the opponent has finished a turn.
- *
- * @author Adam Heeter
  */
 public class PostCheckTurnRoute implements Route {
 
-    private static final Logger LOG = Logger.getLogger(PostCheckTurnRoute.class.getName());
+    /**
+     * Logger for logging things to the console
+     */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
+
+    /**
+     * Gson object for transporting data
+     */
     private final Gson gson;
+
+    /**
+     * Player Lobby to receive info about players in game
+     */
     private PlayerLobby playerLobby;
 
     /**

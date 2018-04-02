@@ -9,7 +9,11 @@ import java.util.LinkedList;
 
 public class Player extends PlayerEntity {
 
+    /**
+     * Current Players session
+     */
     private Session session;
+
     /**
     * Holds all previous games played
     */
@@ -44,6 +48,11 @@ public class Player extends PlayerEntity {
         return previousGames.iterator();
     }
 
+    /**
+     * Deletes a game save
+     * @param game
+     * @return
+     */
     public boolean deleteGame(String game) {
         for(int i = 0; i < previousGames.size(); i++) {
             if(previousGames.get(i).toString().equals(game)) {

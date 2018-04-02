@@ -2,6 +2,7 @@ package com.webcheckers.ui.Saves;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.ui.Game.GetGameRoute;
 import spark.*;
 
 import java.util.HashMap;
@@ -17,9 +18,19 @@ import static spark.Spark.halt;
  */
 public class GetSavesRoute implements Route {
 
-    private static final Logger LOG = Logger.getLogger(GetSavesRoute.class.getName());
+    /**
+     * Logger for logging things to the console
+     */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
+    /**
+     * Template engine for desplaying things to users
+     */
     private final TemplateEngine templateEngine;
+
+    /**
+     * Player Lobby to receive info about players in game
+     */
     private PlayerLobby playerLobby;
 
     /**
@@ -48,6 +59,7 @@ public class GetSavesRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("GetSaveRoute is invoked.");
 
+        //If the user has entered a game to delete, then delete it
         String game = request.queryParams("game");
         if(game != null){
             Player player = playerLobby.getPlayer(request.session());
@@ -58,9 +70,8 @@ public class GetSavesRoute implements Route {
 
         Map<String, Object> vm = new HashMap<>();
 
-        Player currentPlayer = playerLobby.getPlayer(request.session());
-
         // Redirect the player to the game page if a game is in progress or session doesnt exist
+        Player currentPlayer = playerLobby.getPlayer(request.session());
         if (currentPlayer == null ) {
             response.redirect("/game");
             throw halt(303);

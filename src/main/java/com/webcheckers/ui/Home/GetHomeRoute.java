@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
+import com.webcheckers.ui.Game.GetGameRoute;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -18,46 +19,53 @@ import static spark.Spark.halt;
 /**
  * The UI Controller to GET the Home page.
  *
- * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetHomeRoute implements Route {
-  private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-  private final TemplateEngine templateEngine;
+    /**
+    * Logger for logging things to the console
+    */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-  private PlayerLobby playerLobby;
-  private static final String ATTR_CURRENT_PLAYER = "currentPlayer";
+    /**
+    * Template engine for desplaying things to users
+    */
+    private final TemplateEngine templateEngine;
 
-  /**
-   * Create the Spark Route (UI controller) for the
-   * {@code GET /} HTTP request.
-   *
-   * @param templateEngine
-   *   the HTML template rendering engine
-   */
-  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
-    // validation
-    Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-    //
-    this.templateEngine = templateEngine;
-    this.playerLobby = playerLobby;
-    //
-    LOG.config("GetHomeRoute is initialized.");
-  }
+    /**
+    * Player Lobby to receive info about players in game
+    */
+    private PlayerLobby playerLobby;
 
-  /**
-   * Render the WebCheckers Home page.
-   *
-   * @param request
-   *   the HTTP request
-   * @param response
-   *   the HTTP response
-   *
-   * @return
-   *   the rendered HTML for the Home page
-   */
-  @Override
-  public Object handle(Request request, Response response) {
+    /**
+    * Create the Spark Route (UI controller) for the
+    * {@code GET /} HTTP request.
+    *
+    * @param templateEngine
+    *   the HTML template rendering engine
+    */
+    public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+        // validation
+        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
+        this.templateEngine = templateEngine;
+        this.playerLobby = playerLobby;
+
+        LOG.config("GetHomeRoute is initialized.");
+    }
+
+    /**
+    * Render the WebCheckers Home page.
+    *
+    * @param request
+    *   the HTTP request
+    * @param response
+    *   the HTTP response
+    *
+    * @return
+    *   the rendered HTML for the Home page
+    */
+    @Override
+    public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
 
     Map<String, Object> vm = new HashMap<>();
@@ -65,18 +73,21 @@ public class GetHomeRoute implements Route {
 
     Player user = playerLobby.getPlayer(request.session());
 
-    vm.put("playerCount", playerLobby.playersInLobby());
+    //If Player is presently logged in show them the user lost
     if ( user != null ) {
-      if ( !user.isInLobby() ){
-        response.redirect("/game");
-        throw halt(100);
-      }
+        //If the player is not in the lobby send them to their game
+        if ( !user.isInLobby() ){
+            response.redirect("/game");
+            throw halt(100);
+        }
 
-      vm.put(ATTR_CURRENT_PLAYER, user);
-      vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
+        vm.put("currentPlayer", user);
+        vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
     }
 
+    vm.put("playerCount", playerLobby.playersInLobby());
+
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
-  }
+    }
 
 }

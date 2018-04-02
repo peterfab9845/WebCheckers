@@ -5,17 +5,31 @@ import com.webcheckers.appl.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.States.MessageType;
+import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.TemplateEngine;
 
 import java.util.Objects;
 import java.util.logging.Logger;
 
 public class PostBackupMoveRoute implements Route {
-    private static final Logger LOG = Logger.getLogger(PostBackupMoveRoute.class.getName());
 
+    /**
+     * Logger for logging things to the console
+     */
+    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+
+
+    /**
+     * Gson object for transporting data
+     */
     private final Gson gson;
+
+    /**
+     * Player Lobby to receive info about players in game
+     */
     private PlayerLobby playerLobby;
 
     /**
@@ -44,7 +58,7 @@ public class PostBackupMoveRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("PostBackupMoveRoute is invoked.");
 
-        Player currentPlayer = playerLobby.getPlayer(request.session());
+//        Player currentPlayer = playerLobby.getPlayer(request.session());
         Message responseMessage = new Message("", MessageType.info);
         return gson.toJson(responseMessage);
     }
