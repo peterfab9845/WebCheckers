@@ -1,15 +1,13 @@
 package com.webcheckers.ui.Movement;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.Message;
+import com.webcheckers.model.Message;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.TemplateEngine;
 
 import java.util.Objects;
 import java.util.logging.Logger;

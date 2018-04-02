@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 
 /**
  * Map of each player's session ID to its respective Player object, along with their game data.
+ * todo: see if its worth while to split playerlobby into player and game lobby
+ * todo: get opponent
  */
 public class PlayerLobby {
 
@@ -81,9 +83,7 @@ public class PlayerLobby {
           whitePlayer.hasWon();
       }
 
-      game.getWhitePlayer().sendToLobby();
       games.remove(game.getWhitePlayer());
-      game.getRedPlayer().sendToLobby();
       games.remove(game.getRedPlayer());
   }
 
@@ -176,6 +176,7 @@ public class PlayerLobby {
    * @param challenging
    */
   public void challenge(Player player, Player challenging){
+    //todo: check if challenging is in game
     player.setInGame();
     challenging.setInGame();
     Game game = new Game(player, challenging);

@@ -1,7 +1,7 @@
 package com.webcheckers.ui.Movement;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.Message;
+import com.webcheckers.model.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Board.Move;
 import com.webcheckers.model.Entities.Game;
