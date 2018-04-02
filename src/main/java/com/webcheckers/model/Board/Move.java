@@ -54,7 +54,7 @@ public class Move {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
     }
 
-    public Iterator iterator(){
-        return spacesJumped.iterator();
-    }
+//    public Iterator iterator(){
+//        return spacesJumped.iterator();
+//    }
 }

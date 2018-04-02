@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardViewTest {
 
   private BoardView CuT;
-  private Space[][] board;
+  private Space[][] board = new Space[8][8];
 
   @BeforeEach
   void setUp() {
@@ -20,7 +20,7 @@ class BoardViewTest {
       for (int col = 0; col < 8; col++) {
         board[row][col] = new Space(col, null);
       }
-    };
+    }
     CuT = new BoardView(board);
   }
 
