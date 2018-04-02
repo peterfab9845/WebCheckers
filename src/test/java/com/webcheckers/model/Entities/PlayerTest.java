@@ -7,6 +7,7 @@ import spark.Session;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class PlayerTest {
 
@@ -19,6 +20,7 @@ class PlayerTest {
     void setUp() {
         session = mock(Session.class);
         gameLog = mock(GameLog.class);
+        when(gameLog.toString()).thenReturn("Yeah this is happening");
         CuT = new Player(USERNAME, session);
     }
 
@@ -35,6 +37,7 @@ class PlayerTest {
 
     @Test
     void deleteGame() {
+        CuT.saveGame(mock(GameLog.class));
         CuT.saveGame(gameLog);
         CuT.deleteGame(gameLog.toString());
         CuT.deleteGame(null);
