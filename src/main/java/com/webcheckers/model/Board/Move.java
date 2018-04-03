@@ -49,6 +49,22 @@ public class Move {
         return end;
     }
 
+    public int getStartingX(){
+        return start.getCell();
+    }
+
+    public int getEndingX(){
+        return end.getCell();
+    }
+
+    public int getStartingY(){
+        return start.getRow();
+    }
+
+    public int getEndingY(){
+        return end.getCell();
+    }
+
     /**
      * Returns if two objects are equal
      * @param obj
