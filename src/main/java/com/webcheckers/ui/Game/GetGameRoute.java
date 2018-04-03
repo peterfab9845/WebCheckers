@@ -48,7 +48,7 @@ public class GetGameRoute implements Route {
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
         //
-        LOG.config("GetHomeRoute is initialized.");
+        LOG.config("GetEndRoute is initialized.");
     }
 
     /**
@@ -74,6 +74,10 @@ public class GetGameRoute implements Route {
             response.redirect("/");
             throw halt(401);
         }
+        if( user.hasWon() || user.hasLost() ){
+            response.redirect("/end");
+            throw halt(403);
+        }
 
         // if the opponent name is present challange that player
         String opponentName = request.queryParams("opponentName");
@@ -89,6 +93,7 @@ public class GetGameRoute implements Route {
             response.redirect("/");
             throw halt(402);
         }
+
 
         Game game = playerLobby.getGame(user);
 

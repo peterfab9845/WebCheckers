@@ -238,7 +238,7 @@ public class PostSigninRouteTest {
         if (!exceptionThrown) {
             fail("handle did not halt rendering of page for redirect.");
         }
-    } // no HTML test for this condition; this is handled by GetHomeRoute
+    } // no HTML test for this condition; this is handled by GetEndRoute
     */
 
 

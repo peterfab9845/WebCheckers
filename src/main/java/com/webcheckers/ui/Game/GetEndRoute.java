@@ -1,18 +1,13 @@
-package com.webcheckers.ui.Home;
+package com.webcheckers.ui.Game;
+
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Entities.Player;
+import spark.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
-
-import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
-import com.webcheckers.ui.Game.GetGameRoute;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
 
 import static spark.Spark.halt;
 
@@ -20,7 +15,7 @@ import static spark.Spark.halt;
  * The UI Controller to GET the Home page.
  *
  */
-public class GetHomeRoute implements Route {
+public class GetEndRoute implements Route {
 
     /**
     * Logger for logging things to the console
@@ -44,7 +39,7 @@ public class GetHomeRoute implements Route {
     * @param templateEngine
     *   the HTML template rendering engine
     */
-    public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
+    public GetEndRoute(final TemplateEngine templateEngine, PlayerLobby playerLobby) {
         // validation
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
         this.templateEngine = templateEngine;
@@ -54,7 +49,7 @@ public class GetHomeRoute implements Route {
     }
 
     /**
-    * Render the WebCheckers Home page.
+    * Render the WebCheckers end page.
     *
     * @param request
     *   the HTTP request
@@ -62,32 +57,34 @@ public class GetHomeRoute implements Route {
     *   the HTTP response
     *
     * @return
-    *   the rendered HTML for the Home page
+    *   the rendered HTML for the end page
     */
     @Override
     public Object handle(Request request, Response response) {
         LOG.finer("GetEndRoute is invoked.");
-
-        Map<String, Object> vm = new HashMap<>();
-        vm.put("title", "Welcome!");
-
         Player user = playerLobby.getPlayer(request.session());
 
-        //If Player is presently logged in show them the user lost
-        if ( user != null ) {
-            //If the player is not in the lobby send them to their game
-            if ( !user.isInLobby() ){
-                response.redirect("/game");
-                throw halt(100);
-            }
+        Map<String, Object> vm = new HashMap<>();
 
-            vm.put("currentPlayer", user);
-            vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
+
+        //If Player is presently logged in show them the user lost
+        if ( user == null || (!user.hasWon() && !user.hasLost()) ) {
+            response.redirect("/");
+            throw halt(100);
         }
 
-        vm.put("playerCount", playerLobby.playersInLobby());
+        vm.put("currentPlayer", user);
+        if(user.hasWon()) {
+            vm.put("title", "You Won!");
+            vm.put("winLoss", "won.");
+        }
+        else if( user.hasLost()) {
+            vm.put("title", "You Lost!");
+            vm.put("winLoss", "loss.");
+        }
 
-        return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+
+        return templateEngine.render(new ModelAndView(vm , "end.ftl"));
     }
 
 }
