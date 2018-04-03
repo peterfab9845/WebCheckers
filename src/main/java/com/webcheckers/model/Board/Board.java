@@ -42,6 +42,9 @@ public class Board {
         return new BoardView(board, color);
     }
 
+    public Space[][] getMatrix(){
+        return board;
+    }
 
     /**
      * Get a 180-degree rotation of the board, for the other player's perspective
