@@ -1,9 +1,8 @@
 package com.webcheckers.model.Board;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import com.webcheckers.model.States.PieceColor;
+
+import java.util.*;
 
 /**
  * The Row class for sending to the client
@@ -20,13 +19,16 @@ public class Row implements Iterable {
      */
     private List<Space> spaces;
 
+    private PieceColor color;
+
     /**
      * Create a row with an index, based on an array of Pieces
      * @param index the index of the row
      * @param boardCols array of the pieces in the row
      */
-    public Row(int index, Space[] boardCols) {
+    public Row(int index, Space[] boardCols, PieceColor color) {
         spaces = new ArrayList<>();
+        this.color = color;
         this.index = index;
         Collections.addAll(spaces, boardCols);
     }
@@ -45,7 +47,21 @@ public class Row implements Iterable {
      */
     @Override
     public Iterator<Space> iterator() {
-        return spaces.iterator();
+        if( color.equals(PieceColor.RED) )
+            return spaces.iterator();
+        return reverseIterator();
+    }
+
+    private Iterator<Space> reverseIterator(){
+        color = PieceColor.RED;
+        Stack<Space> stack = new Stack<Space>();
+        Stack<Space> reverseStack = new Stack<Space>();
+        for (Object o : this)
+            stack.push((Space) o);
+        while(!stack.isEmpty())
+            reverseStack.push(stack.pop());
+        color = PieceColor.WHITE;
+        return reverseStack.iterator();
     }
 
 
