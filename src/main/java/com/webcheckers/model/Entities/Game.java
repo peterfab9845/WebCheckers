@@ -3,6 +3,7 @@ package com.webcheckers.model.Entities;
 import com.webcheckers.model.Board.Board;
 import com.webcheckers.model.Board.BoardView;
 import com.webcheckers.model.Board.Move;
+import com.webcheckers.model.Board.Space;
 import com.webcheckers.model.GameSaves.GameLog;
 import com.webcheckers.model.States.PieceColor;
 
@@ -69,6 +70,10 @@ public class Game {
     */
     public BoardView getBoardView(PieceColor color) {
           return board.getBoardView(color);
+    }
+
+    public Space[][] getMatrix(){
+        return board.getMatrix();
     }
 
     /**

@@ -62,7 +62,7 @@ public class Move {
     }
 
     public int getEndingY(){
-        return end.getCell();
+        return end.getRow();
     }
 
     /**

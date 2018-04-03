@@ -65,7 +65,7 @@ public class PostValidateMoveRoute implements Route {
         Move move = gson.fromJson(json, Move.class);
         Game game = playerLobby.getGame(currentPlayer);
         Message responseMessage;
-        if( MoveChecker.isMoveValid(move) ) {
+        if( MoveChecker.isMoveValid(move, game.getMatrix(), currentPlayer.getTeamColor()) ) {
             game.queueMove(move);
             responseMessage = new Message("" , MessageType.info);
         }
