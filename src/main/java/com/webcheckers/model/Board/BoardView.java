@@ -1,8 +1,11 @@
 package com.webcheckers.model.Board;
 
 import com.webcheckers.model.States.PieceColor;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import java.util.*;
+
+import static java.util.Collections.*;
 
 /**
  * The class representation for transmission to the client
@@ -14,17 +17,14 @@ public class BoardView implements Iterable<Row> {
      */
     private List<Row> rows;
 
-    private PieceColor color;
-
     /**
      * Creates a BoardView from the 2D array representation in Board
      * @param boardRows 2D array of Pieces to convert
      */
-    public BoardView(Space[][] boardRows, PieceColor color) {
-        this.color = color;
+    public BoardView(Space[][] boardRows) {
         rows = new ArrayList<>(8);
         for (int row = 0; row < boardRows.length; row++) {
-            rows.add(new Row(row, boardRows[row], color));
+            rows.add(new Row(row, boardRows[row]));
         }
     }
 
@@ -34,21 +34,7 @@ public class BoardView implements Iterable<Row> {
      */
     @Override
     public Iterator<Row> iterator() {
-        if( color.equals(PieceColor.RED) )
-            return rows.iterator();
-        return reverseIterator();
-    }
-
-    private Iterator<Row> reverseIterator(){
-        color = PieceColor.RED;
-        Stack<Row> stack = new Stack<Row>();
-        Stack<Row> reverseStack = new Stack<Row>();
-        for (Object o : this)
-            stack.push((Row) o);
-        while(!stack.isEmpty())
-            reverseStack.push(stack.pop());
-        color = PieceColor.WHITE;
-        return reverseStack.iterator();
+        return rows.iterator();
     }
 
 }

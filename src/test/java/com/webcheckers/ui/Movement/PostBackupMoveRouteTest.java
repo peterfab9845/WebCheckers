@@ -18,11 +18,11 @@ class PostBackupMoveRouteTest {
 
     @BeforeEach
     void setUp() {
-//        Request request = mock(Request.class);
-//        Response response = mock(Response.class);
-//        PlayerLobby playerLobby = mock(PlayerLobby.class);
-//        Gson gson = mock(Gson.class);
-//        CuT = new PostBackupMoveRoute(gson, playerLobby);
+        Request request = mock(Request.class);
+        Response response = mock(Response.class);
+        PlayerLobby playerLobby = mock(PlayerLobby.class);
+        Gson gson = mock(Gson.class);
+        CuT = new PostBackupMoveRoute(gson, playerLobby);
     }
 
     @Test
