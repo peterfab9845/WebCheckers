@@ -20,6 +20,11 @@ public class Move {
      */
     private Position end;
 
+    /**
+     * Piece jumped
+     */
+    private Piece pieceJumped;
+
     //private LinkedList<Space> spacesJumped;
 
     /**
@@ -75,4 +80,7 @@ public class Move {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
     }
 
+    public void setJumped(Piece jumped) {
+        this.pieceJumped = jumped;
+    }
 }

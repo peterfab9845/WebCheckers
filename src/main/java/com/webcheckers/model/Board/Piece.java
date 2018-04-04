@@ -59,4 +59,8 @@ public class Piece {
         }
         return false;
     }
+
+    public boolean isKing() {
+        return this.type == PieceType.KING;
+    }
 }
