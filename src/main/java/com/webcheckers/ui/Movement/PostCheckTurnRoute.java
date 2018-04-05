@@ -66,8 +66,11 @@ public class PostCheckTurnRoute implements Route {
         LOG.finer("PostCheckTurnRoute is invoked.");
 
         Player currentPlayer = playerLobby.getPlayer(request.session());
-        Game game = playerLobby.getGame(currentPlayer);
-        Message responseMessage = checkTurn(currentPlayer, game);
+        Message responseMessage = new Message("You are not logged in", MessageType.error);
+        if( currentPlayer != null) {
+            Game game = playerLobby.getGame(currentPlayer);
+            responseMessage = checkTurn(currentPlayer, game);
+        }
         return gson.toJson(responseMessage);
     }
 

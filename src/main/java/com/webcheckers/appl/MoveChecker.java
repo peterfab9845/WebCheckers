@@ -6,7 +6,6 @@ import com.webcheckers.model.Board.Position;
 import com.webcheckers.model.Board.Space;
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.ui.Game.GetGameRoute;
-import jdk.internal.jline.internal.Log;
 
 import java.util.logging.Logger;
 
@@ -75,11 +74,9 @@ public class MoveChecker {
     }
 
     private static Piece pieceBetween(Move move, Space[][] board) {
-        int x = move.getStartingX();
-        x += delta(move.getStartingX(), move.getEndingX())/2;
 
-        int y = move.getStartingY();
-        y += delta(move.getStartingY(), move.getEndingY())/2;
+        int x= (move.getStartingX() + move.getEndingX()) / 2;
+        int y = (move.getStartingY() + move.getEndingY()) / 2;
 
         return board[y][x].getPiece();
     }
