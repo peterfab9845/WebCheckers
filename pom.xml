@@ -156,6 +156,8 @@
               <workingDirectory>docs</workingDirectory>
               <arguments>
                 <argument>DesignDoc.md</argument>
+				<argument>-H</argument>
+				<argument>figure-fix.tex</argument>
                 <argument>-o</argument>
                 <argument>${project.build.directory}/DesignDoc.pdf</argument>
               </arguments>

@@ -180,6 +180,7 @@ These routes take web requests from the client, perform the required actions (su
 
 ### Static models
 As the below class diagram shows, the PostSigninRoute class has a FreeMarker renderer; when it is called, the messages for the login status are shown appropriately using the template.
+
 ![UML Diagram of PostSigninRoute](PostSigninRoute-diagram.png)
 
 ### Dynamic models
@@ -192,7 +193,9 @@ One of the most important parts of our Application tier is the PlayerLobby class
 The Application tier also contains some utility components; for example, one allows messages to be shown to a user from another user's request.
 
 ### Static models
+
 ![UML Class Diagram for PlayerLobby](PlayerLobby.png)
+
 This UML class diagram shows the methods and attributes of PlayerLobby, which are used to keep track of each signed-in player and in-progress game.
 
 ### Dynamic models
