@@ -1,5 +1,7 @@
 package com.webcheckers.model.Board;
 
+import javafx.geometry.Pos;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -23,7 +25,7 @@ public class Move {
     /**
      * Piece jumped
      */
-    private Piece pieceJumped;
+    private Position pieceJumped;
 
     //private LinkedList<Space> spacesJumped;
 
@@ -80,7 +82,11 @@ public class Move {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
     }
 
-    public void setJumped(Piece jumped) {
+    public void setJumped(Position jumped) {
         this.pieceJumped = jumped;
+    }
+
+    public Position getPieceJumped(){
+        return this.pieceJumped;
     }
 }

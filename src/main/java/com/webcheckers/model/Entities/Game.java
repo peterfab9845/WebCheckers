@@ -1,9 +1,6 @@
 package com.webcheckers.model.Entities;
 
-import com.webcheckers.model.Board.Board;
-import com.webcheckers.model.Board.BoardView;
-import com.webcheckers.model.Board.Move;
-import com.webcheckers.model.Board.Space;
+import com.webcheckers.model.Board.*;
 import com.webcheckers.model.GameSaves.GameLog;
 import com.webcheckers.model.States.PieceColor;
 
@@ -39,6 +36,11 @@ public class Game {
      */
     private GameLog gameLog;
 
+    /**
+     * Constructor
+     * @param redPlayer
+     * @param whitePlayer
+     */
     public Game(Player redPlayer, Player whitePlayer){
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
@@ -102,4 +104,19 @@ public class Game {
     public void queueMove(Move move){
         turnTracker.add(move);
     }
+
+    public void isGameOver(){
+        int red = board.getRedPieces();
+        int white = board.getWhitePieces();
+        if( red == 0 ){
+            redPlayer.justLost();
+            whitePlayer.justWon();
+        }
+        else if( white == 0 ){
+            redPlayer.justWon();
+            whitePlayer.justLost();
+        }
+
+    }
+
 }

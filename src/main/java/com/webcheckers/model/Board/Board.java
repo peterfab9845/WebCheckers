@@ -11,6 +11,17 @@ public class Board {
     private Space[][] board = new Space[8][8];
 
     /**
+     * int representing all redPlayer Pieces
+     */
+    private int redPieces;
+
+    /**
+     * int representing all redPlayer Pieces
+     */
+    private int whitePieces;
+
+
+    /**
      * Create a new board with pieces in the default starting configuration
      */
     public Board() {
@@ -32,6 +43,9 @@ public class Board {
                 board[7][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.RED));
             }
         }
+
+        redPieces = 12;
+        whitePieces = 12;
     }
 
     /**
@@ -79,5 +93,25 @@ public class Board {
         Piece piece = board[start.getRow()][start.getCell()].getPiece();
         board[start.getRow()][start.getCell()].setPiece(null);
         board[end.getRow()][end.getCell()].setPiece(piece);
+        removePiece(move.getPieceJumped());
+    }
+
+    public void removePiece(Position position){
+        if( position == null )
+            return;
+        Piece piece = this.valueAt(position);
+        if(piece.getColor() == PieceColor.RED)
+            redPieces--;
+        else
+            whitePieces--;
+        board[position.getRow()][position.getCell()] = new Space(position.getCell(), null);
+    }
+
+    public int getRedPieces() {
+        return redPieces;
+    }
+
+    public int getWhitePieces() {
+        return whitePieces;
     }
 }
