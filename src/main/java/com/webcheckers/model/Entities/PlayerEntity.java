@@ -98,7 +98,7 @@ public class PlayerEntity {
     /**
      * Changes state of object to Loss
      */
-    public void justLoss() {
+    public void justLost() {
         this.currentState = PlayerStates.LOSS;
     }
 }

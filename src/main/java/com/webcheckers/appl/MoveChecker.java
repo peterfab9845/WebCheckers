@@ -6,6 +6,7 @@ import com.webcheckers.model.Board.Position;
 import com.webcheckers.model.Board.Space;
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.ui.Game.GetGameRoute;
+import javafx.geometry.Pos;
 
 import java.util.logging.Logger;
 
@@ -39,6 +40,9 @@ public class MoveChecker {
 
     public static boolean isMoveValid(Move move, Space[][] board, PieceColor color){
 
+        if(!positionOnBoard(move.getEnd()))
+            return false;
+
         //Check for black space
         if( !positionIsBlack(move.getEnd()) )
             return false;
@@ -54,7 +58,7 @@ public class MoveChecker {
 
         if( inDistanceOf(move, JUMP_DISTANCE)) {
             if ( hasPieceBetween(move, board) && pieceBetween(move, board).getColor() != color) {
-                move.setJumped(pieceBetween(move, board));
+                move.setJumped(positionBetween(move));
             }
             else{
                 LOG.info("did not have a piece between");
@@ -69,16 +73,8 @@ public class MoveChecker {
         return true;
     }
 
-    private static boolean hasPieceBetween(Move move, Space[][] board) {
-        return pieceBetween(move,board) != null;
-    }
-
-    private static Piece pieceBetween(Move move, Space[][] board) {
-
-        int x= (move.getStartingX() + move.getEndingX()) / 2;
-        int y = (move.getStartingY() + move.getEndingY()) / 2;
-
-        return board[y][x].getPiece();
+    private static boolean positionOnBoard(Position position) {
+        return position.getCell() >= 0 && position.getRow() >= 0 && position.getCell() <= 8 && position.getRow() <= 8;
     }
 
     private static boolean positionIsBlack(Position position){
@@ -86,6 +82,21 @@ public class MoveChecker {
             return position.getCell() % 2 == 1;
         else
             return position.getCell() % 2 == 0;
+    }
+
+    private static boolean hasPieceBetween(Move move, Space[][] board) {
+        return pieceBetween(move,board) != null;
+    }
+
+    private static Piece pieceBetween(Move move, Space[][] board) {
+        Position position = positionBetween(move);
+        return board[position.getRow()][position.getCell()].getPiece();
+    }
+
+    private static Position positionBetween(Move move){
+        int x= (move.getStartingX() + move.getEndingX()) / 2;
+        int y = (move.getStartingY() + move.getEndingY()) / 2;
+        return new Position(y, x);
     }
 
     private static boolean inDistanceOf(Move move, int dist) {
