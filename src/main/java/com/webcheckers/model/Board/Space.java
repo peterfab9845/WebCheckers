@@ -53,7 +53,7 @@ public class Space {
     }
 
     public boolean isKing(){
-        return piece.getType() == PieceType.KING;
+        return piece != null && piece.getType() == PieceType.KING;
     }
 
 

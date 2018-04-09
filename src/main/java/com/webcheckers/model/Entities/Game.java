@@ -4,7 +4,9 @@ import com.webcheckers.model.Board.*;
 import com.webcheckers.model.GameSaves.GameLog;
 import com.webcheckers.model.States.PieceColor;
 
-public class Game {
+import java.util.Iterator;
+
+public class Game implements Iterable<Move>{
 
     /**
      * Red Player
@@ -119,4 +121,8 @@ public class Game {
 
     }
 
+    @Override
+    public Iterator<Move> iterator() {
+        return turnTracker.iterator();
+    }
 }
