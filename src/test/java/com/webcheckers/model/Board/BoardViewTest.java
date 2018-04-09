@@ -21,7 +21,7 @@ class BoardViewTest {
         board[row][col] = new Space(col, null);
       }
     }
-    CuT = new BoardView(board);
+    CuT = new BoardView(board, PieceColor.RED);
   }
 
   @Test
