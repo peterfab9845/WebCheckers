@@ -67,11 +67,9 @@ public class PostValidateMoveRoute implements Route {
         Move move = gson.fromJson(json, Move.class);
         Game game = playerLobby.getGame(currentPlayer);
         Message responseMessage;
-//        if( MoveChecker.kingMe() ){
-//            responseMessage = new Message("King" , MessageType.info);
-//
-//        }
-        if( MoveChecker.isMoveValid(move, game.getMatrix(), currentPlayer.getTeamColor()) ) {
+        boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
+
+        if( MoveChecker.isMoveValid(move, game.getMatrix(), currentPlayer.getTeamColor(),isKing) ) {
             game.queueMove(move);
             responseMessage = new Message("" , MessageType.info);
         }
@@ -82,7 +80,7 @@ public class PostValidateMoveRoute implements Route {
             while(i.hasNext()){
                 newMove = (Move)i.next();
                 newMove = new Move(newMove.getStart(), move.getEnd());
-                if( MoveChecker.isMoveValid(newMove, game.getMatrix(), currentPlayer.getTeamColor()) ){
+                if( MoveChecker.isMoveValid(newMove, game.getMatrix(), currentPlayer.getTeamColor(), isKing )){
                     responseMessage = new Message("" , MessageType.info);
                     return gson.toJson(responseMessage);
                 }

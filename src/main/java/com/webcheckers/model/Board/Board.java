@@ -92,6 +92,12 @@ public class Board {
         Position end = move.getEnd();
         Piece piece = board[start.getRow()][start.getCell()].getPiece();
         board[start.getRow()][start.getCell()].setPiece(null);
+
+        if(end.getRow() == 0 && piece != null && piece.getColor() == PieceColor.RED)
+            piece.king();
+        if(end.getRow() == 7 && piece != null && piece.getColor() == PieceColor.WHITE)
+            piece.king();
+
         board[end.getRow()][end.getCell()].setPiece(piece);
         removePiece(move.getPieceJumped());
     }

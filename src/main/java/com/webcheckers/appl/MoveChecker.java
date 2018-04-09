@@ -30,15 +30,15 @@ public class MoveChecker {
             for( int col = -1; col < 2; col+=2) {
                 placeInQuestion = new Position(startY + row, startX + col);
                 move = new Move(position, placeInQuestion);
-                if(isMoveValid(move, board, color))
+                boolean isKing = isKing(move.getStart(), board);
+                if(isMoveValid(move, board, color, isKing))
                     return true;
             }
         }
         return false;
     }
 
-
-    public static boolean isMoveValid(Move move, Space[][] board, PieceColor color){
+    public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king){
 
         if(!positionOnBoard(move.getEnd()))
             return false;
@@ -47,7 +47,7 @@ public class MoveChecker {
         if( !positionIsBlack(move.getEnd()) )
             return false;
 
-        if( !isKing(move.getStart(), board) ){
+        if( !king ){
             //Check for direction
             if(color == PieceColor.RED && movingNorth(move) )
                 return false;
@@ -109,7 +109,7 @@ public class MoveChecker {
         return value1 - value2;
     }
 
-    private static boolean isKing(Position position, Space[][] board){
+    public static boolean isKing(Position position, Space[][] board){
         int x = position.getCell();
         int y = position.getRow();
         return board[y][x].isKing();

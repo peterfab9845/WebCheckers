@@ -63,4 +63,8 @@ public class Piece {
     public boolean isKing() {
         return this.type == PieceType.KING;
     }
+
+    public void king() {
+        this.type = PieceType.KING;
+    }
 }
