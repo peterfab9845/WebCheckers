@@ -70,6 +70,7 @@ public class PostCheckTurnRoute implements Route {
         if( currentPlayer != null) {
             Game game = playerLobby.getGame(currentPlayer);
             responseMessage = checkTurn(currentPlayer, game);
+            game.isGameOver();
         }
         return gson.toJson(responseMessage);
     }
