@@ -2,7 +2,7 @@ package com.webcheckers.ui.Movement;
 
 import com.google.gson.Gson;
 import com.webcheckers.model.Message;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;

@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.ModelAndView;

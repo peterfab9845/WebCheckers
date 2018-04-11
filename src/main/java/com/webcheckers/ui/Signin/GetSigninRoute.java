@@ -1,6 +1,6 @@
 package com.webcheckers.ui.Signin;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.*;
