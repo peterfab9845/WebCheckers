@@ -1,0 +1,8 @@
+To compile and run project:
+mvn compile exec:java
+
+To connect:
+navigate to http://localhost:4567
+
+For logging in more than one player on the same computer, 
+two browsers or incognito/private browsing mode must be used.
