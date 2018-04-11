@@ -80,7 +80,7 @@ public class GetEndRoute implements Route {
         }
         else if( user.hasLost()) {
             vm.put("title", "You Lost!");
-            vm.put("winLoss", "loss.");
+            vm.put("winLoss", "lost.");
         }
 
 
