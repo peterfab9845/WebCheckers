@@ -50,7 +50,7 @@ public class GetHomeRoute implements Route {
         this.templateEngine = templateEngine;
         this.playerLobby = playerLobby;
 
-        LOG.config("GetHomeRoute is initialized.");
+        LOG.config("GetEndRoute is initialized.");
     }
 
     /**
@@ -66,28 +66,28 @@ public class GetHomeRoute implements Route {
     */
     @Override
     public Object handle(Request request, Response response) {
-    LOG.finer("GetHomeRoute is invoked.");
+        LOG.finer("GetEndRoute is invoked.");
 
-    Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+        Map<String, Object> vm = new HashMap<>();
+        vm.put("title", "Welcome!");
 
-    Player user = playerLobby.getPlayer(request.session());
+        Player user = playerLobby.getPlayer(request.session());
 
-    //If Player is presently logged in show them the user lost
-    if ( user != null ) {
-        //If the player is not in the lobby send them to their game
-        if ( !user.isInLobby() ){
-            response.redirect("/game");
-            throw halt(100);
+        //If Player is presently logged in show them the user lost
+        if ( user != null ) {
+            //If the player is not in the lobby send them to their game
+            if ( !user.isInLobby() ){
+                response.redirect("/game");
+                throw halt(100);
+            }
+
+            vm.put("currentPlayer", user);
+            vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
         }
 
-        vm.put("currentPlayer", user);
-        vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
-    }
+        vm.put("playerCount", playerLobby.playersInLobby());
 
-    vm.put("playerCount", playerLobby.playersInLobby());
-
-    return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+        return templateEngine.render(new ModelAndView(vm , "home.ftl"));
     }
 
 }

@@ -4,8 +4,6 @@ import com.webcheckers.model.States.PieceColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PlayerEntityTest {
 
     private PlayerEntity CuT;
@@ -49,11 +47,11 @@ class PlayerEntityTest {
 
     @Test
     void hasWon() {
-        CuT.hasWon();
+        CuT.justWon();
     }
 
     @Test
     void hasLoss() {
-        CuT.hasLoss();
+        CuT.justLoss();
     }
 }

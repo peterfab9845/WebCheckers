@@ -2,7 +2,9 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.ui.Game.GetEndRoute;
 import com.webcheckers.ui.Game.GetGameRoute;
+import com.webcheckers.ui.Game.PostEndRoute;
 import com.webcheckers.ui.Home.GetHomeRoute;
 import com.webcheckers.ui.Movement.PostBackupMoveRoute;
 import com.webcheckers.ui.Movement.PostCheckTurnRoute;
@@ -105,9 +107,14 @@ public class WebServer {
     private static final String CHECK_TURN_URL = "/checkTurn";
 
     /**
-    * The URL pattern to request the saves url.
-    */
+     * The URL pattern to request the saves url.
+     */
     private static final String SAVES_URL = "/saves";
+
+    /**
+     * The URL pattern to request the end url.
+     */
+    private static final String END_URL = "/end";
 
 
     /**
@@ -223,6 +230,10 @@ public class WebServer {
         get(SIGNOUT_URL, new GetSignoutRoute(playerLobby));
 
         get(SAVES_URL, new GetSavesRoute(templateEngine, playerLobby));
+
+        get(END_URL, new GetEndRoute(templateEngine, playerLobby));
+
+        post(END_URL, new PostEndRoute(gson, playerLobby));
 
         post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
 

@@ -77,14 +77,28 @@ public class PlayerEntity {
     /**
      * Changes state of object to Won
      */
-    public void hasWon() {
+    public void justWon() {
         this.currentState = PlayerStates.WON;
+    }
+
+    /**
+     * returns if state of object is Won
+     */
+    public boolean hasWon() {
+        return this.currentState == PlayerStates.WON;
+    }
+
+    /**
+     * returns if state of object is Won
+     */
+    public boolean hasLost() {
+        return this.currentState == PlayerStates.LOSS;
     }
 
     /**
      * Changes state of object to Loss
      */
-    public void hasLoss() {
+    public void justLoss() {
         this.currentState = PlayerStates.LOSS;
     }
 }
