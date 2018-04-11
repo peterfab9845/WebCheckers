@@ -1,4 +1,20 @@
-package com.webcheckers.model.entities.AI;
+package com.webcheckers.model.Entities.AI;
 
-public class EasyAI {
+import com.webcheckers.model.Entities.PlayerEntity;
+
+public class EasyAI extends PlayerEntity implements ArtIntel {
+
+    /**
+     * Constructor
+     *
+     * @param name
+     */
+    public EasyAI(String name) {
+        super(name);
+    }
+
+    @Override
+    public void makeDecision() {
+
+    }
 }

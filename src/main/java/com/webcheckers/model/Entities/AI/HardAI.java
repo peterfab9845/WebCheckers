@@ -1,4 +1,20 @@
-package com.webcheckers.model.entities.AI;
+package com.webcheckers.model.Entities.AI;
 
-public class HardAI {
+import com.webcheckers.model.Entities.PlayerEntity;
+
+public class HardAI extends PlayerEntity implements ArtIntel {
+
+    /**
+     * Constructor
+     *
+     * @param name
+     */
+    public HardAI(String name) {
+        super(name);
+    }
+
+    @Override
+    public void makeDecision() {
+
+    }
 }

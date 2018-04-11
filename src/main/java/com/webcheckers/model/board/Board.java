@@ -1,5 +1,6 @@
 package com.webcheckers.model.board;
 
+import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PieceType;
 
@@ -24,7 +25,7 @@ public class Board {
     /**
      * Create a new board with pieces in the default starting configuration
      */
-    public Board() {
+    public Board(Player redPlayer, Player whitePlayer) {
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
@@ -35,12 +36,18 @@ public class Board {
         for (int col = 0; col < 8; col++) {
             if (col % 2 == 1) {
                 board[0][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.WHITE));
+                whitePlayer.addPiece(board[0][col].getPiece());
                 board[2][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.WHITE));
+                whitePlayer.addPiece(board[2][col].getPiece());
                 board[6][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.RED));
+                redPlayer.addPiece(board[6][col].getPiece());
             } else {
                 board[1][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.WHITE));
+                whitePlayer.addPiece(board[1][col].getPiece());
                 board[5][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.RED));
+                redPlayer.addPiece(board[5][col].getPiece());
                 board[7][col].setPiece(new Piece(PieceType.SINGLE, PieceColor.RED));
+                redPlayer.addPiece(board[7][col].getPiece());
             }
         }
 

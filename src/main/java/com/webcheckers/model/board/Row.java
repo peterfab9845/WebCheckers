@@ -33,6 +33,10 @@ public class Row implements Iterable {
         Collections.addAll(spaces, boardCols);
     }
 
+    public Row(int index, Piece[] boardCols) {
+
+    }
+
     /**
      * Get the index of this row
      * @return the index of this row

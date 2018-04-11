@@ -47,7 +47,7 @@ public class Game implements Iterable<Move>{
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         activeColor = PieceColor.RED;
-        board = new Board();
+        board = new Board(this.redPlayer, this.whitePlayer);
         gameLog = new GameLog(redPlayer, whitePlayer);
         turnTracker = new TurnTracker(board);
     }

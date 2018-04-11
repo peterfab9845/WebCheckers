@@ -1,5 +1,10 @@
 package com.webcheckers.gameview;
 
+import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.board.Piece;
+import com.webcheckers.model.board.Row;
+import com.webcheckers.model.board.Space;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
