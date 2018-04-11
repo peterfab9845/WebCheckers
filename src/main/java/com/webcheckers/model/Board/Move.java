@@ -1,5 +1,7 @@
 package com.webcheckers.model.Board;
 
+import javafx.geometry.Pos;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -19,6 +21,11 @@ public class Move {
      * The ending position of the move
      */
     private Position end;
+
+    /**
+     * Piece jumped
+     */
+    private Position pieceJumped;
 
     //private LinkedList<Space> spacesJumped;
 
@@ -49,6 +56,22 @@ public class Move {
         return end;
     }
 
+    public int getStartingX(){
+        return start.getCell();
+    }
+
+    public int getEndingX(){
+        return end.getCell();
+    }
+
+    public int getStartingY(){
+        return start.getRow();
+    }
+
+    public int getEndingY(){
+        return end.getRow();
+    }
+
     /**
      * Returns if two objects are equal
      * @param obj
@@ -59,4 +82,11 @@ public class Move {
         return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
     }
 
+    public void setJumped(Position jumped) {
+        this.pieceJumped = jumped;
+    }
+
+    public Position getPieceJumped(){
+        return this.pieceJumped;
+    }
 }

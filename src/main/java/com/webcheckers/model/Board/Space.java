@@ -1,5 +1,7 @@
 package com.webcheckers.model.Board;
 
+import com.webcheckers.model.States.PieceType;
+
 public class Space {
 
     /**
@@ -48,6 +50,10 @@ public class Space {
      */
     public boolean isValid() {
         return piece == null;
+    }
+
+    public boolean isKing(){
+        return piece != null && piece.getType() == PieceType.KING;
     }
 
 

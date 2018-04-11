@@ -52,6 +52,6 @@ class PlayerEntityTest {
 
     @Test
     void hasLoss() {
-        CuT.justLoss();
+        CuT.justLost();
     }
 }

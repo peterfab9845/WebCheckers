@@ -76,10 +76,10 @@ public class PlayerLobby {
 
       if( player == whitePlayer ){
           redPlayer.justWon();
-          whitePlayer.justLoss();
+          whitePlayer.justLost();
       }
       else{
-          redPlayer.justLoss();
+          redPlayer.justLost();
           whitePlayer.justWon();
       }
 
