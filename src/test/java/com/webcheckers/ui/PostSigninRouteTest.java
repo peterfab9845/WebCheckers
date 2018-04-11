@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.Message;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.appl.PlayerLobby;

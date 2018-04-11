@@ -1,8 +1,8 @@
 package com.webcheckers.ui.Game;
 
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.entities.Game;
-import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.Entities.Game;
+import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.States.ViewMode;
 import spark.*;
 

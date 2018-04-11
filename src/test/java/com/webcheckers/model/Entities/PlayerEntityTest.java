@@ -1,4 +1,4 @@
-package com.webcheckers.model.entities;
+package com.webcheckers.model.Entities;
 
 import com.webcheckers.model.States.PieceColor;
 import org.junit.jupiter.api.BeforeEach;
