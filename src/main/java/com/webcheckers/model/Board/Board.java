@@ -53,10 +53,7 @@ public class Board {
      * @return BoardView containing the pieces from this board
      */
     public BoardView getBoardView(PieceColor color) {
-        if( color == PieceColor.RED )
-            return new BoardView(board);
-        Space[][] temp = this.rotate180();
-        return new BoardView(temp);
+        return new BoardView(board, color);
     }
 
     public Space[][] getMatrix(){
