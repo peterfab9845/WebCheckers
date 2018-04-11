@@ -1,11 +1,9 @@
-package com.webcheckers.model.Entities;
+package com.webcheckers.model.entities;
 
-import com.webcheckers.model.Board.Board;
-import com.webcheckers.model.Board.Move;
-import com.webcheckers.ui.Movement.PostValidateMoveRoute;
+import com.webcheckers.model.board.Board;
+import com.webcheckers.model.board.Move;
 
 import java.util.LinkedList;
-import java.util.logging.Logger;
 
 public class TurnTracker extends LinkedList{
 

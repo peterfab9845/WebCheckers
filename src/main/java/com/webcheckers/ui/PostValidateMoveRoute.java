@@ -1,8 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.Message;
-import com.webcheckers.appl.MessageType;
+import com.webcheckers.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;

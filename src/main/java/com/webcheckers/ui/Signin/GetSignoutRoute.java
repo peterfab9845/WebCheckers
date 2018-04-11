@@ -1,15 +1,12 @@
 package com.webcheckers.ui.Signin;
 
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.Game.GetGameRoute;
-import com.webcheckers.ui.Home.GetHomeRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.TemplateEngine;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;

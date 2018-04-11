@@ -1,12 +1,10 @@
-package com.webcheckers.model.Entities;
+package com.webcheckers.model.entities;
 
-import com.webcheckers.model.Board.Board;
-import com.webcheckers.model.Board.Move;
+import com.webcheckers.model.board.Board;
+import com.webcheckers.model.board.Move;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class TurnTrackerTest {

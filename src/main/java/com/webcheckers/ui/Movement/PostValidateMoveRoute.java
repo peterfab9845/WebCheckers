@@ -2,12 +2,12 @@ package com.webcheckers.ui.Movement;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.MoveChecker;
-import com.webcheckers.model.Board.Position;
+import com.webcheckers.model.board.Position;
 import com.webcheckers.model.Message;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Board.Move;
-import com.webcheckers.model.Entities.Game;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.board.Move;
+import com.webcheckers.model.entities.Game;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;

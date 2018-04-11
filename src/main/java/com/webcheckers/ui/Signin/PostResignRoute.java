@@ -3,7 +3,7 @@ package com.webcheckers.ui.Signin;
 import com.google.gson.Gson;
 import com.webcheckers.model.Message;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.Request;

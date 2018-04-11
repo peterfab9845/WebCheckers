@@ -1,9 +1,4 @@
-package com.webcheckers.model.Board;
-
-import javafx.geometry.Pos;
-
-import java.util.Iterator;
-import java.util.LinkedList;
+package com.webcheckers.model.board;
 
 /**
  * A move from the player.

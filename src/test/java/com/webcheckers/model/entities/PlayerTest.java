@@ -1,6 +1,6 @@
-package com.webcheckers.model.Entities;
+package com.webcheckers.model.entities;
 
-import com.webcheckers.model.GameSaves.GameLog;
+import com.webcheckers.model.gamesaves.GameLog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Session;

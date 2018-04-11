@@ -1,8 +1,7 @@
-package com.webcheckers.model.Board;
+package com.webcheckers.model.board;
 
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PieceType;
-import javafx.geometry.Pos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

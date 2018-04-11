@@ -1,7 +1,7 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Entities.Game;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.entities.Game;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.States.PieceColor;
 import spark.Session;
 

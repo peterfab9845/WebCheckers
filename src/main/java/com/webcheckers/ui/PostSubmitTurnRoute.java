@@ -4,8 +4,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.Message;
-import com.webcheckers.appl.MessageType;
+import com.webcheckers.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 

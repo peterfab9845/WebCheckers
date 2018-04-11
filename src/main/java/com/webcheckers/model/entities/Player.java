@@ -1,7 +1,6 @@
-package com.webcheckers.model.Entities;
+package com.webcheckers.model.entities;
 
-import com.webcheckers.model.GameSaves.GameLog;
-import com.webcheckers.model.States.PlayerStates;
+import com.webcheckers.model.gamesaves.GameLog;
 import spark.Session;
 
 import java.util.Iterator;

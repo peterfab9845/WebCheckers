@@ -1,4 +1,4 @@
-package com.webcheckers.model.Board;
+package com.webcheckers.model.board;
 
 import com.webcheckers.model.States.PieceType;
 

@@ -1,4 +1,4 @@
-package com.webcheckers.model.Entities;
+package com.webcheckers.model.entities;
 
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PlayerStates;

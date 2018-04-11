@@ -2,8 +2,7 @@ package com.webcheckers.ui;
 
 import static spark.Spark.halt;
 
-import com.webcheckers.appl.Message;
-import com.webcheckers.appl.MessageType;
+import com.webcheckers.Message;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import java.util.HashMap;

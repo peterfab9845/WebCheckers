@@ -2,13 +2,9 @@ package com.webcheckers.ui.Game;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
-import com.webcheckers.model.Message;
-import com.webcheckers.model.States.MessageType;
+import com.webcheckers.model.entities.Player;
 import spark.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 

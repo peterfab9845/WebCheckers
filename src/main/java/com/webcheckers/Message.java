@@ -1,4 +1,4 @@
-package com.webcheckers.appl;
+package com.webcheckers;
 
 import java.util.Objects;
 

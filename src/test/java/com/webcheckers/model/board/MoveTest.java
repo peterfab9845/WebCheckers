@@ -1,7 +1,5 @@
-package com.webcheckers.model.Board;
+package com.webcheckers.model.board;
 
-import javafx.geometry.Pos;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

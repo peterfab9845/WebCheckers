@@ -1,7 +1,7 @@
 package com.webcheckers.ui.Game;
 
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.entities.Player;
 import spark.*;
 
 import java.util.HashMap;

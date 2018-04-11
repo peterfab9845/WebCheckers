@@ -1,7 +1,7 @@
-package com.webcheckers.model.GameSaves;
+package com.webcheckers.model.gamesaves;
 
-import com.webcheckers.model.Board.Move;
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.board.Move;
+import com.webcheckers.model.entities.Player;
 
 import java.util.LinkedList;
 import java.util.Queue;

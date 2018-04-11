@@ -1,12 +1,11 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Board.Move;
-import com.webcheckers.model.Board.Piece;
-import com.webcheckers.model.Board.Position;
-import com.webcheckers.model.Board.Space;
+import com.webcheckers.model.board.Move;
+import com.webcheckers.model.board.Piece;
+import com.webcheckers.model.board.Position;
+import com.webcheckers.model.board.Space;
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.ui.Game.GetGameRoute;
-import javafx.geometry.Pos;
 
 import java.util.logging.Logger;
 

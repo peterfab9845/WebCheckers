@@ -9,9 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.webcheckers.appl.Message;
+import com.webcheckers.Message;
 import com.webcheckers.appl.MessageMap;
-import com.webcheckers.appl.MessageType;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 
