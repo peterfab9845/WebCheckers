@@ -1,5 +1,6 @@
 package com.webcheckers.model.entities;
 
+import com.webcheckers.appl.BoardController;
 import com.webcheckers.model.board.Board;
 import com.webcheckers.model.board.Move;
 
@@ -27,7 +28,7 @@ public class TurnTracker extends LinkedList{
     public void finalizeTurn(){
         while(!isEmpty()) {
             Move move = (Move) remove();
-            board.makeMove(move);
+            BoardController.makeMove(board, move);
         }
     }
 }

@@ -108,8 +108,8 @@ public class Game implements Iterable<Move>{
     }
 
     public void isGameOver(){
-        int red = board.getRedPieces();
-        int white = board.getWhitePieces();
+        int red = board.getNumRedPieces();
+        int white = board.getNumWhitePieces();
         if( red == 0 ){
             redPlayer.justLost();
             whitePlayer.justWon();
