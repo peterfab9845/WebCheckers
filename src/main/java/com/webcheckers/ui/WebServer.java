@@ -1,20 +1,20 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.PlayerLobby.PlayerLobby;
-import com.webcheckers.ui.Game.GetEndRoute;
-import com.webcheckers.ui.Game.GetGameRoute;
-import com.webcheckers.ui.Game.PostEndRoute;
-import com.webcheckers.ui.Home.GetHomeRoute;
-import com.webcheckers.ui.Movement.PostBackupMoveRoute;
-import com.webcheckers.ui.Movement.PostCheckTurnRoute;
-import com.webcheckers.ui.Movement.PostSubmitTurnRoute;
-import com.webcheckers.ui.Movement.PostValidateMoveRoute;
-import com.webcheckers.ui.Saves.GetSavesRoute;
-import com.webcheckers.ui.Signin.GetSigninRoute;
-import com.webcheckers.ui.Signin.GetSignoutRoute;
-import com.webcheckers.ui.Signin.PostResignRoute;
-import com.webcheckers.ui.Signin.PostSigninRoute;
+import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.ui.game.GetEndRoute;
+import com.webcheckers.ui.game.GetGameRoute;
+import com.webcheckers.ui.game.PostEndRoute;
+import com.webcheckers.ui.home.GetHomeRoute;
+import com.webcheckers.ui.movement.PostBackupMoveRoute;
+import com.webcheckers.ui.movement.PostCheckTurnRoute;
+import com.webcheckers.ui.movement.PostSubmitTurnRoute;
+import com.webcheckers.ui.movement.PostValidateMoveRoute;
+import com.webcheckers.ui.saves.GetSavesRoute;
+import com.webcheckers.ui.signin.GetSigninRoute;
+import com.webcheckers.ui.signin.GetSignoutRoute;
+import com.webcheckers.ui.signin.PostResignRoute;
+import com.webcheckers.ui.signin.PostSigninRoute;
 import spark.TemplateEngine;
 
 import java.util.Objects;

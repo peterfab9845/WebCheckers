@@ -6,14 +6,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.webcheckers.model.Entities.Player;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.Message;
-import com.webcheckers.model.States.MessageType;
-import com.webcheckers.appl.PlayerLobby.PlayerLobby;
+import com.webcheckers.model.states.MessageType;
+import com.webcheckers.appl.playerlobby.PlayerLobby;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.webcheckers.ui.Signin.PostSigninRoute;
+import com.webcheckers.ui.signin.PostSigninRoute;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

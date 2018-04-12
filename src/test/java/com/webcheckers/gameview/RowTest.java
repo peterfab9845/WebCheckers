@@ -1,7 +1,7 @@
 package com.webcheckers.gameview;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 import com.webcheckers.model.board.Piece;
 import com.webcheckers.model.board.Row;
 import com.webcheckers.model.board.Space;

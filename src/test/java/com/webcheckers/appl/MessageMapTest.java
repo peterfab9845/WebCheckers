@@ -1,7 +1,7 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.Message;
-import com.webcheckers.model.States.MessageType;
+import com.webcheckers.model.states.MessageType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Session;

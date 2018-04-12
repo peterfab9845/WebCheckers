@@ -1,6 +1,6 @@
 package com.webcheckers;
 
-import com.webcheckers.model.States.MessageType;
+import com.webcheckers.model.states.MessageType;
 
 import java.util.Objects;
 

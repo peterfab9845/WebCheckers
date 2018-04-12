@@ -4,8 +4,8 @@ import com.webcheckers.model.board.Move;
 import com.webcheckers.model.board.Piece;
 import com.webcheckers.model.board.Position;
 import com.webcheckers.model.board.Space;
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.ui.Game.GetGameRoute;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.logging.Logger;
 

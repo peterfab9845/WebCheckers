@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.webcheckers.Message;
 import com.webcheckers.appl.MessageMap;
-import com.webcheckers.appl.PlayerLobby.PlayerLobby;
+import com.webcheckers.appl.playerlobby.PlayerLobby;
 
 import spark.ModelAndView;
 import spark.Request;
