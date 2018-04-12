@@ -3,6 +3,7 @@ package com.webcheckers.model.board;
 import com.webcheckers.appl.BoardController;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -100,6 +101,12 @@ public class Board {
             }
         }
         return positions;
+    }
+
+    public boolean isKing(Position position){
+        Piece piece = valueAt(position);
+        if (piece.getType().equals(PieceType.KING)) return true;
+        return false;
     }
 
 }

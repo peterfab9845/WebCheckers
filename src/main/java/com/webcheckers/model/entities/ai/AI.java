@@ -26,11 +26,11 @@ public class AI extends PlayerEntity{
     /**
      *Team Color - Set when game started
      */
-    private PieceColor teamColor;
+    protected PieceColor teamColor;
 
     PlayerLobby playerLobby;
 
-    private Game game;
+    protected Game game;
 
     /**
      * Constructor
