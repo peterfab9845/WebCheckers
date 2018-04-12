@@ -5,10 +5,9 @@ import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.PlayerEntity;
-import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.LinkedList;
-import java.util.concurrent.Callable;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class AI extends PlayerEntity{
@@ -76,4 +75,10 @@ public class AI extends PlayerEntity{
             }
         }
     }
+
+    public Piece getRandomPiece(){
+        Random rand = new Random();
+        return pieces.get(rand.nextInt(pieces.size()));
+    }
+
 }

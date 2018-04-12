@@ -49,27 +49,34 @@ public class EasyAI extends AI implements ArtIntel {
         if(piecesNum <= 0)
             return;
 
-        Piece piece = pieces.get(0);
+        Piece piece = getRandomPiece();
         Position position = BoardController.getPieceLocation(board, piece);
         Move move;
-        int y, x;
+        int x, y;
         boolean isKing =  MoveChecker.isKing(position, board);
         PieceColor color = piece.getColor();
 
-        int i = 0;
-        while(!MoveChecker.hasValidMove(position, board, color)){
-            piece = pieces.get(i);
-            position = BoardController.getPieceLocation(board, piece);
-            i++;
+        position = BoardController.getPieceLocation(board, piece);
+        try {
+            while (!MoveChecker.hasValidMove(position, board, color)) {
+                piece = getRandomPiece();
+                position = BoardController.getPieceLocation(board, piece);
+            }
+        }
+        catch (NullPointerException e) {
+            pieces.remove(piece);
+            LOG.info(pieces.size() + "");
+            return;
         }
 
         y = position.getRow();
         x = position.getCell();
-        for( int row = -1; row < 2; row+=2){
-            for( int col = -1; col < 2; col+=2) {
+        for( int row = -3; row < 4; row+=1){
+            for( int col = -3; col < 4; col+=1) {
                 move = new Move(position, new Position(y + row, x + col));
                 if (MoveChecker.isMoveValid(move, board, color, isKing)) {
                     makeMove(move);
+                    return;
                 }
             }
         }
