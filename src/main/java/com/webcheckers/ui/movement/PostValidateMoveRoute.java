@@ -76,13 +76,14 @@ public class PostValidateMoveRoute implements Route {
         else{
             Iterator i = game.iterator();
             Move newMove;
-            Position position;
-            while(i.hasNext()){
-                newMove = (Move)i.next();
-                newMove = new Move(newMove.getStart(), move.getEnd());
-                if( MoveChecker.isMoveValid(newMove, game.getMatrix(), currentPlayer.getTeamColor(), isKing )){
-                    responseMessage = new Message("" , MessageType.info);
-                    return gson.toJson(responseMessage);
+            if( isKing ) {
+                while (i.hasNext()) {
+                    newMove = (Move) i.next();
+                    newMove = new Move(newMove.getStart(), move.getEnd());
+                    if (MoveChecker.isMoveValid(newMove, game.getMatrix(), currentPlayer.getTeamColor(), isKing)) {
+                        responseMessage = new Message("King jump", MessageType.info);
+                        return gson.toJson(responseMessage);
+                    }
                 }
             }
             responseMessage = new Message("Invalid Move" , MessageType.error);

@@ -1,5 +1,6 @@
 package com.webcheckers.model.entities;
 
+import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.gamesaves.GameLog;
 import com.webcheckers.model.states.PieceColor;
@@ -97,6 +98,7 @@ public class Game implements Iterable<Move>{
             activeColor = PieceColor.WHITE;
         else
             activeColor= PieceColor.RED;
+        MoveChecker.resetPieceMoved();
     }
 
     /**

@@ -7,6 +7,7 @@ import com.webcheckers.model.board.Space;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.ui.game.GetGameRoute;
 
+import java.util.LinkedList;
 import java.util.logging.Logger;
 
 public class MoveChecker {
@@ -18,19 +19,19 @@ public class MoveChecker {
      */
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-
+    private static boolean pieceMoved = false;
 
     public static boolean hasValidMove(Position position, Space[][] board, PieceColor color){
         int startX = position.getCell();
         int startY = position.getRow();
         Position placeInQuestion;
         Move move;
-        for( int row = -1; row < 2; row+=2){
-            for( int col = -1; col < 2; col+=2) {
+        for( int row = -3; row < 4; row+=1){
+            for( int col = -3; col < 4; col+=1) {
                 placeInQuestion = new Position(startY + row, startX + col);
                 move = new Move(position, placeInQuestion);
                 boolean isKing = isKing(move.getStart(), board);
-                if(isMoveValid(move, board, color, isKing))
+                if(isMoveValid(move, board, color, isKing,true))
                     return true;
             }
         }
@@ -42,15 +43,52 @@ public class MoveChecker {
         if(!positionOnBoard(move.getEnd()))
             return false;
 
+        if(board[move.getEndingY()][move.getEndingX()].getPiece() != null )
+            return false;
+
         //Check for black space
         if( !positionIsBlack(move.getEnd()) )
             return false;
 
+        if(!checks(move, board, color, king)){
+            return false;
+        }
+
+
+        pieceMoved = true;
+        return true;
+    }
+
+    public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king, boolean isTesting){
+
+        if(!positionOnBoard(move.getEnd()))
+            return false;
+
+        if(board[move.getEndingY()][move.getEndingX()].getPiece() != null )
+            return false;
+
+        //Check for black space
+        if( !positionIsBlack(move.getEnd()) )
+            return false;
+
+
+        if(!checks(move, board, color, king))
+            return false;
+
+        if(!isTesting)
+            pieceMoved = true;
+
+        return true;
+    }
+
+    private static boolean checks(Move move, Space[][] board, PieceColor color, boolean king){
         if( !king ){
             //Check for direction
             if(color == PieceColor.RED && movingNorth(move) )
                 return false;
             if(color == PieceColor.WHITE && movingSouth(move) )
+                return false;
+            if(pieceMoved)
                 return false;
         }
 
@@ -62,7 +100,7 @@ public class MoveChecker {
                 return false;
             }
         }
-        else if( !inDistanceOf(move, SINGLE_DISTANCE) ){
+        else if( !inDistanceOf(move, SINGLE_DISTANCE) ) {
             return false;
         }
 
@@ -70,7 +108,7 @@ public class MoveChecker {
     }
 
     private static boolean positionOnBoard(Position position) {
-        return position.getCell() >= 0 && position.getRow() >= 0 && position.getCell() <= 8 && position.getRow() <= 8;
+        return position.getCell() >= 0 && position.getRow() >= 0 && position.getCell() < 8 && position.getRow() < 8;
     }
 
     private static boolean positionIsBlack(Position position){
@@ -106,6 +144,8 @@ public class MoveChecker {
     }
 
     public static boolean isKing(Position position, Space[][] board){
+        if(position == null)
+            return false;
         int x = position.getCell();
         int y = position.getRow();
         return board[y][x].isKing();
@@ -119,4 +159,7 @@ public class MoveChecker {
         return delta( move.getStartingY(), move.getEndingY() ) > 0;
     }
 
+    public static void resetPieceMoved(){
+        pieceMoved = false;
+    }
 }

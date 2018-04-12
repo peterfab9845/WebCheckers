@@ -11,7 +11,7 @@ import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.concurrent.Callable;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import static com.webcheckers.appl.BoardController.getPieceLocation;
@@ -103,6 +103,12 @@ public class AI extends PlayerEntity{
             }
         }
     }
+
+    public Piece getRandomPiece(){
+        Random rand = new Random();
+        return pieces.get(rand.nextInt(pieces.size()));
+    }
+
 
     /**
      * Seaches for surrounding allies and enemies around a given position
