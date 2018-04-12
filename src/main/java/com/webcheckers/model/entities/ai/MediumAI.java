@@ -16,8 +16,6 @@ import static com.webcheckers.appl.MoveChecker.isMoveValid;
 
 public class MediumAI extends AI implements ArtIntel {
 
-    Board board = game.getBoard();
-
     /**
      * Constructor
      *
@@ -43,6 +41,7 @@ public class MediumAI extends AI implements ArtIntel {
 
     @Override
     public void makeDecision() {
+        Board board = getGame(playerLobby).getBoard();
         ArrayList<Position> movablePositions = positionsOfMovablePieces();
         assert (movablePositions.size() > 0);
 
