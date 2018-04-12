@@ -35,7 +35,10 @@ public class AI extends PlayerEntity{
     public Game getGame(PlayerLobby playerLobby) {
         this.game  = playerLobby.getGame(enemy);
         Board board = game.getBoard();
-        pieces = board.getRedPieces();
+        if( game.getRedPlayer() == this )
+            pieces = board.getRedPieces();
+        else
+            pieces = board.getWhitePieces();
         return game;
     }
 
