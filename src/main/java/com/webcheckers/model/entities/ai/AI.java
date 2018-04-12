@@ -5,17 +5,28 @@ import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.states.AiPositionProtection;
+import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.ui.game.GetGameRoute;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
+
+import static com.webcheckers.appl.BoardController.getPieceLocation;
+import static com.webcheckers.appl.MoveChecker.hasValidMove;
 
 public class AI extends PlayerEntity{
 
     LinkedList<Piece> pieces;
 
     PlayerEntity enemy;
+
+    /**
+     *Team Color - Set when game started
+     */
+    private PieceColor teamColor;
 
     PlayerLobby playerLobby;
 
@@ -40,6 +51,22 @@ public class AI extends PlayerEntity{
         else
             pieces = board.getWhitePieces();
         return game;
+    }
+
+    /**
+     * gets the players color
+     * @return PieceColor
+     */
+    public PieceColor getTeamColor() {
+        return teamColor;
+    }
+
+    /**
+     * Sets the players color
+     * @param teamColor
+     */
+    public void setTeamColor(PieceColor teamColor) {
+        this.teamColor = teamColor;
     }
 
     /**
@@ -75,5 +102,104 @@ public class AI extends PlayerEntity{
                     break;
             }
         }
+    }
+
+    /**
+     * Seaches for surrounding allies and enemies around a given position
+     * @param position The position to be analyzed
+     * @return the AiPositionProtection which informs the Ai how good the position is to move to;
+     */
+    public AiPositionProtection analizePosition(Position position){
+        AiPositionProtection defense = AiPositionProtection.ALONE;
+        int allies = 0;
+        int rearAllies = 0;
+        int hostiles = 0;
+        int row = position.getRow();
+        int cell = position.getCell();
+        Board board = game.getBoard();
+
+        //The actual checking of surrounding positions
+        if (row < 7) {
+            if (cell < 7){
+                Position adjancentPosition = new Position(row + 1, cell + 1);
+                Piece adjancentPiece = board.valueAt(adjancentPosition);
+                if (adjancentPiece != null){
+                    if (adjancentPiece.getColor().equals(teamColor)){
+                        allies++;
+                        if (teamColor.equals(PieceColor.RED)) rearAllies++;
+                    }
+                    else hostiles ++;
+                }
+            }
+            if (cell > 0){
+                Position adjancentPosition = new Position(row + 1, cell - 1);
+                Piece adjancentPiece = board.valueAt(adjancentPosition);
+                if (adjancentPiece != null){
+                    if (adjancentPiece.getColor().equals(teamColor)){
+                        allies++;
+                        if (teamColor.equals(PieceColor.RED)) rearAllies++;
+                    }
+                    else hostiles ++;
+                }
+            }
+        }
+        else if (row > 0) {
+            if (cell < 7){
+                Position adjancentPosition = new Position(row - 1, cell + 1);
+                Piece adjancentPiece = board.valueAt(adjancentPosition);
+                if (adjancentPiece != null){
+                    if (adjancentPiece.getColor().equals(teamColor)){
+                        allies++;
+                        if (teamColor.equals(PieceColor.WHITE)) rearAllies++;
+                    }
+                    else hostiles ++;
+                }
+            }
+            if (cell > 0){
+                Position adjancentPosition = new Position(row - 1, cell - 1);
+                Piece adjancentPiece = board.valueAt(adjancentPosition);
+                if (adjancentPiece != null){
+                    if (adjancentPiece.getColor().equals(teamColor)){
+                        allies++;
+                        if (teamColor.equals(PieceColor.WHITE)) rearAllies++;
+                    }
+                    else hostiles ++;
+                }
+            }
+        }
+
+        //Assigning the proper Enum for the surrounding pieces
+        if (allies > 0){
+            if (allies == 1){
+                if (rearAllies > 0) defense = AiPositionProtection.SINGLE_REAR_DEFENDER;
+                else defense = AiPositionProtection.SINGLE_DEFENDER;
+            }
+            if (allies == 2){
+                if (rearAllies > 1) defense = AiPositionProtection.DOUBLE_REAR_DEFENDERS;
+                else defense = AiPositionProtection.DOUBLY_DEFENDED;
+            }
+            if (allies == 3){
+                defense = AiPositionProtection.TRIPLY_DEFENDED;
+            }
+            if (allies == 4){
+                defense = AiPositionProtection.FULL_PROTECTION;
+            }
+        }
+        else if (hostiles > 0){
+            defense = AiPositionProtection.HOSTILE;
+        }
+
+        return defense;
+    }
+
+    //Figures out what pieces can move and where they are
+    public ArrayList<Position> positionsOfMovablePieces(){
+        Board board = game.getBoard();
+        ArrayList<Position> moveablePositions = new ArrayList<Position>(0);
+        ArrayList<Position> positions = board.getLocationOfPieces(teamColor);
+        for (Position position : positions) {
+            if (hasValidMove(position, board.getMatrix(), teamColor))moveablePositions.add(position);
+        }
+        return moveablePositions;
     }
 }

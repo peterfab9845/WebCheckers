@@ -1,9 +1,11 @@
 package com.webcheckers.model.entities.ai;
 
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.model.board.Position;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.states.AiPositionProtection;
 
 public class MediumAI extends AI implements ArtIntel {
     /**
