@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="10">
-    <title>${title} | Web Checkers</title>
+    <meta http-equiv="refresh" content="1">
+    <title>${title} | Web Checkers 🅱️</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -38,7 +38,7 @@
                 <td>
                     <p>
                         <#list playerList as player>
-                            <a href="/game?opponentName=${player.name}">${player.name}</a>
+                            ${player.name} - <a href="/game?opponentName=${player.name}">Challenge</a>
                             <br>
                         </#list>
                     </p>
@@ -47,7 +47,7 @@
                 <td>
                     <p>
                         <#list gameList as player>
-                            <a href="/spectate?name=${player.name}">${player.name}</a>
+                            ${player.name} - <a href="/spectate?name=${player.name}">Spectate</a>
                             <br>
                         </#list>
                     </p>
