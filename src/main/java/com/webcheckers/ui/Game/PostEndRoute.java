@@ -1,6 +1,8 @@
 package com.webcheckers.ui.Game;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
 import spark.*;

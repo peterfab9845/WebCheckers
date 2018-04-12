@@ -1,6 +1,6 @@
 package com.webcheckers.ui.Saves;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.*;

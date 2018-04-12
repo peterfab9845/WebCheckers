@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.Entities.Player;
 import com.webcheckers.ui.Game.GetGameRoute;
 import spark.ModelAndView;
@@ -83,6 +83,8 @@ public class GetHomeRoute implements Route {
 
             vm.put("currentPlayer", user);
             vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
+            vm.put("gameList", playerLobby.getPlayersInGameExcept(request.session()));
+
         }
 
         vm.put("playerCount", playerLobby.playersInLobby());

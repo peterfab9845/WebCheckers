@@ -17,7 +17,7 @@
 </head>
 <body>
   <div class="page">
-    <h1>Web Checkers</h1>
+    <h1>Web Checkers 🅱️</h1>
     
     <div class="navigation">
     <#if currentPlayer??>
@@ -99,7 +99,7 @@
     </div>
   </div>
 
-  <audio id="audio" src="http://www.soundjay.com/button/beep-07.mp3" autostart="false" ></audio>
+  <#--<audio id="audio" src="http://www.soundjay.com/button/beep-07.mp3" autostart="false" ></audio>-->
   
   <script data-main="js/game/index" src="js/require.js"></script>
   

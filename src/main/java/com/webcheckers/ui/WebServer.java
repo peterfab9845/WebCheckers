@@ -1,7 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.ui.Game.GetEndRoute;
 import com.webcheckers.ui.Game.GetGameRoute;
 import com.webcheckers.ui.Game.PostEndRoute;

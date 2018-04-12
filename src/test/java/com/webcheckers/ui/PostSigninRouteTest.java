@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import com.webcheckers.model.Entities.Player;
 import com.webcheckers.model.Message;
 import com.webcheckers.model.States.MessageType;
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import java.util.HashMap;
 import java.util.Map;
 

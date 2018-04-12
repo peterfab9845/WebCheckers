@@ -52,11 +52,19 @@ public class PlayerEntity {
     }
 
     /**
-    * Returns if state is IN_LOBBY
-    * @return boolean
-    */
+     * Returns if state is IN_LOBBY
+     * @return boolean
+     */
     public boolean isInLobby(){
         return currentState == PlayerStates.IN_LOBBY;
+    }
+
+    /**
+     * Returns if state is IN_LOBBY
+     * @return boolean
+     */
+    public boolean isInGame(){
+        return currentState == PlayerStates.IN_GAME;
     }
 
     /**
