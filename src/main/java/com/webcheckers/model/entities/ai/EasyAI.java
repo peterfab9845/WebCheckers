@@ -59,6 +59,7 @@ public class EasyAI extends AI implements ArtIntel {
         int i = 0;
         while(!MoveChecker.hasValidMove(position, board, color)){
             piece = pieces.get(i);
+            position = BoardController.getPieceLocation(board, piece);
             i++;
         }
 

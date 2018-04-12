@@ -146,12 +146,12 @@ public class PlayerLobby {
         return gameManager.getGame(player);
     }
 
-    public void challengeAI(Player player, AI ai){
+    public void challengeAI(AI ai, PlayerEntity player){
         player.setInGame();
         ai.setInGame();
-        Game game = new Game(ai, player);
-        player.setTeamColor(PieceColor.WHITE);
-        ai.setTeamColor(PieceColor.RED);
+        Game game = new Game( player, ai );
+        player.setTeamColor(PieceColor.RED);
+        ai.setTeamColor(PieceColor.WHITE);
         gameManager.addGame(player, game);
         gameManager.addGame(ai, game);
     }

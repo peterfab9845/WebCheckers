@@ -83,7 +83,7 @@ public class PostAI implements Route {
         if( type.equals("hard"))
             ai = new HardAI(AINaming.getName(), user, playerLobby);
 
-        playerLobby.challengeAI(user, ai);
+        playerLobby.challengeAI(ai, user);
 
         response.redirect("/game");
         throw halt(1002);

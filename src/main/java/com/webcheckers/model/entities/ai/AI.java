@@ -47,6 +47,7 @@ public class AI extends PlayerEntity{
     public void makeMove(Move move){
         BoardController.makeMove(game.getBoard(), move);
         game.changeTurns();
+        LOG.info("move made");
     }
 
     public Space[][] piecesAround(Position position, int distance){
