@@ -83,6 +83,8 @@ public class GetHomeRoute implements Route {
 
             vm.put("currentPlayer", user);
             vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
+            vm.put("gameList", playerLobby.getPlayersInGameExcept(request.session()));
+
         }
 
         vm.put("playerCount", playerLobby.playersInLobby());

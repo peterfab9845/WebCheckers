@@ -89,12 +89,21 @@ public class PlayerLobby {
     }
 
     /**
-    * Returns a iterator of players in the lobby except the requested player
-    * @param session
-    * @return iterator of player
-    */
+     * Returns a iterator of players in the lobby except the requested player
+     * @param session
+     * @return iterator of player
+     */
     public Iterator<Player> getPlayersInLobbyExcept(Session session){
         return playerManager.getPlayersInLobbyExcept(session);
+    }
+
+    /**
+     * Returns a iterator of players in the lobby except the requested player
+     * @param session
+     * @return iterator of player
+     */
+    public Iterator<Player> getPlayersInGameExcept(Session session){
+        return playerManager.getPlayersInGameExcept(session);
     }
 
     /**

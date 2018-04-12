@@ -95,14 +95,31 @@ public class PlayerManager {
      * @return iterator of player
      */
     public Iterator<Player> getPlayersInLobbyExcept(Session session){
+        return getPlayersExcept(session, true);
+    }
+
+    /**
+     * Returns a iterator of players in the lobby except the requested player
+     * @param session
+     * @return iterator of player
+     */
+    public Iterator<Player> getPlayersInGameExcept(Session session){
+        return getPlayersExcept(session, false);
+    }
+
+    public Iterator<Player> getPlayersExcept(Session session, boolean inLobby){
         String sessionid = session.id();
         Stream<Player> playerStream = listOfPlayers().stream();
         //filter players out of lobby
-        playerStream = playerStream.filter(Player::isInLobby);
+        if( inLobby )
+            playerStream = playerStream.filter(Player::isInLobby);
+        else
+            playerStream = playerStream.filter(Player::isInGame);
         //filter out the exepted player
         playerStream = playerStream.filter(p -> !p.getSession().id().equals(sessionid));
         return playerStream.iterator();
     }
+
 
     /**
      * gets number of players in the lobby
