@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="1">
+    <meta http-equiv="refresh" content="3">
     <title>${title} | Web Checkers</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
@@ -37,6 +37,9 @@
 
                 <td>
                     <p>
+                        Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
+                        Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
+                        Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
                         <#list playerList as player>
                             ${player.name} - <a href="/game?opponentName=${player.name}">Challenge</a>
                             <br>

@@ -1,6 +1,7 @@
 package com.webcheckers.model.board;
 
 import com.webcheckers.appl.BoardController;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
 
 import java.util.LinkedList;
@@ -76,4 +77,14 @@ public class Board {
     public int getNumWhitePieces() {
         return whitePieces.size();
     }
+
+    public LinkedList<Piece> getRedPieces() {
+        return redPieces;
+    }
+
+    public LinkedList<Piece> getWhitePieces() {
+        return whitePieces;
+    }
+
+
 }

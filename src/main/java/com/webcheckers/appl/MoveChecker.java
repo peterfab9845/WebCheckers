@@ -52,7 +52,6 @@ public class MoveChecker {
                 return false;
             if(color == PieceColor.WHITE && movingSouth(move) )
                 return false;
-            LOG.info("valid direction");
         }
 
         if( inDistanceOf(move, JUMP_DISTANCE)) {
@@ -60,12 +59,10 @@ public class MoveChecker {
                 move.setJumped(positionBetween(move));
             }
             else{
-                LOG.info("did not have a piece between");
                 return false;
             }
         }
         else if( !inDistanceOf(move, SINGLE_DISTANCE) ){
-            LOG.info("Not within one move");
             return false;
         }
 

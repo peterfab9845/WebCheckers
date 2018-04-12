@@ -1,5 +1,6 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
 import com.webcheckers.model.board.*;
@@ -60,5 +61,16 @@ public class BoardController {
         board.clearSpace(position);
     }
 
+
+    public static Position getPieceLocation(Space[][] board, Piece piece) {
+        for(int i = 0; i < board.length; i++){
+            for( int j = 0; j < board[i].length; j++){
+                if(board[i][j].getPiece() == piece){
+                    return new Position(i, j);
+                }
+            }
+        }
+        return null;
+    }
 
 }

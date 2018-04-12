@@ -11,12 +11,12 @@ public class Game implements Iterable<Move>{
     /**
      * Red Player
      */
-    private Player redPlayer;
+    private PlayerEntity redPlayer;
 
     /**
      * Blue Player
      */
-    private Player whitePlayer;
+    private PlayerEntity whitePlayer;
 
     /**
      * The Current state of whos turn it is turn
@@ -43,7 +43,7 @@ public class Game implements Iterable<Move>{
      * @param redPlayer
      * @param whitePlayer
      */
-    public Game(Player redPlayer, Player whitePlayer){
+    public Game(PlayerEntity redPlayer, PlayerEntity whitePlayer){
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         activeColor = PieceColor.RED;
@@ -56,7 +56,7 @@ public class Game implements Iterable<Move>{
      * give the red player
      * @return Player
      */
-    public Player getRedPlayer() {
+    public PlayerEntity getRedPlayer() {
         return redPlayer;
     }
 
@@ -64,7 +64,7 @@ public class Game implements Iterable<Move>{
      * give the white player
      * @return Player
      */
-    public Player getWhitePlayer() {
+    public PlayerEntity getWhitePlayer() {
         return whitePlayer;
     }
 
@@ -125,4 +125,9 @@ public class Game implements Iterable<Move>{
     public Iterator<Move> iterator() {
         return turnTracker.iterator();
     }
+
+    public Board getBoard(){
+        return board;
+    }
+
 }

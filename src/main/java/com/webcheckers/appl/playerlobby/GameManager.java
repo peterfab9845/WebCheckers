@@ -2,6 +2,7 @@ package com.webcheckers.appl.playerlobby;
 
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.entities.PlayerEntity;
 import com.webcheckers.model.states.PieceColor;
 
 import java.util.HashMap;
@@ -18,10 +19,10 @@ public class GameManager {
      * Removes game from list of games, and assigns winners
      * @param player
      */
-    public void removeGame(Player player){
+    public void removeGame(PlayerEntity player){
         Game game = getGame(player);
-        Player redPlayer = game.getRedPlayer();
-        Player whitePlayer = game.getWhitePlayer();
+        PlayerEntity redPlayer = game.getRedPlayer();
+        PlayerEntity whitePlayer = game.getWhitePlayer();
 
         if( player == whitePlayer ){
             redPlayer.justWon();
@@ -41,7 +42,7 @@ public class GameManager {
      * @param player
      * @param challenging
      */
-    public void challenge(Player player, Player challenging){
+    public void challenge(PlayerEntity player, PlayerEntity challenging){
         player.setInGame();
         challenging.setInGame();
         Game game = new Game(player, challenging);
@@ -56,7 +57,7 @@ public class GameManager {
      * @param player
      * @param game
      */
-    public void addGame(Player player, Game game){
+    public void addGame(PlayerEntity player, Game game){
         games.put(player.getName(), game);
     }
 
@@ -67,7 +68,7 @@ public class GameManager {
      * @param player
      * @return
      */
-    public Game getGame(Player player){
+    public Game getGame(PlayerEntity player){
         return games.get(player.getName());
     }
 }

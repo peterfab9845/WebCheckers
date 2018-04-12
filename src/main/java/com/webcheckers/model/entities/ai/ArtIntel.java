@@ -1,6 +1,8 @@
 package com.webcheckers.model.entities.ai;
 
-public interface ArtIntel {
+import com.webcheckers.model.entities.PlayerEntity;
+
+public interface ArtIntel{
 
     public void makeDecision();
 

@@ -2,6 +2,9 @@ package com.webcheckers.appl.playerlobby;
 
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.entities.ai.AI;
+import com.webcheckers.model.states.PieceColor;
 import spark.Session;
 
 import java.util.Iterator;
@@ -121,7 +124,7 @@ public class PlayerLobby {
     * @param player
     * @param challenging
     */
-    public void challenge(Player player, Player challenging){
+    public void challenge(PlayerEntity player, PlayerEntity challenging){
         gameManager.challenge(player, challenging);
     }
 
@@ -130,7 +133,7 @@ public class PlayerLobby {
     * @param player
     * @param game
     */
-    public void addGame(Player player, Game game){
+    public void addGame(PlayerEntity player, Game game){
         gameManager.addGame(player, game);
     }
 
@@ -139,7 +142,17 @@ public class PlayerLobby {
     * @param player
     * @return
     */
-    public Game getGame(Player player){
+    public Game getGame(PlayerEntity player){
         return gameManager.getGame(player);
+    }
+
+    public void challengeAI(Player player, AI ai){
+        player.setInGame();
+        ai.setInGame();
+        Game game = new Game(ai, player);
+        player.setTeamColor(PieceColor.WHITE);
+        ai.setTeamColor(PieceColor.RED);
+        gameManager.addGame(player, game);
+        gameManager.addGame(ai, game);
     }
 }

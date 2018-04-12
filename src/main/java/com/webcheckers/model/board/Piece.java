@@ -67,4 +67,5 @@ public class Piece {
     public void king() {
         this.type = PieceType.KING;
     }
+
 }

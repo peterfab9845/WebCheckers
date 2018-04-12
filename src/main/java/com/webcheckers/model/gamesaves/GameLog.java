@@ -2,6 +2,7 @@ package com.webcheckers.model.gamesaves;
 
 import com.webcheckers.model.board.Move;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.entities.PlayerEntity;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,8 +12,8 @@ public class GameLog {
     /**
      * Players that where playing in the given game
      */
-    private Player redPlayer;
-    private Player whitePlayer;
+    private PlayerEntity redPlayer;
+    private PlayerEntity whitePlayer;
 
     /**
      * Queue that holds every move made
@@ -24,7 +25,7 @@ public class GameLog {
      * @param redPlayer red player in the game
      * @param whitePlayer white player in the game
      */
-    public GameLog(Player redPlayer, Player whitePlayer){
+    public GameLog(PlayerEntity redPlayer, PlayerEntity whitePlayer){
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.moveQueue = new LinkedList<>();
@@ -49,14 +50,14 @@ public class GameLog {
     /**
      * @return red player in give game
      */
-    public Player getRedPlayer() {
+    public PlayerEntity getRedPlayer() {
         return redPlayer;
     }
 
     /**
      * @return white player in give game
      */
-    public Player getWhitePlayer() {
+    public PlayerEntity getWhitePlayer() {
         return whitePlayer;
     }
 

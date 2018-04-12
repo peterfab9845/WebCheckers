@@ -23,7 +23,7 @@ public class PostValidateMoveRoute implements Route {
     /**
      * Logger for logging things to the console
      */
-    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
 
 
     /**
