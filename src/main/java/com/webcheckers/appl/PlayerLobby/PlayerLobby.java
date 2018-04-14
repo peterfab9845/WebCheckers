@@ -25,8 +25,8 @@ public class PlayerLobby {
         playerManager = new PlayerManager();
     }
 
-    public void addPlayer(Player player) {
-        playerManager.addPlayer(player);
+    public boolean addPlayer(Player player) {
+        return playerManager.addPlayer(player);
     }
 
     /**
