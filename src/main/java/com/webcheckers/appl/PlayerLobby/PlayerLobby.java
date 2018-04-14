@@ -106,7 +106,7 @@ public class PlayerLobby {
     * gets number of players in the lobby
     * @return integer of players in loby
     */
-    public int playersInLobby(){
+    public int countInLobby(){
     return playerManager.countInLobby();
     }
 

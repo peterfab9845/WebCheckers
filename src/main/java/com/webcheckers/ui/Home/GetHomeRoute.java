@@ -87,7 +87,7 @@ public class GetHomeRoute implements Route {
 
         }
 
-        vm.put("playerCount", playerLobby.playersInLobby());
+        vm.put("playerCount", playerLobby.countInLobby());
 
         return templateEngine.render(new ModelAndView(vm , "home.ftl"));
     }
