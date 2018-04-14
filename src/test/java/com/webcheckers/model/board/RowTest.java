@@ -19,16 +19,16 @@ class RowTest {
     private static final PieceColor PIECE_COLOR = PieceColor.WHITE;
 
     private Row row;
-    private Piece[] boardCols;
+    private Space[] boardCols;
 
     @BeforeEach
     void setup() {
         int cols = 8;
-        boardCols = new Piece[cols];
+        boardCols = new Space[cols];
         for (int i = 0; i < boardCols.length; i++) {
-            boardCols[i] = new Piece(PIECE_TYPE, PIECE_COLOR);
+            boardCols[i] = new Space(i, new Piece(PIECE_TYPE, PIECE_COLOR));
         }
-        row = new Row(INDEX, boardCols);
+        row = new Row(INDEX, boardCols, PieceColor.RED);
     }
 
     @Test
@@ -40,7 +40,7 @@ class RowTest {
     void iterator() {
         ArrayList<Object> spaces = new ArrayList<>(8);
         for (int col = 0; col < boardCols.length; col++) {
-            spaces.add(new Space(col, boardCols[col]));
+            spaces.add(new Space(boardCols[col].getCellIdx(), boardCols[col].getPiece()));
         }
         Iterator iterator1 = row.iterator();
         Iterator iterator2 = spaces.iterator();

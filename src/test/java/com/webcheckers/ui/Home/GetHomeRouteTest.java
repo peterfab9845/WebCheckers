@@ -8,6 +8,8 @@ import static org.mockito.Mockito.when;
 import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.PlayerLobby.PlayerLobby;
 import com.webcheckers.model.Message;
+import com.webcheckers.model.States.MessageType;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.TemplateEngineTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -35,6 +37,8 @@ public class GetHomeRouteTest {
 
     private Session session;
 
+    private PlayerLobby lobby;
+
     @BeforeEach
     public void setup() {
         request = mock(Request.class);
@@ -43,7 +47,7 @@ public class GetHomeRouteTest {
         when(session.id()).thenReturn(SESSION_ID);
         engine = mock(TemplateEngine.class);
         response = mock(Response.class);
-        PlayerLobby.init();
+        lobby = new PlayerLobby();
         MessageMap.init();
     }
 
@@ -51,7 +55,7 @@ public class GetHomeRouteTest {
     public void constructor_nullEngine() {
         engine = null;
         assertThrows(NullPointerException.class, () -> {
-            final GetHomeRoute getHomeRoute = new GetHomeRoute(engine);
+            final GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         }, "GetHomeRoute allowed null template engine.");
     }
 
@@ -59,7 +63,7 @@ public class GetHomeRouteTest {
     public void handle_notSignedIn() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         getHomeRoute.handle(request, response);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
@@ -77,8 +81,8 @@ public class GetHomeRouteTest {
         Player player = mock(Player.class);
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
-        PlayerLobby.addPlayer(player, session);
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine);
+        lobby.addPlayer(player, session);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         getHomeRoute.handle(request, response);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
@@ -86,7 +90,7 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
         testHelper
-            .assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
+            .assertViewModelAttribute("playerList", lobby.getPlayersInLobbyExcept(session));
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
 
@@ -97,10 +101,10 @@ public class GetHomeRouteTest {
         Player player = mock(Player.class);
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
-        PlayerLobby.addPlayer(player, session);
+        lobby.addPlayer(player, session);
         Message message = new Message(MESSAGE_TEXT, MessageType.info);
         MessageMap.setMessage(session, message);
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         getHomeRoute.handle(request, response);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
@@ -108,7 +112,7 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
         testHelper
-            .assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
+            .assertViewModelAttribute("playerList", lobby.getPlayersInLobbyExcept(session));
         testHelper.assertViewModelAttribute("message", message);
     }
 }
