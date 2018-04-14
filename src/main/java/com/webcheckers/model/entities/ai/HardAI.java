@@ -5,12 +5,11 @@ import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.Move;
 import com.webcheckers.model.board.Piece;
+import com.webcheckers.model.board.Position;
 import com.webcheckers.model.board.Space;
 import com.webcheckers.model.entities.PlayerEntity;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +18,7 @@ import java.util.Random;
 public class HardAI extends AI implements ArtIntel {
 
     private static HashMap<String, ArrayList<Move>> memory;
+    private static final String CSV_FILE = "/Users/andrewreed/Documents/Swen/team-project-2175-swen-261-b/src/main/csv/AI1/test1.txt";
     private ArrayList<MoveMemory> currentGame;
     private int turn;
 
@@ -43,8 +43,12 @@ public class HardAI extends AI implements ArtIntel {
                 }
             }
         };
-        loadMemory();
-        currentGame = new ArrayList();
+        try {
+            loadMemory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        currentGame = new ArrayList<>();
         thread.start();
     }
 
@@ -52,9 +56,7 @@ public class HardAI extends AI implements ArtIntel {
     public void makeDecision() {
         try {
             Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        } catch (InterruptedException ignored) {}
         turn++;
         this.game = getGame(playerLobby);
 //        if(turn > 200){
@@ -93,14 +95,13 @@ public class HardAI extends AI implements ArtIntel {
     }
 
     private String hashMatrix(Space[][] space){
-        StringBuilder value = new StringBuilder("[" + teamColor + ",");
+        StringBuilder value = new StringBuilder(teamColor + ",");
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 value.append(String.valueOf(space[i][j].getPiece()));
                 value.append(",");
             }
         }
-        value.append(pieces.size()).append("]");
         return value.toString();
     }
 
@@ -127,19 +128,42 @@ public class HardAI extends AI implements ArtIntel {
         });
     }
 
-    private void loadMemory(){
-        if( memory == null ) {
-            memory = new HashMap<>();
+    private void loadMemory() throws IOException {
+        memory = new HashMap<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(CSV_FILE))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] info = line.split(",");
+                System.out.println(info.length);
+                StringBuilder matrix = new StringBuilder("");
+                Position start = new Position(Integer.parseInt(info[65]),Integer.parseInt(info[66]));
+                Position end = new Position(Integer.parseInt(info[67]),Integer.parseInt(info[68]));
+                Move move = new Move(start, end);
+                for(int i = 0; i < 65; i++){
+                    matrix.append(info[i]).append(",");
+                    if(i < 65)
+                        matrix.append(",");
+                }
+                MoveMemory moveMemory = new MoveMemory(matrix.toString(), move);
+                if(!memory.containsKey(matrix.toString())) {
+                    memory.put(matrix.toString(), new ArrayList<>());
+                }
+
+                memory.get(matrix.toString()).add(move);
+            }
         }
+
     }
 
     private void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter("/Users/andrewreed/Documents/Swen/team-project-2175-swen-261-b/src/main/csv/AI1/test1.txt", "UTF-8");
+        File file = new File(CSV_FILE);
+        file.delete();
+        PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8");
         for(Map.Entry<String, ArrayList<Move>> entry : memory.entrySet()) {
             String key = entry.getKey();
             ArrayList<Move> value = entry.getValue();
 
-            value.forEach( i -> writer.println(key + "  [" + "]"));
+            value.forEach( i -> writer.println(key + i));
         }
         writer.close();
     }

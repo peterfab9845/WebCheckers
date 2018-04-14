@@ -114,7 +114,6 @@ public class AI extends PlayerEntity{
                 currentpieces.add(piece);
         }
         Random rand = new Random();
-        System.out.println(currentpieces.size() + " out of " + pieces.size());
         return currentpieces.get(rand.nextInt(currentpieces.size()));
     }
 
