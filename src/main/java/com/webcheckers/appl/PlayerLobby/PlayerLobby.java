@@ -29,8 +29,8 @@ public class PlayerLobby {
         return username.matches(USERNAME_REGEX);
     }
 
-    public void addPlayer(Player player, Session session) {
-        playerManager.addPlayer(player, session);
+    public void addPlayer(Player player) {
+        playerManager.addPlayer(player);
     }
 
     /**
