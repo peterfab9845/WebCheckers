@@ -27,7 +27,8 @@ define(function(require){
     
     // Add the ModeControls mixin
     ControlsToolbarMixin.call(this);
-    // TODO: create mode control buttons
+    this.addButton(PlayModeConstants.RESIGN_BUTTON_ID, 'Resign', true,
+        PlayModeConstants.RESIGN_BUTTON_TOOLTIP, this.resignGame);
 
     // Public (internal) methods
 

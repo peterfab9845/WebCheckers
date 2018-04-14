@@ -146,6 +146,7 @@ public class MoveChecker {
     public static boolean isKing(Position position, Space[][] board){
         if(position == null)
             return false;
+
         int x = position.getCell();
         int y = position.getRow();
         return board[y][x].isKing();

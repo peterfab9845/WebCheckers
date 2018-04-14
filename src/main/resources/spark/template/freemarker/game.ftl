@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <head>
+  <#if viewMode == "SPECTATOR">
+    <meta http-equiv="refresh" content="1">
+  </#if>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
   <title>${title} | Web Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
@@ -17,7 +20,7 @@
 </head>
 <body>
   <div class="page">
-    <h1>Web Checkers</h1>
+    <h1>Web Checkers 🅱️</h1>
     
     <div class="navigation">
     <#if currentPlayer??>

@@ -99,7 +99,7 @@ public class GetGameRoute implements Route {
 
         vm.put("title", "Game!");
         vm.put("currentPlayer", user);
-        vm.put("viewMode", ViewMode.PLAY);
+        vm.put("viewMode", ViewMode.SPECTATOR);
         vm.put("redPlayer", game.getRedPlayer());
         vm.put("whitePlayer", game.getWhitePlayer());
         vm.put("activeColor", game.getActiveColor());

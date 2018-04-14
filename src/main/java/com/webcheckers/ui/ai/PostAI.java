@@ -76,12 +76,20 @@ public class PostAI implements Route {
 
         String type = request.queryParams("type");
         AI ai = new AI(AINaming.getName(), user, playerLobby);
-        if(type.equals("easy"))
+        if(type.equals("easy") )
             ai = new EasyAI(AINaming.getName(), user, playerLobby);
-        if( type.equals("medium"))
+        if( type.equals("medium") )
             ai = new MediumAI(AINaming.getName(), user, playerLobby);
-        if( type.equals("hard"))
+        if( type.equals("hard") )
             ai = new HardAI(AINaming.getName(), user, playerLobby);
+        if( type.equals("train") ){
+            ai = new HardAI(AINaming.getName(), user, playerLobby);
+            AI ai2 = new HardAI(AINaming.getName(), user, playerLobby);
+            Game game = playerLobby.challengeAI(ai, ai2);
+            playerLobby.addSpectator(user, game);
+            response.redirect("/game");
+            throw halt(1002);
+        }
 
         playerLobby.challengeAI(ai, user);
 

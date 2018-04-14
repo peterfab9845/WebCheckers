@@ -73,4 +73,8 @@ public class Piece {
         this.type = PieceType.KING;
     }
 
+    public String toString(){
+        return color.toString();
+    }
+
 }

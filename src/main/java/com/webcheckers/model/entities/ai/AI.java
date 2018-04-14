@@ -1,6 +1,7 @@
 package com.webcheckers.model.entities.ai;
 
 import com.webcheckers.appl.BoardController;
+import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.entities.Game;
@@ -77,7 +78,7 @@ public class AI extends PlayerEntity{
     public void makeMove(Move move){
         BoardController.makeMove(game.getBoard(), move);
         game.changeTurns();
-        LOG.info("move made");
+        game.isGameOver();
     }
 
     public Space[][] piecesAround(Position position, int distance){
@@ -98,8 +99,9 @@ public class AI extends PlayerEntity{
                 if (game.getActiveColor() == this.getTeamColor()) {
                     ai.makeDecision();
                 }
-                if (hasLost() || hasWon())
+                if (hasLost() || hasWon()) {
                     break;
+                }
             }
         }
     }
@@ -207,5 +209,49 @@ public class AI extends PlayerEntity{
             if (hasValidMove(position, board.getMatrix(), teamColor))moveablePositions.add(position);
         }
         return moveablePositions;
+    }
+
+    public Move getRandomMove(){
+        int x;
+        int y;
+        Move move;
+        Piece piece;
+        Position position;
+        boolean isKing;
+        PieceColor color;
+        int piecesNum = pieces.size();
+        Space[][] board = game.getMatrix();
+
+        if(piecesNum <= 0)
+            return null;
+
+        piece = getRandomPiece();
+        position = BoardController.getPieceLocation(board, piece);
+        isKing =  MoveChecker.isKing(position, board);
+        color = piece.getColor();
+
+        try {
+            while (!MoveChecker.hasValidMove(position, board, color)) {
+                piece = getRandomPiece();
+                position = BoardController.getPieceLocation(board, piece);
+            }
+        }
+        catch (NullPointerException e) {
+            pieces.remove(piece);
+            LOG.info(pieces.size() + "");
+            return null;
+        }
+
+        y = position.getRow();
+        x = position.getCell();
+        for( int row = -3; row < 4; row+=1){
+            for( int col = -3; col < 4; col+=1) {
+                move = new Move(position, new Position(y + row, x + col));
+                if (MoveChecker.isMoveValid(move, board, color, isKing)) {
+                    return move;
+                }
+            }
+        }
+        return null;
     }
 }

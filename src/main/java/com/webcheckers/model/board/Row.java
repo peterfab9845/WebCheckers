@@ -51,7 +51,7 @@ public class Row implements Iterable {
      */
     @Override
     public Iterator<Space> iterator() {
-        if( color.equals(PieceColor.RED) )
+        if( color != null && color.equals(PieceColor.RED) )
             return spaces.iterator();
         return reverseIterator();
     }

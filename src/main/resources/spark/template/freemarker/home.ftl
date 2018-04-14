@@ -40,6 +40,9 @@
                         Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
                         Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
                         Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
+                        <#if currentPlayer.name == "admin">
+                            <a href="/ai?type=train">Train Hard AI</a><br>
+                        </#if>
                         <#list playerList as player>
                             ${player.name} - <a href="/game?opponentName=${player.name}">Challenge</a>
                             <br>

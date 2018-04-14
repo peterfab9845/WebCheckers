@@ -80,7 +80,7 @@ public class PlayerLobby {
     * Removes game from list of games, and assigns winners
     * @param player
     */
-    public void removeGame(Player player){
+    public void removeGame(PlayerEntity player){
         gameManager.removeGame(player);
     }
 
@@ -146,7 +146,7 @@ public class PlayerLobby {
         return gameManager.getGame(player);
     }
 
-    public void challengeAI(AI ai, PlayerEntity player){
+    public Game challengeAI(AI ai, PlayerEntity player){
         player.setInGame();
         ai.setInGame();
         Game game = new Game( player, ai );
@@ -154,5 +154,12 @@ public class PlayerLobby {
         ai.setTeamColor(PieceColor.WHITE);
         gameManager.addGame(player, game);
         gameManager.addGame(ai, game);
+        return game;
     }
+
+    public void addSpectator(PlayerEntity player, Game game){
+        player.setInGame();
+        gameManager.addGame(player, game);
+    }
+
 }
