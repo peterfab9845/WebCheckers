@@ -51,6 +51,10 @@ public class PlayerEntity {
         this.currentState = PlayerStates.IN_GAME;
     }
 
+    public void setToSpectator(){
+        this.currentState = PlayerStates.SPECTATOR;
+    }
+
     /**
      * Returns if state is IN_LOBBY
      * @return boolean

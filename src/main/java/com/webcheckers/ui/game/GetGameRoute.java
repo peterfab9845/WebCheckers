@@ -6,6 +6,7 @@ import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.ViewMode;
 import spark.*;
 
+import javax.swing.text.View;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -79,7 +80,7 @@ public class GetGameRoute implements Route {
             throw halt(403);
         }
 
-        // if the opponent name is present challange that player
+        // if the opponent name is present challenge that player
         String opponentName = request.queryParams("opponentName");
         if (opponentName != null ) {
             Player opponent = playerLobby.getPlayer(opponentName);
@@ -99,7 +100,13 @@ public class GetGameRoute implements Route {
 
         vm.put("title", "Game!");
         vm.put("currentPlayer", user);
-        vm.put("viewMode", ViewMode.SPECTATOR);
+        if(user.isInGame()) {
+            vm.put("viewMode", ViewMode.PLAY);
+        }
+        else{
+            vm.put("viewMode", ViewMode.SPECTATOR);
+            vm.put("isSpectating", true);
+        }
         vm.put("redPlayer", game.getRedPlayer());
         vm.put("whitePlayer", game.getWhitePlayer());
         vm.put("activeColor", game.getActiveColor());

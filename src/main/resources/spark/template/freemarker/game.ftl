@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <head>
-  <#if viewMode == "SPECTATOR">
-    <meta http-equiv="refresh" content="1">
-  </#if>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
   <title>${title} | Web Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
@@ -17,6 +14,10 @@
     "activeColor" : "${activeColor}"
   };
   </script>
+
+  <#if isSpectating??>
+    <meta http-equiv="refresh" content="1">
+  </#if>
 </head>
 <body>
   <div class="page">

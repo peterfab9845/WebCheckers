@@ -1,12 +1,19 @@
 package com.webcheckers.model.entities.ai;
 
+import com.webcheckers.appl.BoardController;
+import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.Move;
+import com.webcheckers.model.board.Piece;
 import com.webcheckers.model.board.Space;
 import com.webcheckers.model.entities.PlayerEntity;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class HardAI extends AI implements ArtIntel {
@@ -44,19 +51,20 @@ public class HardAI extends AI implements ArtIntel {
     @Override
     public void makeDecision() {
         try {
-            Thread.sleep(200);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         turn++;
         this.game = getGame(playerLobby);
-        if(turn == 300){
-            playerLobby.removeGame(this);
-        }
+//        if(turn > 200){
+//            playerLobby.removeGame(this);
+//        }
         String matrix = hashMatrix(this.game.getMatrix());
         if(!memory.containsKey(matrix)){
             Move move = getRandomMove();
             if(move != null) {
+                if(MoveChecker.isMoveValid(move, game.getMatrix(), teamColor, true))
                 makeMove(move);
                 currentGame.add(new MoveMemory(matrix, move));
             }
@@ -85,7 +93,7 @@ public class HardAI extends AI implements ArtIntel {
     }
 
     private String hashMatrix(Space[][] space){
-        StringBuilder value = new StringBuilder("[");
+        StringBuilder value = new StringBuilder("[" + teamColor + ",");
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 value.append(String.valueOf(space[i][j].getPiece()));
@@ -100,7 +108,7 @@ public class HardAI extends AI implements ArtIntel {
     public void justWon() {
         super.justWon();
         System.out.println(getName() + " won");
-        currentGame.forEach(i -> {
+        currentGame.forEach((MoveMemory i) -> {
             ArrayList<Move> mem;
             if(memory.containsKey(i.matrix)){
                 mem = memory.get(i.matrix);
@@ -108,6 +116,12 @@ public class HardAI extends AI implements ArtIntel {
             else {
                 mem = new ArrayList<>();
                 memory.put(i.matrix, mem);
+            }
+
+            try {
+                writeToFile();
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
             mem.add(i.move);
         });
@@ -117,6 +131,17 @@ public class HardAI extends AI implements ArtIntel {
         if( memory == null ) {
             memory = new HashMap<>();
         }
+    }
+
+    private void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter("/Users/andrewreed/Documents/Swen/team-project-2175-swen-261-b/src/main/csv/AI1/test1.txt", "UTF-8");
+        for(Map.Entry<String, ArrayList<Move>> entry : memory.entrySet()) {
+            String key = entry.getKey();
+            ArrayList<Move> value = entry.getValue();
+
+            value.forEach( i -> writer.println(key + "  [" + "]"));
+        }
+        writer.close();
     }
 }
 

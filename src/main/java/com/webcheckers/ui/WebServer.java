@@ -2,7 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
-import com.webcheckers.ui.ai.PostAI;
+import com.webcheckers.ui.ai.PostAIRoute;
 import com.webcheckers.ui.game.GetEndRoute;
 import com.webcheckers.ui.game.GetGameRoute;
 import com.webcheckers.ui.game.PostEndRoute;
@@ -238,7 +238,7 @@ public class WebServer {
 
         post(END_URL, new PostEndRoute(gson, playerLobby));
 
-        get(AI_URL, new PostAI(gson, playerLobby));
+        get(AI_URL, new PostAIRoute(gson, playerLobby));
 
         post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
 

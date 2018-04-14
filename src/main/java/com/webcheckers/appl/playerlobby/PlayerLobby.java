@@ -158,8 +158,9 @@ public class PlayerLobby {
     }
 
     public void addSpectator(PlayerEntity player, Game game){
-        player.setInGame();
+        player.setToSpectator();
         gameManager.addGame(player, game);
+        game.addSpectator(player);
     }
 
 }

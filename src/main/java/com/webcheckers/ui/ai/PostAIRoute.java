@@ -3,15 +3,12 @@ package com.webcheckers.ui.ai;
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.AINaming;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
-import com.webcheckers.model.Message;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.ai.AI;
 import com.webcheckers.model.entities.ai.EasyAI;
 import com.webcheckers.model.entities.ai.HardAI;
 import com.webcheckers.model.entities.ai.MediumAI;
-import com.webcheckers.model.states.MessageType;
-import com.webcheckers.ui.game.GetGameRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -21,12 +18,12 @@ import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
-public class PostAI implements Route {
+public class PostAIRoute implements Route {
 
     /**
      * Logger for logging things to the console
      */
-    private static final Logger LOG = Logger.getLogger(PostAI.class.getName());
+    private static final Logger LOG = Logger.getLogger(PostAIRoute.class.getName());
 
 
     /**
@@ -44,7 +41,7 @@ public class PostAI implements Route {
      *
      * @param gson the gson instance
      */
-    public PostAI(final Gson gson, PlayerLobby playerLobby) {
+    public PostAIRoute(final Gson gson, PlayerLobby playerLobby) {
 
         this.playerLobby = playerLobby;
 
@@ -66,7 +63,7 @@ public class PostAI implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
-        LOG.finer("PostAI is invoked.");
+        LOG.finer("PostAIRoute is invoked.");
 
         Player user = playerLobby.getPlayer(request.session());
         if( user == null || !user.isInLobby() ) {

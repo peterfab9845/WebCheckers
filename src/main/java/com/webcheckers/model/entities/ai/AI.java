@@ -2,20 +2,19 @@ package com.webcheckers.model.entities.ai;
 
 import com.webcheckers.appl.BoardController;
 import com.webcheckers.appl.MoveChecker;
+import com.webcheckers.appl.playerlobby.AINaming;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.PlayerEntity;
 import com.webcheckers.model.states.AiPositionProtection;
 import com.webcheckers.model.states.PieceColor;
-import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import static com.webcheckers.appl.BoardController.getPieceLocation;
 import static com.webcheckers.appl.MoveChecker.hasValidMove;
 
 public class AI extends PlayerEntity{
@@ -106,9 +105,17 @@ public class AI extends PlayerEntity{
         }
     }
 
-    public Piece getRandomPiece(){
+    public Piece getRandomPiece(Space[][] board){
+        LinkedList<Piece> currentpieces = new LinkedList<>();
+        Position position;
+        for (Piece piece : pieces) {
+            position = BoardController.getPieceLocation(board, piece);
+            if (MoveChecker.hasValidMove(position, board, piece.getColor()))
+                currentpieces.add(piece);
+        }
         Random rand = new Random();
-        return pieces.get(rand.nextInt(pieces.size()));
+        System.out.println(currentpieces.size() + " out of " + pieces.size());
+        return currentpieces.get(rand.nextInt(currentpieces.size()));
     }
 
 
@@ -225,14 +232,14 @@ public class AI extends PlayerEntity{
         if(piecesNum <= 0)
             return null;
 
-        piece = getRandomPiece();
+        piece = getRandomPiece(board);
         position = BoardController.getPieceLocation(board, piece);
         isKing =  MoveChecker.isKing(position, board);
         color = piece.getColor();
 
         try {
             while (!MoveChecker.hasValidMove(position, board, color)) {
-                piece = getRandomPiece();
+                piece = getRandomPiece(board);
                 position = BoardController.getPieceLocation(board, piece);
             }
         }
@@ -244,14 +251,21 @@ public class AI extends PlayerEntity{
 
         y = position.getRow();
         x = position.getCell();
+        Random random = new Random();
+        LinkedList<Move> moves = new LinkedList<>();
+
         for( int row = -3; row < 4; row+=1){
             for( int col = -3; col < 4; col+=1) {
                 move = new Move(position, new Position(y + row, x + col));
                 if (MoveChecker.isMoveValid(move, board, color, isKing)) {
-                    return move;
+                    move = new Move(position, new Position(y + row, x + col));
+                    moves.add(move);
                 }
             }
         }
-        return null;
+        if(moves.isEmpty())
+            return null;
+        return moves.get(random.nextInt(moves.size()));
+
     }
 }

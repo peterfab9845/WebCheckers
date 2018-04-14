@@ -26,8 +26,8 @@ public class MoveChecker {
         int startY = position.getRow();
         Position placeInQuestion;
         Move move;
-        for( int row = -3; row < 4; row+=1){
-            for( int col = -3; col < 4; col+=1) {
+        for( int row = -6; row < 7; row+=1){
+            for( int col = -6; col < 7; col+=1) {
                 placeInQuestion = new Position(startY + row, startX + col);
                 move = new Move(position, placeInQuestion);
                 boolean isKing = isKing(move.getStart(), board);
@@ -39,6 +39,9 @@ public class MoveChecker {
     }
 
     public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king){
+
+        if(move == null)
+            return false;
 
         if(!positionOnBoard(move.getEnd()))
             return false;
@@ -60,6 +63,9 @@ public class MoveChecker {
     }
 
     public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king, boolean isTesting){
+
+        if(move == null)
+            return false;
 
         if(!positionOnBoard(move.getEnd()))
             return false;

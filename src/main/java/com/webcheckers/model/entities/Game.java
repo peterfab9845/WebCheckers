@@ -6,6 +6,7 @@ import com.webcheckers.model.gamesaves.GameLog;
 import com.webcheckers.model.states.PieceColor;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Game implements Iterable<Move>{
 
@@ -18,6 +19,11 @@ public class Game implements Iterable<Move>{
      * Blue Player
      */
     private PlayerEntity whitePlayer;
+
+    /**
+     *
+     */
+    private LinkedList<PlayerEntity> spectators;
 
     /**
      * The Current state of whos turn it is turn
@@ -51,6 +57,7 @@ public class Game implements Iterable<Move>{
         board = new Board();
         gameLog = new GameLog(redPlayer, whitePlayer);
         turnTracker = new TurnTracker(board);
+        spectators = new LinkedList<>();
     }
 
     /**
@@ -115,12 +122,13 @@ public class Game implements Iterable<Move>{
         if( red == 0 ){
             redPlayer.justLost();
             whitePlayer.justWon();
+            spectators.forEach(PlayerEntity::sendToLobby);
         }
         else if( white == 0 ){
             redPlayer.justWon();
             whitePlayer.justLost();
+            spectators.forEach(PlayerEntity::sendToLobby);
         }
-
     }
 
     @Override
@@ -130,6 +138,10 @@ public class Game implements Iterable<Move>{
 
     public Board getBoard(){
         return board;
+    }
+
+    public boolean addSpectator(PlayerEntity playerEntity){
+        return spectators.add(playerEntity);
     }
 
 }
