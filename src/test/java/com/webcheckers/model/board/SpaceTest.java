@@ -1,4 +1,4 @@
-package com.webcheckers.gameview;
+package com.webcheckers.model.board;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -16,7 +16,7 @@ class SpaceTest {
     private Piece piece;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         piece = new Piece(TYPE, COLOR);
         space = new Space(CELLIDX, piece);
     }

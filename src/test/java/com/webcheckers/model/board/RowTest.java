@@ -1,14 +1,15 @@
-package com.webcheckers.gameview;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Iterator;
+package com.webcheckers.model.board;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.States.PieceType;
+import java.util.ArrayList;
+import java.util.Iterator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 @Tag("Model-tier")
 class RowTest {
@@ -21,11 +22,12 @@ class RowTest {
     private Piece[] boardCols;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         int cols = 8;
         boardCols = new Piece[cols];
-        for(int i = 0; i < boardCols.length; i++)
+        for (int i = 0; i < boardCols.length; i++) {
             boardCols[i] = new Piece(PIECE_TYPE, PIECE_COLOR);
+        }
         row = new Row(INDEX, boardCols);
     }
 
@@ -37,14 +39,15 @@ class RowTest {
     @Test
     void iterator() {
         ArrayList<Object> spaces = new ArrayList<>(8);
-        for (int col = 0; col < boardCols.length; col++)
+        for (int col = 0; col < boardCols.length; col++) {
             spaces.add(new Space(col, boardCols[col]));
+        }
         Iterator iterator1 = row.iterator();
         Iterator iterator2 = spaces.iterator();
         boolean flag = true;
 
-        while(iterator2.hasNext()){
-            if(!iterator2.next().equals(iterator1.next())){
+        while (iterator2.hasNext()) {
+            if (!iterator2.next().equals(iterator1.next())) {
                 flag = false;
                 break;
             }

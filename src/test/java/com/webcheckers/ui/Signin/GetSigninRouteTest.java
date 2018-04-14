@@ -1,17 +1,21 @@
-package com.webcheckers.ui;
+package com.webcheckers.ui.Signin;
 
-import com.webcheckers.appl.PlayerLobby.PlayerLobby;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-import spark.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static spark.Spark.get;
-import static spark.Spark.halt;
+
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
+import com.webcheckers.ui.TemplateEngineTester;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import spark.HaltException;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Session;
+import spark.TemplateEngine;
 
 @Tag("UI-tier")
 class GetSigninRouteTest {
@@ -26,7 +30,7 @@ class GetSigninRouteTest {
     private TemplateEngineTester testHelper;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         request = mock(Request.class);
         Session session = mock(Session.class);
         when(request.session()).thenReturn(session);
@@ -41,7 +45,7 @@ class GetSigninRouteTest {
     }
 
     @Test
-    void constructor(){
+    void constructor() {
         engine = mock(TemplateEngine.class);
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
     }
@@ -67,20 +71,21 @@ class GetSigninRouteTest {
     }
 
     @Test
-    void handleWithTakenSession(){
-
+    void handleWithTakenSession() {
 
         PlayerLobby.addPlayer(player, request.session());
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
-        try { getSigninRoute.handle(request, response); }
-        catch (HaltException ignored){ }
+        try {
+            getSigninRoute.handle(request, response);
+        } catch (HaltException ignored) {
+        }
 
     }
 
     @Test
-    void handleHalt(){
+    void handleHalt() {
         PlayerLobby.addPlayer(player, request.session());
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine);
-        assertThrows(HaltException.class, ()->getSigninRoute.handle(request, response));
+        assertThrows(HaltException.class, () -> getSigninRoute.handle(request, response));
     }
 }

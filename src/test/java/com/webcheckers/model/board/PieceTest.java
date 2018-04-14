@@ -1,11 +1,12 @@
 package com.webcheckers.model.board;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PieceType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PieceTest {
 
@@ -14,7 +15,7 @@ class PieceTest {
     private Piece CuT;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         CuT = new Piece(TYPE, COLOR);
     }
 

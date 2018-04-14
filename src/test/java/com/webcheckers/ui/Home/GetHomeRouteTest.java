@@ -1,18 +1,17 @@
-package com.webcheckers.ui;
+package com.webcheckers.ui.Home;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.webcheckers.appl.MessageMap;
+import com.webcheckers.appl.PlayerLobby.PlayerLobby;
+import com.webcheckers.model.Message;
+import com.webcheckers.ui.TemplateEngineTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import com.webcheckers.Message;
-import com.webcheckers.appl.MessageMap;
-import com.webcheckers.appl.PlayerLobby.PlayerLobby;
-
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -21,20 +20,21 @@ import spark.TemplateEngine;
 
 @Tag("UI-tier")
 public class GetHomeRouteTest {
+
     private static final String SESSION_ID = "sessionId";
-    
+
     private static final String PLAYER_NAME = "playerName";
-    
+
     private static final String MESSAGE_TEXT = "message";
-    
+
     private TemplateEngine engine;
-    
+
     private Request request;
-    
+
     private Response response;
-    
+
     private Session session;
-    
+
     @BeforeEach
     public void setup() {
         request = mock(Request.class);
@@ -46,7 +46,7 @@ public class GetHomeRouteTest {
         PlayerLobby.init();
         MessageMap.init();
     }
-    
+
     @Test
     public void constructor_nullEngine() {
         engine = null;
@@ -54,7 +54,7 @@ public class GetHomeRouteTest {
             final GetHomeRoute getHomeRoute = new GetHomeRoute(engine);
         }, "GetHomeRoute allowed null template engine.");
     }
-    
+
     @Test
     public void handle_notSignedIn() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -69,7 +69,7 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttributeIsAbsent("playerList");
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
-    
+
     @Test
     public void handle_signedIn() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -85,10 +85,11 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("title", "Welcome!");
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper.assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
+        testHelper
+            .assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
-    
+
     @Test
     public void handle_signedInWithMessage() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -106,7 +107,8 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("title", "Welcome!");
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper.assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
+        testHelper
+            .assertViewModelAttribute("playerList", PlayerLobby.getPlayerListExcept(PLAYER_NAME));
         testHelper.assertViewModelAttribute("message", message);
     }
 }

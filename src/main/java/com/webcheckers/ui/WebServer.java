@@ -13,7 +13,7 @@ import com.webcheckers.ui.Movement.PostValidateMoveRoute;
 import com.webcheckers.ui.Saves.GetSavesRoute;
 import com.webcheckers.ui.Signin.GetSigninRoute;
 import com.webcheckers.ui.Signin.GetSignoutRoute;
-import com.webcheckers.ui.Signin.PostResignRoute;
+import com.webcheckers.ui.Game.PostResignRoute;
 import com.webcheckers.ui.Signin.PostSigninRoute;
 import spark.TemplateEngine;
 

@@ -1,11 +1,10 @@
-package com.webcheckers.appl;
+package com.webcheckers.model;
 
-import com.webcheckers.model.Message;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.webcheckers.model.States.MessageType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MessageTest {
 
@@ -15,7 +14,7 @@ class MessageTest {
     private Message CuT;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         CuT = new Message(TEXT, TYPE);
     }
 

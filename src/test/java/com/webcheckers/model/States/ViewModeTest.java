@@ -1,15 +1,28 @@
 package com.webcheckers.model.States;
 
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@Tag("Model-tier")
 class ViewModeTest {
 
     @Test
-    void testing() {
-        ViewMode.SPECTATOR.equals(null);
-        ViewMode.REPLAY.equals(null);
+    void PLAY_test() {
+        ViewMode play = ViewMode.PLAY;
+        assertEquals(play, ViewMode.valueOf("PLAY"));
+    }
+
+    @Test
+    void SPECTATOR_test() {
+        ViewMode spectator = ViewMode.SPECTATOR;
+        assertEquals(spectator, ViewMode.valueOf("SPECTATOR"));
+    }
+
+    @Test
+    void REPLAY_test() {
+        ViewMode replay = ViewMode.REPLAY;
+        assertEquals(replay, ViewMode.valueOf("REPLAY"));
     }
 }

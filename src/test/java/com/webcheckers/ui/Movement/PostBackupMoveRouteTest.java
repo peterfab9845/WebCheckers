@@ -3,8 +3,6 @@ package com.webcheckers.ui.Movement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-
 class PostBackupMoveRouteTest {
 
     private PostBackupMoveRoute CuT;

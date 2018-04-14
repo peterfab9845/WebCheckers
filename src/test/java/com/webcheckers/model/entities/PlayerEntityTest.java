@@ -11,7 +11,7 @@ class PlayerEntityTest {
 
 
     @BeforeEach
-    void setup(){
+    void setup() {
         CuT = new PlayerEntity(USERNAME);
     }
 

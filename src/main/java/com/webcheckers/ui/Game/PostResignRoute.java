@@ -1,4 +1,4 @@
-package com.webcheckers.ui.Signin;
+package com.webcheckers.ui.Game;
 
 import com.google.gson.Gson;
 import com.webcheckers.model.Message;

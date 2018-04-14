@@ -1,13 +1,13 @@
 package com.webcheckers.model.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.webcheckers.model.gamesaves.GameLog;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Session;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class PlayerTest {
 
@@ -52,4 +52,6 @@ class PlayerTest {
     void hashCode_Test() {
         CuT.hashCode();
     }
+
+
 }
