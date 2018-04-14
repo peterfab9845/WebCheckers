@@ -17,7 +17,7 @@ public class PlayerManager {
     private HashMap<String, Player> players;
 
 
-    public PlayerManager(){
+    public PlayerManager() {
         players = new HashMap<>();
     }
 
@@ -48,8 +48,9 @@ public class PlayerManager {
      * Removes player from lobby
      * @param player
      */
-    public void removePlayer(Player player){
-        players.remove(player.getSession().id());
+    public void removePlayer(Player player) {
+        Session playerSession = player.getSession();
+        players.remove(playerSession.id());
     }
 
     /**
@@ -57,7 +58,7 @@ public class PlayerManager {
      * @param name
      * @return Player
      */
-    public Player getPlayer(String name){
+    public Player getPlayer(String name) {
         LinkedList<Player> playerLinkedList = listOfPlayers();
         String tempName;
         for (Player aPlayerLinkedList : playerLinkedList) {
@@ -81,7 +82,7 @@ public class PlayerManager {
      * Returns a iterator of players in the lobby
      * @return iterator of player
      */
-    public Iterator<Player> getPlayersInLobby(){
+    public Iterator<Player> getPlayersInLobby() {
         Stream<Player> playerStream = listOfPlayers().stream();
         //filter players out of lobby
         playerStream = playerStream.filter(Player::isInLobby);
@@ -94,7 +95,7 @@ public class PlayerManager {
      * @param session
      * @return iterator of player
      */
-    public Iterator<Player> getPlayersInLobbyExcept(Session session){
+    public Iterator<Player> getPlayersInLobbyExcept(Session session) {
         return getPlayersExcept(session, true);
     }
 
@@ -103,11 +104,11 @@ public class PlayerManager {
      * @param session
      * @return iterator of player
      */
-    public Iterator<Player> getPlayersInGameExcept(Session session){
+    public Iterator<Player> getPlayersInGameExcept(Session session) {
         return getPlayersExcept(session, false);
     }
 
-    public Iterator<Player> getPlayersExcept(Session session, boolean inLobby){
+    public Iterator<Player> getPlayersExcept(Session session, boolean inLobby) {
         String sessionid = session.id();
         Stream<Player> playerStream = listOfPlayers().stream();
         //filter players out of lobby
@@ -115,21 +116,21 @@ public class PlayerManager {
             playerStream = playerStream.filter(Player::isInLobby);
         else
             playerStream = playerStream.filter(Player::isInGame);
-        //filter out the exepted player
+        //filter out the excepted player
         playerStream = playerStream.filter(p -> !p.getSession().id().equals(sessionid));
         return playerStream.iterator();
     }
 
 
     /**
-     * gets number of players in the lobby
-     * @return integer of players in loby
+     * Gets the number of players in the lobby
+     * @return count of players in lobby
      */
-    public int playersInLobby(){
+    public int playersInLobby() {
         return (int) listOfPlayers().stream().filter(Player::isInLobby).count();
     }
 
-    private LinkedList<Player> listOfPlayers(){
+    private LinkedList<Player> listOfPlayers() {
         LinkedList<Player> playerList = new LinkedList<>();
         Player player;
         for(Map.Entry<String, Player> entry : players.entrySet()) {
