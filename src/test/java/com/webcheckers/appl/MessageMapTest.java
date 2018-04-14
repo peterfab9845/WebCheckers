@@ -6,10 +6,14 @@ import static org.mockito.Mockito.mock;
 import com.webcheckers.model.Message;
 import com.webcheckers.model.States.MessageType;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import spark.Session;
 
-
+/**
+ * Test class for MessageMap
+ */
+@Tag("Application-tier")
 class MessageMapTest {
 
     private final String MESSAGE = "Message";
@@ -18,7 +22,7 @@ class MessageMapTest {
 
     @BeforeEach
     void init() {
-        MessageMap map = new MessageMap();
+        MessageMap map = new MessageMap(); // for coverage
         MessageMap.init();
         session = mock(Session.class);
         message = new Message(MESSAGE, MessageType.info);
