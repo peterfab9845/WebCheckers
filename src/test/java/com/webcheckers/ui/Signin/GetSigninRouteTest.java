@@ -41,6 +41,7 @@ class GetSigninRouteTest {
         response = mock(Response.class);
         player = mock(Player.class);
         when(player.getName()).thenReturn(VALID_USERNAME);
+        when(player.getSession()).thenReturn(session);
         lobby = new PlayerLobby();
         testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
@@ -75,7 +76,7 @@ class GetSigninRouteTest {
     @Test
     void handleWithTakenSession() {
 
-        lobby.addPlayer(player, request.session());
+        lobby.addPlayer(player);
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine, lobby);
         try {
             getSigninRoute.handle(request, response);
@@ -86,7 +87,7 @@ class GetSigninRouteTest {
 
     @Test
     void handleHalt() {
-        lobby.addPlayer(player, request.session());
+        lobby.addPlayer(player);
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine, lobby);
         assertThrows(HaltException.class, () -> getSigninRoute.handle(request, response));
     }

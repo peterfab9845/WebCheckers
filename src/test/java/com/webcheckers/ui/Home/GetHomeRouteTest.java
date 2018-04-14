@@ -81,7 +81,8 @@ public class GetHomeRouteTest {
         Player player = mock(Player.class);
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
-        lobby.addPlayer(player, session);
+        when(player.getSession()).thenReturn(session);
+        lobby.addPlayer(player);
         GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         getHomeRoute.handle(request, response);
         testHelper.assertViewModelExists();
@@ -101,7 +102,8 @@ public class GetHomeRouteTest {
         Player player = mock(Player.class);
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
-        lobby.addPlayer(player, session);
+        when(player.getSession()).thenReturn(session);
+        lobby.addPlayer(player);
         Message message = new Message(MESSAGE_TEXT, MessageType.info);
         MessageMap.setMessage(session, message);
         GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);

@@ -64,9 +64,9 @@ class PlayerLobbyTest {
         when(game.getRedPlayer()).thenReturn(player1);
         when(game.getWhitePlayer()).thenReturn(player2);
 
-        CuT.addPlayer(player1, player1Session);
-        CuT.addPlayer(player2, player2Session);
-        CuT.addPlayer(player3, player3Session);
+        CuT.addPlayer(player1);
+        CuT.addPlayer(player2);
+        CuT.addPlayer(player3);
     }
 
     @Test
@@ -113,13 +113,6 @@ class PlayerLobbyTest {
         assertTrue(actual);
     }
 
-    @Test
-    void validUsername() {
-        boolean actual = CuT.playerExists(BROKEN_USERNAME);
-        assertFalse(actual);
-        actual = CuT.validUsername(PLAYER1NAME);
-        assertTrue(actual);
-    }
 
     @Test
     void getPlayer_Session() {
