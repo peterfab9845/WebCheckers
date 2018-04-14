@@ -126,7 +126,7 @@ public class PlayerManager {
      * Gets the number of players in the lobby
      * @return count of players in lobby
      */
-    public int playersInLobby() {
+    public int countInLobby(){
         return (int) listOfPlayers().stream().filter(Player::isInLobby).count();
     }
 
