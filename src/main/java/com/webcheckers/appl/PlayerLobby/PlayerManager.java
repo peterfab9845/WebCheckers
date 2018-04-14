@@ -24,14 +24,14 @@ public class PlayerManager {
     /**
      * Add a player to the lobby.
      * @param player the player to add
-     * @param session that player's session
      * @return true if that player is not already in the lobby
      */
-    public boolean addPlayer(Player player, Session session) {
+    public boolean addPlayer(Player player) {
         if (players.containsValue(player)) {
             return false;
         }
-        players.put(session.id(), player);
+        Session playerSession = player.getSession();
+        players.put(playerSession.id(), player);
         return true;
     }
 

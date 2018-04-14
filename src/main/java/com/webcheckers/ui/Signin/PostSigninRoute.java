@@ -88,7 +88,7 @@ public class PostSigninRoute implements Route {
       vm.put(ATTR_MESSAGE, new Message(MSG_TAKEN_USERNAME, MessageType.error));
     else{
       Player user = new Player(username, request.session());
-      playerLobby.addPlayer(user, request.session());
+      playerLobby.addPlayer(user);
       response.redirect("/");
       throw halt(200);
     }
