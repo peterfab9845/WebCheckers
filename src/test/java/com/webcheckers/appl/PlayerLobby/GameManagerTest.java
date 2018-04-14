@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
  * Test class for GameManager
  */
 @SuppressWarnings("WeakerAccess")
-@Tag("Model-tier")
+@Tag("Application-tier")
 public class GameManagerTest {
 
     private Player player1;
