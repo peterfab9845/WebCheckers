@@ -103,7 +103,7 @@ class PlayerLobbyTest {
 
     @Test
     void playersInLobby() {
-        int actual = CuT.playersInLobby();
+        int actual = CuT.countInLobby();
         assertEquals(TOTAL_PLAYERS, actual);
     }
 

@@ -200,7 +200,7 @@ public class PlayerManagerTest {
         CuT.addPlayer(player2);
         CuT.addPlayer(player3);
 
-        assertEquals(2, CuT.playersInLobby(), "Wrong count of players in lobby.");
+        assertEquals(2, CuT.countInLobby(), "Wrong count of players in lobby.");
     }
 
 }
