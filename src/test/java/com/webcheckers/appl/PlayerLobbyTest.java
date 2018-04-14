@@ -104,8 +104,8 @@
 //    }
 //
 //    @Test
-//    void playersInLobby() {
-//        int actual = CuT.playersInLobby();
+//    void countInLobby() {
+//        int actual = CuT.countInLobby();
 //        assertEquals(TOTAL_PLAYERS, actual);
 //    }
 //
