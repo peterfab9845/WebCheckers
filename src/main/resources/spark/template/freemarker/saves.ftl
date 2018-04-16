@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="page">
-    <h1>Web Checkers 🅱️</h1>
+    <h1>We🅱️ Checkers️</h1>
 
     <div class="navigation">
         <a href="/">my home</a> -
