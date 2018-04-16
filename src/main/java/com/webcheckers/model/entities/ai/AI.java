@@ -9,10 +9,7 @@ import com.webcheckers.model.entities.PlayerEntity;
 import com.webcheckers.model.states.AiPositionProtection;
 import com.webcheckers.model.states.PieceColor;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Logger;
 
 import static com.webcheckers.appl.MoveChecker.hasValidMove;
@@ -92,7 +89,7 @@ public class AI extends PlayerEntity{
         return fieldOfView;
     }
 
-    public void myTurn(ArtIntel ai){
+    public synchronized void myTurn(ArtIntel ai){
         while(true) {
             Game game = playerLobby.getGame(enemy);
             if (game != null) {
@@ -111,20 +108,20 @@ public class AI extends PlayerEntity{
     }
 
     public Piece getRandomPiece(Space[][] board){
-        LinkedList<Piece> currentpieces = new LinkedList<>();
+        LinkedList<Piece> currentPieces = new LinkedList<>();
         Position position;
 
         for (Piece piece : pieces) {
             position = BoardController.getPieceLocation(board, piece);
             if (MoveChecker.hasValidMove(position, board, piece.getColor()))
-                currentpieces.add(piece);
+                currentPieces.add(piece);
         }
         Random rand = new Random();
 
-        if (currentpieces.isEmpty())
+        if (currentPieces.isEmpty())
             return null;
 
-        return currentpieces.get(rand.nextInt(currentpieces.size()));
+        return currentPieces.get(rand.nextInt(currentPieces.size()));
     }
 
 
@@ -228,14 +225,14 @@ public class AI extends PlayerEntity{
     }
 
     public Move getRandomMove(){
-        LinkedList<Piece> validPieces = getPiecesWithValidMoves();
+        List<Piece> validPieces = getPiecesWithValidMoves();
         if( pieces.isEmpty() || validPieces.isEmpty() )
             return null;
 
         return getValidMove(validPieces);
     }
 
-    public LinkedList<Piece> getPiecesWithValidMoves(){
+    private List<Piece> getPiecesWithValidMoves(){
 
         LinkedList<Piece> validPieces = new LinkedList<>();
         pieces.forEach(i ->{
@@ -246,7 +243,7 @@ public class AI extends PlayerEntity{
         return validPieces;
     }
 
-    public Move getValidMove(LinkedList<Piece> validPieces){
+    private Move getValidMove(List<Piece> validPieces){
         Random random = new Random();
         LinkedList<Move> moves = new LinkedList<>();
 

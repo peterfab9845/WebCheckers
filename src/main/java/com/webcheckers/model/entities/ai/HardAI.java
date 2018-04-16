@@ -14,13 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.System.*;
+import static java.lang.Thread.sleep;
 
 public class HardAI extends AI implements ArtIntel {
 
     private HashMap<String, ArrayList<MoveMemory>> memory;
-    private static final String CSV_FILE = "src/main/csv/AI1/test1.txt";
+    private static final String CSV_FILE = "src/main/csv/AI1/test1.csv";
     private ArrayList<MoveMemory> currentGame;
-    private static final int thoughtTime = 1000;
+    private static final int thoughtTime = 10;
     private int turn;
 
     /**
@@ -47,38 +48,42 @@ public class HardAI extends AI implements ArtIntel {
     }
 
     @Override
-    public void makeDecision(){
+    public synchronized void makeDecision(){
 
-        try { Thread.sleep(thoughtTime); }
+        try { wait(thoughtTime); }
         catch (InterruptedException ignored) { }
 
         game = getGame(playerLobby);
         String matrix = hashMatrix(game.getMatrix());
 
         if( memory.containsKey(matrix) ){
-            out.println("Move In Memory");
-        }
-        else {
-            Move move = getRandomMove();
-            if(move == null) {
-                playerLobby.removeGame(this);
+            System.out.println("move in memory");
+            ArrayList<MoveMemory> moveMemories = memory.get(matrix);
+            if((moveMemories.size() > 3)){
                 return;
             }
-            boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
-            if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
-                makeMove(move);
-                currentGame.add(new MoveMemory(matrix, move));
-                turn++;
-                out.println("move made");
-            }
-            else{
-                out.println("move invalid");
-            }
+            System.out.println("not enough data for this move");
         }
+        Move move = getRandomMove();
+        if(move == null) {
+            playerLobby.removeGame(this);
+            return;
+        }
+        boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
+        if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+            makeMove(move);
+            currentGame.add(new MoveMemory(matrix, move));
+            turn++;
+            out.println("move made");
+        }
+        else{
+            out.println("move invalid");
+        }
+
     }
 
     private String hashMatrix(Space[][] space){
-        StringBuilder value = new StringBuilder(teamColor + ",");
+        StringBuilder value = new StringBuilder("");
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(space[i][j].getPiece() == null)
@@ -96,14 +101,16 @@ public class HardAI extends AI implements ArtIntel {
 
     @Override
     public void justWon() {
+        if(hasWon())
+            return;
         super.justWon();
         currentGame.forEach((MoveMemory i) -> {
-            ArrayList<MoveMemory> mem;
+            ArrayList<MoveMemory> mem = new ArrayList<>();
+            i.setWonIn(turn);
             if(memory.containsKey(i.matrix)){
                 mem = memory.get(i.matrix);
             }
             else {
-                mem = new ArrayList<>();
                 memory.put(i.matrix, mem);
             }
 
@@ -121,20 +128,22 @@ public class HardAI extends AI implements ArtIntel {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(CSV_FILE))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-//                String[] info = line.split(",");
-//                StringBuilder matrix = new StringBuilder("");
-//                Position start = new Position(Integer.parseInt(info[65]),Integer.parseInt(info[66]));
-//                Position end = new Position(Integer.parseInt(info[67]),Integer.parseInt(info[68]));
-//                Move move = new Move(start, end);
-//                for(int i = 1; i < 65; i++){
-//                    matrix.append(info[i]);
-//                }
-//                MoveMemory moveMemory = new MoveMemory(matrix.toString(), move);
-//                if(!memory.containsKey(matrix.toString())) {
-//                    memory.put(matrix.toString(), new ArrayList<>());
-//                }
-//
-//                memory.get(matrix.toString()).add(moveMemory);
+                String[] info = line.split(",");
+                StringBuilder matrix = new StringBuilder("");
+                Position start = new Position(Integer.parseInt(info[64]),Integer.parseInt(info[65]));
+                Position end = new Position(Integer.parseInt(info[66]),Integer.parseInt(info[67]));
+                int turns = Integer.parseInt(info[68]);
+                Move move = new Move(start, end);
+                for(int i = 0; i < 64; i++){
+                    matrix.append(info[i] + ",");
+                }
+                MoveMemory moveMemory = new MoveMemory(matrix.toString(), move);
+                moveMemory.setWonIn(turns);
+                if(!memory.containsKey(matrix.toString())) {
+                    memory.put(matrix.toString(), new ArrayList<>());
+                }
+
+                memory.get(matrix.toString()).add(moveMemory);
             }
         }
 
@@ -144,10 +153,8 @@ public class HardAI extends AI implements ArtIntel {
         try (PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8")) {
 
             for (Map.Entry<String, ArrayList<MoveMemory>> entry : memory.entrySet()) {
-                String key = entry.getKey();
                 ArrayList<MoveMemory> value = entry.getValue();
-
-                value.forEach(i -> writer.println(key + i));
+                value.forEach(i -> writer.println(i));
             }
             writer.close();
         }
@@ -177,7 +184,7 @@ class MoveMemory{
 
     @Override
     public String toString() {
-        return matrix + "," + move + "," + wonIn;
+        return matrix + move + "," + wonIn;
     }
 
     public Move getMove() {
