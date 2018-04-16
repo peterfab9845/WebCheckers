@@ -2,7 +2,6 @@ package com.webcheckers.model.entities.ai;
 
 import com.webcheckers.appl.BoardController;
 import com.webcheckers.appl.MoveChecker;
-import com.webcheckers.appl.playerlobby.AINaming;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.entities.Game;

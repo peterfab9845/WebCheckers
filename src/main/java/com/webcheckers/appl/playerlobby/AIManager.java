@@ -1,10 +1,10 @@
 package com.webcheckers.appl.playerlobby;
 
-public class AINaming {
+public class AIManager {
 
     private static int AI_NUM = 0;
     private static int PIECE_ID = 0;
-    private static final boolean debugging = false;
+    private static final boolean debugging = true;
 
     public static String getName(){
         AI_NUM++;

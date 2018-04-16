@@ -1,7 +1,7 @@
 package com.webcheckers.ui.ai;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.playerlobby.AINaming;
+import com.webcheckers.appl.playerlobby.AIManager;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
@@ -13,7 +13,6 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -73,17 +72,17 @@ public class PostAIRoute implements Route {
         }
 
         String type = request.queryParams("type");
-        AI ai = new AI(AINaming.getName(), user, playerLobby);
+        AI ai = new AI(AIManager.getName(), user, playerLobby);
         if(type.equals("easy") )
-            ai = new EasyAI(AINaming.getName(), user, playerLobby);
+            ai = new EasyAI(AIManager.getName(), user, playerLobby);
         if( type.equals("medium") )
-            ai = new MediumAI(AINaming.getName(), user, playerLobby);
+            ai = new MediumAI(AIManager.getName(), user, playerLobby);
         if( type.equals("hard") ) {
-            ai = new HardAI(AINaming.getName(), user, playerLobby);
+            ai = new HardAI(AIManager.getName(), user, playerLobby);
         }
         if( type.equals("train") ){
-            ai = new HardAI(AINaming.getName(), user, playerLobby);
-            AI ai2 = new HardAI(AINaming.getName(), user, playerLobby);
+            ai = new HardAI(AIManager.getName(), user, playerLobby);
+            AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 
             Game game = playerLobby.challengeAI(ai, ai2);
             playerLobby.addSpectator(user, game);
