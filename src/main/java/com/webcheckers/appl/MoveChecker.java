@@ -1,12 +1,10 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.board.Move;
-import com.webcheckers.model.board.Piece;
-import com.webcheckers.model.board.Position;
-import com.webcheckers.model.board.Space;
+import com.webcheckers.model.board.*;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.ui.game.GetGameRoute;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Logger;
 
@@ -20,6 +18,15 @@ public class MoveChecker {
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private static boolean pieceMoved = false;
+
+    public static boolean playerHasValidMove(Board board, PieceColor color){
+        ArrayList<Position> positionsOfPieces = board.getLocationOfPieces(color);
+        Space[][] boardSpace = board.getMatrix();
+        for (Position position : positionsOfPieces) {
+            if (hasValidMove(position, boardSpace, color)) return true;
+        }
+        return false;
+    }
 
     public static boolean hasValidMove(Position position, Space[][] board, PieceColor color){
         if( position == null )
