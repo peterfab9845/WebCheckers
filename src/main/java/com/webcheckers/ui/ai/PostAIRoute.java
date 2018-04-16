@@ -13,6 +13,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -77,11 +78,13 @@ public class PostAIRoute implements Route {
             ai = new EasyAI(AINaming.getName(), user, playerLobby);
         if( type.equals("medium") )
             ai = new MediumAI(AINaming.getName(), user, playerLobby);
-        if( type.equals("hard") )
+        if( type.equals("hard") ) {
             ai = new HardAI(AINaming.getName(), user, playerLobby);
+        }
         if( type.equals("train") ){
             ai = new HardAI(AINaming.getName(), user, playerLobby);
             AI ai2 = new HardAI(AINaming.getName(), user, playerLobby);
+
             Game game = playerLobby.challengeAI(ai, ai2);
             playerLobby.addSpectator(user, game);
             response.redirect("/game");

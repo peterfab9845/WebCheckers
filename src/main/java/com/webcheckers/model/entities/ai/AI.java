@@ -11,6 +11,7 @@ import com.webcheckers.model.states.AiPositionProtection;
 import com.webcheckers.model.states.PieceColor;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -77,7 +78,8 @@ public class AI extends PlayerEntity{
     public void makeMove(Move move){
         BoardController.makeMove(game.getBoard(), move);
         game.changeTurns();
-        game.isGameOver();
+        if(!hasWon() && !hasLost())
+            game.isGameOver();
     }
 
     public Space[][] piecesAround(Position position, int distance){
@@ -96,11 +98,15 @@ public class AI extends PlayerEntity{
             Game game = playerLobby.getGame(enemy);
             if (game != null) {
                 if (game.getActiveColor() == this.getTeamColor()) {
-                    ai.makeDecision();
+                    try {
+                        ai.makeDecision();
+                    }
+                    catch(ConcurrentModificationException e){
+                        e.printStackTrace();
+                    }
                 }
-                if (hasLost() || hasWon()) {
+                if (hasLost() || hasWon())
                     break;
-                }
             }
         }
     }
@@ -108,12 +114,17 @@ public class AI extends PlayerEntity{
     public Piece getRandomPiece(Space[][] board){
         LinkedList<Piece> currentpieces = new LinkedList<>();
         Position position;
+
         for (Piece piece : pieces) {
             position = BoardController.getPieceLocation(board, piece);
             if (MoveChecker.hasValidMove(position, board, piece.getColor()))
                 currentpieces.add(piece);
         }
         Random rand = new Random();
+
+        if (currentpieces.isEmpty())
+            return null;
+
         return currentpieces.get(rand.nextInt(currentpieces.size()));
     }
 
@@ -218,6 +229,53 @@ public class AI extends PlayerEntity{
     }
 
     public Move getRandomMove(){
+        LinkedList<Piece> validPieces = getPiecesWithValidMoves();
+        if( pieces.isEmpty() || validPieces.isEmpty() )
+            return null;
+
+        return getValidMove(validPieces);
+    }
+
+    public LinkedList<Piece> getPiecesWithValidMoves(){
+
+        LinkedList<Piece> validPieces = new LinkedList<>();
+        pieces.forEach(i ->{
+            Position position = BoardController.getPieceLocation(game.getMatrix(), i);
+            if(MoveChecker.hasValidMove(position, game.getMatrix(), getTeamColor()))
+                validPieces.add(i);
+        });
+        return validPieces;
+    }
+
+    public Move getValidMove(LinkedList<Piece> validPieces){
+        Random random = new Random();
+        LinkedList<Move> moves = new LinkedList<>();
+
+        validPieces.forEach(piece->{
+            Move move;
+            Position position = BoardController.getPieceLocation(game.getMatrix(), piece);
+            int x = position.getCell();
+            int y = position.getRow();
+            boolean isKing = MoveChecker.isKing(position, game.getMatrix());
+            for( int row = -3; row < 4; row+=1){
+                for( int col = -3; col < 4; col+=1) {
+                    move = new Move(position, new Position(y + row, x + col));
+                    if (MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing, true)) {
+                        move = new Move(position, new Position(y + row, x + col));
+                        moves.add(move);
+                    }
+                }
+            }
+        });
+
+        if(moves.isEmpty())
+            return null;
+
+        return moves.get(random.nextInt(moves.size()));
+    }
+
+
+    public Move getRandomMoveOld(){
         int x;
         int y;
         Move move;
@@ -234,6 +292,9 @@ public class AI extends PlayerEntity{
         piece = getRandomPiece(board);
         position = BoardController.getPieceLocation(board, piece);
         isKing =  MoveChecker.isKing(position, board);
+        if(piece == null){
+            return null;
+        }
         color = piece.getColor();
 
         try {

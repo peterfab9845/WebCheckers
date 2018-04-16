@@ -36,11 +36,6 @@ public class EasyAI extends AI implements ArtIntel {
         thread.start();
     }
 
-    /**
-     * Logger for logging things to the console
-     */
-    private static final Logger LOG = Logger.getLogger(EasyAI.class.getName());
-
     @Override
     public void makeDecision() {
         this.game = getGame(playerLobby);

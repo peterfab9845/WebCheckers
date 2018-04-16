@@ -22,6 +22,8 @@ public class MoveChecker {
     private static boolean pieceMoved = false;
 
     public static boolean hasValidMove(Position position, Space[][] board, PieceColor color){
+        if( position == null )
+            return false;
         int startX = position.getCell();
         int startY = position.getRow();
         Position placeInQuestion;
