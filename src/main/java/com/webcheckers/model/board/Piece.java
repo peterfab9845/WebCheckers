@@ -1,6 +1,6 @@
 package com.webcheckers.model.board;
 
-import com.webcheckers.appl.playerlobby.AINaming;
+import com.webcheckers.appl.playerlobby.AIManager;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
 
@@ -29,7 +29,7 @@ public class Piece {
     public Piece(PieceType type, PieceColor color ){
         this.type = type;
         this.color = color;
-        this.id = AINaming.getPieceID();
+        this.id = AIManager.getPieceID();
     }
 
     /**
