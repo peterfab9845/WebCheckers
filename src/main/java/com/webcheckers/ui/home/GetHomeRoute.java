@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.playerlobby.AINaming;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.game.GetGameRoute;
@@ -73,7 +74,7 @@ public class GetHomeRoute implements Route {
 
         Player user = playerLobby.getPlayer(request.session());
 
-        if ( user == null ){
+        if ( user == null && AINaming.isDebugging()){
             user = new Player("admin", request.session());
             playerLobby.addPlayer(user, request.session());
         }
