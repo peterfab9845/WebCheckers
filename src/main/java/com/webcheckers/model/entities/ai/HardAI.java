@@ -20,7 +20,7 @@ public class HardAI extends AI implements ArtIntel {
     private HashMap<String, ArrayList<MoveMemory>> memory;
     private static final String CSV_FILE = "src/main/csv/AI1/test1.txt";
     private ArrayList<MoveMemory> currentGame;
-    private static final int thoughtTime = 1000;
+    private static final int thoughtTime = 1;
     private int turn;
 
     /**

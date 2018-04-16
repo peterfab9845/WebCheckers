@@ -8,6 +8,8 @@ import com.webcheckers.model.states.PieceColor;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import static com.webcheckers.appl.MoveChecker.playerHasValidMove;
+
 public class Game implements Iterable<Move>{
 
     /**
@@ -119,12 +121,12 @@ public class Game implements Iterable<Move>{
     public void isGameOver(){
         int red = board.getNumRedPieces();
         int white = board.getNumWhitePieces();
-        if( red == 0 ){
+        if( red == 0 || !playerHasValidMove(board, PieceColor.RED) ){
             redPlayer.justLost();
             whitePlayer.justWon();
             spectators.forEach(PlayerEntity::sendToLobby);
         }
-        else if( white == 0 ){
+        else if( white == 0 || !playerHasValidMove(board, PieceColor.WHITE)){
             redPlayer.justWon();
             whitePlayer.justLost();
             spectators.forEach(PlayerEntity::sendToLobby);
