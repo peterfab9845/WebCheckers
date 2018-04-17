@@ -5,6 +5,7 @@ import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.ui.ai.PostAIRoute;
 import com.webcheckers.ui.game.GetEndRoute;
 import com.webcheckers.ui.game.GetGameRoute;
+import com.webcheckers.ui.game.GetSpectatingRoute;
 import com.webcheckers.ui.game.PostEndRoute;
 import com.webcheckers.ui.home.GetHomeRoute;
 import com.webcheckers.ui.movement.PostBackupMoveRoute;
@@ -118,6 +119,8 @@ public class WebServer {
     private static final String END_URL = "/end";
 
     private static final String AI_URL = "/ai";
+
+    private static final String SPECTATE_URL = "/spectate";
 
 
     /**
@@ -239,6 +242,8 @@ public class WebServer {
         post(END_URL, new PostEndRoute(gson, playerLobby));
 
         get(AI_URL, new PostAIRoute(gson, playerLobby));
+
+        get(SPECTATE_URL, new GetSpectatingRoute(templateEngine, playerLobby));
 
         post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
 

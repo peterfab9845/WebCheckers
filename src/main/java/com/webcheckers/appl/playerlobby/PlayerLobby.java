@@ -163,4 +163,9 @@ public class PlayerLobby {
         game.addSpectator(player);
     }
 
+    public void addSpectator(PlayerEntity playerEntity, PlayerEntity watching){
+        Game game = gameManager.getGame(watching);
+        addSpectator(playerEntity, game);
+    }
+
 }
