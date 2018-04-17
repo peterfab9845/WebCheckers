@@ -2,14 +2,21 @@ package com.webcheckers.model.board;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for Move
+ */
+@Tag("Model-tier")
 class MoveTest {
 
     private Move CuT;
+
     private Position start;
     private Position wrongStart;
     private Position end;
@@ -19,6 +26,10 @@ class MoveTest {
     private static final int ROW2 = 1;
     private static final int CELL2 = 2;
 
+    /**
+     * Test the equality of Moves
+     */
+    @SuppressWarnings("EqualsWithItself")
     @Test
     void equals() {
         start = mock(Position.class);
@@ -27,35 +38,40 @@ class MoveTest {
         wrongEnd = mock(Position.class);
 
         CuT = new Move(start, end);
-        Move move = new Move(start, wrongEnd);
+        Move same = new Move(start, end);
+        Move different = new Move(start, wrongEnd);
 
-        boolean actual = CuT.equals(CuT);
-        assertTrue(actual);
-        actual = CuT.equals(start);
-        assertFalse(actual);
-        actual = CuT.equals(move);
-        assertFalse(actual);
+        assertEquals(CuT, same, "CuT was not equal to another move, same start/end");
 
-        move = new Move(wrongStart, end);
-        actual = CuT.equals(move);
-        assertFalse(actual);
+        assertNotEquals(CuT, different, "CuT was equal to another move of different end");
 
+        different = new Move(wrongStart, end);
+
+        assertNotEquals(CuT, different, "CuT was equal to another move of different start");
     }
 
+    /**
+     * Test getting the start of a Move
+     */
     @Test
     void getStart() {
-        Position start = new Position(ROW1, CELL1);
-        Position end = new Position(ROW2, CELL2);
+        Position start = mock(Position.class);
+        Position end = mock(Position.class);
         Move move = new Move(start, end);
-        assertEquals(move.getStart(), start);
+
+        assertEquals(move.getStart(), start, "Move did not return correct start");
     }
 
+    /**
+     * Test getting the end of a Move
+     */
     @Test
     void getEnd() {
-        Position start = new Position(ROW1, CELL1);
-        Position end = new Position(ROW2, CELL2);
+        Position start = mock(Position.class);
+        Position end = mock(Position.class);
         Move move = new Move(start, end);
-        assertEquals(move.getEnd(), end);
+
+        assertEquals(move.getEnd(), end, "Move did not return correct end");
     }
 
 }
