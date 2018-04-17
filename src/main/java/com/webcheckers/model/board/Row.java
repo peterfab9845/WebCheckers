@@ -59,16 +59,25 @@ public class Row implements Iterable {
 
 
     /**
-     * returns weather two objects are equal
-     * @param obj
+     * returns whether two objects are equal
+     * @param obj the object to compare
      * @return boolean
      */
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj instanceof Row) {
             Row otherRow = (Row) obj;
-            if (otherRow.getIndex() == this.index)
-                return (otherRow.iterator()).equals(this.iterator());
+            if (otherRow.getIndex() == this.index) {
+                Iterator<Space> thisIterator = this.iterator();
+                Iterator<Space> otherIterator = ((Row) obj).iterator();
+                while (thisIterator.hasNext()) {
+                    Space thisNext = thisIterator.next();
+                    if (!thisNext.equals(otherIterator.next())) {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
         return false;
     }
