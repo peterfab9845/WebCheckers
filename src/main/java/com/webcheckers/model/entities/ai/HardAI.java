@@ -9,19 +9,16 @@ import com.webcheckers.model.entities.PlayerEntity;
 import com.webcheckers.model.states.PieceColor;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static java.lang.System.*;
-import static java.lang.Thread.sleep;
 
 public class HardAI extends AI implements ArtIntel {
 
     private HashMap<String, ArrayList<MoveMemory>> memory;
     private static final String CSV_FILE = "src/main/csv/AI1/test1.csv";
     private ArrayList<MoveMemory> currentGame;
-    private static final int thoughtTime = 10;
+    private static final long THOUGHT_PROCESS_TIME = 500;
+    private static final int ACCURACY = 100;
     private int turn;
 
     /**
@@ -50,19 +47,40 @@ public class HardAI extends AI implements ArtIntel {
     @Override
     public synchronized void makeDecision(){
 
-        try { wait(thoughtTime); }
+        try { this.wait(THOUGHT_PROCESS_TIME); }
         catch (InterruptedException ignored) { }
 
         game = getGame(playerLobby);
         String matrix = hashMatrix(game.getMatrix());
 
         if( memory.containsKey(matrix) ){
-            System.out.println("move in memory");
             ArrayList<MoveMemory> moveMemories = memory.get(matrix);
-            if((moveMemories.size() > 3)){
-                return;
+            Random rand = new Random();
+            int n = moveMemories.size();
+            int prob = rand.nextInt(ACCURACY);
+            if(prob < n){
+                final float avgTurns[] = {0};
+                moveMemories.forEach(i -> avgTurns[0] += i.getWonIn());
+                avgTurns[0] = avgTurns[0] / n;
+                if(avgTurns[0] < 200.0){
+                    MoveMemory min = new MoveMemory("",null);
+                    min.setWonIn(201);
+                    for (MoveMemory moveMemory : moveMemories) {
+                        if (moveMemory.getWonIn() < min.getWonIn()) {
+                            min = moveMemory;
+                        }
+                    }
+                    Move move = min.getMove();
+                    Position p = new Position(move.getStartingX(), move.getStartingY());
+                    boolean isKing = MoveChecker.isKing(p,game.getMatrix());
+                    if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+                        makeMove(move);
+                        turn++;
+                        System.out.println("memory used");
+                        return;
+                    }
+                }
             }
-            System.out.println("not enough data for this move");
         }
         Move move = getRandomMove();
         if(move == null) {
@@ -74,10 +92,6 @@ public class HardAI extends AI implements ArtIntel {
             makeMove(move);
             currentGame.add(new MoveMemory(matrix, move));
             turn++;
-            out.println("move made");
-        }
-        else{
-            out.println("move invalid");
         }
 
     }
@@ -101,7 +115,7 @@ public class HardAI extends AI implements ArtIntel {
 
     @Override
     public void justWon() {
-        if(hasWon())
+        if(hasWon() || hasLost())
             return;
         super.justWon();
         currentGame.forEach((MoveMemory i) -> {
@@ -173,6 +187,7 @@ class MoveMemory{
     public Move move;
     public int wonIn;
 
+
     public MoveMemory(String matrix, Move move){
         this.matrix = matrix;
         this.move = move;
@@ -180,6 +195,9 @@ class MoveMemory{
 
     public void setWonIn(int wonIn) {
         this.wonIn = wonIn;
+    }
+    public int getWonIn() {
+        return wonIn;
     }
 
     @Override

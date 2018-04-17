@@ -47,6 +47,9 @@ public class Game implements Iterable<Move>{
      */
     private GameLog gameLog;
 
+
+    private boolean gameInSession;
+
     /**
      * Constructor
      * @param redPlayer
@@ -60,6 +63,7 @@ public class Game implements Iterable<Move>{
         gameLog = new GameLog(redPlayer, whitePlayer);
         turnTracker = new TurnTracker(board);
         spectators = new LinkedList<>();
+        gameInSession = true;
     }
 
     /**
@@ -125,12 +129,18 @@ public class Game implements Iterable<Move>{
             redPlayer.justLost();
             whitePlayer.justWon();
             spectators.forEach(PlayerEntity::sendToLobby);
+            gameInSession = false;
         }
         else if( white == 0 || !playerHasValidMove(board, PieceColor.WHITE)){
             redPlayer.justWon();
             whitePlayer.justLost();
             spectators.forEach(PlayerEntity::sendToLobby);
+            gameInSession = false;
         }
+    }
+
+    public boolean isGameInSession() {
+        return gameInSession;
     }
 
     @Override

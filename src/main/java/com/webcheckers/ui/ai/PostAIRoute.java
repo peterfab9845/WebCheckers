@@ -84,8 +84,30 @@ public class PostAIRoute implements Route {
             ai = new HardAI(AIManager.getName(), user, playerLobby);
             AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 
-            Game game = playerLobby.challengeAI(ai, ai2);
-            playerLobby.addSpectator(user, game);
+            final Game[] game = {playerLobby.challengeAI(ai, ai2)};
+            playerLobby.addSpectator(user, game[0]);
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    while(AIManager.isDebugging()){
+                        System.out.println("waiting");
+                        if(!game[0].isGameInSession()){
+                            try {
+                                this.sleep((long) 1000.0);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            AI ai = new HardAI(AIManager.getName(), user, playerLobby);
+                            AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
+
+                            game[0] = playerLobby.challengeAI(ai, ai2);
+                            playerLobby.addSpectator(user, game[0]);
+                        }
+                    }
+                }
+            };
+            thread.start();
             response.redirect("/game");
             throw halt(1002);
         }
