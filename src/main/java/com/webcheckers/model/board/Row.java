@@ -53,15 +53,8 @@ public class Row implements Iterable {
     }
 
     private Iterator<Space> reverseIterator(){
-        color = PieceColor.RED;
-        Stack<Space> stack = new Stack<Space>();
-        Stack<Space> reverseStack = new Stack<Space>();
-        for (Object o : this)
-            stack.push((Space) o);
-        while(!stack.isEmpty())
-            reverseStack.push(stack.pop());
-        color = PieceColor.WHITE;
-        return reverseStack.iterator();
+        Deque<Space> deque = new ArrayDeque<>(spaces);
+        return deque.descendingIterator();
     }
 
 
