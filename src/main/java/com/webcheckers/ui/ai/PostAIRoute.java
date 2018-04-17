@@ -3,6 +3,7 @@ package com.webcheckers.ui.ai;
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.AIManager;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.model.board.Position;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.ai.AI;
@@ -23,8 +24,7 @@ public class PostAIRoute implements Route {
     /**
      * Logger for logging things to the console
      */
-    private static final Logger LOG = Logger.getLogger(PostAIRoute.class.getName());
-
+    private final Logger LOG = Logger.getLogger(PostAIRoute.class.getName());
 
     /**
      * Gson object for transporting data
@@ -91,13 +91,12 @@ public class PostAIRoute implements Route {
                 public void run() {
                     super.run();
                     while(AIManager.isDebugging()){
-                        System.out.println("waiting");
+                        try {
+                            this.sleep((long) 1500.0);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         if(!game[0].isGameInSession()){
-                            try {
-                                this.sleep((long) 1000.0);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             AI ai = new HardAI(AIManager.getName(), user, playerLobby);
                             AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 
