@@ -55,7 +55,7 @@ class MessageMapTest {
      * Instantiate MessageMap because JaCoCo wants us to
      */
     @BeforeAll
-    public void instantiate() {
+    static void instantiate() {
         MessageMap map = new MessageMap(); // for coverage
     }
 
