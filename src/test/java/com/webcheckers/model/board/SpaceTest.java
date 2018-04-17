@@ -73,7 +73,7 @@ class SpaceTest {
         when(piece.getType()).thenReturn(PieceType.KING);
         assertTrue(CuT.isKing(), "isKing returned false with king piece");
 
-        piece = null;
+        CuT = new Space(CELL_IDX, null);
         assertFalse(CuT.isKing(), "isKing returned true with null piece");
     }
 
