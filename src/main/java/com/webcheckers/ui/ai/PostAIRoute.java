@@ -91,13 +91,12 @@ public class PostAIRoute implements Route {
                 public void run() {
                     super.run();
                     while(AIManager.isDebugging()){
-                        System.out.println("waiting");
+                        try {
+                            this.sleep((long) 1000.0);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         if(!game[0].isGameInSession()){
-                            try {
-                                this.sleep((long) 1000.0);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             AI ai = new HardAI(AIManager.getName(), user, playerLobby);
                             AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 
