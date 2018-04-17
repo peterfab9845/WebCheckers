@@ -1,35 +1,57 @@
 package com.webcheckers.model.board;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for Position
+ */
 @Tag("Model-tier")
 class PositionTest {
 
-    private static final int ARG_1 = 1;
-    private static final int ARG_2 = 2;
+    private static final int ROW = 1;
+    private static final int CELL = 2;
+    private static final int ROW2 = 3;
+    private static final int CELL2 = 4;
 
+    private Position CuT;
 
     /**
-     * Test that the no-arg constructor works without failure.
+     * Set up a Position to test
+     */
+    @BeforeEach
+    void setup() {
+        CuT = new Position(ROW, CELL);
+    }
+
+    /**
+     * Test getting row
      */
     @Test
-    void ctor() {
-        Position position = new Position(ARG_1, ARG_2);
-    }
-
-    @Test
     void getRow() {
-        Position position = new Position(ARG_1, ARG_2);
-        assertEquals(position.getRow(), ARG_1);
+        assertEquals(CuT.getRow(), ROW, "Position did not return correct row");
     }
 
+    /**
+     * Test getting cell
+     */
     @Test
     void getCell() {
-        Position position = new Position(ARG_1, ARG_2);
-        assertEquals(position.getCell(), ARG_2);
+        assertEquals(CuT.getCell(), CELL, "Position did not return correct cell");
     }
 
+    /**
+     * Test equality of Positions
+     */
+    @Test
+    void equals() {
+        assertEquals(CuT, CuT, "Position was not equal to itself");
+
+        Position other = new Position(ROW2, CELL2);
+        assertNotEquals(CuT, other, "Position was equal to a different position");
+    }
 }
