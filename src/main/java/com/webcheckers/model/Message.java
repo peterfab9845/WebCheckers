@@ -37,6 +37,19 @@ public class Message {
         return type;
     }
 
+    /**
+     * Check whether this message is the same, in type and text, as another.
+     * @param obj the message with which to check equality
+     * @return true if the other message has the same text and type (and is a Message)
+     */
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Message)) {
+            return false;
+        } else {
+            Message other = (Message) obj;
+            return getText().equals(other.getText()) && getType().equals(other.getType());
+        }
+    }
 
     /**
      * Get the hash code for this Message.

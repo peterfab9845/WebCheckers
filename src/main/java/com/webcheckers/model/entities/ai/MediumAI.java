@@ -129,6 +129,80 @@ public class MediumAI extends AI implements ArtIntel {
                     }
                 }
             }
+
+
+            if (currentRow < 6){
+                if (currentCell < 6){
+                    testPosition = new Position( currentRow +2, currentCell +2);
+                    testMove = new Move(position, testPosition);
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                        testProtection = analizePosition(testPosition);
+                        if (testProtection.getValue() > bestProtection.getValue()){
+                            bestMove = testMove;
+                            bestProtection = testProtection;
+                            equivalentMoves = 1;
+                        }
+                        else if (testProtection.getValue() == bestProtection.getValue()){
+                            equivalentMoves++;
+                            int random = ThreadLocalRandom.current().nextInt(0,equivalentMoves);
+                            if (random == 1) bestMove = testMove;
+                        }
+                    }
+                }
+                if (currentCell > 1){
+                    testPosition = new Position( currentRow +2, currentCell -2);
+                    testMove = new Move(position, testPosition);
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                        testProtection = analizePosition(testPosition);
+                        if (testProtection.getValue() > bestProtection.getValue()){
+                            bestMove = testMove;
+                            bestProtection = testProtection;
+                            equivalentMoves = 1;
+                        }
+                        else if (testProtection.getValue() == bestProtection.getValue()){
+                            equivalentMoves++;
+                            int random = ThreadLocalRandom.current().nextInt(0,equivalentMoves);
+                            if (random == 1) bestMove = testMove;
+                        }
+                    }
+                }
+            }
+            if (currentRow > 1){
+                if (currentCell < 6){
+                    testPosition = new Position( currentRow -2, currentCell +2);
+                    testMove = new Move(position, testPosition);
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                        testProtection = analizePosition(testPosition);
+                        if (testProtection.getValue() > bestProtection.getValue()){
+                            bestMove = testMove;
+                            bestProtection = testProtection;
+                            equivalentMoves = 1;
+                        }
+                        else if (testProtection.getValue() == bestProtection.getValue()){
+                            equivalentMoves++;
+                            int random = ThreadLocalRandom.current().nextInt(0,equivalentMoves);
+                            if (random == 1) bestMove = testMove;
+                        }
+                    }
+                }
+                if (currentCell > 1){
+                    testPosition = new Position( currentRow -2, currentCell -2);
+                    testMove = new Move(position, testPosition);
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                        testProtection = analizePosition(testPosition);
+                        if (testProtection.getValue() > bestProtection.getValue()){
+                            bestMove = testMove;
+                            bestProtection = testProtection;
+                            equivalentMoves = 1;
+                        }
+                        else if (testProtection.getValue() == bestProtection.getValue()){
+                            equivalentMoves++;
+                            int random = ThreadLocalRandom.current().nextInt(0,equivalentMoves);
+                            if (random == 1) bestMove = testMove;
+                        }
+                    }
+                }
+            }
         }
         assert (bestMove != null);
         if (MoveChecker.isMoveValid(bestMove, game.getBoard(), teamColor, board.isKing(bestMove.getStart()), true))

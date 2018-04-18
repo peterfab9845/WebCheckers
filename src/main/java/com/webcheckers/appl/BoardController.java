@@ -1,6 +1,5 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
@@ -46,10 +45,12 @@ public class BoardController {
         Piece piece = spaces[start.getRow()][start.getCell()].getPiece();
         spaces[start.getRow()][start.getCell()].setPiece(null);
 
-        if(end.getRow() == 0 && piece != null && piece.getColor() == PieceColor.RED)
-            piece.king();
-        if(end.getRow() == 7 && piece != null && piece.getColor() == PieceColor.WHITE)
-            piece.king();
+        if (piece != null) {
+            if (end.getRow() == 0 && piece.getColor() == PieceColor.RED)
+                piece.king();
+            if (end.getRow() == 7 && piece.getColor() == PieceColor.WHITE)
+                piece.king();
+        }
 
         spaces[end.getRow()][end.getCell()].setPiece(piece);
         removePiece(board, move.getPieceJumped());

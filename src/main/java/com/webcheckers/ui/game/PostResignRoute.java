@@ -1,9 +1,10 @@
-package com.webcheckers.ui.signin;
+package com.webcheckers.ui.game;
 
 import com.google.gson.Gson;
 import com.webcheckers.model.Message;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.states.MessageType;
 import com.webcheckers.model.states.MessageType;
 import com.webcheckers.ui.game.GetGameRoute;
 import spark.Request;

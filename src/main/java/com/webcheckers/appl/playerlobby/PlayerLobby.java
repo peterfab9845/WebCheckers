@@ -9,7 +9,6 @@ import spark.Session;
 
 import java.util.Iterator;
 
-
 /**
  * Map of each player's session ID to its respective Player object, along with their game data.
  */
@@ -39,7 +38,7 @@ public class PlayerLobby {
 
     /**
      * Removes player from lobby
-     *  @param player
+     *  @param player the player to remove
      */
     public void removePlayer(Player player){
         playerManager.removePlayer(player);
@@ -50,7 +49,7 @@ public class PlayerLobby {
 
     /**
      * given a session it returns the player in lobby with that session
-     * @param session
+     * @param session the session to get the player for
      * @return Players
      */
     public Player getPlayer(Session session){
@@ -59,7 +58,7 @@ public class PlayerLobby {
 
     /**
      * given a String it returns the player in lobby with that username
-     * @param name
+     * @param name the name of the player to get
      * @return Player
      */
     public Player getPlayer(String name){
@@ -78,7 +77,7 @@ public class PlayerLobby {
 
     /**
     * Removes game from list of games, and assigns winners
-    * @param player
+    * @param player the player whose game to remove
     */
     public void removeGame(PlayerEntity player){
         if(gameManager != null)
@@ -113,10 +112,10 @@ public class PlayerLobby {
 
     /**
     * gets number of players in the lobby
-    * @return integer of players in loby
+    * @return integer of players in lobby
     */
-    public int countInLobby(){
-    return playerManager.playersInLobby();
+    public int countOnline(){
+    return playerManager.countInLobby();
     }
 
 
@@ -131,8 +130,8 @@ public class PlayerLobby {
 
     /**
     * Adds a game to the game library
-    * @param player
-    * @param game
+    * @param player the player
+    * @param game the player's game
     */
     public void addGame(PlayerEntity player, Game game){
         gameManager.addGame(player, game);
@@ -140,8 +139,8 @@ public class PlayerLobby {
 
     /**
     * Given a player returns the game that they are in
-    * @param player
-    * @return
+    * @param player the player for which to get the game
+    * @return the game that player is in
     */
     public Game getGame(PlayerEntity player){
         return gameManager.getGame(player);

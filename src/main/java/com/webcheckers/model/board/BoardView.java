@@ -39,16 +39,9 @@ public class BoardView implements Iterable<Row> {
         return reverseIterator();
     }
 
-    private Iterator<Row> reverseIterator(){
-        color = PieceColor.RED;
-        Stack<Row> stack = new Stack<Row>();
-        Stack<Row> reverseStack = new Stack<Row>();
-        for (Object o : this)
-            stack.push((Row) o);
-        while(!stack.isEmpty())
-            reverseStack.push(stack.pop());
-        color = PieceColor.WHITE;
-        return reverseStack.iterator();
+    private Iterator<Row> reverseIterator() {
+        Deque<Row> deque = new ArrayDeque<>(rows);
+        return deque.descendingIterator();
     }
 
 }

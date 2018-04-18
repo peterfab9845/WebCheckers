@@ -1,6 +1,7 @@
 package com.webcheckers.model.board;
 
 import com.webcheckers.appl.BoardController;
+import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
@@ -105,8 +106,7 @@ public class Board {
 
     public boolean isKing(Position position){
         Piece piece = valueAt(position);
-        if (piece.getType().equals(PieceType.KING)) return true;
-        return false;
+        return piece.getType().equals(PieceType.KING);
     }
 
 }
