@@ -1,10 +1,12 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.board.*;
+import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class MoveChecker {
@@ -133,6 +135,9 @@ public class MoveChecker {
         else if( !inDistanceOf(move, SINGLE_DISTANCE) ) {
             return false;
         }
+
+        if( inDistanceOf(move, SINGLE_DISTANCE) )
+            return board[move.getStartingY()][move.getStartingX()].getPiece() != null;
 
         return true;
     }
