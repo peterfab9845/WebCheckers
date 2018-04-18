@@ -58,16 +58,20 @@ public class Space {
 
 
     /**
-     * returns wether two objects are equal
-     * @param obj
+     * returns whether two objects are equal
+     * @param obj the object to check against
      * @return boolean
      */
     @Override
     public boolean equals(Object obj){
-        if (obj instanceof Space){
-            Space otherSpace = (Space)obj;
-            if (otherSpace.getCellIdx() == this.cellIdx)
-                return (otherSpace.getPiece()).equals(this.piece);
+        if (obj instanceof Space) {
+            Space otherSpace = (Space) obj;
+            if (otherSpace.getCellIdx() == this.cellIdx) {
+                if (otherSpace.getPiece() != null) {
+                    return (otherSpace.getPiece()).equals(this.piece);
+                }
+                return piece == null;
+            }
         }
         return false;
     }

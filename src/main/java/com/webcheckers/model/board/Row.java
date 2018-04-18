@@ -57,29 +57,31 @@ public class Row implements Iterable {
     }
 
     private Iterator<Space> reverseIterator(){
-        color = PieceColor.RED;
-        Stack<Space> stack = new Stack<Space>();
-        Stack<Space> reverseStack = new Stack<Space>();
-        for (Object o : this)
-            stack.push((Space) o);
-        while(!stack.isEmpty())
-            reverseStack.push(stack.pop());
-        color = PieceColor.WHITE;
-        return reverseStack.iterator();
+        Deque<Space> deque = new ArrayDeque<>(spaces);
+        return deque.descendingIterator();
     }
 
 
     /**
-     * returns weather two objects are equal
-     * @param obj
+     * returns whether two objects are equal
+     * @param obj the object to compare
      * @return boolean
      */
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj instanceof Row) {
             Row otherRow = (Row) obj;
-            if (otherRow.getIndex() == this.index)
-                return (otherRow.iterator()).equals(this.iterator());
+            if (otherRow.getIndex() == this.index) {
+                Iterator<Space> thisIterator = this.iterator();
+                Iterator<Space> otherIterator = ((Row) obj).iterator();
+                while (thisIterator.hasNext()) {
+                    Space thisNext = thisIterator.next();
+                    if (!thisNext.equals(otherIterator.next())) {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
         return false;
     }

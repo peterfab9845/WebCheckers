@@ -1,5 +1,6 @@
 package com.webcheckers.appl.playerlobby;
 
+import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.PlayerEntity;
@@ -11,20 +12,34 @@ public class GameManager {
 
     private HashMap<String, Game> games;
 
-    public GameManager(){
+    public GameManager() {
         games = new HashMap<>();
+    }
+
+
+    /**
+     * Adds a game to the game library
+     */
+    public void addGame(PlayerEntity player, Game game) {
+        games.put(player.getName(), game);
+    }
+
+    /**
+     * Given a player, returns the game that they are in
+     */
+    public Game getGame(PlayerEntity player) {
+        return games.get(player.getName());
     }
 
     /**
      * Removes game from list of games, and assigns winners
-     * @param player
      */
-    public void removeGame(PlayerEntity player){
-        Game game = getGame(player);
+    public void removeGame(PlayerEntity loser){
+        Game game = getGame(loser);
         PlayerEntity redPlayer = game.getRedPlayer();
         PlayerEntity whitePlayer = game.getWhitePlayer();
 
-        if( player == whitePlayer ){
+        if( loser == whitePlayer ){
             redPlayer.justWon();
             whitePlayer.justLost();
         }
@@ -33,16 +48,14 @@ public class GameManager {
             whitePlayer.justWon();
         }
 
-        games.remove(game.getWhitePlayer());
-        games.remove(game.getRedPlayer());
+        games.remove(redPlayer.getName());
+        games.remove(whitePlayer.getName());
     }
 
     /**
-     * puts two players in a game together
-     * @param player
-     * @param challenging
+     * Puts two players in a game together
      */
-    public void challenge(PlayerEntity player, PlayerEntity challenging){
+    public void challenge(PlayerEntity player, PlayerEntity challenging) {
         player.setInGame();
         challenging.setInGame();
         Game game = new Game(player, challenging);
@@ -52,23 +65,4 @@ public class GameManager {
         addGame(challenging, game);
     }
 
-    /**
-     * Adds a game to the game library
-     * @param player
-     * @param game
-     */
-    public void addGame(PlayerEntity player, Game game){
-        games.put(player.getName(), game);
-    }
-
-
-
-    /**
-     * Given a player returns the game that they are in
-     * @param player
-     * @return
-     */
-    public Game getGame(PlayerEntity player){
-        return games.get(player.getName());
-    }
 }

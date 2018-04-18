@@ -1,13 +1,17 @@
 package com.webcheckers.ui.home;
 
+import com.webcheckers.appl.MessageMap;
+import com.webcheckers.model.Message;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.playerlobby.AIManager;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.appl.playerlobby.AIManager;
+import com.webcheckers.appl.MessageMap;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.Message;
 import com.webcheckers.ui.game.GetGameRoute;
 import spark.ModelAndView;
 import spark.Request;
@@ -29,7 +33,7 @@ public class GetHomeRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     /**
-    * Template engine for desplaying things to users
+    * Template engine for displaying things to users
     */
     private final TemplateEngine templateEngine;
 
@@ -85,7 +89,10 @@ public class GetHomeRoute implements Route {
             vm.put("currentPlayer", user);
             vm.put("playerList", playerLobby.getPlayersInLobbyExcept(request.session()));
             vm.put("gameList", playerLobby.getPlayersInGameExcept(request.session()));
-
+            Message message;
+            if ((message = MessageMap.getMessage(request.session())) != null) {
+                vm.put("message", message);
+            }
         }
 
         vm.put("playerCount", playerLobby.countInLobby());
