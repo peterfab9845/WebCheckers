@@ -3,7 +3,10 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.ui.ai.PostAIRoute;
-import com.webcheckers.ui.game.*;
+import com.webcheckers.ui.game.GetEndRoute;
+import com.webcheckers.ui.game.GetGameRoute;
+import com.webcheckers.ui.game.GetSpectatingRoute;
+import com.webcheckers.ui.game.PostEndRoute;
 import com.webcheckers.ui.home.GetHomeRoute;
 import com.webcheckers.ui.movement.PostBackupMoveRoute;
 import com.webcheckers.ui.movement.PostCheckTurnRoute;
@@ -118,8 +121,6 @@ public class WebServer {
     private static final String AI_URL = "/ai";
 
     private static final String SPECTATE_URL = "/spectate";
-
-    private static final String QUIT_SIGNIN = "/leave";
 
 
     /**
@@ -245,9 +246,6 @@ public class WebServer {
         get(SPECTATE_URL, new GetSpectatingRoute(templateEngine, playerLobby));
 
         post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
-
-        post(QUIT_SIGNIN, new PostLeaveSpectatingRoute(gson, playerLobby));
-
 
         //
         LOG.config("WebServer is initialized.");

@@ -45,8 +45,6 @@ define(function(require){
     
   };
 
-
-
   //
   // Public (external) methods
   //
