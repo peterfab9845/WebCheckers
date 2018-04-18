@@ -70,6 +70,7 @@ public class Space {
                 if (otherSpace.getPiece() != null) {
                     return (otherSpace.getPiece()).equals(this.piece);
                 }
+                return true;
         }
         return false;
     }
