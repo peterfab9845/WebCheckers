@@ -14,6 +14,7 @@ import spark.Response;
 import spark.Route;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;
@@ -36,7 +37,7 @@ public class PostAIRoute implements Route {
      */
     private PlayerLobby playerLobby;
 
-    private final static long SLEEP_TIME = (long)1000.0;
+    private final static long SLEEP_TIME = (long)2000.0;
 
     /**
      * Create the Spark Route (UI controller) for the {@code POST /checkTurn} HTTP request.
@@ -100,7 +101,12 @@ public class PostAIRoute implements Route {
                         }
                         if(!game[0].isGameInSession()){
                             AI ai = new HardAI(AIManager.getName(), user, playerLobby);
-                            AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
+                            AI ai2;
+                            Random random = new Random();
+                            if(random.nextInt(10)% 2 == 0)
+                                ai2 = new EasyAI(AIManager.getName(), user, playerLobby);
+                            else
+                                ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 
                             game[0] = playerLobby.challengeAI(ai, ai2);
                             playerLobby.addSpectator(user, game[0]);

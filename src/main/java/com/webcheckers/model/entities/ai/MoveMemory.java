@@ -9,9 +9,13 @@ public class MoveMemory{
     public int wonIn;
 
 
+    public boolean hasBeenSaved;
+
+
     public MoveMemory(String matrix, Move move){
         this.matrix = matrix;
         this.move = move;
+        hasBeenSaved = false;
     }
 
     public void setWonIn(int wonIn) {
@@ -28,5 +32,13 @@ public class MoveMemory{
 
     public Move getMove() {
         return move;
+    }
+
+    public boolean hasBeenSaved() {
+        return hasBeenSaved;
+    }
+
+    public void setHasBeenSaved(boolean hasBeenSaved) {
+        this.hasBeenSaved = hasBeenSaved;
     }
 }

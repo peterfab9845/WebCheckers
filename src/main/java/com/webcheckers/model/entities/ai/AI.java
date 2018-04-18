@@ -253,15 +253,17 @@ public class AI extends PlayerEntity{
         validPieces.forEach(piece->{
             Move move;
             Position position = BoardController.getPieceLocation(game.getMatrix(), piece);
-            int x = position.getCell();
-            int y = position.getRow();
-            boolean isKing = MoveChecker.isKing(position, game.getMatrix());
-            for( int row = -3; row < 4; row+=1){
-                for( int col = -3; col < 4; col+=1) {
-                    move = new Move(position, new Position(y + row, x + col));
-                    if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, false)) {
+            if(position != null) {
+                int x = position.getCell();
+                int y = position.getRow();
+                boolean isKing = MoveChecker.isKing(position, game.getMatrix());
+                for (int row = -3; row < 4; row += 1) {
+                    for (int col = -3; col < 4; col += 1) {
                         move = new Move(position, new Position(y + row, x + col));
-                        moves.add(move);
+                        if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, false)) {
+                            move = new Move(position, new Position(y + row, x + col));
+                            moves.add(move);
+                        }
                     }
                 }
             }

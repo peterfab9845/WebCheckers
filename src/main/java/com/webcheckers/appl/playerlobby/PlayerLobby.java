@@ -81,7 +81,8 @@ public class PlayerLobby {
     * @param player
     */
     public void removeGame(PlayerEntity player){
-        gameManager.removeGame(player);
+        if(gameManager != null)
+            gameManager.removeGame(player);
     }
 
     /**

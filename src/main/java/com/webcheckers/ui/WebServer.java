@@ -10,6 +10,7 @@ import com.webcheckers.ui.movement.PostCheckTurnRoute;
 import com.webcheckers.ui.movement.PostSubmitTurnRoute;
 import com.webcheckers.ui.movement.PostValidateMoveRoute;
 import com.webcheckers.ui.saves.GetSavesRoute;
+import com.webcheckers.ui.saves.PostSaveRoute;
 import com.webcheckers.ui.signin.GetSigninRoute;
 import com.webcheckers.ui.signin.GetSignoutRoute;
 import com.webcheckers.ui.signin.PostResignRoute;
@@ -120,6 +121,8 @@ public class WebServer {
     private static final String SPECTATE_URL = "/spectate";
 
     private static final String QUIT_SIGNIN = "/leave";
+
+    private static final String SAVE_URL = "/save";
 
 
     /**
@@ -248,6 +251,7 @@ public class WebServer {
 
         post(QUIT_SIGNIN, new PostLeaveSpectatingRoute(gson, playerLobby));
 
+        post(SAVE_URL, new PostSaveRoute(gson, playerLobby));
 
         //
         LOG.config("WebServer is initialized.");

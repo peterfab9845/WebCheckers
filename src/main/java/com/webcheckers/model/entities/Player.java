@@ -19,6 +19,11 @@ public class Player extends PlayerEntity {
     private LinkedList<GameLog> previousGames;
 
     /**
+     * Holds temp recording of prev game
+     */
+    private GameLog lastGame;
+
+    /**
     * Constructor
     * @param name
     * @param session
@@ -77,5 +82,13 @@ public class Player extends PlayerEntity {
     @Override
     public int hashCode(){
         return session.hashCode();
+    }
+
+    public GameLog getLastGame() {
+        return lastGame;
+    }
+
+    public void setLastGame(GameLog lastGame) {
+        this.lastGame = lastGame;
     }
 }

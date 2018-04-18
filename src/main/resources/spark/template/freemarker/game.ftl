@@ -21,8 +21,7 @@
 </head>
 <body>
   <div class="page">
-    <h1>We🅱️ Checkers️ </h1>
-    
+    <h1>We🅱️ Checkers<font size="1"></h1></font>
     <div class="navigation">
     <#if currentPlayer??>
       <a href="/">my home</a> |

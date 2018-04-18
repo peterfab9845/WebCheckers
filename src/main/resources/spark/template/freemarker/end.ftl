@@ -21,7 +21,7 @@
 
 
     <div align="center" class="body">
-        <h2><u>You have ${winLoss}</u></h2><br>
+        <h2 style="color: #000000"><u>You have ${winLoss}</u></h2><br>
 
         <form action="/save" method="POST">
             <button>Save and Watch Replay</button>

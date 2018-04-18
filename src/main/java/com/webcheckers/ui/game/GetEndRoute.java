@@ -79,11 +79,11 @@ public class GetEndRoute implements Route {
         vm.put("currentPlayer", user);
         if(user.hasWon()) {
             vm.put("title", "You Won!");
-            vm.put("winLoss", "won.");
+            vm.put("winLoss", "won!");
         }
         else if( user.hasLost()) {
             vm.put("title", "You Lost!");
-            vm.put("winLoss", "loss.");
+            vm.put("winLoss", "lost!");
         }
 
 
