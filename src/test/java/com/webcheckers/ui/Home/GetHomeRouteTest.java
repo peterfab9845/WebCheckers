@@ -15,6 +15,7 @@ import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import spark.HaltException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -134,5 +135,18 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
         testHelper.assertViewModelAttribute("message", message);
+    }
+
+    /**
+     * Test for redirect if in a game
+     */
+    @Test
+    void handle_inGame() {
+        Player player = mock(Player.class);
+        when(player.getSession()).thenReturn(session);
+        when(player.isInLobby()).thenReturn(false);
+        lobby.addPlayer(player);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
+        assertThrows(HaltException.class, () -> getHomeRoute.handle(request, response));
     }
 }
