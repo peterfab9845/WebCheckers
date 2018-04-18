@@ -16,8 +16,6 @@ public class MoveChecker {
      */
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-    private static boolean pieceMoved = false;
-
     public static boolean playerHasValidMove(Board board, PieceColor color){
         ArrayList<Position> positionsOfPieces = board.getLocationOfPieces(color);
         for (Position position : positionsOfPieces) {
@@ -67,7 +65,6 @@ public class MoveChecker {
         if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
             return false;
 
-        pieceMoved = true;
         return true;
     }
 
@@ -92,9 +89,6 @@ public class MoveChecker {
 
         if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
             return false;
-
-        if(!isTesting)
-            pieceMoved = true;
 
         return true;
     }
@@ -149,8 +143,6 @@ public class MoveChecker {
             if(color == PieceColor.RED && movingNorth(move) )
                 return false;
             if(color == PieceColor.WHITE && movingSouth(move) )
-                return false;
-            if(pieceMoved)
                 return false;
         }
 
@@ -222,7 +214,4 @@ public class MoveChecker {
         return delta( move.getStartingY(), move.getEndingY() ) > 0;
     }
 
-    public static void resetPieceMoved(){
-        pieceMoved = false;
-    }
 }

@@ -34,9 +34,9 @@ public class AI extends PlayerEntity{
      *
      * @param name
      */
-    public AI(String name, PlayerEntity emeny, PlayerLobby playerLobby) {
+    public AI(String name, PlayerEntity enemy, PlayerLobby playerLobby) {
         super(name);
-        this.enemy = emeny;
+        this.enemy = enemy;
         this.playerLobby = playerLobby;
     }
 

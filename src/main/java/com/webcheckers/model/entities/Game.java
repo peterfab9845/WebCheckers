@@ -111,7 +111,6 @@ public class Game implements Iterable<Move>{
             activeColor = PieceColor.WHITE;
         else
             activeColor= PieceColor.RED;
-        MoveChecker.resetPieceMoved();
     }
 
     /**

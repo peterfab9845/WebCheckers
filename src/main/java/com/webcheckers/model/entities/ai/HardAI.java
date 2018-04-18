@@ -172,12 +172,6 @@ public class HardAI extends AI implements ArtIntel {
             writer.close();
         }
     }
-
-    @Override
-    public void sendToLobby(){
-        super.sendToLobby();
-        MoveChecker.resetPieceMoved();
-    }
 }
 
 class MoveMemory{
