@@ -66,11 +66,12 @@ public class Space {
     public boolean equals(Object obj){
         if (obj instanceof Space) {
             Space otherSpace = (Space) obj;
-            if (otherSpace.getCellIdx() == this.cellIdx)
+            if (otherSpace.getCellIdx() == this.cellIdx) {
                 if (otherSpace.getPiece() != null) {
                     return (otherSpace.getPiece()).equals(this.piece);
                 }
-                return true;
+                return piece == null;
+            }
         }
         return false;
     }
