@@ -37,6 +37,11 @@ public class Message {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return text;
+    }
+
     /**
      * Check whether this message is the same, in type and text, as another.
      * @param obj the message with which to check equality
