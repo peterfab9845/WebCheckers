@@ -21,6 +21,10 @@ import spark.Response;
 import spark.Session;
 import spark.TemplateEngine;
 
+/**
+ * Test class for GetHomeRoute
+ */
+@SuppressWarnings("WeakerAccess")
 @Tag("UI-tier")
 public class GetHomeRouteTest {
 
@@ -40,6 +44,9 @@ public class GetHomeRouteTest {
 
     private PlayerLobby lobby;
 
+    /**
+     * Set up request, session, engine, and lobby to use for tests
+     */
     @BeforeEach
     public void setup() {
         request = mock(Request.class);
@@ -52,6 +59,9 @@ public class GetHomeRouteTest {
         MessageMap.init();
     }
 
+    /**
+     * Test that the constructor will not accept a null template engine
+     */
     @Test
     public void constructor_nullEngine() {
         engine = null;
@@ -60,6 +70,9 @@ public class GetHomeRouteTest {
         }, "GetHomeRoute allowed null template engine.");
     }
 
+    /**
+     * Test behavior for when a player is not signed in
+     */
     @Test
     public void handle_notSignedIn() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -75,6 +88,9 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
 
+    /**
+     * Test behavior for when a player is signed in
+     */
     @Test
     public void handle_signedIn() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
@@ -95,6 +111,9 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
 
+    /**
+     * Test behavior for when a player is signed in and has a message to see
+     */
     @Test
     public void handle_signedInWithMessage() {
         final TemplateEngineTester testHelper = new TemplateEngineTester();

@@ -18,6 +18,9 @@ import spark.Response;
 import spark.Session;
 import spark.TemplateEngine;
 
+/**
+ * Test class for GetSigninRoute
+ */
 @Tag("UI-tier")
 class GetSigninRouteTest {
 
@@ -31,6 +34,9 @@ class GetSigninRouteTest {
     private TemplateEngineTester testHelper;
     private PlayerLobby lobby;
 
+    /**
+     * Set up a request, session, engine, player, and lobby to test with
+     */
     @BeforeEach
     void setup() {
         request = mock(Request.class);
@@ -47,12 +53,18 @@ class GetSigninRouteTest {
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
     }
 
+    /**
+     * Test that the constructor works correctly
+     */
     @Test
     void constructor() {
         engine = mock(TemplateEngine.class);
         GetSigninRoute getSigninRoute = new GetSigninRoute(engine, lobby);
     }
 
+    /**
+     * Test that the constructor rejects a null TemplateEngine
+     */
     @Test
     void constructor_nullEngine() {
         engine = null;
@@ -61,6 +73,9 @@ class GetSigninRouteTest {
         }, "GetSigninRoute allowed null template engine.");
     }
 
+    /**
+     * Test getting the sign-in page without being signed in
+     */
     @Test
     void handleWithoutTakenSession() {
 
@@ -73,18 +88,9 @@ class GetSigninRouteTest {
 
     }
 
-    @Test
-    void handleWithTakenSession() {
-
-        lobby.addPlayer(player);
-        GetSigninRoute getSigninRoute = new GetSigninRoute(engine, lobby);
-        try {
-            getSigninRoute.handle(request, response);
-        } catch (HaltException ignored) {
-        }
-
-    }
-
+    /**
+     * Test that the sign-in page redirects home if signed in
+     */
     @Test
     void handleHalt() {
         lobby.addPlayer(player);
