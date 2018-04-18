@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class="page">
-    <h1>We🅱️ Checkers ️</h1>
+    <h1>We🅱️ Checkers</h1>
 
     <div class="navigation">
       <#if currentPlayer??>
