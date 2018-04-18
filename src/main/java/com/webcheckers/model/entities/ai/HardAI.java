@@ -73,7 +73,7 @@ public class HardAI extends AI implements ArtIntel {
                     Move move = min.getMove();
                     Position p = new Position(move.getStartingX(), move.getStartingY());
                     boolean isKing = MoveChecker.isKing(p,game.getMatrix());
-                    if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+                    if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
                         makeMove(move);
                         turn++;
                         System.out.println("memory used");
@@ -88,7 +88,7 @@ public class HardAI extends AI implements ArtIntel {
             return;
         }
         boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
-        if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+        if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
             makeMove(move);
             currentGame.add(new MoveMemory(matrix, move));
             turn++;
@@ -118,23 +118,23 @@ public class HardAI extends AI implements ArtIntel {
         if(hasWon() || hasLost())
             return;
         super.justWon();
-        currentGame.forEach((MoveMemory i) -> {
-            ArrayList<MoveMemory> mem = new ArrayList<>();
-            i.setWonIn(turn);
-            if(memory.containsKey(i.matrix)){
-                mem = memory.get(i.matrix);
-            }
-            else {
-                memory.put(i.matrix, mem);
-            }
+//        currentGame.forEach((MoveMemory i) -> {
+//            ArrayList<MoveMemory> mem = new ArrayList<>();
+//            i.setWonIn(turn);
+//            if(memory.containsKey(i.matrix)){
+//                mem = memory.get(i.matrix);
+//            }
+//            else {
+//                memory.put(i.matrix, mem);
+//            }
 
-            try {
-                writeToFile();
-            } catch (FileNotFoundException | UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            mem.add(i);
-        });
+//            try {
+        writeToFile();
+//            } catch (FileNotFoundException | UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//            mem.add(i);
+//        });
     }
 
     public void loadMemory() throws IOException {
@@ -163,14 +163,32 @@ public class HardAI extends AI implements ArtIntel {
 
     }
 
-    private void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
-        try (PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8")) {
-
-            for (Map.Entry<String, ArrayList<MoveMemory>> entry : memory.entrySet()) {
-                ArrayList<MoveMemory> value = entry.getValue();
-                value.forEach(i -> writer.println(i));
+    private void writeToFile() {
+//        try (PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8")) {
+//
+//            for (Map.Entry<String, ArrayList<MoveMemory>> entry : memory.entrySet()) {
+//                ArrayList<MoveMemory> value = entry.getValue();
+//                value.forEach(i -> writer.println(i));
+//            }
+//            writer.close();
+//        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE, true))) {
+            for (MoveMemory i : currentGame) {
+                i.setWonIn(turn);
+                try {
+                    if (hasWon() && !i.hasBeenSaved()) {
+                        bw.write(String.valueOf(i));
+                        bw.newLine();
+                        bw.flush();
+                        i.setHasBeenSaved(true);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            writer.close();
+            System.out.println("data saved");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -188,9 +206,13 @@ class MoveMemory{
     public int wonIn;
 
 
+    public boolean hasBeenSaved;
+
+
     public MoveMemory(String matrix, Move move){
         this.matrix = matrix;
         this.move = move;
+        hasBeenSaved = false;
     }
 
     public void setWonIn(int wonIn) {
@@ -207,5 +229,13 @@ class MoveMemory{
 
     public Move getMove() {
         return move;
+    }
+
+    public boolean hasBeenSaved() {
+        return hasBeenSaved;
+    }
+
+    public void setHasBeenSaved(boolean hasBeenSaved) {
+        this.hasBeenSaved = hasBeenSaved;
     }
 }

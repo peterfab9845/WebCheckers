@@ -21,14 +21,13 @@ public class MoveChecker {
 
     public static boolean playerHasValidMove(Board board, PieceColor color){
         ArrayList<Position> positionsOfPieces = board.getLocationOfPieces(color);
-        Space[][] boardSpace = board.getMatrix();
         for (Position position : positionsOfPieces) {
-            if (hasValidMove(position, boardSpace, color)) return true;
+            if (hasValidMove(position, board, color)) return true;
         }
         return false;
     }
 
-    public static boolean hasValidMove(Position position, Space[][] board, PieceColor color){
+    public static boolean hasValidMove(Position position, Board board, PieceColor color){
         if( position == null )
             return false;
         int startX = position.getCell();
@@ -39,7 +38,7 @@ public class MoveChecker {
             for( int col = -6; col < 7; col+=1) {
                 placeInQuestion = new Position(startY + row, startX + col);
                 move = new Move(position, placeInQuestion);
-                boolean isKing = isKing(move.getStart(), board);
+                boolean isKing = isKing(move.getStart(), board.getMatrix());
                 if(isMoveValid(move, board, color, isKing,true))
                     return true;
             }
@@ -47,7 +46,7 @@ public class MoveChecker {
         return false;
     }
 
-    public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king){
+    public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king){
 
         if(move == null)
             return false;
@@ -55,23 +54,25 @@ public class MoveChecker {
         if(!positionOnBoard(move.getEnd()))
             return false;
 
-        if(board[move.getEndingY()][move.getEndingX()].getPiece() != null )
+        if(board.getMatrix()[move.getEndingY()][move.getEndingX()].getPiece() != null )
             return false;
 
         //Check for black space
         if( !positionIsBlack(move.getEnd()) )
             return false;
 
-        if(!checks(move, board, color, king)){
+        if(!checks(move, board.getMatrix(), color, king)){
             return false;
         }
 
+        if(forsedMoveAvalible(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
+            return false;
 
         pieceMoved = true;
         return true;
     }
 
-    public static boolean isMoveValid(Move move, Space[][] board, PieceColor color, boolean king, boolean isTesting){
+    public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king, boolean isTesting){
 
         if(move == null)
             return false;
@@ -79,21 +80,67 @@ public class MoveChecker {
         if(!positionOnBoard(move.getEnd()))
             return false;
 
-        if(board[move.getEndingY()][move.getEndingX()].getPiece() != null )
+        if(board.getMatrix()[move.getEndingY()][move.getEndingX()].getPiece() != null )
             return false;
 
         //Check for black space
         if( !positionIsBlack(move.getEnd()) )
             return false;
 
+        if(!checks(move, board.getMatrix(), color, king)){
+            return false;
+        }
 
-        if(!checks(move, board, color, king))
+        if(forsedMoveAvalible(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
             return false;
 
-        if(!isTesting)
-            pieceMoved = true;
-
+        if(isTesting)
+            pieceMoved = false;
         return true;
+    }
+
+    private static boolean forsedMoveAvalible(Board board, PieceColor color){
+        ArrayList<Position> positionsOfPieces = board.getLocationOfPieces(color);
+        for (Position position : positionsOfPieces) {
+            if (hasJumpMove(position, board, color)) return true;
+        }
+        return false;
+    }
+
+    private static boolean hasJumpMove(Position position, Board board, PieceColor color) {
+        if( position == null )
+            return false;
+        int startX = position.getCell();
+        int startY = position.getRow();
+
+        Move move;
+        Position placeInQuestion;
+        for( int row = -6; row < 7; row+=1){
+            for( int col = -6; col < 7; col+=1) {
+                placeInQuestion = new Position(startY + row, startX + col);
+                move = new Move(position, placeInQuestion);
+                boolean isKing = isKing(move.getStart(), board.getMatrix());
+
+                if( !isKing ){
+                    //Check for direction
+                    if(color == PieceColor.RED && movingNorth(move) )
+                        continue;
+                    if(color == PieceColor.WHITE && movingSouth(move) )
+                        continue;
+                }
+
+                if(positionOnBoard(move.getEnd())) {
+                    if (inDistanceOf(move, JUMP_DISTANCE)) {
+                        if (hasPieceBetween(move, board.getMatrix()) && pieceBetween(move, board.getMatrix()).getColor() != color) {
+                            if(board.getMatrix()[move.getEndingY()][move.getEndingX()].getPiece() == null)
+                                return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
     }
 
     private static boolean checks(Move move, Space[][] board, PieceColor color, boolean king){
@@ -107,7 +154,7 @@ public class MoveChecker {
                 return false;
         }
 
-        if( inDistanceOf(move, JUMP_DISTANCE)) {
+        if( inDistanceOf(move, JUMP_DISTANCE) ) {
             if ( hasPieceBetween(move, board) && pieceBetween(move, board).getColor() != color) {
                 move.setJumped(positionBetween(move));
             }
