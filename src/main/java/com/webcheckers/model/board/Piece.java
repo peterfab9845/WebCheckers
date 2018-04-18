@@ -1,6 +1,6 @@
 package com.webcheckers.model.board;
 
-import com.webcheckers.appl.playerlobby.AIManager;
+import com.webcheckers.appl.ai.AIManager;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
 

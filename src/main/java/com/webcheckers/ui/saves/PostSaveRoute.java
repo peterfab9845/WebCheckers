@@ -1,19 +1,14 @@
 package com.webcheckers.ui.saves;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.playerlobby.AIManager;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
-import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
-import com.webcheckers.model.entities.ai.*;
 import com.webcheckers.model.gamesaves.GameLog;
-import com.webcheckers.ui.ai.PostAIRoute;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;

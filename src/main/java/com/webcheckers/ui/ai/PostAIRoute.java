@@ -1,7 +1,8 @@
 package com.webcheckers.ui.ai;
 
 import com.google.gson.Gson;
-import com.webcheckers.appl.playerlobby.AIManager;
+import com.webcheckers.appl.ai.AITrainer;
+import com.webcheckers.appl.ai.AIManager;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
@@ -14,7 +15,6 @@ import spark.Response;
 import spark.Route;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;
@@ -37,7 +37,6 @@ public class PostAIRoute implements Route {
      */
     private PlayerLobby playerLobby;
 
-    private final static long SLEEP_TIME = (long)2000.0;
 
     /**
      * Create the Spark Route (UI controller) for the {@code POST /checkTurn} HTTP request.
@@ -89,32 +88,8 @@ public class PostAIRoute implements Route {
 
             final Game[] game = {playerLobby.challengeAI(ai, ai2)};
             playerLobby.addSpectator(user, game[0]);
-            Thread thread = new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    while(AIManager.isDebugging()){
-                        try {
-                            sleep(SLEEP_TIME);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        if(!game[0].isGameInSession()){
-                            AI ai = new HardAI(AIManager.getName(), user, playerLobby);
-                            AI ai2;
-                            Random random = new Random();
-                            if(random.nextInt(10)% 2 == 0)
-                                ai2 = new EasyAI(AIManager.getName(), user, playerLobby);
-                            else
-                                ai2 = new HardAI(AIManager.getName(), user, playerLobby);
-
-                            game[0] = playerLobby.challengeAI(ai, ai2);
-                            playerLobby.addSpectator(user, game[0]);
-                        }
-                    }
-                }
-            };
-            thread.start();
+            Thread trainer = new AITrainer(game, user, playerLobby);
+            trainer.start();
             response.redirect("/game");
             throw halt(1002);
         }
