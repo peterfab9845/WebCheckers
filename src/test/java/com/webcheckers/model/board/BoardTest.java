@@ -39,8 +39,13 @@ class BoardTest {
     void valueAt() {
         Position position = new Position(0, 1);
         Piece actual = CuT.valueAt(position);
-        Piece expected = new Piece(PieceType.SINGLE, PieceColor.WHITE);
-        assertEquals(expected, actual);
+        assertEquals(PieceType.SINGLE, actual.getType(), "Piece was not correct type");
+        assertEquals(PieceColor.WHITE, actual.getColor(), "Piece was not correct color");
+
+        position = new Position(7, 0);
+        actual = CuT.valueAt(position);
+        assertEquals(PieceType.SINGLE, actual.getType(), "Piece was not correct type");
+        assertEquals(PieceColor.RED, actual.getColor(), "Piece was not correct color");
     }
 
     /**
@@ -176,10 +181,24 @@ class BoardTest {
         }
 
         Space[][] returnedBoard = CuT.getMatrix();
+        Piece piece;
+        Piece returnedPiece;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                assertEquals(board[row][col], returnedBoard[row][col],
-                    "Board did not return correct matrix");
+                piece = board[row][col].getPiece();
+                returnedPiece = returnedBoard[row][col].getPiece();
+                if (piece == null) {
+                    assertNull(returnedPiece,
+                        "Piece in created and returned board did not match");
+                    return;
+                } else {
+                    assertNotNull(returnedPiece,
+                        "Piece in created and returned board did not match");
+                }
+                assertEquals(piece.getType(), returnedPiece.getType(),
+                    "Piece in created and returned board did not match");
+                assertEquals(piece.getColor(), returnedPiece.getColor(),
+                    "Piece in created and returned board did not match");
             }
         }
     }
