@@ -11,7 +11,8 @@ define(function(){
     return {
       
       SPECTATOR_MODE_STARTING: 'SPECTATOR_MODE_STARTING',
-      // TODO more State constants
+      SPECTATING: 'Spectating',
+      QUIT_SPEC_BUTTON: 'Leave spectating'
 
     };
 });
