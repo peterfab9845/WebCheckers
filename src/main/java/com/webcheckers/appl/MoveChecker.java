@@ -5,7 +5,6 @@ import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.ui.game.GetGameRoute;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Logger;
 
 public class MoveChecker {
@@ -65,7 +64,7 @@ public class MoveChecker {
             return false;
         }
 
-        if(forsedMoveAvalible(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
+        if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
             return false;
 
         pieceMoved = true;
@@ -73,14 +72,34 @@ public class MoveChecker {
     }
 
     public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king, boolean isTesting){
-        if(!isMoveValid(move,board,color,king))
+
+        if(move == null)
             return false;
-        if(isTesting)
-            pieceMoved = false;
+
+        if(!positionOnBoard(move.getEnd()))
+            return false;
+
+        if(board.getMatrix()[move.getEndingY()][move.getEndingX()].getPiece() != null )
+            return false;
+
+        //Check for black space
+        if( !positionIsBlack(move.getEnd()) )
+            return false;
+
+
+        if(!checks(move, board.getMatrix(), color, king))
+            return false;
+
+        if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
+            return false;
+
+        if(!isTesting)
+            pieceMoved = true;
+
         return true;
     }
 
-    private static boolean forsedMoveAvalible(Board board, PieceColor color){
+    private static boolean forcedMoveAvailable(Board board, PieceColor color){
         ArrayList<Position> positionsOfPieces = board.getLocationOfPieces(color);
         for (Position position : positionsOfPieces) {
             if (hasJumpMove(position, board, color)) return true;
