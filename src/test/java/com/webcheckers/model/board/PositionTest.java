@@ -51,7 +51,13 @@ class PositionTest {
     void equals() {
         assertEquals(CuT, CuT, "Position was not equal to itself");
 
-        Position other = new Position(ROW2, CELL2);
-        assertNotEquals(CuT, other, "Position was equal to a different position");
+        Object other = 0;
+        assertNotEquals(CuT, other, "Position was equal to a non-Position");
+
+        other = new Position(ROW2, CELL);
+        assertNotEquals(CuT, other, "Position was equal to a position of different row");
+
+        other = new Position(ROW, CELL2);
+        assertNotEquals(CuT, other, "Position was equal to a position of different cell");
     }
 }

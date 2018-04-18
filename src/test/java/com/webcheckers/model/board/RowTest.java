@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 
 import com.webcheckers.model.States.PieceColor;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.Iterator;
@@ -78,15 +77,15 @@ class RowTest {
     @Test
     void equals() {
         Object other = 0;
-        assertNotEquals(other, CuT, "Row was equal to non-Row");
+        assertNotEquals(CuT, other, "Row was equal to non-Row");
 
         other = new Row(INDEX2, COLS, PieceColor.RED);
-        assertNotEquals(other, CuT, "Row was equal to Row of different index");
+        assertNotEquals(CuT, other, "Row was equal to Row of different index");
 
         other = new Row(INDEX, COLS, PieceColor.WHITE);
-        assertNotEquals(other, CuT, "Row was equal to Row with different color");
+        assertNotEquals(CuT, other, "Row was equal to Row with different color");
 
         other = new Row(INDEX, COLS, PieceColor.RED);
-        assertEquals(other, CuT, "Row was not equal to Row of same index and content");
+        assertEquals(CuT, other, "Row was not equal to Row of same index and content");
     }
 }

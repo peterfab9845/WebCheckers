@@ -69,12 +69,17 @@ public class Move {
 
     /**
      * Returns if two objects are equal
-     * @param obj
+     * @param obj the object to check against
      * @return boolean
      */
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Move && ((Move) obj).start == this.start && ((Move) obj).end == this.end;
+        if (obj instanceof Move) {
+            if (start.equals(((Move) obj).getStart())) {
+                return end.equals(((Move) obj).getEnd());
+            }
+        }
+        return false;
     }
 
     public void setJumped(Position jumped) {

@@ -1,7 +1,9 @@
 package com.webcheckers.model.board;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.webcheckers.model.States.PieceColor;
 import com.webcheckers.model.States.PieceType;
@@ -18,6 +20,7 @@ class PieceTest {
     private final PieceType TYPE = PieceType.SINGLE;
     private final PieceType TYPE2 = PieceType.KING;
     private final PieceColor COLOR = PieceColor.RED;
+    private final PieceColor COLOR2 = PieceColor.WHITE;
     private Piece CuT;
 
     /**
@@ -47,6 +50,16 @@ class PieceTest {
     }
 
     /**
+     * Test kinging a piece and getKing()
+     */
+    @Test
+    void king() {
+        assertFalse(CuT.isKing(), "Piece was king without being kinged");
+        CuT.king();
+        assertTrue(CuT.isKing(), "Piece was not king after being kinged");
+    }
+
+    /**
      * Test the equality of two Pieces
      */
     @Test
@@ -54,7 +67,13 @@ class PieceTest {
         Piece test = CuT;
         assertEquals(test, CuT, "Piece was not equal to itself");
 
-        Piece other = new Piece(TYPE2, COLOR);
+        Object other = 0;
+        assertNotEquals(CuT, other, "Piece was equal to a non-Piece");
+
+        other = new Piece(TYPE2, COLOR);
         assertNotEquals(other, CuT, "Piece was equal to different type of piece");
+
+        other = new Piece(TYPE, COLOR2);
+        assertNotEquals(other, CuT, "Piece was equal to piece of different color");
     }
 }

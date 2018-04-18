@@ -59,7 +59,7 @@ public class Space {
 
     /**
      * returns whether two objects are equal
-     * @param obj
+     * @param obj the object to check against
      * @return boolean
      */
     @Override
@@ -67,7 +67,7 @@ public class Space {
         if (obj instanceof Space) {
             Space otherSpace = (Space) obj;
             if (otherSpace.getCellIdx() == this.cellIdx)
-                if (otherSpace.getPiece() != null && this.piece != null) {
+                if (otherSpace.getPiece() != null) {
                     return (otherSpace.getPiece()).equals(this.piece);
                 }
         }
