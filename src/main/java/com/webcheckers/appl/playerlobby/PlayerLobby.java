@@ -2,6 +2,9 @@ package com.webcheckers.appl.playerlobby;
 
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.entities.ai.AI;
+import com.webcheckers.model.states.PieceColor;
 import spark.Session;
 
 import java.util.Iterator;
@@ -25,8 +28,8 @@ public class PlayerLobby {
         playerManager = new PlayerManager();
     }
 
-    public boolean addPlayer(Player player) {
-        return playerManager.addPlayer(player);
+    public void addPlayer(Player player) {
+        playerManager.addPlayer(player);
     }
 
     /**
@@ -72,7 +75,7 @@ public class PlayerLobby {
     * Removes game from list of games, and assigns winners
     * @param player
     */
-    public void removeGame(Player player){
+    public void removeGame(PlayerEntity player) {
         gameManager.removeGame(player);
     }
 
@@ -80,7 +83,7 @@ public class PlayerLobby {
     * Returns a iterator of players in the lobby
     * @return iterator of player
     */
-    public Iterator<Player> getPlayersInLobby(){
+    public Iterator<Player> getPlayersInLobby() {
     return playerManager.getPlayersInLobby();
     }
 
@@ -116,7 +119,7 @@ public class PlayerLobby {
     * @param player
     * @param challenging
     */
-    public void challenge(Player player, Player challenging){
+    public void challenge(PlayerEntity player, PlayerEntity challenging){
         gameManager.challenge(player, challenging);
     }
 
@@ -125,7 +128,7 @@ public class PlayerLobby {
     * @param player
     * @param game
     */
-    public void addGame(Player player, Game game){
+    public void addGame(PlayerEntity player, Game game){
         gameManager.addGame(player, game);
     }
 
@@ -134,7 +137,30 @@ public class PlayerLobby {
     * @param player
     * @return
     */
-    public Game getGame(Player player){
+    public Game getGame(PlayerEntity player){
         return gameManager.getGame(player);
     }
+
+    public Game challengeAI(AI ai, PlayerEntity player){
+        player.setInGame();
+        ai.setInGame();
+        Game game = new Game( player, ai );
+        player.setTeamColor(PieceColor.RED);
+        ai.setTeamColor(PieceColor.WHITE);
+        gameManager.addGame(player, game);
+        gameManager.addGame(ai, game);
+        return game;
+    }
+
+    public void addSpectator(PlayerEntity player, Game game){
+        player.setToSpectator();
+        gameManager.addGame(player, game);
+        game.addSpectator(player);
+    }
+
+    public void addSpectator(PlayerEntity playerEntity, PlayerEntity watching){
+        Game game = gameManager.getGame(watching);
+        addSpectator(playerEntity, game);
+    }
+
 }

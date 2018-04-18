@@ -24,14 +24,14 @@ public class PlayerManager {
     /**
      * Add a player to the lobby.
      * @param player the player to add
+     * @param session that player's session
      * @return true if that player is not already in the lobby
      */
-    public boolean addPlayer(Player player) {
+    public boolean addPlayer(Player player, Session session) {
         if (players.containsValue(player)) {
             return false;
         }
-        Session playerSession = player.getSession();
-        players.put(playerSession.id(), player);
+        players.put(session.id(), player);
         return true;
     }
 
@@ -126,8 +126,8 @@ public class PlayerManager {
      * Gets the number of players in the lobby
      * @return count of players in lobby
      */
-    public int countInLobby(){
-        return (int) listOfPlayers().stream().filter(Player::isInLobby).count();
+    public int playersInLobby(){
+        return (int) listOfPlayers().stream().count();
     }
 
     private LinkedList<Player> listOfPlayers() {

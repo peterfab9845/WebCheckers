@@ -3,14 +3,16 @@ package com.webcheckers.ui.game;
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
-import spark.*;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 import java.util.Objects;
 import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
-public class PostEndRoute implements Route {
+public class PostLeaveSpectatingRoute implements Route {
 
     /**
      * Logger for logging things to the console
@@ -22,25 +24,26 @@ public class PostEndRoute implements Route {
      */
     private PlayerLobby playerLobby;
 
-
-    public PostEndRoute(final Gson gson, PlayerLobby playerLobby) {
+    public PostLeaveSpectatingRoute(final Gson gson, PlayerLobby playerLobby){
 
         // validation
         Objects.requireNonNull(gson, "gson must not be null");
 
+
         this.playerLobby = playerLobby;
 
 
-        LOG.config("PostEndRoute is initialized.");
+        LOG.config("PostLeaveSpectatingRoute is initialized.");
+
     }
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        LOG.finer("PostEndRoute is invoked.");
+
+        LOG.finer("PostLeaveSpectatingRoute is invoked.");
 
         Player user = playerLobby.getPlayer(request.session());
-        if(user != null)
-            user.sendToLobby();
+        user.sendToLobby();
 
         response.redirect("/");
         halt(501);

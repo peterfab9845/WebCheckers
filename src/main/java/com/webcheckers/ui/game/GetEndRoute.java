@@ -62,9 +62,12 @@ public class GetEndRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         LOG.finer("GetEndRoute is invoked.");
-        Player user = playerLobby.getPlayer(request.session());
 
         Map<String, Object> vm = new HashMap<>();
+
+
+        Player user = playerLobby.getPlayer(request.session());
+
 
 
         //If Player is presently logged in show them the user lost
@@ -80,7 +83,7 @@ public class GetEndRoute implements Route {
         }
         else if( user.hasLost()) {
             vm.put("title", "You Lost!");
-            vm.put("winLoss", "lost.");
+            vm.put("winLoss", "loss.");
         }
 
 

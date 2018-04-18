@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${title} | Web Checkers️</title>
+    <title>${title} | We🅱️ Checkers️</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <div class="page">
-    <h1>Web Checkers 🅱️</h1>
+    <h1>We🅱️ Checkers ️</h1>
 
     <div class="navigation">
         <a href="/">my home</a> -
@@ -21,7 +21,7 @@
 
 
     <div align="center" class="body">
-        You have ${winLoss}<br>
+        <h2><u>You have ${winLoss}</u></h2><br>
 
         <form action="/save" method="POST">
             <button>Save and Watch Replay</button>

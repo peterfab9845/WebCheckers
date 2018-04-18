@@ -63,4 +63,15 @@ public class BoardController {
     }
 
 
+    public static Position getPieceLocation(Space[][] board, Piece piece) {
+        for(int i = 0; i < board.length; i++){
+            for( int j = 0; j < board[i].length; j++){
+                if(board[i][j].getPiece() == piece){
+                    return new Position(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
 }

@@ -34,7 +34,7 @@ public class BoardView implements Iterable<Row> {
      */
     @Override
     public Iterator<Row> iterator() {
-        if( color.equals(PieceColor.RED) )
+        if( color != null && color.equals(PieceColor.RED) )
             return rows.iterator();
         return reverseIterator();
     }

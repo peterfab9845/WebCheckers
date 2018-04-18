@@ -2,9 +2,8 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
-import com.webcheckers.ui.game.GetEndRoute;
-import com.webcheckers.ui.game.GetGameRoute;
-import com.webcheckers.ui.game.PostEndRoute;
+import com.webcheckers.ui.ai.PostAIRoute;
+import com.webcheckers.ui.game.*;
 import com.webcheckers.ui.home.GetHomeRoute;
 import com.webcheckers.ui.movement.PostBackupMoveRoute;
 import com.webcheckers.ui.movement.PostCheckTurnRoute;
@@ -13,7 +12,7 @@ import com.webcheckers.ui.movement.PostValidateMoveRoute;
 import com.webcheckers.ui.saves.GetSavesRoute;
 import com.webcheckers.ui.signin.GetSigninRoute;
 import com.webcheckers.ui.signin.GetSignoutRoute;
-import com.webcheckers.ui.game.PostResignRoute;
+import com.webcheckers.ui.signin.PostResignRoute;
 import com.webcheckers.ui.signin.PostSigninRoute;
 import spark.TemplateEngine;
 
@@ -115,6 +114,12 @@ public class WebServer {
      * The URL pattern to request the end url.
      */
     private static final String END_URL = "/end";
+
+    private static final String AI_URL = "/ai";
+
+    private static final String SPECTATE_URL = "/spectate";
+
+    private static final String QUIT_SIGNIN = "/leave";
 
 
     /**
@@ -235,7 +240,14 @@ public class WebServer {
 
         post(END_URL, new PostEndRoute(gson, playerLobby));
 
+        get(AI_URL, new PostAIRoute(gson, playerLobby));
+
+        get(SPECTATE_URL, new GetSpectatingRoute(templateEngine, playerLobby));
+
         post(RESIGN_URL, new PostResignRoute(gson, playerLobby));
+
+        post(QUIT_SIGNIN, new PostLeaveSpectatingRoute(gson, playerLobby));
+
 
         //
         LOG.config("WebServer is initialized.");

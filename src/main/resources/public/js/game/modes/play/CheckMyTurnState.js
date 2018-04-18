@@ -61,7 +61,6 @@ define(function(require){
       }
       // handle error message
       else {
-        // FIXME: not really sure this is the right thing do...
         this._controller.displayMessage(message);
         this._controller.setState(PlayModeConstants.WAIT_FOR_MY_TURN);
       }

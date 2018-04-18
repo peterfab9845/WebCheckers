@@ -5,10 +5,10 @@ An online Checkers game system built in Java 8 and Spark, a web micro-framework.
 
 ## Team
 
-- MEMBER1
-- MEMBER2
-- MEMBER3
-- MEMBER4
+- Andrew Reed
+- Curtis Veronesi
+- Peter Fabinski
+- Adam Heeter
 
 
 ## Prerequisites

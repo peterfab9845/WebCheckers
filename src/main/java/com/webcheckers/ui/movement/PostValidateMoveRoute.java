@@ -2,28 +2,25 @@ package com.webcheckers.ui.movement;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.MoveChecker;
-import com.webcheckers.model.board.Position;
-import com.webcheckers.model.Message;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.model.Message;
 import com.webcheckers.model.board.Move;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.MessageType;
-import com.webcheckers.ui.game.GetGameRoute;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.logging.Logger;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 public class PostValidateMoveRoute implements Route {
 
     /**
      * Logger for logging things to the console
      */
-    private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(PostValidateMoveRoute.class.getName());
 
 
     /**
@@ -69,20 +66,21 @@ public class PostValidateMoveRoute implements Route {
         Message responseMessage;
         boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
 
-        if( MoveChecker.isMoveValid(move, game.getMatrix(), currentPlayer.getTeamColor(),isKing) ) {
+        if( MoveChecker.isMoveValid(move, game.getBoard(), currentPlayer.getTeamColor(),isKing, false) ) {
             game.queueMove(move);
-            responseMessage = new Message("" , MessageType.info);
+            responseMessage = new Message("Valid Move", MessageType.info);
         }
         else{
             Iterator i = game.iterator();
             Move newMove;
-            Position position;
-            while(i.hasNext()){
-                newMove = (Move)i.next();
-                newMove = new Move(newMove.getStart(), move.getEnd());
-                if( MoveChecker.isMoveValid(newMove, game.getMatrix(), currentPlayer.getTeamColor(), isKing )){
-                    responseMessage = new Message("" , MessageType.info);
-                    return gson.toJson(responseMessage);
+            if( isKing ) {
+                while (i.hasNext()) {
+                    newMove = (Move) i.next();
+                    newMove = new Move(newMove.getStart(), move.getEnd());
+                    if (MoveChecker.isMoveValid(newMove, game.getBoard(), currentPlayer.getTeamColor(), isKing, false)) {
+                        responseMessage = new Message("King jump", MessageType.info);
+                        return gson.toJson(responseMessage);
+                    }
                 }
             }
             responseMessage = new Message("Invalid Move" , MessageType.error);

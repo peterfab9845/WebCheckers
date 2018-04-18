@@ -33,6 +33,10 @@ public class Row implements Iterable {
         Collections.addAll(spaces, boardCols);
     }
 
+    public Row(int index, Piece[] boardCols) {
+
+    }
+
     /**
      * Get the index of this row
      * @return the index of this row
@@ -47,7 +51,7 @@ public class Row implements Iterable {
      */
     @Override
     public Iterator<Space> iterator() {
-        if( color.equals(PieceColor.RED) )
+        if( color != null && color.equals(PieceColor.RED) )
             return spaces.iterator();
         return reverseIterator();
     }

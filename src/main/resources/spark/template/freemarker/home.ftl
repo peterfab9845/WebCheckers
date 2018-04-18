@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-    <meta http-equiv="refresh" content="1">
-    <title>${title} | Web Checkers</title>
+    <meta http-equiv="refresh" content="3">
+    <title>${title} | We🅱️ Checkers</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <div class="page">
 
-    <h1>Web Checkers 🅱️</h1>
+    <h1>We🅱️ Checkers️</h1>
 
     <div class="navigation">
       <#if currentPlayer??>
@@ -28,14 +28,14 @@
         <p>Welcome to the world of online Checkers.</p>
         <p>${playerCount} player<#if (playerCount == 1)> is<#else>s are</#if> online right now.</p>
         <#if currentPlayer??>
-            <table width="80%">
+            <table width="100%" align="center">
             <tr>
-                <th align="left">Players In Lobby</th>
-                <th align="left">Players In Game</th>
+                <th>Players In Lobby</th>
+                <th>Players In Game</th>
+                <th>Play/Watch Artificial Intel</th>
             </tr>
             <tr>
-
-                <td>
+                <td align="center">
                     <p>
                         <#list playerList as player>
                             ${player.name} - <a href="/game?opponentName=${player.name}">Challenge</a>
@@ -44,12 +44,20 @@
                     </p>
                 </td>
 
-                <td>
+                <td align="center">
                     <p>
                         <#list gameList as player>
                             ${player.name} - <a href="/spectate?name=${player.name}">Spectate</a>
                             <br>
                         </#list>
+                    </p>
+                </td>
+                <td align="center">
+                    <p>
+                        Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
+                        Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
+                        Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
+                        AI vs AI - <a href="/ai?type=train">Challenge</a><br>
                     </p>
                 </td>
             </tr>
