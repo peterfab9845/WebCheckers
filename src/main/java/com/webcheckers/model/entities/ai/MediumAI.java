@@ -61,7 +61,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 7){
                     testPosition = new Position( currentRow +1, currentCell +1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -78,7 +78,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 0){
                     testPosition = new Position( currentRow +1, currentCell -1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -97,7 +97,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 7){
                     testPosition = new Position( currentRow -1, currentCell +1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -114,7 +114,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 0){
                     testPosition = new Position( currentRow -1, currentCell -1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -135,7 +135,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 6){
                     testPosition = new Position( currentRow +2, currentCell +2);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -152,7 +152,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 1){
                     testPosition = new Position( currentRow +2, currentCell -2);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -171,7 +171,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 6){
                     testPosition = new Position( currentRow -2, currentCell +2);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -188,7 +188,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 1){
                     testPosition = new Position( currentRow -2, currentCell -2);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
+                    if (isMoveValid(testMove, board, teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
