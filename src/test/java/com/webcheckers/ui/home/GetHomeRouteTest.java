@@ -5,10 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.webcheckers.appl.MessageMap;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
-import com.webcheckers.model.Message;
-import com.webcheckers.model.states.MessageType;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.TemplateEngineTester;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +29,6 @@ public class GetHomeRouteTest {
 
     private static final String PLAYER_NAME = "playerName";
 
-    private static final String MESSAGE_TEXT = "message";
-
     private TemplateEngine engine;
 
     private Request request;
@@ -56,7 +51,6 @@ public class GetHomeRouteTest {
         engine = mock(TemplateEngine.class);
         response = mock(Response.class);
         lobby = new PlayerLobby(); // friendly
-        MessageMap.init();
     }
 
     /**
@@ -85,7 +79,6 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("currentPlayer", null);
         testHelper.assertViewModelAttribute("playerCount", 0);
         testHelper.assertViewModelAttributeIsAbsent("playerList");
-        testHelper.assertViewModelAttributeIsAbsent("message");
     }
 
     /**
@@ -108,32 +101,6 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("title", "Welcome!");
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper.assertViewModelAttributeIsAbsent("message");
-    }
-
-    /**
-     * Test behavior for when a player is signed in and has a message to see
-     */
-    @Test
-    public void handle_signedInWithMessage() {
-        final TemplateEngineTester testHelper = new TemplateEngineTester();
-        when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-        Player player = mock(Player.class);
-        when(player.isInGame()).thenReturn(false);
-        when(player.getName()).thenReturn(PLAYER_NAME);
-        when(player.getSession()).thenReturn(session);
-        when(player.isInLobby()).thenReturn(true);
-        lobby.addPlayer(player);
-        Message message = new Message(MESSAGE_TEXT, MessageType.info);
-        MessageMap.setMessage(session, message);
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
-        getHomeRoute.handle(request, response);
-        testHelper.assertViewModelExists();
-        testHelper.assertViewModelIsaMap();
-        testHelper.assertViewModelAttribute("title", "Welcome!");
-        testHelper.assertViewModelAttribute("currentPlayer", player);
-        testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper.assertViewModelAttribute("message", message);
     }
 
     /**
