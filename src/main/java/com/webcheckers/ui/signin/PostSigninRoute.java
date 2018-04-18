@@ -4,6 +4,7 @@ import static spark.Spark.halt;
 
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.Message;
+import com.webcheckers.model.entities.PlayerEntity;
 import com.webcheckers.model.states.MessageType;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.game.GetGameRoute;

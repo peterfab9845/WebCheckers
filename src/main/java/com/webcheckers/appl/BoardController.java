@@ -1,9 +1,9 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.board.*;
+import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
-import com.webcheckers.model.board.*;
 
 import java.util.LinkedList;
 

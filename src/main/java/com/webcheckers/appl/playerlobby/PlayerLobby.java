@@ -18,8 +18,6 @@ public class PlayerLobby {
     private PlayerManager playerManager;
     private GameManager gameManager;
 
-    private static final String USERNAME_REGEX = "[A-Za-z0-9 ]+";
-
     /**
     * Constructor
     */
@@ -28,12 +26,8 @@ public class PlayerLobby {
         playerManager = new PlayerManager();
     }
 
-    public boolean validUsername(String username) {
-        return username.matches(USERNAME_REGEX);
-    }
-
-    public void addPlayer(Player player, Session session) {
-        playerManager.addPlayer(player, session);
+    public void addPlayer(Player player) {
+        playerManager.addPlayer(player);
     }
 
     /**
