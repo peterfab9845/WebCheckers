@@ -36,6 +36,8 @@ public class PostAIRoute implements Route {
      */
     private PlayerLobby playerLobby;
 
+    private final static long SLEEP_TIME = (long)1000.0;
+
     /**
      * Create the Spark Route (UI controller) for the {@code POST /checkTurn} HTTP request.
      *
@@ -91,13 +93,12 @@ public class PostAIRoute implements Route {
                 public void run() {
                     super.run();
                     while(AIManager.isDebugging()){
-                        System.out.println("waiting");
+                        try {
+                            sleep(SLEEP_TIME);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         if(!game[0].isGameInSession()){
-                            try {
-                                this.sleep((long) 1000.0);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             AI ai = new HardAI(AIManager.getName(), user, playerLobby);
                             AI ai2 = new HardAI(AIManager.getName(), user, playerLobby);
 

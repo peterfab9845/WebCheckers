@@ -39,7 +39,8 @@ public class PostEndRoute implements Route {
         LOG.finer("PostEndRoute is invoked.");
 
         Player user = playerLobby.getPlayer(request.session());
-        user.sendToLobby();
+        if(user != null)
+            user.sendToLobby();
 
         response.redirect("/");
         halt(501);

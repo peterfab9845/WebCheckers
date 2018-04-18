@@ -17,7 +17,7 @@ public class HardAI extends AI implements ArtIntel {
     private HashMap<String, ArrayList<MoveMemory>> memory;
     private static final String CSV_FILE = "src/main/csv/AI1/test1.csv";
     private ArrayList<MoveMemory> currentGame;
-    private static final long THOUGHT_PROCESS_TIME = 10;
+    private static final long THOUGHT_PROCESS_TIME = 200;
     private static final int ACCURACY = 100;
     private int turn;
 
@@ -72,7 +72,7 @@ public class HardAI extends AI implements ArtIntel {
                     Move move = min.getMove();
                     Position p = new Position(move.getStartingX(), move.getStartingY());
                     boolean isKing = MoveChecker.isKing(p,game.getMatrix());
-                    if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
+                    if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, false)) {
                         makeMove(move);
                         turn++;
                         System.out.println("memory used");
@@ -87,7 +87,7 @@ public class HardAI extends AI implements ArtIntel {
             return;
         }
         boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
-        if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
+        if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, false)) {
             makeMove(move);
             currentGame.add(new MoveMemory(matrix, move));
             turn++;
@@ -171,34 +171,5 @@ public class HardAI extends AI implements ArtIntel {
             }
             writer.close();
         }
-    }
-}
-
-class MoveMemory{
-
-    public String matrix;
-    public Move move;
-    public int wonIn;
-
-
-    public MoveMemory(String matrix, Move move){
-        this.matrix = matrix;
-        this.move = move;
-    }
-
-    public void setWonIn(int wonIn) {
-        this.wonIn = wonIn;
-    }
-    public int getWonIn() {
-        return wonIn;
-    }
-
-    @Override
-    public String toString() {
-        return matrix + move + "," + wonIn;
-    }
-
-    public Move getMove() {
-        return move;
     }
 }

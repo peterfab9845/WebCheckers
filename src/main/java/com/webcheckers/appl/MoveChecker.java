@@ -36,14 +36,14 @@ public class MoveChecker {
                 placeInQuestion = new Position(startY + row, startX + col);
                 move = new Move(position, placeInQuestion);
                 boolean isKing = isKing(move.getStart(), board.getMatrix());
-                if(isMoveValid(move, board, color, isKing,true))
+                if(isMoveValid(move, board, color, isKing, true))
                     return true;
             }
         }
         return false;
     }
 
-    public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king){
+    public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king, boolean testing){
 
         if(move == null)
             return false;
@@ -58,34 +58,9 @@ public class MoveChecker {
         if( !positionIsBlack(move.getEnd()) )
             return false;
 
-        if(!checks(move, board.getMatrix(), color, king)){
+        if(!checks(move, board.getMatrix(), color, king, testing)){
             return false;
         }
-
-        if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
-            return false;
-
-        return true;
-    }
-
-    public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king, boolean isTesting){
-
-        if(move == null)
-            return false;
-
-        if(!positionOnBoard(move.getEnd()))
-            return false;
-
-        if(board.getMatrix()[move.getEndingY()][move.getEndingX()].getPiece() != null )
-            return false;
-
-        //Check for black space
-        if( !positionIsBlack(move.getEnd()) )
-            return false;
-
-
-        if(!checks(move, board.getMatrix(), color, king))
-            return false;
 
         if(forcedMoveAvailable(board, color) && !inDistanceOf(move, JUMP_DISTANCE))
             return false;
@@ -137,7 +112,7 @@ public class MoveChecker {
         return false;
     }
 
-    private static boolean checks(Move move, Space[][] board, PieceColor color, boolean king){
+    private static boolean checks(Move move, Space[][] board, PieceColor color, boolean king, boolean testing){
         if( !king ){
             //Check for direction
             if(color == PieceColor.RED && movingNorth(move) )
@@ -148,7 +123,8 @@ public class MoveChecker {
 
         if( inDistanceOf(move, JUMP_DISTANCE) ) {
             if ( hasPieceBetween(move, board) && pieceBetween(move, board).getColor() != color) {
-                move.setJumped(positionBetween(move));
+                if(!testing)
+                    move.setJumped(positionBetween(move));
             }
             else{
                 return false;

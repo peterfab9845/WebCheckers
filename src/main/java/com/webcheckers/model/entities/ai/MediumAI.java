@@ -1,5 +1,6 @@
 package com.webcheckers.model.entities.ai;
 
+import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.Board;
 import com.webcheckers.model.board.Move;
@@ -60,7 +61,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 7){
                     testPosition = new Position( currentRow +1, currentCell +1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position))){
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -77,7 +78,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 0){
                     testPosition = new Position( currentRow +1, currentCell -1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position))){
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -96,7 +97,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell < 7){
                     testPosition = new Position( currentRow -1, currentCell +1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position))){
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -113,7 +114,7 @@ public class MediumAI extends AI implements ArtIntel {
                 if (currentCell > 0){
                     testPosition = new Position( currentRow -1, currentCell -1);
                     testMove = new Move(position, testPosition);
-                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position))){
+                    if (isMoveValid(testMove, game.getBoard(), teamColor, board.isKing(position), true)){
                         testProtection = analizePosition(testPosition);
                         if (testProtection.getValue() > bestProtection.getValue()){
                             bestMove = testMove;
@@ -130,8 +131,8 @@ public class MediumAI extends AI implements ArtIntel {
             }
         }
         assert (bestMove != null);
-
-        makeMove(bestMove);
+        if(MoveChecker.isMoveValid(bestMove, game.getBoard(), teamColor, board.isKing(bestMove.getStart()), false))
+            makeMove(bestMove);
     }
 
 }

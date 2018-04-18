@@ -73,9 +73,11 @@ public class AI extends PlayerEntity{
     private static final Logger LOG = Logger.getLogger(AI.class.getName());
 
     public void makeMove(Move move){
-        BoardController.makeMove(game.getBoard(), move);
-        game.changeTurns();
-        if(!hasWon() && !hasLost())
+        if(MoveChecker.isMoveValid(move,game.getBoard(),getTeamColor(),MoveChecker.isKing(move.getStart(),game.getMatrix()),false)) {
+            BoardController.makeMove(game.getBoard(), move);
+            game.changeTurns();
+        }
+        if (!hasWon() && !hasLost())
             game.isGameOver();
     }
 
@@ -257,7 +259,7 @@ public class AI extends PlayerEntity{
             for( int row = -3; row < 4; row+=1){
                 for( int col = -3; col < 4; col+=1) {
                     move = new Move(position, new Position(y + row, x + col));
-                    if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, true)) {
+                    if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, false)) {
                         move = new Move(position, new Position(y + row, x + col));
                         moves.add(move);
                     }
@@ -314,7 +316,7 @@ public class AI extends PlayerEntity{
         for( int row = -3; row < 4; row+=1){
             for( int col = -3; col < 4; col+=1) {
                 move = new Move(position, new Position(y + row, x + col));
-                if (MoveChecker.isMoveValid(move, game.getBoard(), color, isKing)) {
+                if (MoveChecker.isMoveValid(move, game.getBoard(), color, isKing, false)) {
                     move = new Move(position, new Position(y + row, x + col));
                     moves.add(move);
                 }

@@ -74,10 +74,6 @@ public class GetHomeRoute implements Route {
 
         Player user = playerLobby.getPlayer(request.session());
 
-//        if ( user == null && AIManager.isDebugging()){
-//            user = new Player("admin", request.session());
-//            playerLobby.addPlayer(user, request.session());
-//        }
         //If Player is presently logged in show them the user lost
         if ( user != null ) {
             //If the player is not in the lobby send them to their game
