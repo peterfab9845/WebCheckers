@@ -52,7 +52,7 @@ public class PlayerEntity {
     }
 
     public void setToSpectator(){
-        this.currentState = PlayerStates.SPECTATOR;
+        this.currentState = PlayerStates.SPECTATING;
     }
 
     /**

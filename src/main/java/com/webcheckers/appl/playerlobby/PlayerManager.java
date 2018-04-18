@@ -24,20 +24,20 @@ public class PlayerManager {
     /**
      * Add a player to the lobby.
      * @param player the player to add
-     * @param session that player's session
      * @return true if that player is not already in the lobby
      */
-    public boolean addPlayer(Player player, Session session) {
+    public boolean addPlayer(Player player) {
         if (players.containsValue(player)) {
             return false;
         }
-        players.put(session.id(), player);
+        Session playerSession = player.getSession();
+        players.put(playerSession.id(), player);
         return true;
     }
 
     /**
      * returns if username is taken
-     * @param username
+     * @param username the username to check
      * @return boolean of username taken
      */
     public boolean playerExists(String username) {
@@ -46,7 +46,7 @@ public class PlayerManager {
 
     /**
      * Removes player from lobby
-     * @param player
+     * @param player the player to remove
      */
     public void removePlayer(Player player) {
         Session playerSession = player.getSession();
@@ -55,8 +55,8 @@ public class PlayerManager {
 
     /**
      * given a String it returns the player in lobby with that username
-     * @param name
-     * @return Player
+     * @param name the name to look for
+     * @return Player with that name
      */
     public Player getPlayer(String name) {
         LinkedList<Player> playerLinkedList = listOfPlayers();
@@ -72,8 +72,8 @@ public class PlayerManager {
 
     /**
      * given a session it returns the player in lobby with that session
-     * @param session
-     * @return Players
+     * @param session the session to exclude
+     * @return Player with given session
      */
     public Player getPlayer(Session session){
         return players.get(session.id());
@@ -92,7 +92,7 @@ public class PlayerManager {
 
     /**
      * Returns a iterator of players in the lobby except the requested player
-     * @param session
+     * @param session the session to exclude
      * @return iterator of player
      */
     public Iterator<Player> getPlayersInLobbyExcept(Session session) {
@@ -101,14 +101,14 @@ public class PlayerManager {
 
     /**
      * Returns a iterator of players in the lobby except the requested player
-     * @param session
+     * @param session the session to exclude
      * @return iterator of player
      */
     public Iterator<Player> getPlayersInGameExcept(Session session) {
         return getPlayersExcept(session, false);
     }
 
-    public Iterator<Player> getPlayersExcept(Session session, boolean inLobby) {
+    private Iterator<Player> getPlayersExcept(Session session, boolean inLobby) {
         String sessionid = session.id();
         Stream<Player> playerStream = listOfPlayers().stream();
         //filter players out of lobby
@@ -126,8 +126,8 @@ public class PlayerManager {
      * Gets the number of players in the lobby
      * @return count of players in lobby
      */
-    public int playersInLobby(){
-        return (int) listOfPlayers().stream().count();
+    public int countInLobby(){
+        return listOfPlayers().size();
     }
 
     private LinkedList<Player> listOfPlayers() {

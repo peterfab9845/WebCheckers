@@ -28,13 +28,13 @@ public class PlayerLobby {
         playerManager = new PlayerManager();
     }
 
-    public void addPlayer(Player player) {
-        playerManager.addPlayer(player);
+    public boolean addPlayer(Player player) {
+        return playerManager.addPlayer(player);
     }
 
     /**
      * Removes player from lobby
-     *  @param player
+     *  @param player the player to remove
      */
     public void removePlayer(Player player){
         playerManager.removePlayer(player);
@@ -45,7 +45,7 @@ public class PlayerLobby {
 
     /**
      * given a session it returns the player in lobby with that session
-     * @param session
+     * @param session the session to get the player for
      * @return Players
      */
     public Player getPlayer(Session session){
@@ -54,7 +54,7 @@ public class PlayerLobby {
 
     /**
      * given a String it returns the player in lobby with that username
-     * @param name
+     * @param name the name of the player to get
      * @return Player
      */
     public Player getPlayer(String name){
@@ -64,7 +64,7 @@ public class PlayerLobby {
 
     /**
     * returns if username is taken
-    * @param username
+    * @param username the name to check
     * @return boolean of username taken
     */
     public boolean playerExists(String username) {
@@ -73,7 +73,7 @@ public class PlayerLobby {
 
     /**
     * Removes game from list of games, and assigns winners
-    * @param player
+    * @param player the player whose game to remove
     */
     public void removeGame(PlayerEntity player) {
         gameManager.removeGame(player);
@@ -89,7 +89,7 @@ public class PlayerLobby {
 
     /**
      * Returns a iterator of players in the lobby except the requested player
-     * @param session
+     * @param session the session to exclude
      * @return iterator of player
      */
     public Iterator<Player> getPlayersInLobbyExcept(Session session){
@@ -98,7 +98,7 @@ public class PlayerLobby {
 
     /**
      * Returns a iterator of players in the lobby except the requested player
-     * @param session
+     * @param session the session to exclude
      * @return iterator of player
      */
     public Iterator<Player> getPlayersInGameExcept(Session session){
@@ -107,7 +107,7 @@ public class PlayerLobby {
 
     /**
     * gets number of players in the lobby
-    * @return integer of players in loby
+    * @return integer of players in lobby
     */
     public int countInLobby(){
     return playerManager.countInLobby();
@@ -116,8 +116,8 @@ public class PlayerLobby {
 
     /**
     * puts two players in a game together
-    * @param player
-    * @param challenging
+    * @param player the player being challenged
+    * @param challenging the player who is challenging
     */
     public void challenge(PlayerEntity player, PlayerEntity challenging){
         gameManager.challenge(player, challenging);
@@ -125,8 +125,8 @@ public class PlayerLobby {
 
     /**
     * Adds a game to the game library
-    * @param player
-    * @param game
+    * @param player the player
+    * @param game the player's game
     */
     public void addGame(PlayerEntity player, Game game){
         gameManager.addGame(player, game);
@@ -134,8 +134,8 @@ public class PlayerLobby {
 
     /**
     * Given a player returns the game that they are in
-    * @param player
-    * @return
+    * @param player the player for which to get the game
+    * @return the game that player is in
     */
     public Game getGame(PlayerEntity player){
         return gameManager.getGame(player);

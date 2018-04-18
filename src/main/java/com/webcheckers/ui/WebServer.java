@@ -12,7 +12,6 @@ import com.webcheckers.ui.movement.PostValidateMoveRoute;
 import com.webcheckers.ui.saves.GetSavesRoute;
 import com.webcheckers.ui.signin.GetSigninRoute;
 import com.webcheckers.ui.signin.GetSignoutRoute;
-import com.webcheckers.ui.signin.PostResignRoute;
 import com.webcheckers.ui.signin.PostSigninRoute;
 import spark.TemplateEngine;
 
@@ -133,7 +132,7 @@ public class WebServer {
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     /**
-     * Template engine for desplaying things to users
+     * Template engine for displaying things to users
      */
     private final TemplateEngine templateEngine;
 

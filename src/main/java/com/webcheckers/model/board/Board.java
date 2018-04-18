@@ -106,8 +106,7 @@ public class Board {
 
     public boolean isKing(Position position){
         Piece piece = valueAt(position);
-        if (piece.getType().equals(PieceType.KING)) return true;
-        return false;
+        return piece.getType().equals(PieceType.KING);
     }
 
 }
