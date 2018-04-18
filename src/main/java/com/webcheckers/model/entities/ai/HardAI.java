@@ -1,6 +1,5 @@
 package com.webcheckers.model.entities.ai;
 
-import com.sun.tools.jdeprscan.CSV;
 import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.Move;
@@ -18,7 +17,7 @@ public class HardAI extends AI implements ArtIntel {
     private HashMap<String, ArrayList<MoveMemory>> memory;
     private static final String CSV_FILE = "src/main/csv/AI1/test1.csv";
     private ArrayList<MoveMemory> currentGame;
-    private static final long THOUGHT_PROCESS_TIME = 1;
+    private static final long THOUGHT_PROCESS_TIME = 10;
     private static final int ACCURACY = 100;
     private int turn;
 
@@ -73,7 +72,7 @@ public class HardAI extends AI implements ArtIntel {
                     Move move = min.getMove();
                     Position p = new Position(move.getStartingX(), move.getStartingY());
                     boolean isKing = MoveChecker.isKing(p,game.getMatrix());
-                    if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
+                    if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
                         makeMove(move);
                         turn++;
                         System.out.println("memory used");
@@ -88,7 +87,7 @@ public class HardAI extends AI implements ArtIntel {
             return;
         }
         boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
-        if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
+        if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
             makeMove(move);
             currentGame.add(new MoveMemory(matrix, move));
             turn++;
@@ -120,10 +119,17 @@ public class HardAI extends AI implements ArtIntel {
         super.justWon();
         currentGame.forEach((MoveMemory i) -> {
             ArrayList<MoveMemory> mem = new ArrayList<>();
+            i.setWonIn(turn);
+            if(memory.containsKey(i.matrix)){
+                mem = memory.get(i.matrix);
+            }
+            else {
+                memory.put(i.matrix, mem);
+            }
 
             try {
                 writeToFile();
-            } catch (IOException e) {
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             mem.add(i);
@@ -146,7 +152,6 @@ public class HardAI extends AI implements ArtIntel {
                 }
                 MoveMemory moveMemory = new MoveMemory(matrix.toString(), move);
                 moveMemory.setWonIn(turns);
-                moveMemory.setHasBeenSaved(true);
                 if(!memory.containsKey(matrix.toString())) {
                     memory.put(matrix.toString(), new ArrayList<>());
                 }
@@ -157,33 +162,15 @@ public class HardAI extends AI implements ArtIntel {
 
     }
 
-    private void writeToFile() throws IOException {
-//        try (PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8")) {
-//
-//            for (Map.Entry<String, ArrayList<MoveMemory>> entry : memory.entrySet()) {
-//                ArrayList<MoveMemory> value = entry.getValue();
-//                value.forEach(i -> writer.println(i));
-//            }
-//            writer.close();
-//        }
+    private void writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
+        try (PrintWriter writer = new PrintWriter(CSV_FILE, "UTF-8")) {
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE, true))) {
-            for (MoveMemory i : currentGame) {
-                i.setWonIn(turn);
-                try {
-                    if (hasWon() && !i.hasBeenSaved()) {
-                        bw.write(String.valueOf(i));
-                        bw.newLine();
-                        bw.flush();
-                        i.setHasBeenSaved(true);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            for (Map.Entry<String, ArrayList<MoveMemory>> entry : memory.entrySet()) {
+                ArrayList<MoveMemory> value = entry.getValue();
+                value.forEach(i -> writer.println(i));
             }
-            System.out.println("data saved");
+            writer.close();
         }
-
     }
 
     @Override
@@ -200,13 +187,9 @@ class MoveMemory{
     public int wonIn;
 
 
-    public boolean hasBeenSaved;
-
-
     public MoveMemory(String matrix, Move move){
         this.matrix = matrix;
         this.move = move;
-        hasBeenSaved = false;
     }
 
     public void setWonIn(int wonIn) {
@@ -223,13 +206,5 @@ class MoveMemory{
 
     public Move getMove() {
         return move;
-    }
-
-    public boolean hasBeenSaved() {
-        return hasBeenSaved;
-    }
-
-    public void setHasBeenSaved(boolean hasBeenSaved) {
-        this.hasBeenSaved = hasBeenSaved;
     }
 }
