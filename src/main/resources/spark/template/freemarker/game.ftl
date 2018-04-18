@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-  <title>${title} | Web Checkers</title>
+  <title>${title} | We🅱️ Checkers</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/game.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,10 +14,14 @@
     "activeColor" : "${activeColor}"
   };
   </script>
+
+  <#if isSpectating??>
+    <meta http-equiv="refresh" content="1">
+  </#if>
 </head>
 <body>
   <div class="page">
-    <h1>Web Checkers 🅱️</h1>
+    <h1>We🅱️ Checkers️ </h1>
     
     <div class="navigation">
     <#if currentPlayer??>

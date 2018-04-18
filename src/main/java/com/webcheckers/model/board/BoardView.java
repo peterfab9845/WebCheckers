@@ -1,6 +1,6 @@
 package com.webcheckers.model.board;
 
-import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.states.PieceColor;
 
 import java.util.*;
 
@@ -34,7 +34,7 @@ public class BoardView implements Iterable<Row> {
      */
     @Override
     public Iterator<Row> iterator() {
-        if( color.equals(PieceColor.RED) )
+        if( color != null && color.equals(PieceColor.RED) )
             return rows.iterator();
         return reverseIterator();
     }

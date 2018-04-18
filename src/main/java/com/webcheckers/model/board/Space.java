@@ -1,6 +1,6 @@
 package com.webcheckers.model.board;
 
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceType;
 
 public class Space {
 

@@ -84,4 +84,9 @@ public class Move {
     public Position getPieceJumped(){
         return this.pieceJumped;
     }
+
+    @Override
+    public String toString() {
+        return start + "," + end;
+    }
 }

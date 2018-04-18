@@ -1,22 +1,31 @@
 package com.webcheckers.model.entities;
 
+import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.gamesaves.GameLog;
-import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.states.PieceColor;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+
+import static com.webcheckers.appl.MoveChecker.playerHasValidMove;
 
 public class Game implements Iterable<Move>{
 
     /**
      * Red Player
      */
-    private Player redPlayer;
+    private PlayerEntity redPlayer;
 
     /**
      * Blue Player
      */
-    private Player whitePlayer;
+    private PlayerEntity whitePlayer;
+
+    /**
+     *
+     */
+    private LinkedList<PlayerEntity> spectators;
 
     /**
      * The Current state of whos turn it is turn
@@ -38,25 +47,30 @@ public class Game implements Iterable<Move>{
      */
     private GameLog gameLog;
 
+
+    private boolean gameInSession;
+
     /**
      * Constructor
      * @param redPlayer
      * @param whitePlayer
      */
-    public Game(Player redPlayer, Player whitePlayer){
+    public Game(PlayerEntity redPlayer, PlayerEntity whitePlayer){
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         activeColor = PieceColor.RED;
         board = new Board();
         gameLog = new GameLog(redPlayer, whitePlayer);
         turnTracker = new TurnTracker(board);
+        spectators = new LinkedList<>();
+        gameInSession = true;
     }
 
     /**
      * give the red player
      * @return Player
      */
-    public Player getRedPlayer() {
+    public PlayerEntity getRedPlayer() {
         return redPlayer;
     }
 
@@ -64,7 +78,7 @@ public class Game implements Iterable<Move>{
      * give the white player
      * @return Player
      */
-    public Player getWhitePlayer() {
+    public PlayerEntity getWhitePlayer() {
         return whitePlayer;
     }
 
@@ -110,19 +124,35 @@ public class Game implements Iterable<Move>{
     public void isGameOver(){
         int red = board.getNumRedPieces();
         int white = board.getNumWhitePieces();
-        if( red == 0 ){
+        if( red == 0 || !playerHasValidMove(board, PieceColor.RED) ){
             redPlayer.justLost();
             whitePlayer.justWon();
+            spectators.forEach(PlayerEntity::sendToLobby);
+            gameInSession = false;
         }
-        else if( white == 0 ){
+        else if( white == 0 || !playerHasValidMove(board, PieceColor.WHITE)){
             redPlayer.justWon();
             whitePlayer.justLost();
+            spectators.forEach(PlayerEntity::sendToLobby);
+            gameInSession = false;
         }
+    }
 
+    public boolean isGameInSession() {
+        return gameInSession;
     }
 
     @Override
     public Iterator<Move> iterator() {
         return turnTracker.iterator();
     }
+
+    public Board getBoard(){
+        return board;
+    }
+
+    public boolean addSpectator(PlayerEntity playerEntity){
+        return spectators.add(playerEntity);
+    }
+
 }

@@ -1,7 +1,10 @@
 package com.webcheckers.model.entities;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PlayerStates;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PlayerStates;
+import com.webcheckers.model.board.Piece;
+
+import java.util.LinkedList;
 
 public class PlayerEntity {
 
@@ -21,11 +24,17 @@ public class PlayerEntity {
     private String name;
 
     /**
+     * List of pieces
+     */
+    private LinkedList<Piece> pieces;
+
+    /**
      * Constructor
      * @param name
      */
     public PlayerEntity(String name){
         this.name = name;
+        pieces = new LinkedList<>();
     }
 
     /**
@@ -40,6 +49,10 @@ public class PlayerEntity {
     */
     public void setInGame(){
         this.currentState = PlayerStates.IN_GAME;
+    }
+
+    public void setToSpectator(){
+        this.currentState = PlayerStates.SPECTATOR;
     }
 
     /**
@@ -109,4 +122,9 @@ public class PlayerEntity {
     public void justLost() {
         this.currentState = PlayerStates.LOSS;
     }
+
+    public void addPiece(Piece piece) {
+        pieces.add(piece);
+    }
+
 }

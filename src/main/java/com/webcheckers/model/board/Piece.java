@@ -1,12 +1,15 @@
 package com.webcheckers.model.board;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.appl.playerlobby.AIManager;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 
 /**
  * A checkers piece
  */
 public class Piece {
+
+    private int id;
 
     /**
      * The type of piece this is
@@ -26,6 +29,7 @@ public class Piece {
     public Piece(PieceType type, PieceColor color ){
         this.type = type;
         this.color = color;
+        this.id = AIManager.getPieceID();
     }
 
     /**
@@ -54,7 +58,8 @@ public class Piece {
         if (obj instanceof Piece){
             Piece otherPiece = (Piece)obj;
             if (otherPiece.getColor() == this.color){
-                if (otherPiece.getType() == this.type) return true;
+                if (otherPiece.getType() == this.type)
+                    return otherPiece.id == this.id;
             }
         }
         return false;
@@ -67,4 +72,9 @@ public class Piece {
     public void king() {
         this.type = PieceType.KING;
     }
+
+    public String toString(){
+        return color.toString();
+    }
+
 }
