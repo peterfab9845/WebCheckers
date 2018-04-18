@@ -11,7 +11,6 @@ define(function(){
     return {
       
       SPECTATOR_MODE_STARTING: 'SPECTATOR_MODE_STARTING',
-      SPECTATING: 'Spectating',
       QUIT_SPEC_BUTTON: 'Leave spectating'
 
     };

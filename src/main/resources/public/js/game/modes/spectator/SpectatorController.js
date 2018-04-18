@@ -57,7 +57,7 @@ define(function(require){
      * This action leaves the current Game view and retrieves an
      * updated Game view from the server.
      */
-    SpectatorController.prototype.leave = function resignGame() {
+    SpectatorController.prototype.leave = function leave() {
         // confirm that the player really wants to resign
         var yes = window.confirm('Are you sure you want to leave viewing?');
         if (!yes) {
@@ -73,7 +73,7 @@ define(function(require){
             // HTTP error handler
             .fail(AjaxUtils.handleErrorResponse)
             // always display a message that the Ajax call has completed.
-            .always(() => console.debug('ResignGame response complete.'));
+            .always(() => console.debug('leaveSpectating response complete.'));
 
         //
         function handleResponse(message) {
