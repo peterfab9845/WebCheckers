@@ -47,6 +47,7 @@ public class AI extends PlayerEntity{
             pieces = board.getRedPieces();
         else
             pieces = board.getWhitePieces();
+        game.isGameOver();
         return game;
     }
 
