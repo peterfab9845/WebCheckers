@@ -69,7 +69,7 @@ class GetSigninRouteTest {
 
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
-        testHelper.assertViewModelAttribute("title", "Sign-in");
+        testHelper.assertViewModelAttribute("title", "Sign-In");
 
     }
 

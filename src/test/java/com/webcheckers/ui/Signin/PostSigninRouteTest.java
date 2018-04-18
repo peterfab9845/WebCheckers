@@ -164,7 +164,7 @@ public class PostSigninRouteTest {
     public void handle_takenUsername() {
         when(request.queryParams(PostSigninRoute.REQUEST_PARAM_NAME)).thenReturn(VALID_USERNAME);
         message = new Message(PostSigninRoute.MSG_TAKEN_USERNAME, MessageType.error);
-        playerLobby.addPlayer(player);
+        when(playerLobby.playerExists(VALID_USERNAME)).thenReturn(true);
 
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());

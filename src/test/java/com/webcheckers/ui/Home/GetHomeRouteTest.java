@@ -11,6 +11,7 @@ import com.webcheckers.model.Message;
 import com.webcheckers.model.States.MessageType;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.ui.TemplateEngineTester;
+import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,7 @@ public class GetHomeRouteTest {
         when(session.id()).thenReturn(SESSION_ID);
         engine = mock(TemplateEngine.class);
         response = mock(Response.class);
-        lobby = new PlayerLobby();
+        lobby = new PlayerLobby(); // friendly
         MessageMap.init();
     }
 
@@ -82,6 +83,7 @@ public class GetHomeRouteTest {
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
         when(player.getSession()).thenReturn(session);
+        when(player.isInLobby()).thenReturn(true);
         lobby.addPlayer(player);
         GetHomeRoute getHomeRoute = new GetHomeRoute(engine, lobby);
         getHomeRoute.handle(request, response);
@@ -90,8 +92,6 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("title", "Welcome!");
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper
-            .assertViewModelAttribute("playerList", lobby.getPlayersInLobbyExcept(session));
         testHelper.assertViewModelAttributeIsAbsent("message");
     }
 
@@ -103,6 +103,7 @@ public class GetHomeRouteTest {
         when(player.isInGame()).thenReturn(false);
         when(player.getName()).thenReturn(PLAYER_NAME);
         when(player.getSession()).thenReturn(session);
+        when(player.isInLobby()).thenReturn(true);
         lobby.addPlayer(player);
         Message message = new Message(MESSAGE_TEXT, MessageType.info);
         MessageMap.setMessage(session, message);
@@ -113,8 +114,6 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelAttribute("title", "Welcome!");
         testHelper.assertViewModelAttribute("currentPlayer", player);
         testHelper.assertViewModelAttribute("playerCount", 1);
-        testHelper
-            .assertViewModelAttribute("playerList", lobby.getPlayersInLobbyExcept(session));
         testHelper.assertViewModelAttribute("message", message);
     }
 }
