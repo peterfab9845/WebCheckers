@@ -40,7 +40,8 @@ public class EasyAI extends AI implements ArtIntel {
     public void makeDecision() {
         this.game = getGame(playerLobby);
         Move move = getRandomMove();
-        if(move != null)
+        boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
+        if(MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing))
             makeMove(move);
     }
 

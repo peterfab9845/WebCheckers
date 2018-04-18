@@ -8,7 +8,7 @@
 <body>
 <div class="page">
 
-    <h1>We🅱️ Checkers️</h1>
+    <h1>We🅱️ Checkers ️</h1>
 
     <div class="navigation">
       <#if currentPlayer??>
@@ -28,37 +28,42 @@
         <p>Welcome to the world of online Checkers.</p>
         <p>${playerCount} player<#if (playerCount == 1)> is<#else>s are</#if> online right now.</p>
         <#if currentPlayer??>
-            <table width="80%">
-            <tr>
-                <th align="left">Players In Lobby</th>
-                <th align="left">Players In Game</th>
-            </tr>
-            <tr>
-
-                <td>
-                    <p>
-                        Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
-                        Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
-                        Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
-                        <#if currentPlayer.name == "admin">
-                            <a href="/ai?type=train">Train Hard AI</a><br>
-                        </#if>
+            <table width="100%" align="center">
+                <tr>
+                    <th>Players In Lobby</th>
+                    <th>Players In Game</th>
+                    <th>Play Artificial Intel</th>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <p>
                         <#list playerList as player>
                             ${player.name} - <a href="/game?opponentName=${player.name}">Challenge</a>
                             <br>
                         </#list>
-                    </p>
-                </td>
+                        </p>
+                    </td>
 
-                <td>
-                    <p>
+                    <td align="center">
+                        <p>
                         <#list gameList as player>
                             ${player.name} - <a href="/spectate?name=${player.name}">Spectate</a>
                             <br>
                         </#list>
-                    </p>
-                </td>
-            </tr>
+                        </p>
+                    </td>
+                    <td align="center">
+                        <p>
+                            Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
+                            Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
+                            Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
+
+                        <#if currentPlayer.name == "admin">
+                            Train Hard AI - <a href="/ai?type=train">Challenge</a><br>
+                        </#if>
+                        </p>
+                    </td>
+                </tr>
             </table>
         </#if>
     </div>
