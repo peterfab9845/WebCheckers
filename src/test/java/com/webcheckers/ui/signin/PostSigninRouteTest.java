@@ -88,8 +88,7 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
-        //testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
         testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
@@ -109,10 +108,8 @@ public class PostSigninRouteTest {
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
-            "Title tag missing from HTML.");
-        //assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_MISSING_USERNAME)),
-        //        "Error message tag missing from HTML.");
+        assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_MISSING_USERNAME)),
+                "Error message tag missing from HTML.");
     }
 
     /**
@@ -130,8 +127,7 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
-        //testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
         testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
@@ -151,10 +147,8 @@ public class PostSigninRouteTest {
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
-            "Title tag missing from HTML.");
-        //assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_INVALID_USERNAME)),
-        //      "Error message tag missing from HTML.");
+        assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_INVALID_USERNAME)),
+              "Error message tag missing from HTML.");
     }
 
     /**
@@ -174,9 +168,8 @@ public class PostSigninRouteTest {
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
 
-        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_TITLE, PostSigninRoute.PAGE_TITLE);
-        //testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
-        //testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
+        testHelper.assertViewModelAttribute(PostSigninRoute.ATTR_MESSAGE, message);
+        testHelper.assertViewModelAttributeIsAbsent(PostSigninRoute.ATTR_CURRENT_PLAYER);
     }
 
     /**
@@ -195,8 +188,6 @@ public class PostSigninRouteTest {
 
         final String viewHTML = engine.render(modelAndView);
 
-        assertTrue(viewHTML.contains(generateTitleHTML(PostSigninRoute.PAGE_TITLE)),
-            "Title tag missing from HTML.");
         //assertTrue(viewHTML.contains(generateMessageHTML(PostSigninRoute.MSG_TAKEN_USERNAME)),
         //        "Error message tag missing from HTML.");
     }
@@ -238,17 +229,6 @@ public class PostSigninRouteTest {
         }
     } // no HTML test for this condition; this is handled by GetEndRoute
     */
-
-
-    /**
-     * Create the HTML title tag to check for
-     *
-     * @param title the title message
-     * @return HTML title tag to verify is created
-     */
-    private String generateTitleHTML(String title) {
-        return "<title>" + title + " | Web Checkers</title>";
-    }
 
     /**
      * Create the HTML error message tag to check for

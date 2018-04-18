@@ -227,7 +227,7 @@ public class PlayerLobbyTest {
         CuT.addPlayer(player2);
         CuT.addPlayer(player3);
 
-        assertEquals(2, CuT.countInLobby(), "Wrong count of players in lobby.");
+        assertEquals(3, CuT.countOnline(), "Wrong count of players in lobby.");
     }
 
     /**
