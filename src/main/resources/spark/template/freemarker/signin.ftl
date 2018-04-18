@@ -22,7 +22,7 @@
       <h2>Sign in:</h2>
       
       <#if message??>
-      <div class="error">${message.text}</div>
+      <div class="error">${message}</div>
       </#if>
       
       <form action="/signin" method="POST">
