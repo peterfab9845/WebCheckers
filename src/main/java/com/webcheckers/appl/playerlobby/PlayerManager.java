@@ -126,7 +126,7 @@ public class PlayerManager {
      * @return integer of players in loby
      */
     public int playersInLobby(){
-        return (int) listOfPlayers().stream().filter(Player::isInLobby).count();
+        return (int) listOfPlayers().stream().count();
     }
 
     private LinkedList<Player> listOfPlayers(){

@@ -32,7 +32,7 @@
             <tr>
                 <th>Players In Lobby</th>
                 <th>Players In Game</th>
-                <th>Play Artificial Intel</th>
+                <th>Play/Watch Artificial Intel</th>
             </tr>
             <tr>
                 <td align="center">
@@ -57,10 +57,7 @@
                         Easy Ai - <a href="/ai?type=easy">Challenge</a><br>
                         Medium Ai - <a href="/ai?type=medium">Challenge</a><br>
                         Hard Ai - <a href="/ai?type=hard">Challenge</a><br>
-
-                        <#if currentPlayer.name == "admin">
-                            Train Hard AI - <a href="/ai?type=train">Challenge</a><br>
-                        </#if>
+                        AI vs AI - <a href="/ai?type=train">Challenge</a><br>
                     </p>
                 </td>
             </tr>
