@@ -28,7 +28,7 @@ public class GetWatchRoute implements Route {
     /**
      * Template engine for desplaying things to users
      */
-    private final TemplateEngine templateEngine;
+    private TemplateEngine templateEngine;
 
     /**
      * Player Lobby to receive info about players in game

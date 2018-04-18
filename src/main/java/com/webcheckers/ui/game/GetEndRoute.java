@@ -1,5 +1,6 @@
 package com.webcheckers.ui.game;
 
+import com.google.gson.Gson;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Player;
 import spark.*;
@@ -26,6 +27,7 @@ public class GetEndRoute implements Route {
     * Template engine for desplaying things to users
     */
     private final TemplateEngine templateEngine;
+
 
     /**
     * Player Lobby to receive info about players in game
@@ -86,6 +88,7 @@ public class GetEndRoute implements Route {
             vm.put("winLoss", "lost!");
         }
 
+        vm.put("game", user.getLastGame());
 
         return templateEngine.render(new ModelAndView(vm , "end.ftl"));
     }

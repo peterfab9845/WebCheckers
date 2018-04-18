@@ -69,6 +69,8 @@ public class Player extends PlayerEntity {
 
 
     public GameLog getGameLogByName(String game){
+        if(lastGame.toString().equals(game))
+            return lastGame;
         for(int i = 0; i < previousGames.size(); i++) {
             if(previousGames.get(i).toString().equals(game)) {
                 return previousGames.get(i);

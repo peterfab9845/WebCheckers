@@ -21,18 +21,14 @@
 
 
     <div align="center" class="body">
-        <h2 style="color: #000000"><u>You have ${winLoss}</u></h2><br>
+        <br>
+        <h2 style="color: #000000"><u>You have ${winLoss}</u></h2><br><br>
 
         <form action="/save" method="POST">
             <button>Save and Watch Replays</button>
         </form>
 
         <br>
-        <form action="/watch?&{game}" method="POST">
-            <button>Watch Replay</button>
-        </form>
-
-        <br><br>
         <form action="/end" method="POST">
             <button>Back To Lobby</button>
         </form>
