@@ -3,6 +3,7 @@ package com.webcheckers.appl.playerlobby;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.gamesaves.GameLog;
 import com.webcheckers.model.states.PieceColor;
 
 import java.util.HashMap;
@@ -21,8 +22,15 @@ public class GameManager {
      */
     public void removeGame(PlayerEntity player){
         Game game = getGame(player);
+        GameLog gameLog = game.getGameLog();
+
         PlayerEntity redPlayer = game.getRedPlayer();
+        if(redPlayer instanceof Player)
+            ((Player)redPlayer).setLastGame(gameLog);
+
         PlayerEntity whitePlayer = game.getWhitePlayer();
+        if(whitePlayer instanceof Player)
+            ((Player)whitePlayer).setLastGame(gameLog);
 
         if( player == whitePlayer ){
             redPlayer.justWon();

@@ -127,11 +127,7 @@ public class Game implements Iterable<Move>{
         int white = board.getNumWhitePieces();
         if( red == 0 || !playerHasValidMove(board, PieceColor.RED) ){
             redPlayer.justLost();
-            if(redPlayer instanceof Player)
-                ((Player)redPlayer).setLastGame(gameLog);
             whitePlayer.justWon();
-            if(whitePlayer instanceof Player)
-                ((Player)whitePlayer).setLastGame(gameLog);
             spectators.forEach(PlayerEntity::sendToLobby);
             gameInSession = false;
         }
@@ -160,4 +156,7 @@ public class Game implements Iterable<Move>{
         return spectators.add(playerEntity);
     }
 
+    public GameLog getGameLog() {
+        return gameLog;
+    }
 }

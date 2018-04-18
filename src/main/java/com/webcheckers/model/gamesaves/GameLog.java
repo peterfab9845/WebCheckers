@@ -4,6 +4,7 @@ import com.webcheckers.model.board.Move;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.PlayerEntity;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -20,6 +21,8 @@ public class GameLog {
      */
     private Queue<Move> moveQueue;
 
+    private Date timeStamp;
+
     /**
      * Creates an object that tracks the given game being played/ previously played
      * @param redPlayer red player in the game
@@ -29,6 +32,7 @@ public class GameLog {
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.moveQueue = new LinkedList<>();
+        timeStamp = new Date();
     }
 
     /**
@@ -61,4 +65,8 @@ public class GameLog {
         return whitePlayer;
     }
 
+    @Override
+    public String toString() {
+        return timeStamp.toString() + " - " + redPlayer.getName() + " vs " + whitePlayer.getName();
+    }
 }
