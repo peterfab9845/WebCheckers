@@ -108,12 +108,12 @@ public class AI extends PlayerEntity{
         }
     }
 
-    public Piece getRandomPiece(Space[][] board){
+    public Piece getRandomPiece(Board board){
         LinkedList<Piece> currentPieces = new LinkedList<>();
         Position position;
 
         for (Piece piece : pieces) {
-            position = BoardController.getPieceLocation(board, piece);
+            position = BoardController.getPieceLocation(board.getMatrix(), piece);
             if (MoveChecker.hasValidMove(position, board, piece.getColor()))
                 currentPieces.add(piece);
         }
@@ -220,7 +220,7 @@ public class AI extends PlayerEntity{
         ArrayList<Position> moveablePositions = new ArrayList<Position>(0);
         ArrayList<Position> positions = board.getLocationOfPieces(teamColor);
         for (Position position : positions) {
-            if (hasValidMove(position, board.getMatrix(), teamColor))moveablePositions.add(position);
+            if (hasValidMove(position, board, teamColor))moveablePositions.add(position);
         }
         return moveablePositions;
     }
@@ -238,7 +238,7 @@ public class AI extends PlayerEntity{
         LinkedList<Piece> validPieces = new LinkedList<>();
         pieces.forEach(i ->{
             Position position = BoardController.getPieceLocation(game.getMatrix(), i);
-            if(MoveChecker.hasValidMove(position, game.getMatrix(), getTeamColor()))
+            if(MoveChecker.hasValidMove(position, game.getBoard(), getTeamColor()))
                 validPieces.add(i);
         });
         return validPieces;
@@ -257,7 +257,7 @@ public class AI extends PlayerEntity{
             for( int row = -3; row < 4; row+=1){
                 for( int col = -3; col < 4; col+=1) {
                     move = new Move(position, new Position(y + row, x + col));
-                    if (MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing, true)) {
+                    if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing, true)) {
                         move = new Move(position, new Position(y + row, x + col));
                         moves.add(move);
                     }
@@ -286,7 +286,7 @@ public class AI extends PlayerEntity{
         if(piecesNum <= 0)
             return null;
 
-        piece = getRandomPiece(board);
+        piece = getRandomPiece(game.getBoard());
         position = BoardController.getPieceLocation(board, piece);
         isKing =  MoveChecker.isKing(position, board);
         if(piece == null){
@@ -295,8 +295,8 @@ public class AI extends PlayerEntity{
         color = piece.getColor();
 
         try {
-            while (!MoveChecker.hasValidMove(position, board, color)) {
-                piece = getRandomPiece(board);
+            while (!MoveChecker.hasValidMove(position, game.getBoard(), color)) {
+                piece = getRandomPiece(game.getBoard());
                 position = BoardController.getPieceLocation(board, piece);
             }
         }
@@ -314,7 +314,7 @@ public class AI extends PlayerEntity{
         for( int row = -3; row < 4; row+=1){
             for( int col = -3; col < 4; col+=1) {
                 move = new Move(position, new Position(y + row, x + col));
-                if (MoveChecker.isMoveValid(move, board, color, isKing)) {
+                if (MoveChecker.isMoveValid(move, game.getBoard(), color, isKing)) {
                     move = new Move(position, new Position(y + row, x + col));
                     moves.add(move);
                 }

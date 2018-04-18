@@ -72,7 +72,7 @@ public class HardAI extends AI implements ArtIntel {
                     Move move = min.getMove();
                     Position p = new Position(move.getStartingX(), move.getStartingY());
                     boolean isKing = MoveChecker.isKing(p,game.getMatrix());
-                    if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+                    if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
                         makeMove(move);
                         turn++;
                         System.out.println("memory used");
@@ -87,7 +87,7 @@ public class HardAI extends AI implements ArtIntel {
             return;
         }
         boolean isKing = MoveChecker.isKing(move.getStart(), game.getMatrix());
-        if( MoveChecker.isMoveValid(move, game.getMatrix(), getTeamColor(), isKing)) {
+        if( MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), isKing)) {
             makeMove(move);
             currentGame.add(new MoveMemory(matrix, move));
             turn++;
