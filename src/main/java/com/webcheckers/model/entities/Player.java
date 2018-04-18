@@ -23,7 +23,7 @@ public class Player extends PlayerEntity {
      */
     private GameLog lastGame;
 
-    private int viewSpeed = 2;
+    private int viewSpeed = 5;
 
     /**
     * Constructor

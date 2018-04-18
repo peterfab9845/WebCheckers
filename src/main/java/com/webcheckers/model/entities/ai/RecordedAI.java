@@ -18,6 +18,7 @@ public class RecordedAI extends AI implements ArtIntel{
     private int name = 0;
     private String whiteName;
     private Player user;
+    private Thread thread;
 
     /**
      * Constructor
@@ -31,14 +32,13 @@ public class RecordedAI extends AI implements ArtIntel{
         this.user = user;
         moveQueue = moves;
         ArtIntel self = this;
-        Thread thread = new Thread(){
+        thread = new Thread(){
             @Override
             public void run() {
                 super.run();
                 try {
                     myTurn(self);
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         };
@@ -48,17 +48,25 @@ public class RecordedAI extends AI implements ArtIntel{
 
     @Override
     public void makeDecision() {
-        while(!moveQueue.isEmpty()){
-            try { sleep((long)(user.getViewSpeed() + 100)); }
-            catch (InterruptedException e) { e.printStackTrace(); }
-            getGame(playerLobby);
-            if(!moveQueue.isEmpty()) {
-                Move move = moveQueue.remove();
-                if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), true, false))
-                    makeMove(move);
-            }
+        try { sleep((long)(1000 * user.getViewSpeed() + 100)); }
+        catch (InterruptedException e) {  }
+        getGame(playerLobby);
+        if(!moveQueue.isEmpty()) {
+            Move move = moveQueue.remove();
+            if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), true, false))
+                makeMove(move);
+            else
+                System.out.println("invalid");
         }
+        else{
+            game.setInSession(false);
+            user.sendToLobby();
+            sendToLobby();
+        }
+    }
 
+    public void play(){
+        thread.interrupt();
     }
 
 

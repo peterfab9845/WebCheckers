@@ -57,7 +57,7 @@
 </head>
 <body>
   <div class="page">
-    <h1>We🅱️ Checkers<font size="1"></h1></font>
+    <h1>We🅱 Checkers<font size="1"></h1></font>
     <div class="navigation">
     <#if currentPlayer??>
       <a href="/">my home</a> |
@@ -134,9 +134,27 @@
               <#if isReplay??>
               <div align="center">
                   <form action="/speed" method="POST">
-                      <input id="speed" name="speed" type="range" min="1" max="10" value="${speed}" class="slider"><br>
-                      <button type="submit">Change Speed</button><br>
+                      Speed: <input id="speed" name="speed" type="range" min="1" max="10" value="${speed}" class="slider" onclick="submit()">
+                      <script>
+                          function submit(){
+                              .submit();
+                          }
+                      </script>
                   </form>
+
+                  <br><br>
+                  <div style="width: 50%; float: left" align="right">
+                      <form action="/speed" method="POST" >
+                          <button style="font-size: 20px;" id="speed" name="speed" value="1000" type="submit">⏸</button><br>
+                      </form>
+                  </div>
+                  <div style="width: 50%; float: right" align="left">
+                      <form action="/play" method="POST">
+                          <button style="font-size: 20px;" id="speed" name="speed" value="1000" type="submit">▶️</button><br>
+                      </form>
+                  </div>
+
+                  <br><br>
               </div>
 
           </#if>

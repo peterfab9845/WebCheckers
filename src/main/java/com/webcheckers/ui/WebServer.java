@@ -6,9 +6,7 @@ import com.webcheckers.ui.ai.PostAIRoute;
 import com.webcheckers.ui.game.*;
 import com.webcheckers.ui.home.GetHomeRoute;
 import com.webcheckers.ui.movement.*;
-import com.webcheckers.ui.saves.GetSavesRoute;
-import com.webcheckers.ui.saves.GetWatchRoute;
-import com.webcheckers.ui.saves.PostSaveRoute;
+import com.webcheckers.ui.saves.*;
 import com.webcheckers.ui.signin.GetSigninRoute;
 import com.webcheckers.ui.signin.GetSignoutRoute;
 import com.webcheckers.ui.signin.PostResignRoute;
@@ -125,6 +123,8 @@ public class WebServer {
     private static final String WATCH__URL = "/watch";
 
     private static final String SPEED_URL = "/speed";
+
+    private static final String PLAY_URL = "/play";
 
     /**
      * Gson object for transporting data
@@ -256,7 +256,9 @@ public class WebServer {
 
         get(WATCH__URL, new GetWatchRoute(templateEngine,playerLobby));
 
-        post(SPEED_URL, new PostSpeedChange(gson, playerLobby));
+        post(SPEED_URL, new PostSpeedRoute(gson, playerLobby));
+
+        post(PLAY_URL, new PostPlayRoute(gson, playerLobby));
 
         // /
         LOG.config("WebServer is initialized.");

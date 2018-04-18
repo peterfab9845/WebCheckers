@@ -165,4 +165,8 @@ public class Game implements Iterable<Move>{
         turnTracker.remove();
         gameLog.nextMove();
     }
+
+    public void setInSession(boolean inSession) {
+        this.gameInSession = inSession;
+    }
 }
