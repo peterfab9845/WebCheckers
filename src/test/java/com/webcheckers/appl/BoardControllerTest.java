@@ -111,8 +111,4 @@ public class BoardControllerTest {
         assertNull(board.valueAt(startRed), "There is a piece where you moved from");
         assertNull(board.valueAt(endRed), "There is a piece where you moved to");
     }
-
-    /**
-     * Test
-     */
 }
