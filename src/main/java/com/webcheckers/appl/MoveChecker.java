@@ -73,7 +73,8 @@ public class MoveChecker {
     }
 
     public static boolean isMoveValid(Move move, Board board, PieceColor color, boolean king, boolean isTesting){
-        isMoveValid(move,board,color,king);
+        if(!isMoveValid(move,board,color,king))
+            return false;
         if(isTesting)
             pieceMoved = false;
         return true;

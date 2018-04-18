@@ -47,7 +47,6 @@ public class HardAI extends AI implements ArtIntel {
 
     @Override
     public synchronized void makeDecision(){
-
         try { this.wait(THOUGHT_PROCESS_TIME); }
         catch (InterruptedException ignored) { }
 
