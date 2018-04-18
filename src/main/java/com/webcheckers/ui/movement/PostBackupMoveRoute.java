@@ -3,6 +3,8 @@ package com.webcheckers.ui.movement;
 import com.google.gson.Gson;
 import com.webcheckers.model.Message;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.model.entities.Game;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.MessageType;
 import com.webcheckers.ui.game.GetGameRoute;
 import spark.Request;
@@ -56,7 +58,9 @@ public class PostBackupMoveRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("PostBackupMoveRoute is invoked.");
 
-//        Player currentPlayer = playerLobby.getPlayer(request.session());
+        Player currentPlayer = playerLobby.getPlayer(request.session());
+        Game game = playerLobby.getGame(currentPlayer);
+        game.deQueueMove();
         Message responseMessage = new Message("", MessageType.info);
         return gson.toJson(responseMessage);
     }

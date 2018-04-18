@@ -25,7 +25,7 @@
         <#if currentPlayer??>
             <p>
             <#list saveList as gameLog>
-                ${gameLog} - <a href="">watch</a> - <a href="/saves?game=${gameLog}">delete</a>
+                ${gameLog} - <a href="watch?game=${gameLog}">watch</a> - <a href="/saves?game=${gameLog}">delete</a>
                 <br>
             </#list>
             </p>

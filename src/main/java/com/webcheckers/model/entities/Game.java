@@ -62,7 +62,7 @@ public class Game implements Iterable<Move>{
         activeColor = PieceColor.RED;
         board = new Board();
         gameLog = new GameLog(redPlayer, whitePlayer);
-        turnTracker = new TurnTracker(board);
+        turnTracker = new TurnTracker(this);
         spectators = new LinkedList<>();
         gameInSession = true;
     }
@@ -120,6 +120,7 @@ public class Game implements Iterable<Move>{
      */
     public void queueMove(Move move){
         turnTracker.add(move);
+        gameLog.addMove(move);
     }
 
     public void isGameOver(){
@@ -158,5 +159,10 @@ public class Game implements Iterable<Move>{
 
     public GameLog getGameLog() {
         return gameLog;
+    }
+
+    public void deQueueMove() {
+        turnTracker.remove();
+        gameLog.nextMove();
     }
 }

@@ -1,5 +1,6 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.states.PieceType;
@@ -37,7 +38,8 @@ public class BoardController {
 
     }
 
-    public static void makeMove(Board board, Move move){
+    public static void makeMove(Game game, Move move){
+        Board board = game.getBoard();
         Position start = move.getStart();
         Position end = move.getEnd();
         Space[][] spaces = board.getMatrix();

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="page">
-    <h1>We🅱️ Checkers ️</h1>
+    <h1>We🅱️ Checkers️</h1>
 
     <div class="navigation">
         <a href="/">my home</a> -
@@ -24,11 +24,11 @@
         <h2 style="color: #000000"><u>You have ${winLoss}</u></h2><br>
 
         <form action="/save" method="POST">
-            <button>Save and Watch Replay</button>
+            <button>Save and Watch Replays</button>
         </form>
 
         <br>
-        <form action="/watch" method="POST">
+        <form action="/watch?&{game}" method="POST">
             <button>Watch Replay</button>
         </form>
 

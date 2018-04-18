@@ -74,7 +74,7 @@ public class AI extends PlayerEntity{
 
     public void makeMove(Move move){
         if(MoveChecker.isMoveValid(move,game.getBoard(),getTeamColor(),MoveChecker.isKing(move.getStart(),game.getMatrix()),false)) {
-            BoardController.makeMove(game.getBoard(), move);
+            game.queueMove(move);
             game.changeTurns();
         }
         if (!hasWon() && !hasLost())
@@ -93,7 +93,8 @@ public class AI extends PlayerEntity{
     }
 
     public synchronized void myTurn(ArtIntel ai){
-        while(true) {
+        game = getGame(playerLobby);
+        while(game.isGameInSession()) {
             Game game = playerLobby.getGame(enemy);
             if (game != null) {
                 if (game.getActiveColor() == this.getTeamColor()) {

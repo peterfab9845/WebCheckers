@@ -73,8 +73,13 @@ public class GetSavesRoute implements Route {
         // Redirect the player to the game page if a game is in progress or session doesnt exist
         Player currentPlayer = playerLobby.getPlayer(request.session());
         if (currentPlayer == null ) {
+            response.redirect("/");
+            throw halt(304);
+        }
+
+        if(!currentPlayer.isInLobby()){
             response.redirect("/game");
-            throw halt(303);
+            throw halt(305);
         }
 
         vm.put("title", "Saves");

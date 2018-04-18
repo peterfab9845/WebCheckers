@@ -3,7 +3,9 @@ package com.webcheckers.model.entities.ai;
 import com.webcheckers.appl.MoveChecker;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.board.Move;
+import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.entities.PlayerEntity;
+import com.webcheckers.model.gamesaves.GameLog;
 
 import java.util.Queue;
 
@@ -15,6 +17,7 @@ public class RecordedAI extends AI implements ArtIntel{
     private Queue<Move> moveQueue;
     private int name = 0;
     private String whiteName;
+    private Player user;
 
     /**
      * Constructor
@@ -23,29 +26,40 @@ public class RecordedAI extends AI implements ArtIntel{
      * @param enemy
      * @param playerLobby
      */
-    public RecordedAI(String name, String name2, PlayerEntity enemy, PlayerLobby playerLobby) {
+    public RecordedAI(Player user, String name, PlayerEntity enemy, Queue<Move> moves, PlayerLobby playerLobby) {
         super(name, enemy, playerLobby);
-        whiteName = name2;
+        this.user = user;
+        moveQueue = moves;
+        ArtIntel self = this;
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    myTurn(self);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        thread.start();
     }
 
     @Override
     public void makeDecision() {
         while(!moveQueue.isEmpty()){
-            try { sleep(1000); }
+            try { sleep((long)(user.getViewSpeed() + 100)); }
             catch (InterruptedException e) { e.printStackTrace(); }
             getGame(playerLobby);
-            Move move = moveQueue.remove();
-            if(MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(),true, false))
-                makeMove(move);
+            if(!moveQueue.isEmpty()) {
+                Move move = moveQueue.remove();
+                if (MoveChecker.isMoveValid(move, game.getBoard(), getTeamColor(), true, false))
+                    makeMove(move);
+            }
         }
+
     }
 
-    @Override
-    public String getName(){
-        name++;
-        if(name % 2 == 0)
-            super.getName();
-        return this.whiteName;
-    }
 
 }

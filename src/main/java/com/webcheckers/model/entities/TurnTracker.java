@@ -11,15 +11,15 @@ public class TurnTracker extends LinkedList{
     /**
      * Games Board
      */
-    private Board board;
+    private Game game;
 
     /**
      * Constructor
      * @param board
      */
-    public TurnTracker(Board board){
+    public TurnTracker(Game game){
         super();
-        this.board = board;
+        this.game = game;
     }
 
     /**
@@ -28,7 +28,7 @@ public class TurnTracker extends LinkedList{
     public void finalizeTurn(){
         while(!isEmpty()) {
             Move move = (Move) remove();
-            BoardController.makeMove(board, move);
+            BoardController.makeMove(game, move);
         }
     }
 }

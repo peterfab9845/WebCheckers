@@ -131,7 +131,7 @@ public class MediumAI extends AI implements ArtIntel {
             }
         }
         assert (bestMove != null);
-        if(MoveChecker.isMoveValid(bestMove, game.getBoard(), teamColor, board.isKing(bestMove.getStart()), false))
+        if (MoveChecker.isMoveValid(bestMove, game.getBoard(), teamColor, board.isKing(bestMove.getStart()), true))
             makeMove(bestMove);
     }
 

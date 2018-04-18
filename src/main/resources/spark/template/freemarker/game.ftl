@@ -15,6 +15,42 @@
   };
   </script>
 
+    <style>
+        .slidecontainer {
+            width: 100%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 80%;
+            height: 25px;
+            background: #9cd0d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4139d3;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #74a9af;
+            cursor: pointer;
+        }
+    </style>
   <#if isSpectating??>
     <meta http-equiv="refresh" content="1">
   </#if>
@@ -94,13 +130,23 @@
               </#list>
               </tr>
             </#list>
-            </tbody>
+
+              <#if isReplay??>
+              <div align="center">
+                  <form action="/speed" method="POST">
+                      <input id="speed" name="speed" type="range" min="1" max="10" value="${speed}" class="slider"><br>
+                      <button type="submit">Change Speed</button><br>
+                  </form>
+              </div>
+
+          </#if>
+          </tbody>
           </table>
         </div>
       </div>
-
     </div>
   </div>
+
 
   <audio id="audio" src="http://www.soundjay.com/button/beep-07.mp3" autostart="false" ></audio>
   

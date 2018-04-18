@@ -23,6 +23,8 @@ public class Player extends PlayerEntity {
      */
     private GameLog lastGame;
 
+    private int viewSpeed = 2;
+
     /**
     * Constructor
     * @param name
@@ -58,13 +60,21 @@ public class Player extends PlayerEntity {
      * @return
      */
     public boolean deleteGame(String game) {
+        GameLog gameLog = getGameLogByName(game);
+        if(game == null)
+            return false;
+        previousGames.remove(gameLog);
+        return true;
+    }
+
+
+    public GameLog getGameLogByName(String game){
         for(int i = 0; i < previousGames.size(); i++) {
             if(previousGames.get(i).toString().equals(game)) {
-                this.previousGames.remove(i);
-                return true;
+                return previousGames.get(i);
             }
         }
-        return false;
+        return null;
     }
 
     /**
@@ -90,5 +100,13 @@ public class Player extends PlayerEntity {
 
     public void setLastGame(GameLog lastGame) {
         this.lastGame = lastGame;
+    }
+
+    public int getViewSpeed() {
+        return viewSpeed;
+    }
+
+    public void setViewSpeed(int viewSpeed) {
+        this.viewSpeed = viewSpeed;
     }
 }

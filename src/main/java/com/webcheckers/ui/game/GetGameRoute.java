@@ -3,6 +3,7 @@ package com.webcheckers.ui.game;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
+import com.webcheckers.model.entities.ai.RecordedAI;
 import com.webcheckers.model.states.ViewMode;
 import spark.*;
 
@@ -107,6 +108,10 @@ public class GetGameRoute implements Route {
             vm.put("viewMode", ViewMode.SPECTATOR);
             vm.put("isSpectating", true);
         }
+        if(game.getRedPlayer() instanceof RecordedAI)
+            vm.put("isReplay", true);
+
+        vm.put("speed", user.getViewSpeed());
         vm.put("redPlayer", game.getRedPlayer());
         vm.put("whitePlayer", game.getWhitePlayer());
         vm.put("activeColor", game.getActiveColor());

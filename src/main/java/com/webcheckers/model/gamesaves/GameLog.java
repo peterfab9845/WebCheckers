@@ -65,6 +65,10 @@ public class GameLog {
         return whitePlayer;
     }
 
+    public Queue<Move> getMoveQueue() {
+        return moveQueue;
+    }
+
     @Override
     public String toString() {
         return timeStamp.toString() + " - " + redPlayer.getName() + " vs " + whitePlayer.getName();

@@ -5,11 +5,9 @@ import com.webcheckers.appl.playerlobby.PlayerLobby;
 import com.webcheckers.ui.ai.PostAIRoute;
 import com.webcheckers.ui.game.*;
 import com.webcheckers.ui.home.GetHomeRoute;
-import com.webcheckers.ui.movement.PostBackupMoveRoute;
-import com.webcheckers.ui.movement.PostCheckTurnRoute;
-import com.webcheckers.ui.movement.PostSubmitTurnRoute;
-import com.webcheckers.ui.movement.PostValidateMoveRoute;
+import com.webcheckers.ui.movement.*;
 import com.webcheckers.ui.saves.GetSavesRoute;
+import com.webcheckers.ui.saves.GetWatchRoute;
 import com.webcheckers.ui.saves.PostSaveRoute;
 import com.webcheckers.ui.signin.GetSigninRoute;
 import com.webcheckers.ui.signin.GetSignoutRoute;
@@ -124,6 +122,9 @@ public class WebServer {
 
     private static final String SAVE_URL = "/save";
 
+    private static final String WATCH__URL = "/watch";
+
+    private static final String SPEED_URL = "/speed";
 
     /**
      * Gson object for transporting data
@@ -253,7 +254,11 @@ public class WebServer {
 
         post(SAVE_URL, new PostSaveRoute(gson, playerLobby));
 
-        //
+        get(WATCH__URL, new GetWatchRoute(templateEngine,playerLobby));
+
+        post(SPEED_URL, new PostSpeedChange(gson, playerLobby));
+
+        // /
         LOG.config("WebServer is initialized.");
     }
 
