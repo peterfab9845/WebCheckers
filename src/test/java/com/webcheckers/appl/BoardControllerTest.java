@@ -3,7 +3,10 @@ package com.webcheckers.appl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 import java.util.LinkedList;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -62,7 +65,7 @@ public class BoardControllerTest {
     @Test
     public void makeMoveRed() {
         Position startRed = new Position(2, 1);
-        Position endRed = new Position(7, 1);
+        Position endRed = new Position(0, 1);
         Move moveRed = new Move(startRed, endRed);
         BoardController.makeMove(board, moveRed);
         assertNull(board.valueAt(startRed), "Red piece is still in start position");
@@ -80,7 +83,6 @@ public class BoardControllerTest {
         BoardController.makeMove(board, moveWhite);
         assertNull(board.valueAt(startWhite), "White piece is still in start position");
         assertNotNull(board.valueAt(endWhite), "White piece is not in end position");
-
     }
 
     /**
@@ -89,7 +91,7 @@ public class BoardControllerTest {
     @Test
     public void makeMoveJump() {
         Position start = new Position(5, 0);
-        Position end = new Position(3, 0);
+        Position end = new Position(7, 1);
         Position jumped = new Position(1, 0);
         Move move = new Move(start, end);
         move.setJumped(jumped);
@@ -97,6 +99,20 @@ public class BoardControllerTest {
         assertNull(board.valueAt(start), "Jumping piece is still in start position");
         assertNotNull(board.valueAt(end), "Jumping piece is not in end position");
         assertNull(board.valueAt(jumped), "Jumped piece was not removed");
+    }
+
+    /**
+     * Test kinging
+     */
+    @Test
+    public void makeMoveKing() {
+        Position start = new Position(2, 1);
+        Position end = new Position(7, 1);
+        Move move = new Move(start, end);
+        BoardController.makeMove(board, move);
+        assertNull(board.valueAt(start), "Piece is still in start position");
+        assertNotNull(board.valueAt(end), "Piece is not in end position");
+        assertTrue(board.isKing(end), "Piece was not kinged");
     }
 
     /**
@@ -110,5 +126,20 @@ public class BoardControllerTest {
         BoardController.makeMove(board, moveRed);
         assertNull(board.valueAt(startRed), "There is a piece where you moved from");
         assertNull(board.valueAt(endRed), "There is a piece where you moved to");
+    }
+
+    /**
+     * Test getting a piece's location
+     */
+    @Test
+    void getPieceLocation() {
+        Position position = new Position(0, 1);
+        Piece piece = board.valueAt(position);
+        assertEquals(position, BoardController.getPieceLocation(board.getMatrix(), piece),
+            "Did not get correct piece position");
+
+        piece = new Piece(PieceType.SINGLE, PieceColor.RED);
+        assertNull(BoardController.getPieceLocation(board.getMatrix(), piece),
+            "Got position for piece not on board");
     }
 }
