@@ -2,21 +2,18 @@ package com.webcheckers.ui.movement;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.MoveChecker;
-import com.webcheckers.model.board.Position;
-import com.webcheckers.model.Message;
 import com.webcheckers.appl.playerlobby.PlayerLobby;
+import com.webcheckers.model.Message;
 import com.webcheckers.model.board.Move;
 import com.webcheckers.model.entities.Game;
 import com.webcheckers.model.entities.Player;
 import com.webcheckers.model.states.MessageType;
-import com.webcheckers.ui.game.GetGameRoute;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.logging.Logger;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 public class PostValidateMoveRoute implements Route {
 
@@ -71,7 +68,7 @@ public class PostValidateMoveRoute implements Route {
 
         if( MoveChecker.isMoveValid(move, game.getBoard(), currentPlayer.getTeamColor(),isKing, false) ) {
             game.queueMove(move);
-            responseMessage = new Message("" , MessageType.info);
+            responseMessage = new Message("Valid Move", MessageType.info);
         }
         else{
             Iterator i = game.iterator();
