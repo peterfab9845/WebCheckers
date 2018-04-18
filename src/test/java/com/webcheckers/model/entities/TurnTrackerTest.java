@@ -14,7 +14,7 @@ class TurnTrackerTest {
     @BeforeEach
     void setUp() {
         Board board = mock(Board.class);
-        CuT = new TurnTracker(board);
+    //    CuT = new TurnTracker(board);
     }
 
     @Test
