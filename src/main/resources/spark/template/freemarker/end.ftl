@@ -25,7 +25,7 @@
         <h2 style="color: #000000"><u>You have ${winLoss}</u></h2><br><br>
 
         <form action="/save" method="POST">
-            <button>Save and Watch Replays</button>
+            <button>Save and View Replays</button>
         </form>
 
         <br>
