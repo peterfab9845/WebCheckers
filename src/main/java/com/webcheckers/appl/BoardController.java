@@ -1,7 +1,7 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 import com.webcheckers.model.board.*;
 
 import java.util.LinkedList;

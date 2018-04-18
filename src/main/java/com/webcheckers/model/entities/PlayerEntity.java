@@ -1,7 +1,7 @@
 package com.webcheckers.model.entities;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PlayerStates;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PlayerStates;
 
 public class PlayerEntity {
 

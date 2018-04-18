@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

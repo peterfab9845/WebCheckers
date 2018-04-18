@@ -2,7 +2,7 @@ package com.webcheckers.model.entities;
 
 import com.webcheckers.model.board.*;
 import com.webcheckers.model.gamesaves.GameLog;
-import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.states.PieceColor;
 
 import java.util.Iterator;
 

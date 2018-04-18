@@ -12,8 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 
 /**
  * Test class for Board

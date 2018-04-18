@@ -3,7 +3,7 @@ package com.webcheckers.model.entities;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import com.webcheckers.model.States.PieceColor;
+import com.webcheckers.model.states.PieceColor;
 import com.webcheckers.model.board.Board;
 import com.webcheckers.model.board.BoardView;
 import com.webcheckers.model.board.Piece;

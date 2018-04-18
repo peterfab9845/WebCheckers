@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.webcheckers.model.States.PieceColor;
-import com.webcheckers.model.States.PieceType;
+import com.webcheckers.model.states.PieceColor;
+import com.webcheckers.model.states.PieceType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
