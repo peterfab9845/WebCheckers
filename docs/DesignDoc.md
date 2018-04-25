@@ -125,44 +125,56 @@ with the WebCheckers application.
 
 ![The WebCheckers Web Interface Statechart](web-interface.png)
 
-When the user first logs in, they are directed to the home page, which will show them the total number of online players, as well as a link to the sign in page. When they click the link to sign in, they see a text box where they can enter a username. If the username is taken or invalid, they will see a message and be directed back to the sign in page. If they enter a valid, unused username, they will be sent back to the home page with a link to sign out and a full list of players' usernames. When they click on another user, if they are not in a game already, the two players will be placed in a game together and sent to the Game page. Until the game is over, it alternates between being the red and white player's turn.
+When the user first logs in, they are directed to the home page, which will show them the total number of online players, as well as a link to the sign in page. When they click the link to sign in, they see a text box where they can enter a username. If the username is taken or invalid, they will see a message and be directed back to the sign in page. If they enter a valid, unused username, they will be sent back to the home page with a link to sign out and a full list of players' usernames. When they click on another user, if they are not in a game already, the two players will be placed in a game together and sent to the Game page. Until the game is over, it alternates between being the red and white player's turn, verifying each move before it is submitted.
 
 
 ## UI Tier
-The UI tier of our architecture is composed primarily of Spark routes, using the FreeMarker template engine. 
+The UI tier of the architecture is composed primarily of Spark routes, using the FreeMarker template engine. 
 
-These routes take web requests from the client, perform the required actions (such as signing in), and then return HTML for the requested web page. To generate this HTML, FreeMarker templates are used, which allow the pages to be modified based on the state of the application and the user's information.
+These routes take web requests from the client, perform the required actions (such as signing the user in), and then return HTML for the requested web page. To generate this HTML, FreeMarker templates are used, which allow the pages to be modified based on the state of the application and the user's information.
 
 ### Static models
-As the below class diagram shows, the PostSigninRoute class has a FreeMarker renderer; when it is called, the messages for the login status are shown appropriately using the template.
+As the below class diagram shows, the PostSigninRoute class has a FreeMarker template engine; when it is called, the messages for the login status are rendered and shown appropriately using the template.
 
 ![UML Diagram of PostSigninRoute](PostSigninRoute-diagram.png)
 
 ### Dynamic models
 As the below sequence diagram shows, the PostSigninRoute class creates a model and view for the FreeMarker renderer to use. Using the attributes in the model and view, the renderer creates an HTML page with the correct information based on the user's input.
 
+![Sequence Diagram for PostSigninRoute](PostSigninRoute-sequence.png)
+
 ## Application Tier
 In the Application tier, our architecture has several classes which oversee the functionality of the application.
 
-One of the most important parts of our Application tier is the PlayerLobby class. This component holds every player who is logged in; it is used to challenge other players, finish games, save completed games, and manage player states.
-The Application tier also contains some utility components; for example, one allows messages to be shown to a user from another user's request.
+One of the most important parts of our Application tier is the GameManager class. This component holds a map relating players' usernames to the games they are participating in.
+The Application tier also contains some utility components; for example, the BoardController class has various methods to set up an initial game board, move pieces, and get piece information from the board which it is given.
 
 ### Static models
 
-![UML Class Diagram for PlayerLobby](PlayerLobby.png)
+![UML Class Diagram for GameManager](GameManager-diagram.png)
 
-This UML class diagram shows the methods and attributes of PlayerLobby, which are used to keep track of each signed-in player and in-progress game.
+The above UML class diagram shows the methods and attributes of PlayerLobby, which are used to keep track of each signed-in player and in-progress game.
 
 ### Dynamic models
-> Provide any dynamic model, such as state and sequence diagrams, as is relevant to a particularly significant user story.
+
+As the below sequence diagram demonstrates, the GameManager class is used in order for one player to challenge another to a game of checkers. Both players' states are set to be in a game, a new game is created, and the game is added to the map for each player.
+
+![Sequence Diagram for Challenging a Player](challenging-sequence.png)
 
 ## Model Tier
 The Model tier of our architecture contains the basic structures representing a checkers game and its players.
 
-For example, there is the Board class. This structure has each space on the checkers board; in these spaces, checkers pieces can be placed and moved. The board itself does not have very much responsibility; its only functions are to create the initial piece placements and rotate 180 degrees for the white player's perspective.
+For example, there is the Board class. This structure holds every space on the checkers board; in these spaces, checkers pieces can be placed and moved to represent the game taking place.
 
 ### Static models
-> Provide one or more static models (UML class or object diagrams) with some details such as critical attributes and methods.
+
+As the below partial class diagram below shows, the board itself has little responsibility other than holding pieces and providing their basic information. All placement logic and game initialization is handled separately in the BoardController class, in the Application tier.
+
+![Partial UML Class Diagram for Board](Board-diagram.png)
 
 ### Dynamic models
-> Provide any dynamic model, such as state and sequence diagrams, as is relevant to a particularly significant user story.
+
+![Statechart for PlayerEntity](PlayerEntity-statechart.png)
+
+As the above statechart demonstrates, the PlayerEntity class is state-based, and has five possible states. Both AI and real players extend this class, so they also have each of these states. Transitions between states are caused by various actions by the players, or by changes in the game's status; for example, if a player GETs the game page, but the game has ended, they will be placed into either the WON or LOSS states depending on who won the game.
+
