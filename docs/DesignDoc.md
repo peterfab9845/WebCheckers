@@ -191,3 +191,13 @@ For the Model tier, some classes are relatively well-tested; because they did no
 In both the Model and Application tiers, there is almost no coverage for any of the AI-related classes. This is due to the way the AIs are created, which necessitates an enormous number of branches and decision-making logic which is practically impossible to test thoroughly.
 
 For the UI tier, the classes which were carried over from the last sprint are still quite well-tested; for example, the GetHomeRoute, GetSigninRoute, and PostSigninRoute classes all have over 80% coverage. However, none of the new UI-tier classes have any tests written for them; this is due simply to poor planning.
+
+# Code Metrics
+
+The following two figures show the code metrics for all classes in the project.
+
+![Code Metrics, Part 1](code-metrics-1.png)
+
+![Code Metrics, Part 2](code-metrics-2.png)
+
+As the metrics show, there are 8 classes 
