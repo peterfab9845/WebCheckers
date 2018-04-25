@@ -13,17 +13,16 @@ geometry: margin=1in
 
 # Executive Summary
 
-> WebCheckers is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choosing the type of game to play, the user is brought to a screen with the board shown on it, and their opponent also is brought to the same game but from the opposite perspective. From there, they will continue to play the game while being held to the rules of the game. Lastly, players will be able to save and re-watch games they have played in the past.
+WebCheckers is a platform designed for players to link up and play checkers online. Players get to choose to either to play against an Artificial Intelligence or to choose from a list of active players that are not in a game. After choosing the type of game to play, the user is brought to a screen with the board shown on it, and their opponent also is brought to the same game but from the opposite perspective. From there, they will continue to play the game while being held to the rules of the game. Lastly, players will be able to save and re-watch games they have played in the past.
 
 ## Purpose
 
-> Web checkers is a platform for users to come and play checkers online with either their friends or an artificial intelligence.
->
-> Our user group includes:
->
-> > Parents and childern, who want to add more fun to game night. 
-> >
-> > Groups of Friends, who are looking for something fun to play.
+WebCheckers is a platform for users to come and play checkers online with either their friends or an artificial intelligence.
+
+Our user group includes:
+
+* Parents and children, who want to add more fun to game night. 
+* Groups of friends, who are looking for something fun to play.
 
 # Requirements
 
@@ -31,108 +30,62 @@ This section describes the features of the application.
 
 ## Definition of MVP
 
-For this project, the minimum viable product is the capability to play a complete game of checkers. This involves signing in, starting a game, viewing the board, moving pieces, capturing the opponent's pieces, and finally, finishing the game by winning, losing, resigning, or a tie.
+For this project, the minimum viable product is the capability to play a complete game of checkers. This involves signing in, starting a game, viewing the board, moving pieces, capturing the opponent's pieces, and finally, finishing the game by winning, losing, resigning, or getting a tie.
 
 ## MVP Features
 
-> Player Sign-in
+* Player Sign-in
 
-> > As a Player I want to sign-in so that I can play a game of checkers.
+  * As a Player, I want to sign-in so that I can play a game of checkers.
+  
+* Start a Game
 
-> Start a Game
+  * As a Player, I want to start a game so that I can play checkers with an opponent.
 
-> > As a Player I want to start a game so that I can play checkers with an opponent.
+* Epic: Piece Movement
 
-> Start a Game
+  * As a Player, I want to move pieces to play a game of checkers so that I have fun.
 
-> > As a Player I want to start a game so that I can play checkers with an opponent.
+* Epic: Game State
 
-> Epic: Piece Movement
-
-> > As a Player I want to play a game of checkers so that I have fun.
-
-> > Allowed Spaces
-
-> > > As a Player I want to get feedback when I drag a piece so that I know where I am allowed to put it down.
-
-> > Piece Capture
-
-> > > As a Player I want to capture the other player's pieces so that I can progress in the game.
-
-> > Forced Moves
-
-> > > As a Player I want to be informed when I am required to make a move so that I don’t try to make a different move than I need to.
-
-> Epic: Game State
-
-> > The player needs to know the state of the game and what they can do next.
-
-> > Game Endings 
-
-> > > As a Player I want to know when the game is over so that I don't try to continue playing.
+  * As a Player, I need to know the state of the game and what I can do next.
+  
+  * Game Endings
+  
+    *  As a Player, I want to know when the game is over so that I don't try to continue playing.
 
 
 ## Roadmap of Enhancements
 
-> Epic: Save Management
+* Epic: Artificial Intelligence
 
-> > The player must be able to choose when they want to save a game and look at them later.
+  * As a Player, I want to play against a computer player so that I can play checkers without needing another person to play against.
+  
+  * Piece Movement
+  
+    * As an AI, I want to be able to move pieces like a human player so that I can play checkers.
 
-> > Listing Saved Games
+  * AI Learning
 
-> > > As a Player I want to view the games which I have saved so that I can choose which one to watch.
+    * As an AI, I want to learn from mistakes so that I can win every game.
 
-> > Saving a Game
+  * Player Selection 
 
-> > > As a Player I want to decide, at the end of a game, to save it so that I can review it at a later date.
+    * As a Player, I want to choose an AI so that I can play a game of checkers against it.
+	
+* Epic: Game Saves
 
-> > Deleting a Game
+  * Save Management
 
-> > > As a Player I want to delete a game I have saved so that it does not clutter up my list of saved games.
+    * As a Player, I want to save games and then look at them later.
 
-> Epic: Artificial Intelligence
+  * Watching a Saved Game
 
-> > As a Player I want to play against a computer player so that I can play checkers without needing another player to play against.
+    * As a Player, I want to choose a saved game and watch the play-through.
+    
+	* As a Player, I want to pause and resume watching a replay game so that I can stop to analyze a position or think about my own next move.
 
-> > Movement
-
-> > > As an AI I want to move checkers so that the game can be played.
-
-> > Location Take Over
-
-> > > As an AI I want to take positions so that I can win.
-
-> > AI Learning
-
-> > > As an AI I want to Learn from mistakes so that I can win every game.
-
-> > Easy AI Extra
-
-> > > As an easy AI I want to make jokes so that the player is entertained.
-
-> Player Selection 
-
-> > As a Player I want to choose an AI so that I can play a game of checkers against it.
-
-> Epic: Watching a Saved Game
-
-> > The player must be able to pick a saved game and watch the playthrough.
-
-> > Viewing a Game
-
-> > > As a Player I want to see the replayed game in a similar setting to where it was played originally so that I can easily track the movements and game status.
-
-> > Play and Pause
-
-> > > As a Player I want to pause and resume watching a replay game so that I can stop to analyze a position or practice my own playing.
-
-> > Speed Controls
-
-> > > As a Player I want to control the speed of playback of a game so that I can slow it down and look carefully or go quickly through and get the basic idea of the game.
-
-> > Player Information
-
-> > > As a Player watching a game, I want to be told the names of each player in the game so that I know who I am watching.
+    * As a Player watching a game, I want to be told the names of each player in the game so that I know who I am watching.
 
 
 # Application Domain
@@ -141,7 +94,9 @@ This section describes the application domain.
 
 ![The WebCheckers Domain Model](domain-model.png)
 
-Web Checkers is based primarily upon individual games of checkers, each having a board and two players. The board contains 64 spaces of alternating colors; each player's pieces can be placed on the dark squares of the board. Each player has 12 pieces; one player has red pieces, and one player has white pieces. When moving pieces, the players are restricted by the rules of Checkers, which dictate where they are allowed to move and what actions they can take. When a game is complete, either player can decide to save the game to their savegame list to rewatch it at a later date.
+WebCheckers is based primarily upon individual games of checkers, each having a board and two players. A game and its players are linked together via the player lobby, which maintains lists of all games and logged-in users.
+
+The checkers board contains 64 spaces of alternating colors, and each player's pieces can be placed on the dark squares of the board. Each player has 12 pieces; one player has red pieces, and the other player has white pieces. When moving pieces, the players are restricted by the rules of Checkers, which dictate where they are allowed to move and what actions they can take. When a game is complete, either player can decide to save the game to their savegame list to rewatch it at a later date.
 
 
 # Architecture
@@ -180,6 +135,7 @@ These routes take web requests from the client, perform the required actions (su
 
 ### Static models
 As the below class diagram shows, the PostSigninRoute class has a FreeMarker renderer; when it is called, the messages for the login status are shown appropriately using the template.
+
 ![UML Diagram of PostSigninRoute](PostSigninRoute-diagram.png)
 
 ### Dynamic models
@@ -192,7 +148,9 @@ One of the most important parts of our Application tier is the PlayerLobby class
 The Application tier also contains some utility components; for example, one allows messages to be shown to a user from another user's request.
 
 ### Static models
+
 ![UML Class Diagram for PlayerLobby](PlayerLobby.png)
+
 This UML class diagram shows the methods and attributes of PlayerLobby, which are used to keep track of each signed-in player and in-progress game.
 
 ### Dynamic models
