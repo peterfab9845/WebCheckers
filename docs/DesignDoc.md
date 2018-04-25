@@ -240,4 +240,4 @@ Another change which could be made to improve usability is to implement detectio
 
 Finally, there are some improvements which could be made to the AI's learning and use of data. These improvements include changing the way the data is saved to both improve training efficiency; to generalize the storage instead of looking at only one color's moves at a time; and to modify the filtering algorithm on the recorded games so that moves are made more intellectually instead of frequently using random choices.
 
-Overall, the project is not bad in terms of functionality. In some other categories, such as code metrics and test coverage, there still needs to be a lot of improvement, but the project as a whole works well and meets most of the goals we set out to accomplish.
+Overall, the project is not bad in terms of functionality. In some other categories, such as code metrics and test coverage, there still needs to be a lot of improvement, but the project as a whole works well and meets the goals we set out to accomplish.
