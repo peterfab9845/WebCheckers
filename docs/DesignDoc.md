@@ -178,16 +178,3 @@ As the below partial class diagram below shows, the board itself has little resp
 
 As the above statechart demonstrates, the PlayerEntity class is state-based, and has five possible states. Both AI and real players extend this class, so they also have each of these states. Transitions between states are caused by various actions by the players, or by changes in the game's status; for example, if a player GETs the game page, but the game has ended, they will be placed into either the WON or LOSS states depending on who won the game.
 
-# Code Coverage
-
-The below figure shows combined code coverage statistics for all three tiers. (Due to our use of subpackages, the pages for the ui/appl/model packages themselves are not accurate representations of those tiers' coverage, because they do not include the subpackages' statistics.)
-
-![Combined Code Coverage Statistics](code-coverage.png)
-
-As the statistics show, our code coverage for Sprint 3 was very low, at only 32%. This was primarily due to poor time management, as well as focusing too much on getting the maximum number of enhancement features working instead of creating tests for the already-written features.
-
-For the Model tier, some classes are relatively well-tested; because they did not change very much from the last sprint, not much needed to be done to update the tests. This can be seen especially in the board package, which contains most of the representative classes such as Board, Piece, and Move. As the figure shows, this subpackage has 87% code coverage.
-
-In both the Model and Application tiers, there is almost no coverage for any of the AI-related classes. This is due to the way the AIs are created, which necessitates an enormous number of branches and decision-making logic which is practically impossible to test thoroughly.
-
-For the UI tier, the classes which were carried over from the last sprint are still quite well-tested; for example, the GetHomeRoute, GetSigninRoute, and PostSigninRoute classes all have over 80% coverage. However, none of the new UI-tier classes have any tests written for them; this is due simply to poor planning.
